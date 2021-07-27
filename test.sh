@@ -27,44 +27,54 @@ function test()
 	echo $@"; exit" | ./minishell > RESULT2
 	echo $@"; exit" | bash >> RESULT1
 	diff RESULT1 RESULT2 > DIF
-	TEST=$(cat DIF)
+	RES=$(cat DIF)
 
-	if [ !$TEST ]; then
-		printf "YES"
+	if [ !$RES ]; then
+		echo $GREEN"OK"$RESET
 	else
-		printf "NOP"
-		echo
-		printf "Your output :" 
-		cat RESULT2
-		echo "\n"
-		printf "Expected output :"
-		cat RESULT1
-		echo "\n"
+		echo $RED"FAILURE ON: $RESET$@"
+		echo Your output : > DIF
+		cat RESULT2 >> DIF
+		echo \n >> DIF
+		echo Expected output : >> DIF
+		cat RESULT1 >> DIF
+		echo \n >> DIF
 	fi
-	echo
 	sleep 0.1
 }
 
 # ECHO
+echo $BOLDBLUE"TEST ECHO:"$RESET
 test 'echo oui'
-test 'echo oui     non'
-test 'echo -n coucou'
-test 'echo -nm coucou'
-test 'echo -mmmmn coucou'
-
+test 'echo -n -n -nnnn -nnnnm ; echo a'
+test 'echo -n -nnn hello -n ; echo a'
+test 'echo ~'
 # PWD
+echo $BOLDBLUE"\nTEST PWD:"$RESET
 test 'pwd'
 
 # CD
+echo $BOLDBLUE"\nTEST CD:"$RESET
 test 'cd .. ; pwd'
 test 'cd .. ; cd .. ; pwd'
-
-# ENV
-test 'env'
-
+test 'cd ../../../../../.. ; pwd'
+test 'cd /Users/lebourre/ ; pwd'
+test 'cd $HOME/Desktop ; pwd'
+test 'cd - ; pwd'
 # EXEC
+echo $BOLDBLUE"\nTEST ';':"$RESET
 test 'ls ; ls'
 test 'ls ; ls ; ls ; ls ; ls ; ls'
+
+#EXIT STATUS
+echo $BOLDBLUE"\nTEST EXIT STATUS:"$RESET
+test 'cd random_cmd ; echo $?'
+test 'cd random_cmd ; cd $?'
+test './file_that_is_not_an_executable'
+test 'cat bla'
+test 'file_name'
+test 'export test=a ; echo $test'
+test 'ls bonjour ; echo $?'
 
 # EXPORT
 #test 'echo $$'

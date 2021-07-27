@@ -1660,3 +1660,494 @@ ls ; ls; exit
 ls ; ls ; ls ; ls ; ls ; ls; exit
 pwd; exit
 cd .. ; pwd; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+env
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+env; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+env
+env > test
+env
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /home/user42/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /home/user42/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /home/user42/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /home/user42/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /home/lebourre/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Bureau ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+unset HOME; cd ;pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+unset HOME; cd
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+env
+expor
+export
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+echo oui; exit
+echo oui non; exit
+echo -n coucou; exit
+echo -nm coucou; exit
+echo -mmmmn coucou; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+./file_that_is_not_an_executable; exit
+cat bla; exit
+file_name; exit
+export test=a ; echo $test; exit
+ls bonjour ; echo $?; exit
+echo ~
+<a cat <b <c
+echo $a
+cat a
+cat b
+cat c
+<a cat <b <c
+ls
+rm a b c
+<a cat <b <c

@@ -265,18 +265,14 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 				break ;
 			}
 		if (builtin == TRUE)
-		{
 			exec_built_in(*lst, envlst, 1);
-		}
 		else
-		{
 			exec_ve(*lst, builtin, envlst, envp);
-		}
 		dup2((*lst)->fd[0], 0);
 		close((*lst)->fd[0]);
 		dup2((*lst)->fd[1], 1);
 		close((*lst)->fd[1]);
-		if ((*lst)->next && (*lst)->sep == ';') 
+		if ((*lst)->next && (*lst)->sep == ';')
 		{ // faut pas le gerer mais bon on le gere :/
 			*lst = (*lst)->next;
 			get_built_in(lst, envlst, envp);

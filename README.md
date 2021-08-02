@@ -49,11 +49,11 @@
 
 - PLUS BESOIN DE GERER "\\" et ";"
 
-- "|" a faire 
+- "|" a faire
 
-- "ls >a" a fix\n
+- "ls >a" a fix
 
-- ";" a remettre\n
+- ";" a remettre
 
 ## Docs :
 

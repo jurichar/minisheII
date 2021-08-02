@@ -1,13 +1,13 @@
 #include "../includes/minishell.h"
 
-void	ft_redir(t_cmd_lst *lst)
+void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	int	pid = fork();
 	int status;
 	int inout = lst->redir->redir;
 	char *inoutput = lst->redir->arg;
 	char BUF[128];
 
+	pid_t pid = fork();
 	if (pid < 0)
 		perror("fork");
 	else if (pid == 0)
@@ -30,6 +30,7 @@ void	ft_redir(t_cmd_lst *lst)
 			dup2(lst->fd[1], 1);
 			close(lst->fd[1]);
 		}
+        exec_ve(lst, envlst);
 		// exec ?
 		// else if (inout == 4) // <<
 		// {
@@ -41,10 +42,10 @@ void	ft_redir(t_cmd_lst *lst)
 		// 	// 	wait(NULL);
 		// 	close(fd0);
 		// }
-	}
+    }
 	else
 	{
 		waitpid(pid, &status, 0);
-		exit(0);
+		// exit(0);
 	}
 }

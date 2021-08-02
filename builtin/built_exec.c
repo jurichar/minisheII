@@ -90,6 +90,7 @@ char *get_env_by_name(t_env_lst *envlst, char *name)
 	}
 	return 0;
 }
+
 int	is_built_in(t_cmd_lst *lst)
 {
 	int builtin;
@@ -111,7 +112,6 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 {
 	int	i;
 	int	builtin;
-	pid_t	pid;
 
 	(*lst)->fd[0] = dup(0);
 	(*lst)->fd[1] = dup(1);
@@ -120,7 +120,7 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 	while (lst)
 	{
 		if ((*lst)->redir != NULL)
-			ft_redir(*lst);
+			ft_redir(*lst, envlst);
 		if ((*lst)->sep == '|')
 			pipor(*lst);
 		exec_ve(*lst, envlst);

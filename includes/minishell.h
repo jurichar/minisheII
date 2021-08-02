@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 19:19:09 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/02 19:44:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,7 +176,7 @@ void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
 void			print_point_char(char **str);
 char	**join_args(char *s, char **args);
 char *get_env_by_name(t_env_lst *envlst, char *name);
-void	ft_redir(t_cmd_lst *lst);
+void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 int pipor (t_cmd_lst *lst);
 int	is_built_in(t_cmd_lst *lst);
 

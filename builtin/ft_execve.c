@@ -6,8 +6,9 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	char	**args;
 	char 	**path;
 	char 	*cmd;
-	int i = 0;
 	int err;
+	int i = 0;
+	err = 0;
 
 	if (is_built_in(lst) == TRUE)
     {
@@ -15,8 +16,7 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 		exec_built_in(lst, envlst, 1);
         return 1;
     }
-    pid = fork();
-	err = 0;
+    //pid = fork();
 	path = ft_split(get_env_by_name(envlst, "PATH"), ':'); //path =  bin/ usr/bin ...
 	if (!path)
 		return (1);

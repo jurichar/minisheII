@@ -120,7 +120,14 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 	while (lst)
 	{
 		if ((*lst)->redir != NULL)
+		{
 			ft_redir(*lst, envlst);
+			dup2((*lst)->fd[0], 0);
+			close((*lst)->fd[0]);
+			dup2((*lst)->fd[1], 1);
+			close((*lst)->fd[1]);
+			return ;
+		}
 		if ((*lst)->sep == '|')
 			pipor(*lst);
 		exec_ve(*lst, envlst);

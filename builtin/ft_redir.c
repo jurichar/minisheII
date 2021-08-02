@@ -46,6 +46,6 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	else
 	{
 		waitpid(pid, &status, 0);
-		// exit(0);
+		exit(0);
 	}
 }

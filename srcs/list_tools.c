@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:24:47 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 17:51:18 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/02 20:43:59 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,17 @@ t_cmd_lst	*ft_new_cmd_list(char **envp)
 	new = malloc(sizeof(t_cmd_lst));
 	if (new == NULL)
 		return (NULL);
+	new->envp = envp;
 	new->cmd = "NIL";
+	new->args = NULL;
 	new->redir = NULL;
+	new->sep = 0;
+	new->next = NULL;
+	new->prev = NULL;
 	new->fd[0] = 0;
 	new->fd[1] = 0;
-	new->envp = envp;
-	new->next = NULL;
+	new->nb_p = 0; 
+	new->builtin = 0;
 	return (new);
 }
 

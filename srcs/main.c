@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 18:02:40 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/02 20:46:29 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,19 +218,18 @@ int		main(int ac, char **av, char **envp)
 {
 	t_env_lst *envlst;
 	t_cmd_lst *lst;
-	int i;
 	int db;
-	pid_t	pid;
-
+	
 	db = 0;
-	if (ac == 1)
-	{
+	// if (ac == 1)
+	// {
 		(void)ac;
 		(void)av;
-	}
-	else
-		db = 1;
-	(void)envp;
+	// }
+	// else
+		// db = 1;
+	// (void)envp;
+	lst = NULL;
 	lst = ft_new_cmd_list(envp);
 	envlst = NULL;
 	envlst = get_env(envlst, envp);
@@ -242,7 +241,7 @@ int		main(int ac, char **av, char **envp)
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, envlst, envp);
-			free(lst);
+			// free(lst);
 			lst = ft_new_cmd_list(envp);
 		}
 	}

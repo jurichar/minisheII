@@ -2477,3 +2477,74 @@ exit
 ls
 echo a
 exit
+ls
+ls -a
+ls | wc
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls ; ls
+ls
+ps
+ls
+ls -a
+ls
+ls ; ls
+ls
+ps
+ls
+ls -a
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ps
+ls ; ls ; ls
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+echo a
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls ; ls
+ls
+ls -a
+ls
+ls > a
+ls
+ls > a
+ls
+cat a
+ls
+ls > a
+ls
+cat a
+ls > a
+ls
+ls > a
+ls
+ls > a

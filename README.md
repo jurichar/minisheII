@@ -3,30 +3,60 @@
 
 ## ToDo :
 
-- [ ] builtin
 
-- [x] parsing
+- [x] parser
+
+- [ ] gestions d'erreurs
+
+- [x] separator (";")
+
+- [ ] pipe ("|")
+
+
+### builtin :
+
+
+- [ ] cd
+
+- [ ] echo
+
+- [ ] env
+
+- [ ] pwd
+
+- [ ] exit
+
+- [ ] export
+
+- [ ] unset
 
 - [x] exec
 
-- [x] redir
 
-- [ ] pipe
+### redir :
 
-- [ ] gestions d'erreurs
+
+- [x] OUT (">")
+
+- [x] DOUBLE OUT (">>")
+
+- [x] IN ("<")
+
+- [ ] DOUBLE IN ("<<")
 
 
 ## ToFix :
 
 - PLUS BESOIN DE GERER "\" et ";"
 
-- ";|" fonctionne po (genre built_exec printf de sep il fait des trucs etrange + si on met un sep en premier ca fait crash) 
+- "|" a faire 
 
-- "ls>a" a fix\n
+- "ls >a" a fix\n
 
 - ";" a remettre\n
 
-## Work :
+## Docs :
+
 
 ### Pipe :
 

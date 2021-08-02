@@ -22,23 +22,23 @@ BOLDWHITE="\033[1m\033[37m"
 make re
 function test()
 {
-	echo "" > DIF
-	echo $BLUE"> "$RESET$@"; exit" > RESULT1
-	echo $@"; exit" | ./minishell > RESULT2
-	echo $@"; exit" | bash >> RESULT1
-	diff RESULT1 RESULT2 > DIF
-	RES=$(cat DIF)
+	echo "" > test/DIF
+	echo $BLUE"> "$RESET$@"; exit" > test/RESULT1
+	echo $@"; exit" | ./minishell > test/RESULT2
+	echo $@"; exit" | bash >> test/RESULT1
+	diff test/RESULT1 test/RESULT2 > test/DIF
+	RES=$(cat test/DIF)
 
 	if [ !$RES ]; then
 		echo $GREEN"OK"$RESET
 	else
 		echo $RED"FAILURE ON: $RESET$@"
-		echo Your output : > DIF
-		cat RESULT2 >> DIF
-		echo \n >> DIF
-		echo Expected output : >> DIF
-		cat RESULT1 >> DIF
-		echo \n >> DIF
+		echo Your output : > test/DIF
+		cat test/RESULT2 >> test/DIF
+		echo \n >> test/DIF
+		echo Expected output : >> test/DIF
+		cat RESULT1 >> test/DIF
+		echo \n >> test/DIF
 	fi
 	sleep 0.1
 }
@@ -49,6 +49,7 @@ test 'echo oui'
 test 'echo -n -n -nnnn -nnnnm ; echo a'
 test 'echo -n -nnn hello -n ; echo a'
 test 'echo ~'
+
 # PWD
 echo $BOLDBLUE"\nTEST PWD:"$RESET
 test 'pwd'
@@ -58,9 +59,10 @@ echo $BOLDBLUE"\nTEST CD:"$RESET
 test 'cd .. ; pwd'
 test 'cd .. ; cd .. ; pwd'
 test 'cd ../../../../../.. ; pwd'
-test 'cd /Users/lebourre/ ; pwd'
+test 'cd /Users/ ; pwd'
 test 'cd $HOME/Desktop ; pwd'
 test 'cd - ; pwd'
+
 # EXEC
 echo $BOLDBLUE"\nTEST ';':"$RESET
 test 'ls ; ls'
@@ -68,13 +70,13 @@ test 'ls ; ls ; ls ; ls ; ls ; ls'
 
 #EXIT STATUS
 echo $BOLDBLUE"\nTEST EXIT STATUS:"$RESET
-test 'cd random_cmd ; echo $?'
-test 'cd random_cmd ; cd $?'
-test './file_that_is_not_an_executable'
-test 'cat bla'
-test 'file_name'
-test 'export test=a ; echo $test'
-test 'ls bonjour ; echo $?'
+#test 'cd random_cmd ; echo $?'
+#test 'cd random_cmd ; cd $?'
+#test './file_that_is_not_an_executable'
+#test 'cat bla'
+#test 'file_name'
+#test 'export test=a ; echo $test'
+#test 'ls bonjour ; echo $?'
 
 # EXPORT
 #test 'echo $$'

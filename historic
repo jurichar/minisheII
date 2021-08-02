@@ -2151,3 +2151,131 @@ cat c
 ls
 rm a b c
 <a cat <b <c
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+./file_that_is_not_an_executable; exit
+cat bla; exit
+file_name; exit
+export test=a ; echo $test; exit
+ls bonjour ; echo $?; exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/lebourre/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+./file_that_is_not_an_executable; exit
+cat bla; exit
+file_name; exit
+export test=a ; echo $test; exit
+ls bonjour ; echo $?; exit
+ls
+echo a
+exit
+ls
+exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; cd .. ; pwd; exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+./file_that_is_not_an_executable; exit
+cat bla; exit
+file_name; exit
+export test=a ; echo $test; exit
+ls bonjour ; echo $?; exit
+ls
+ls > a
+cat a
+cat < a
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+cd random_cmd ; echo $?; exit
+cd random_cmd ; cd $?; exit
+./file_that_is_not_an_executable; exit
+cat bla; exit
+file_name; exit
+export test=a ; echo $test; exit
+ls bonjour ; echo $?; exit
+echo -n -nnn hello -n
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+ls>a
+cat a
+ls >a
+ls> a
+ls
+rm a

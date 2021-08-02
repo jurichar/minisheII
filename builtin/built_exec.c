@@ -10,15 +10,6 @@ char	*builtin_list[] = {
 	"unset"
 };
 
-// print_lst(t_cmd_lst *lst)
-// {
-// 	while (lst)
-// 	{
-// 		"cmprintf(d = %s\n", lst->cmd);
-// 		lst = lst->next;
-// 	}
-// }
-
 int exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd)
 {
 	if (ft_strcmp(lst->cmd,"echo") == 0)

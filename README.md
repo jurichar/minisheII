@@ -6,23 +6,23 @@
 
 - [x] parser
 
-- [ ] gestions d'erreurs
-
 - [x] separator (";")
 
 - [ ] pipe ("|")
+
+- [ ] gestions d'erreurs
 
 
 ### builtin :
 
 
-- [ ] cd
+- [x] cd
 
-- [ ] echo
+- [x] echo
 
-- [ ] env
+- [x] env
 
-- [ ] pwd
+- [x] pwd
 
 - [ ] exit
 
@@ -47,7 +47,7 @@
 
 ## ToFix :
 
-- PLUS BESOIN DE GERER "\" et ";"
+- PLUS BESOIN DE GERER "\\" et ";"
 
 - "|" a faire 
 

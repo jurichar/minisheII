@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 15:03:46 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/02 19:19:09 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,17 @@ typedef struct s_redir
 	int				redir;
 	char			*arg;
 	struct s_redir	*next;
-}				t_redir;
+}
+				t_redir;
+
+typedef struct s_cmd
+{
+    char **argv;
+}				t_cmd;
 
 typedef struct s_cmd_lst
 {
+	char				**envp;
 	char				*cmd;
 	char				**args;
 	struct s_redir		*redir;
@@ -73,6 +80,8 @@ typedef struct s_cmd_lst
 	struct s_cmd_lst	*next;
 	struct s_cmd_lst	*prev;
 	int					fd[2];
+	int					nb_p;
+	int					builtin;
 }				t_cmd_lst;
 
 typedef struct s_fct_params
@@ -80,6 +89,7 @@ typedef struct s_fct_params
 	char				**av;
 	struct s_fct_params	*env_list;
 }				t_fct_params;
+
 /*
 **
 **IS FUNCTION
@@ -124,7 +134,7 @@ int				how_many_redir(char *s);
 **PARSER RELATED AND TOOLS
 **
 */
-t_cmd_lst		*ft_new_cmd_list();
+t_cmd_lst		*ft_new_cmd_list(char **envp);
 t_cmd_lst		*ft_split_cmd(char *str, t_env_lst *env);
 void			ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
 void			get_to_cur_pos(int from, int to);
@@ -156,12 +166,18 @@ int				minishell_cd(t_fct_params *params);
 int				minishell_echo(t_fct_params *params);
 int				minishell_pwd(t_fct_params *params);
 int				exec_built_in (t_cmd_lst *lst, t_env_lst *envlst, int fd);
-int 			exec_ve(t_cmd_lst *lst, int builtin, t_env_lst *envlst, char **envp);
+int 			exec_ve(t_cmd_lst *lst, t_env_lst *envlst);
 int				minishell_execute(char **av, char **envp, t_env_lst *lst);
 char			*del_char(char *src, int pos);
 void			clear_and_print(int len, char *s, int pos);
 
-void			ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env);
-void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst);
-void print_point_char(char **str);
+void			ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp);
+void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
+void			print_point_char(char **str);
+char	**join_args(char *s, char **args);
+char *get_env_by_name(t_env_lst *envlst, char *name);
+void	ft_redir(t_cmd_lst *lst);
+int pipor (t_cmd_lst *lst);
+int	is_built_in(t_cmd_lst *lst);
+
 #endif

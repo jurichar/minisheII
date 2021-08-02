@@ -2279,3 +2279,201 @@ ls >a
 ls> a
 ls
 rm a
+ls
+s
+ls
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+ls
+ls | wc
+ls
+ls -a
+ls
+ls | wc
+ls
+echo a
+ls
+ls | wc
+Makefile
+README.md
+a.out
+builtin
+historic
+includes
+libft
+minishell
+srcs
+test
+test.c
+test.sh
+test.c
+ls
+ls | wc
+Makefile
+README.md
+a.out
+builtin
+historic
+includes
+libft
+minishell
+test
+srcs
+test.sh
+test.c
+;34m> mREADME.md
+;34m> mbuiltin
+;34m> mhistoric
+;34m> mlibft
+;34m> msrcs
+;34m> mtest.c
+;34m> m;34m> mbuiltin
+ls | wc
+Makefile
+README.md
+a.out
+builtin
+historic
+includes
+libft
+m
+mREADME.md
+mbuiltin
+mhistoric
+minishell
+mlibft
+msrcs
+mtest.c
+srcs
+test
+test.c
+test.sh
+Makefile
+README.md
+a.out
+builtin
+historic
+includes
+libft
+m
+mREADME.md
+mbuiltin
+mhistoric
+minishell
+mlibft
+msrcs
+mtest.c
+srcs
+test
+test.c
+test.sh
+;34m> mMakefile
+;34m> mREADME.md
+;34m> ma.out
+      20     173    1255
+;34m> mbuiltin
+;34m> mhistoric
+;34m> mincludes
+;34m> mlibft
+;34m> mm
+;34m> mmREADME.md
+;34m> mmbuiltin
+;34m> mmhistoric
+;34m> mminishell
+;34m> mmlibft
+;34m> mmsrcs
+;34m> mmtest.c
+;34m> msrcs
+;34m> mtest
+;34m> mtest.c
+;34m> mtest.sh
+;34m> mMakefile
+;34m> mREADME.md
+;34m> ma.out
+      20     173    1255
+;34m> mbuiltin
+;34m> mhistoric
+;34m> mincludes
+;34m> mlibft
+;34m> mm
+;34m> mmREADME.md
+;34m> mmbuiltin
+;34m> mmhistoric
+;34m> mminishell
+;34m> mmlibft
+;34m> mmsrcs
+;34m> mmtest.c
+;34m> msrcs
+;34m> mtest
+;34m> mtest.c
+;34m> mtest.sh
+;34m> m;34m> mMakefile
+ls
+ls | wc
+ls -a
+ls -a | wc
+ls | wc
+ls -l | wc
+p | wc
+ls | wc
+ls -l | wc
+ls | wc | cat -e
+ls | wc
+ls
+ls -a
+ls
+ls | wc | cat -e
+ls
+pwd
+ls
+exit
+echo a | wc
+ls
+echo a
+ls
+cd ..
+ls
+echo a
+ls
+echo a
+ls
+;s
+ls
+echo a
+sleep 5 | sleep 5
+echo a | wc
+ls
+echo truc
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo -n -nnn hello -n ; echo a; exit
+echo ~; exit
+pwd; exit
+cd .. ; pwd; exit
+cd .. ; cd .. ; pwd; exit
+cd ../../../../../.. ; pwd; exit
+cd /Users/ ; pwd; exit
+cd $HOME/Desktop ; pwd; exit
+cd - ; pwd; exit
+ls ; ls; exit
+ls ; ls ; ls ; ls ; ls ; ls; exit
+echo oui; exit
+echo -n -n -nnnn -nnnnm ; echo a; exit
+echo oui; exit
+echo a
+ls
+exit
+ls
+echo a
+exit

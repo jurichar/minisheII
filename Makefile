@@ -17,7 +17,10 @@ SRC_BUILTIN =	built_cd.c \
 				built_pwd.c \
 				built_exec.c \
 				built_exit.c \
-				built_unset.c
+				built_unset.c \
+				ft_execve.c \
+				ft_pipe.c \
+				ft_redir.c
 
 SRC_SRCS =	main.c \
 		ft_split_args.c \

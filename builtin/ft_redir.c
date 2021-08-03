@@ -30,7 +30,6 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 			dup2(lst->fd[1], 1);
 			close(lst->fd[1]);
 		}
-        exec_ve(lst, envlst);
 		// exec ?
 		// else if (inout == 4) // <<
 		// {

@@ -2,7 +2,7 @@
 
 int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	pid_t	pid = -1;
+	pid_t	pid;
 	char	**args = NULL;
 	char 	**path = NULL;
 	char 	*cmd = NULL;
@@ -21,13 +21,13 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	if (!path)
 		return (1);
 	args = join_args(lst->cmd, lst->args); // join ls + args
-	if (pid == 0)
-	{
-		if (execve(lst->cmd, args, lst->envp) == -1)
-		{
-			err = 1;
-		}
-	}
+	// if (pid == 0)
+	// {
+	// 	if (execve(lst->cmd, args, lst->envp) == -1)
+	// 	{
+	// 		err = 1;
+	// 	}
+	// }
 	while (path[i])
 	{
         cmd = ft_strjoin(path[i], "/");
@@ -39,7 +39,6 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
         {
             if (execve(cmd, args, lst->envp) == -1)
             {
-                printf ("coucou\n");
                 err = 1;
             }
         }
@@ -56,5 +55,6 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
     free(lst->cmd);
 	free(lst->args);
 	free(args);
+	free(path);
 	return 1;
 }

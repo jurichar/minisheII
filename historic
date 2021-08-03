@@ -2551,3 +2551,64 @@ ls > a
 echo truc machin bidule | grep machin
 echo truc machin bidule | grep "machin"
 ls | wc
+ls
+ls -a
+code .
+ls
+ls ; ls
+ls
+ps
+echo a
+ls
+ls ; ls
+ls
+ls > a
+ls -a
+ls > a
+ls
+ls > a
+ls
+ls > a
+ls
+ls > a
+ls
+ls > a
+ls > q
+ls
+ls > q
+wwwww
+wwww
+echo a
+echo a > a
+cat q
+cat a
+ls > a
+cat a
+ls | wc > a
+ls | wc
+wc | ls
+ls > a
+ls
+cat a
+rm a
+exit
+ls
+ls > a
+cat a
+rm a
+ls > a
+cat < a
+ls ; ls > a
+cat a
+echo a >> a
+cat a
+exit
+ls
+ls > a
+cat a
+echo truc > b > c > d
+cat b
+cat c
+ls
+ls ; ls
+ls

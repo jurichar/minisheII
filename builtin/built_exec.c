@@ -112,29 +112,32 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 {
 	int	i;
 	int	builtin;
-
-	(*lst)->fd[0] = dup(0);
-	(*lst)->fd[1] = dup(1);
+	int fd[2];
+// (*lst)->
+	fd[0] = dup(0);
+	fd[1] = dup(1);
 	if (!lst)
 		return ;
+
 	while (lst)
 	{
 		if ((*lst)->redir != NULL)
 		{
 			ft_redir(*lst, envlst);
-			dup2((*lst)->fd[0], 0);
-			close((*lst)->fd[0]);
-			dup2((*lst)->fd[1], 1);
-			close((*lst)->fd[1]);
+			exec_ve(*lst, envlst);
+			dup2(fd[0], 0);
+			close(fd[0]);
+			dup2(fd[1], 1);
+			close(fd[1]);
 			return ;
 		}
 		if ((*lst)->sep == '|')
 			pipor(*lst);
 		exec_ve(*lst, envlst);
-		dup2((*lst)->fd[0], 0);
-		close((*lst)->fd[0]);
-		dup2((*lst)->fd[1], 1);
-		close((*lst)->fd[1]);
+		dup2(fd[0], 0);
+		close(fd[0]);
+		dup2(fd[1], 1);
+		close(fd[1]);
 		if ((*lst)->next && (*lst)->sep == ';')
 		{ // faut pas le gerer mais bon on le gere :/
 			*lst = (*lst)->next;
@@ -142,8 +145,8 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 		}
 		break ;
 	}
-	if ((*lst)->fd[0] != 1)
-		close((*lst)->fd[0]);
-	if ((*lst)->fd[1] != 1)
-		close((*lst)->fd[1]);
+	if (fd[0] != 1)
+		close(fd[0]);
+	if (fd[1] != 1)
+		close(fd[1]);
 }

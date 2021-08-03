@@ -35,6 +35,7 @@
 
 ### redir :
 
+- [ ] multiples redir ("echo truc > a > b > c")
 
 - [x] OUT (">")
 

@@ -2612,3 +2612,8 @@ cat c
 ls
 ls ; ls
 ls
+ls> a
+cat a
+cat als
+ls
+git add .

@@ -6,13 +6,13 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:23:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/06/04 15:17:06 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/03 17:00:12 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-
+ 
 t_env_lst		*ft_lstnew_env(char *v_name, char *v_content)
 {
 	t_env_lst *new;

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 18:00:52 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/03 14:43:56 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strdup_sep(char *str, char *separator)
 	return (copy);
 }
 
-int		cmd_counter(char *str, char *separator)
+int		cmd_counter(char *str, char *separator, int *pipe)
 {
 	int i;
 	int count;
@@ -49,9 +49,15 @@ int		cmd_counter(char *str, char *separator)
 	i = -1;
 	count = 0;
 	while (str[++i])
+	{
 		if (!is_separator(str[i], separator)
 		&& (is_separator(str[i + 1], separator) || str[i + 1] == '\0'))
+		{
+			if (str[i + 1] == '|')
+				(*pipe)++;
 			count++;
+		}
+	}
 	return (count);
 }
 /*
@@ -82,7 +88,7 @@ char	***ft_split_cmd2(char *str, char *separator, t_env_lst *env)
 }
 */
 
-t_cmd_lst	*ft_split_cmd(char *str, t_env_lst *env)
+/*t_cmd_lst	*ft_split_cmd(char *str, t_env_lst *env)
 {
 	t_cmd_lst	*lst;
 	t_cmd_lst	*lst_begin;
@@ -120,7 +126,7 @@ t_cmd_lst	*ft_split_cmd(char *str, t_env_lst *env)
 	}
 	// if (lst_begin->next != NULL)
 	return (lst_begin);
-}
+}*/
 
 void	ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 {
@@ -133,7 +139,7 @@ void	ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	lst_begin = *lst;
 	if (!str || !*str)
 		return ;
-	cmd_count = cmd_counter(str, SEP);
+	cmd_count = cmd_counter(str, SEP, &lst_begin->nb_p);
 	j = -1;
 	i = 0;
 	while (++j < cmd_count)

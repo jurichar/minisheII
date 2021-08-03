@@ -2548,3 +2548,6 @@ ls
 ls > a
 ls
 ls > a
+echo truc machin bidule | grep machin
+echo truc machin bidule | grep "machin"
+ls | wc

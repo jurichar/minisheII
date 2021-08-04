@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int		is_n(char *s)
+int is_n(char *s)
 {
 	int i;
 
@@ -16,10 +16,10 @@ int		is_n(char *s)
 	return (0);
 }
 
-int		builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd)
+int builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd)
 {
-	int	i;
-	int	option;
+	int i;
+	int option;
 
 	option = 0;
 	i = 0;

@@ -2745,3 +2745,20 @@ exit
 alksdfhj
 qewfqwef
 exit
+ls
+ls | wc
+lz
+ls
+ls ; ls
+exit
+ls | wc
+ls
+ls | wc
+ls | wc | cat -e
+ls
+ls | wc | cat -e
+ls | wc 
+ls
+ls | wc
+ls
+ls | wc

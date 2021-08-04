@@ -2658,3 +2658,17 @@ ls |  wc
 sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
 ls
 ls | wc
+echo a
+ls
+ls 
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ls ; ls
+ls
+ls ; ls
+ls

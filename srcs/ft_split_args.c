@@ -6,11 +6,38 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/07/20 16:28:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/04 15:39:49 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	print_hex(char c)
+{
+	char *hex;
+
+	hex = "0123456789abcdef";
+	ft_putchar('\\');
+	ft_putchar(hex[(unsigned char)c / 16]);
+	ft_putchar(hex[(unsigned char)c % 16]);
+}
+
+void	ft_putstr_non_printable(char *str)
+{
+	while (*str)
+	{
+		if (*str >= ' ' && *str <= '~')
+			ft_putchar(*str);
+		else
+			print_hex(*str);
+		str++;
+	}
+}
 
 char	*get_arg(char *s, t_env_lst *env, int slash, char *tmp)
 {
@@ -128,6 +155,7 @@ int		args_counter(char *str)
 	int		i;
 	int		count;
 	char	*arg;
+
 	i = 0;
 	count = 1;
 	i = pass_cmd_name(str, i);
@@ -139,12 +167,10 @@ int		args_counter(char *str)
 			count++;
 		}
 		else if (!is_space(str[i])
-		&& (is_space(str[i + 1]) || str[i + 1] == '\0'))
+		&& (is_space(str[i + 1]) || str[i + 1] == '\0' || is_sep(str[i + 1])))
 			count++;
 		i++;
 	}
-	if (!is_space(str[i]) && is_sep(str[i + 1]))
-		count++;
 	return (count);
 }
 

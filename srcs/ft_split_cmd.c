@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/03 14:43:56 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/04 14:19:49 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,8 @@ void	ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 		while (str[i] && is_separator(str[i], SEP))
 			i++;
 		buf = get_cmd(&str[i]);
-		ft_split_args(buf, lst, env);
+		if (str[i])
+			ft_split_args(buf, lst, env);
 		while (str[i] && !is_separator(str[i], SEP))
 			i++;
 		(*lst)->sep = str[i];

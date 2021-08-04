@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/02 20:46:29 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/04 18:54:15 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,7 +219,8 @@ int		main(int ac, char **av, char **envp)
 	t_env_lst *envlst;
 	t_cmd_lst *lst;
 	int db;
-	
+
+	g_exit_code = 0;
 	db = 0;
 	// if (ac == 1)
 	// {

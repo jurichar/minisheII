@@ -32,6 +32,9 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst *envlst)
 	else
 		ret = chdir(lst->args[0]);
 	if (ret == -1)
+	{
 		printf("cd: %s: No such file or directory\n", lst->args[0]);
+		ret = 1;
+	}
 	return (ret);
 }

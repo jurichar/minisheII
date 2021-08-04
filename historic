@@ -2701,3 +2701,26 @@ cd $HOME/Desktop ; pwd; exit
 cd - ; pwd; exit
 ls ; ls; exit
 ls ; ls ; ls ; ls ; ls ; ls; exit
+ls ;
+ls ;;
+ls ""
+ls "dsf"
+echo $?
+ls
+echo $?
+ls ""
+echo $?
+cd srcs
+echo
+ls ""
+ls
+exit
+ls ""
+ls
+ls 
+exit
+dddd
+dogjdiosjgoidsjgoi
+idjgoidjgoidjg
+exit\
+exit

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/04 16:22:43 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/04 18:57:13 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@
 # define MAG "\033[1;35m"
 # define CYAN "\033[1;36m"
 # define ARROW ">"//"\u1405"
+
+int	g_exit_code;
 
 typedef struct s_env_lst
 {

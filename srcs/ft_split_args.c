@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/04 15:39:49 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:00:27 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,11 @@ char	*get_arg(char *s, t_env_lst *env, int slash, char *tmp)
 		len++;
 	}
 	if (quote == 1)
-	{
 		ret = ft_substr(s, 0, len);
-	}
 	else
 		arg = ft_substr(s, 0, len);
+	if ((ft_strcmp(arg, "?") == 0))
+		return (ft_itoa(g_exit_code));
 	while (env && (ft_strcmp(arg, env->name) != 0))
 		env = env->next;
 	if (env != NULL)

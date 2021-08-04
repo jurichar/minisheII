@@ -2724,3 +2724,24 @@ dogjdiosjgoidsjgoi
 idjgoidjgoidjg
 exit\
 exit
+ls ""
+echo $?
+ls ""
+echo $?
+ls
+ls ""
+pwd
+echo pouet
+ls ""
+pwd
+echo coucou
+ajsdhf
+asdlkfjasdjfoqiwejfo
+qwoeifjqoiwejfoqijewf
+ahsdfkjahsd
+akdfjhakjsdfhkajlhsdf
+ls
+exit
+alksdfhj
+qewfqwef
+exit

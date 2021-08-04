@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/04 18:57:13 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:10:34 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include <errno.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>

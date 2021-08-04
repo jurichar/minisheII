@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
+int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
 	char	**args = NULL;
@@ -35,16 +35,15 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 		else if (pid == 0)
 		{
 			if (execve(cmd, args, lst->envp) == -1)
-			{
-				g_exit_code = 1;
-			}
+				g_exit_code = errno;
 		}
 		else
 			waitpid(pid, NULL, 0);
 		i++;
 	}
-	if (g_exit_code == 1)
-		exit(1);
+	g_exit_code = errno;
+	if (g_exit_code == 2)
+		exit(g_exit_code);
 	free(lst->cmd);
 	free(lst->args);
 	free(args);

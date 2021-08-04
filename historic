@@ -2617,3 +2617,44 @@ cat a
 cat als
 ls
 git add .
+ls
+l
+ls
+ls > a
+echo q
+exit
+ls | ls | ls
+ls
+ls | ls
+ls |
+ls | ls
+ls | wc
+ls
+ls | wc
+echo a | wc
+sleep 2 | sleep 2
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+exit
+ls
+ls | ls
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls | wc > a
+cat a
+echo q | wc
+ls | wc
+ls
+ls | wc
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls | wc | cat -e
+ls |  wc
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ls
+ls | wc

@@ -121,6 +121,9 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 
 	while (lst)
 	{
+		// pid_t pid;
+		// if ((pid = fork()) == 0)
+		// {
 		if ((*lst)->redir != NULL)
 		{
 			ft_redir(*lst, envlst);
@@ -132,7 +135,9 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 			return ;
 		}
 		if ((*lst)->sep == '|')
-			pipor(*lst);
+		{
+				pipor(*lst);
+		}
 		exec_ve(*lst, envlst);
 		dup2(fd[0], 0);
 		close(fd[0]);

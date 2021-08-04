@@ -40,7 +40,7 @@ int fork_pipes (int n, struct command *cmd)
         in = fd [0];
     }
     if (in != 0)
-    dup2 (in, 0);
+        dup2 (in, 0);
     return execvp (cmd[i].argv[0], (char **)cmd[i].argv);
 }
 

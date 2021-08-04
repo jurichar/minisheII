@@ -80,6 +80,9 @@ cleanlib:
 	@printf $(END)
 	@make fclean -C libft
 
+clear: fclean cleanlib
+	@$(RM) historic
+
 re: fclean all
 
 go : re

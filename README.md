@@ -1,63 +1,72 @@
 # Minishell :
 
-
-## ToDo :
-
+## Eval :
 
 - [x] parser
 
-- [x] separator (";")
-
-- [ ] pipe ("|")
-
 - [ ] gestions d'erreurs
 
+- [ ] pas d'interpretation de quote ouverte, de \ ou de ;.
 
-### builtin :
+- [ ] UNE globale (et expliquer pourquoi).
 
+- [x] prompt qui attend une commande.
 
-- [x] cd
+- [x] historique fonctionnel.
 
-- [x] echo
+- [x] chercher et executer le bon binaire (relative / absolute PATH).
 
-- [x] env
+- [ ] (',") inhibe tt interpretations.
 
-- [x] pwd
+- [x] pipes
 
-- [ ] exit
+- [ ] multi-pipe
 
-- [ ] export
+## redirection :
 
-- [ ] unset
+- [x] ">"
 
-- [x] exec
+- [x] "<"
 
+- [x] ">>"
 
-### redir :
+- [ ] "<<"
 
-- [ ] multiples redir ("echo truc > a > b > c")
+- [ ] multiple redir.
 
-- [x] OUT (">")
+- [ ] variable d'environnement.
 
-- [x] DOUBLE OUT (">>")
+- [ ] $? affiche le status de la derniere pipe EXIT.
 
-- [x] IN ("<")
+## signaux :
 
-- [ ] DOUBLE IN ("<<")
+- [ ] ctrl-C
 
+- [ ] ctrl-D
+
+- [ ] ctrl-\
+
+## builtins :
+
+- [x] echo avec -n
+
+- [x] cd avec seulement un chemin relative / absolue
+
+- [x] pwd sans option
+
+- [] export sans option
+
+- [ ] unset sans option
+
+- [x] env sans option ni argument
+
+- [x] exit sans option
 
 ## ToFix :
 
-- PLUS BESOIN DE GERER "\\" et ";"
-
-- "|" a faire
-
 - "ls >a" a fix
 
-- ";" a remettre
-
 ## Docs :
-
 
 ### Pipe :
 
@@ -68,10 +77,3 @@
 - [Link 3](http://www.rozmichelle.com/pipes-forks-dups/\n)
 
 - [Link 4](https://tldp.org/LDP/lpg/node11.html\n)
-
-Tu peux faire un wrapper de fork fork_child(int in, int out, int fd_to_close) qui gere tous les cas de fork a faire (que ca soit pipe ou commande normale)
-
-Pour une commande normale tu fais fork_child(STDIN_FILENO, STDOUT_FILENO, -1 (rien a close))
-pour un pipe tu met tes in et out qu'il faut et fd_to_close le fd a close dans le fork (celui du pipe qui sert pas) et tu fais des if (in != STDIN_FILENO) ou (out != STDOUT_FILENO) pour detecter si c'est un cas de pipe ou pas (donc si il faut dup des fd dans le fork ou close des fd dans le fork et le parent apres avoir dup)
-la fonction return le pid donc elle s'utilise exactement comme un fork normal sauf que dans le fork tu as les bon fd pour etre pipe
-la fonction tiens en 15 lignes apres t'as juste a gerer ta suite de pipe en appelant pipe() une fois par |

@@ -12,7 +12,6 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 
 	if (is_built_in(lst) == TRUE)
     {
-        printf("builtin\n");
 		exec_built_in(lst, envlst, 1);
         return 1;
     }
@@ -21,13 +20,13 @@ int exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	if (!path)
 		return (1);
 	args = join_args(lst->cmd, lst->args); // join ls + args
-	// if (pid == 0)
-	// {
-	// 	if (execve(lst->cmd, args, lst->envp) == -1)
-	// 	{
-	// 		err = 1;
-	// 	}
-	// }
+	if (pid == 0)
+	{
+		if (execve(lst->cmd, args, lst->envp) == -1)
+		{
+			err = 1;
+		}
+	}
 	while (path[i])
 	{
         cmd = ft_strjoin(path[i], "/");

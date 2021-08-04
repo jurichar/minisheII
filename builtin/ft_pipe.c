@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int spawn_proc (int in, int out, t_cmd *cmd, t_cmd_lst *lst)
+void spawn_proc (int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 {
     pid_t pid;
     if ((pid = fork()) == 0)
@@ -15,12 +15,12 @@ int spawn_proc (int in, int out, t_cmd *cmd, t_cmd_lst *lst)
             dup2 (out, 1);
             close (out);
         }
-        return execvp (cmd->argv [0], (char * const *)cmd->argv);
+        exec_ve (lst, envlst);
     }
-    return pid;
+    return ;
 }
 
-int fork_pipes (int n, t_cmd *cmd, t_cmd_lst *lst)
+void fork_pipes (int n, t_cmd_lst *lst, t_env_lst *envlst)
 {
     int i;
     int in, fd [2];
@@ -28,25 +28,18 @@ int fork_pipes (int n, t_cmd *cmd, t_cmd_lst *lst)
     for (i = 0; i < n - 1 ; ++i)
     {
         pipe (fd);
-        spawn_proc (in, fd [1], cmd + i, lst);
+        spawn_proc (in, fd [1], lst->next, envlst);
         close (fd [1]);
         in = fd [0];
     }
     if (in != 0)
-    dup2 (in, 0);
-    return execvp (cmd[i].argv[0], (char **)cmd[i].argv);
+        dup2 (in, 0);
+    exec_ve (lst, envlst);
 }
 
-int pipor (t_cmd_lst *lst)
+void pipor (t_cmd_lst *lst, t_env_lst *envlst)
 {
     int i = 0;
     int n = lst->nb_p;
-	t_cmd *args;
-    while (i < n + 1)
-    {
-	    args[i].argv = join_args(lst->cmd, lst->args);
-	    lst = lst->next;
-        i++;
-    }
-	return fork_pipes (n + 1, args, lst);
+	fork_pipes (n + 1, lst, envlst);
 }

@@ -1,6 +1,9 @@
 #include "../includes/minishell.h"
-
-int spawn_proc(int in, int out, t_cmd *cmd)
+struct command
+{
+    const char **argv;
+};
+int spawn_proc(int in, int out, struct command *cmd)
 {
     pid_t pid;
     if ((pid = fork()) == 0)
@@ -20,38 +23,41 @@ int spawn_proc(int in, int out, t_cmd *cmd)
     return pid;
 }
 
-int fork_pipes(int n, t_cmd *cmd)
+int pipor (t_cmd_lst *lst, t_env_lst *envlst)
 {
+    int n = 3;
     int i;
-    int in, fd[2];
+    pid_t pid;
+    int in, fd [2];
+    const char *ls[] = { "ls", "-l", 0 };
+    const char *wc[] = { "wc", 0 };
+    const char *cat[] = { "cat", "-e", 0 };
+    t_cmd cmd[3];
+    //struct command *cmd;
+    // cmd = malloc(n * sizeof(struct command));
+    // struct command cmd [] = { {ls}, {wc}, {cat}} ;
+    cmd[0].argv = ls;
+    cmd[1].argv = wc;
+    cmd[2].argv = cat;
+
+    // while (lst)
+    // {
+    //     cmds[i].argv = join_args(lst->cmd, lst->args);
+    //     i++;
+    //     lst = lst->next;
+    // }
 
     in = 0;
-}
-
-void pipor(t_cmd_lst *lst, t_env_lst *envlst)
-{
-    int in = 0;
-    int i = 0;
-    int n = lst->nb_p;
-    t_cmd *cmds = NULL;
-    cmds = malloc(n * sizeof(t_cmd));
-    while (lst)
+    for (i = 0; i < n - 1; ++i)
     {
-        cmds[i].argv = join_args(lst->cmd, lst->args);
-        i++;
-        lst = lst->next;
-    }
-    n = n + 1;
-    int j;
-    // fork_pipes(n + 1, cmds);
-    for (j = 0; j < n - 1; ++j)
-    {
-        pipe(lst->fd);
-        spawn_proc(in, lst->fd[1], cmds + j);
-        close(lst->fd[1]);
-        in = lst->fd[0];
+        pipe (fd);
+        spawn_proc (in, fd [1], cmd + i);
+        close (fd [1]);
+        in = fd [0];
     }
     if (in != 0)
-        dup2(in, 0);
-    execvp(cmds[j].argv[0], (char **)cmds[j].argv);
+    {
+        dup2 (in, 0);
+    }
+    return execvp (cmd[i].argv[0], (char **)cmd[i].argv);
 }

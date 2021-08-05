@@ -1,6 +1,6 @@
-# Minishell :
+# Minishell
 
-## Eval :
+## Eval
 
 - [x] parser
 
@@ -22,7 +22,7 @@
 
 - [ ] multi-pipe
 
-## redirection :
+## redirection
 
 - [x] ">"
 
@@ -38,7 +38,7 @@
 
 - [ ] $? affiche le status de la derniere pipe EXIT.
 
-## signaux :
+## signaux
 
 - [ ] ctrl-C
 
@@ -46,7 +46,7 @@
 
 - [ ] ctrl-\
 
-## builtins :
+## builtins
 
 - [x] echo avec -n
 
@@ -62,13 +62,13 @@
 
 - [x] exit sans option
 
-## ToFix :
+## ToFix
 
 - "ls >a" a fix
 
-## Docs :
+## Docs
 
-### Pipe :
+### Pipe
 
 - [Link 1](http://www.zeitoun.net/articles/communication-par-tuyau/start\n)
 

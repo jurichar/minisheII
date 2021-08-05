@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <libc.h>
 
 struct command
 {
@@ -7,6 +8,8 @@ struct command
 
 int spawn_proc (int in, int out, struct command *cmd)
 {
+    // all cmd execpt last
+    printf ("cmd = %s\n", cmd->argv[0]);
     pid_t pid;
     if ((pid = fork()) == 0)
     {
@@ -25,8 +28,15 @@ int spawn_proc (int in, int out, struct command *cmd)
     return pid;
 }
 
-int fork_pipes (int n, struct command *cmd)
+int main ()
 {
+    const char *ls[] = { "ls", "-l", 0 };
+    const char *wc[] = { "wc", 0 };
+    const char *cat[] = { "cat", "-e", 0 };
+
+    struct command cmd [] = { {ls}, {wc}, {cat}} ;
+
+    int n = 3;
     int i;
     pid_t pid;
     int in, fd [2];
@@ -40,16 +50,8 @@ int fork_pipes (int n, struct command *cmd)
         in = fd [0];
     }
     if (in != 0)
+    {
         dup2 (in, 0);
+    }
     return execvp (cmd[i].argv[0], (char **)cmd[i].argv);
-}
-
-int main ()
-{
-  const char *ls[] = { "ls", "-l", 0 };
-  const char *wc[] = { "wc", 0 };
-
-  struct command cmd [] = { {ls}, {wc}} ;
-
-  return fork_pipes (2, cmd);
 }

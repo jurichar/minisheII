@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/05 13:22:46 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/05 14:18:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_redir
 
 typedef struct s_cmd
 {
-    const char **argv;
+    char **argv;
 } t_cmd;
 
 typedef struct s_cmd_lst

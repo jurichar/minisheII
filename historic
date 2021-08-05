@@ -1,2 +1,36 @@
 ls
 ls | wc
+ls
+ls | ls
+ls | wc
+ls | wc | cat -e
+ls | wc 
+ls | wc
+ls | wc 
+ls | wc | cat -e
+ls | wc | cat -e | grep '$'
+ls | wc | cat -e | wc -l
+ls | wc | cat -e | wc -l | wc
+exit
+ls | wc | cat -e | wc -l | wc
+ls | wc
+ls
+ls ; ls
+ls 
+ps
+ls
+ls | wc
+ls
+p
+ps
+exit
+ls | wc
+ps
+ls | wc
+ls
+ps
+ls
+ls | ps
+echo a | wc
+ls
+ps

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/04 18:54:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:31:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,15 +221,8 @@ int		main(int ac, char **av, char **envp)
 	int db;
 
 	g_exit_code = 0;
-	db = 0;
-	// if (ac == 1)
-	// {
-		(void)ac;
-		(void)av;
-	// }
-	// else
-		// db = 1;
-	// (void)envp;
+	if (ac != 1 || envp == NULL)
+		return 0; 
 	lst = NULL;
 	lst = ft_new_cmd_list(envp);
 	envlst = NULL;

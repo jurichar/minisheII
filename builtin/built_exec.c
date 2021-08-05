@@ -131,7 +131,7 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 			close(fd[0]);
 			dup2(fd[1], 1);
 			close(fd[1]);
-			return;
+			return ;
 		}
 		if ((*lst)->sep == '|')
 		{
@@ -139,7 +139,7 @@ void get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 			dup2(fd[0], 0);
 			close(fd[0]);
 			dup2(fd[1], 1);
-			close(fd[1]);
+			close(fd[0]);
 			return;
 		}
 		exec_ve(*lst, envlst);

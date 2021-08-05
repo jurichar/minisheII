@@ -4,11 +4,11 @@
 
 - [x] parser
 
-- [ ] gestions d'erreurs
+- [x] gestions d'erreurs
 
 - [ ] pas d'interpretation de quote ouverte, de \ ou de ;.
 
-- [ ] UNE globale (et expliquer pourquoi).
+- [x] UNE globale (et expliquer pourquoi).
 
 - [x] prompt qui attend une commande.
 
@@ -20,7 +20,7 @@
 
 - [x] pipes
 
-- [ ] multi-pipe
+- [x] multi-pipe
 
 ## redirection
 

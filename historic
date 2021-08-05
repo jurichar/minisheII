@@ -111,3 +111,12 @@ exit
 echo $SHLVL
 ls ; ls > a
 ls | wc ; ls
+ls
+ls | wc
+exit
+ls
+ls ; ls
+ls | wc ; ls
+ls
+ls | wc > a
+exit

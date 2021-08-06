@@ -54,7 +54,7 @@
 
 - [x] pwd sans option
 
-- [] export sans option
+- [ ] export sans option
 
 - [ ] unset sans option
 

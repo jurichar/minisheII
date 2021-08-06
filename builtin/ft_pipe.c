@@ -1,10 +1,5 @@
 #include "../includes/minishell.h"
 
-void	ft_osef(void *pouet)
-{
-	pouet = (void *)42;
-}
-
 int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;

@@ -4,7 +4,7 @@
 
 - [x] parser
 
-- [x] gestions d'erreurs
+- [ ] gestions d'erreurs
 
 - [ ] pas d'interpretation de quote ouverte, de \ ou de ;.
 

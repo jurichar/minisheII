@@ -153,3 +153,28 @@ l
 cat | cat | ls
 ls
 ls
+echo a
+ls -a
+ls > a
+cat < a
+exit
+ls
+exit
+ls
+exit
+ls
+exit
+ls
+exit
+echo a
+ls
+exit
+ls
+exit
+woqkoq
+oqwkeokq
+exit
+ls
+echo a
+echo 
+exit

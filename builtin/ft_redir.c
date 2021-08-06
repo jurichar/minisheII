@@ -1,51 +1,59 @@
 #include "../includes/minishell.h"
 
-void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
+void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	int		status;
-	int		inout;
-	pid_t	pid;
-	char	*inoutput;
 	char	BUF[128];
 
+	lst->fd[0] = open(lst->redir->arg, O_RDONLY);
+	dup2(lst->fd[0], 0);
+	read(lst->fd[0], BUF, ft_strlen(lst->redir->arg));
+	while (ft_strcmp(BUF, lst->redir->arg) != 0)
+		wait(NULL);
+	close(lst->fd[0]);
+}
+
+void	ft_redir_out_double(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	lst->fd[1] = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
+	dup2(lst->fd[1], 1);
+	close(lst->fd[1]);
+}
+
+void	ft_redir_out(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	lst->fd[1] = open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	dup2(lst->fd[1], 1);
+	close(lst->fd[1]);
+}
+
+void	ft_redir_in(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	lst->fd[0] = open(lst->redir->arg, O_RDONLY);
+	dup2(lst->fd[0], 0);
+	close(lst->fd[0]);
+}
+
+void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	pid_t	pid;
+
 	pid = fork();
-	inoutput = lst->redir->arg;
-	inout = lst->redir->redir;
 	if (pid < 0)
 		perror("fork");
 	else if (pid == 0)
 	{
-		if (inout == 1)
-		{
-			lst->fd[0] = open(inoutput, O_RDONLY);
-			dup2(lst->fd[0], 0);
-			close(lst->fd[0]);
-		}
-		else if (inout == 2)
-		{
-			lst->fd[1] = open(inoutput, O_CREAT | O_RDWR | O_TRUNC, 0644);
-			dup2(lst->fd[1], 1);
-			close(lst->fd[1]);
-		}		
-		else if (inout == 3)
-		{
-			lst->fd[1] = open(inoutput, O_CREAT | O_RDWR | O_APPEND, 0644);
-			dup2(lst->fd[1], 1);
-			close(lst->fd[1]);
-		}
-		else if (inout == 4)
-		{
-			lst->fd[0] = open(inoutput, O_RDONLY);
-			dup2(lst->fd[0], 0);
-			read(lst->fd[0], BUF, ft_strlen(inoutput));
-			while (ft_strcmp(BUF, inoutput) != 0)
-				wait(NULL);
-			close(lst->fd[0]);
-		}
+		if (lst->redir->redir == 1)
+			ft_redir_in(lst, envlst);
+		else if (lst->redir->redir == 2)
+			ft_redir_out(lst, envlst);
+		else if (lst->redir->redir == 3)
+			ft_redir_out_double(lst, envlst);
+		else if (lst->redir->redir == 4)
+			ft_redir_in_double(lst, envlst);
 	}
 	else
 	{
-		waitpid(pid, &status, 0);
+		waitpid(pid, NULL, 0);
 		exit(0);
 	}
 }

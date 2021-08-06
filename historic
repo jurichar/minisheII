@@ -153,3 +153,75 @@ l
 cat | cat | ls
 ls
 ls
+echo $?
+echo trc
+echo $?
+ls
+$?
+echo $?
+ls
+echo $?
+echo;
+ls gsdf
+echo !?$?
+echo ?$
+echo $?
+aalksdjf
+lsasdf
+ls asdf
+echo $?
+ls sdlkasdflk
+echo $?
+pwd
+echo $?
+pwd asdf
+echo $?
+ls
+echo $?
+ls
+echo $?
+pouet
+asdf
+echo pouet
+echo $?
+ls
+echo $?
+pwd
+echo $?
+pwd asdf
+echo $?
+cd sdsd
+echo $?
+ls
+echo $?
+ls | ls
+asdf
+echo $?
+ech
+asdf
+echo $?
+asdfadsf
+echo $?
+asdf
+echo $?
+asdf
+echo $?
+asdfafsdf
+asdfasdf
+echo $?
+ls
+echo pouet
+pwd
+wc historic
+echo $?
+ps
+ls
+echo $?
+asdf
+echo $?
+asdf
+echo $?
+quit
+exit
+ls poet
+ls d

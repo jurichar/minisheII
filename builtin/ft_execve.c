@@ -35,15 +35,23 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 		else if (pid == 0)
 		{
 			if (execve(cmd, args, lst->envp) == -1)
+			{
 				g_exit_code = errno;
+				printf("COUCOU errno == %d\n", errno);
+			}
 		}
 		else
 			waitpid(pid, NULL, 0);
 		i++;
 	}
-	g_exit_code = errno;
-	if (g_exit_code == 2)
-		exit(g_exit_code);
+	printf("errno == %d\n", errno);
+	if (errno == 10)
+		g_exit_code = 0;
+	if (errno == 2)
+	{
+		g_exit_code = 127;
+		exit(127);
+	}
 	free(lst->cmd);
 	free(lst->args);
 	free(args);

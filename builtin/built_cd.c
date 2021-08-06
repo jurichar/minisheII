@@ -7,7 +7,7 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst *envlst)
 	if (lst->args[0] == NULL)
 	{
 		while (envlst)
-		{
+		{	
 			if (ft_strcmp("HOME", envlst->name) == 0)
 				break ;
 			envlst = envlst->next;

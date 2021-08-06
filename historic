@@ -120,3 +120,36 @@ ls | wc ; ls
 ls
 ls | wc > a
 exit
+$SHLVL
+echo $SHLVL
+./minishell
+echo $SHLVL
+ls
+ls | wc
+ls | echo a | wc
+ls > a
+cat a
+$ENV
+ls
+env
+export
+exit
+cat
+ls
+cat
+exit
+cat < a
+cat
+l
+ls
+bash
+exit
+at
+cat
+ls
+ls | wc
+cat | cat | ls
+l
+cat | cat | ls
+ls
+ls

@@ -119,7 +119,7 @@ int				builtin_env(t_cmd_lst *lst, t_env_lst *envlst);
 **ENVIRONEMENT RELATED
 **
 */
-t_env_lst		*ft_cmd_lstnew_env(char *v_name, char *v_content);
+t_env_lst		*ft_lstnew_env(char *v_name, char *v_content);
 t_env_lst		*ft_lstnew_env(char *v_name, char *v_content);
 t_env_lst		*get_env(t_env_lst *list, char **envp);
 void			ft_env_remove_if(t_env_lst **begin, void *data, int (*cmp)());
@@ -176,10 +176,10 @@ void			clear_and_print(int len, char *s, int pos);
 void			ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp);
 void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
 void			print_point_char(char **str);
-char	**join_args(char *s, char **args);
-char *get_env_by_name(t_env_lst *envlst, char *name);
-void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
-int pipor (t_cmd_lst *lst, t_env_lst *envlst);
-int	is_built_in(t_cmd_lst *lst);
+char			**join_args(char *s, char **args);
+char			 *get_env_by_name(t_env_lst *envlst, char *name);
+void			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int 			pipor (t_cmd_lst *lst, t_env_lst *envlst);
+int				is_built_in(t_cmd_lst *lst);
 
 #endif

@@ -218,6 +218,7 @@ void	ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env)
 	}
 	args_count = args_counter(str);
 	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));
+	printf("args count == %d\n", args_count);
 	i = 0;
 	j = 0;
 	while (is_space(str[j]) && str[j])

@@ -32,8 +32,8 @@ int exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd)
 		return builtin_env(lst, envlst);
 	else if (ft_strcmp(lst->cmd, "unset") == 0)
 		return builtin_unset(lst, envlst);
-	//else if (ft_strcmp(lst->cmds[0],"export") == 0)
-	//	return builtin_export(lst, envlst);
+	else if (ft_strcmp(lst->cmd,"export") == 0)
+		return builtin_export(lst, envlst);
 	close(fd);
 	return 0;
 }

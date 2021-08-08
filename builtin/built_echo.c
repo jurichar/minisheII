@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   built_echo.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/08 17:35:02 by jurichar          #+#    #+#             */
+/*   Updated: 2021/08/08 17:35:03 by jurichar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
-int is_n(char *s)
+int	is_n(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (s[i] == '-')
@@ -16,10 +28,10 @@ int is_n(char *s)
 	return (0);
 }
 
-int builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd)
+int	builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd)
 {
-	int i;
-	int option;
+	int	i;
+	int	option;
 
 	option = 0;
 	i = 0;

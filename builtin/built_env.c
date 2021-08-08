@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int builtin_env(t_cmd_lst *lst, t_env_lst *envlst)
+int	builtin_env(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	while (envlst)
 	{

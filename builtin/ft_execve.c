@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_execve.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
+/*   Updated: 2021/08/08 20:43:16 by jurichar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	check_built_in(t_cmd_lst *lst, t_env_lst *envlst)
@@ -15,17 +27,8 @@ int	exec_ve_abs(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 	char	**args;
 
 	args = join_args(lst->cmd, lst->args);
-	if (pid < 0)
-		perror("pid");
-	else if (pid == 0)
-	{
-		if (execve(lst->cmd, args, lst->envp) == -1)
-			g_exit_code = 1;
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-	}
+	if (execve(lst->cmd, args, lst->envp) == -1)
+		g_exit_code = 1;
 	return (g_exit_code);
 }
 
@@ -56,12 +59,11 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
-
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();
 	if (pid < 0)
-		perror("pid");
+		perror("pid2");
 	else if (pid == 0)
 	{
 		exec_ve_abs(lst, envlst, pid);

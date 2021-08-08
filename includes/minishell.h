@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/05 14:18:24 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:30:00 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int				is_space(char c);
 void			get_built_in (t_cmd_lst **lst, t_env_lst *envlst, char **envp);
 int				builtin_exit(t_cmd_lst *lst);
 int				builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd);
-int				builtin_cd(t_cmd_lst *lst, t_env_lst *envlst);
+int				builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int n);
 int				builtin_pwd(t_cmd_lst *lst, t_env_lst *envlst);
 int				builtin_unset(t_cmd_lst *lst, t_env_lst *env);
 int				builtin_export(t_cmd_lst *lst, t_env_lst *envlst);

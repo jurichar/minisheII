@@ -5,14 +5,14 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 13:50:56 by lebourre          #+#    #+#             */
-/*   Updated: 2021/06/07 11:34:43 by jurichar         ###   ########.fr       */
+/*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
+/*   Updated: 2021/08/08 19:32:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i)
+int	env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i)
 {
 	t_env_lst	*swap;
 	t_env_lst	*tmp_next;
@@ -30,7 +30,7 @@ int		env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i)
 	return (0);
 }
 
-t_env_lst        *env_sort(t_env_lst *list, int i)
+t_env_lst	*env_sort(t_env_lst *list, int i)
 {
 	t_env_lst	*curr;
 	t_env_lst	*begin;
@@ -117,3 +117,9 @@ int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 	return (0);
 }
 */
+
+int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	printf ("A FAIRE !");
+	return (0);
+}

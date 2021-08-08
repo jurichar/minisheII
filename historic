@@ -178,3 +178,40 @@ ls
 echo a
 echo 
 exit
+cd ..
+echo a
+ls
+echo a
+cd ..
+ls
+exit
+ls
+cd ..
+ls
+env
+export
+exit
+ls
+ls > a
+cls
+ceixt
+ls > a
+cat a
+rm a
+ls
+exit
+ls
+ls | wc
+ls
+echo a
+echo
+ej
+ls
+exit
+cd wpodkpowk
+exit
+ls | wc
+ls
+echo a
+exit
+ls | wc

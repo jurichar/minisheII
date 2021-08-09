@@ -37,7 +37,9 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	n = lst->nb_p;
 	i = -1;
 	in = 0;
-	while (i < n)
+	int x = dup(0);
+	int y = dup(1);
+	while (++i < n)
 	{
 		pipe(lst->fd);
 		forkito (in, lst->fd[1], lst, envlst);

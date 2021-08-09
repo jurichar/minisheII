@@ -119,7 +119,7 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 		else if ((*lst)->sep == '|')
 		{
 			pipor(*lst, envlst);
-			exec_ve(*lst, envlst);
+			// exec_ve(*lst, envlst);
 			dup2(fd[0], 0);
 			close(fd[0]);
 			dup2(fd[1], 1);

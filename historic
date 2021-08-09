@@ -238,3 +238,13 @@ ls | wc
 ls
 echo a
 ls | wc
+ls
+ls > a
+cat < a
+ls | wc
+ls
+ls | wc
+ls
+ps
+ls 
+ls | wc | cat -e

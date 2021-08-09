@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/09 17:40:38 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 18:47:51 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,47 @@
 
 void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	char	BUF[128];
-
-	lst->fd[0] = open(lst->redir->arg, O_RDONLY);
-	dup2(lst->fd[0], 0);
-	read(lst->fd[0], BUF, ft_strlen(lst->redir->arg));
-	while (ft_strcmp(BUF, lst->redir->arg) != 0)
-		wait(NULL);
-	close(lst->fd[0]);
+	int		i;
+	int		fd;
+	char	*line;
+	char	*res;
+	char	*buf;
+	fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	dup2(lst->fd[1], 1);
+	while (42)
+	{
+		get_next_line(fd, &buf);
+		if (ft_strcmp(lst->redir->arg, buf) == 0)
+			break;
+		// printf ("buf = %s\n", buf);
+	}
+	close(lst->fd[1]);
+	// dup2(lst->fd[1], 1);
+	// close(lst->fd[1]);
+	// if (ft_strcmp(buf, lst->redir->arg)== 0)
+	// {
+	// 	break ;
+	// }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void	ft_redir_out_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
@@ -48,7 +80,6 @@ void	ft_redir_in(t_cmd_lst *lst, t_env_lst *envlst)
 void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
-
 	pid = fork();
 	if (pid < 0)
 		perror("fork");

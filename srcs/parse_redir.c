@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:40:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/07/20 16:28:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 18:36:55 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ int	how_many_redir(char *s)
 int	which_redir(char *str)
 {
 	if (str[0] == '<')
-		return (1);
+	{
+		if (str[1] == '<')
+			return (4);
+		else
+			return (1);
+	}
 	else if (str[0] == '>')
 	{
 		if (str[1] ==  '>')

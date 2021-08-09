@@ -347,3 +347,45 @@ echo a > a
 ls
 echo a
 exit
+ls
+echo a
+ls
+echo a
+l
+ls
+exit
+ls > a
+cat a
+rm a
+ls
+exit
+cat << a
+ls
+cat << a
+ls
+cat << a
+ls
+cat << a
+ls
+ls -a
+cat .tmp
+cat << a
+ls
+<<
+<< q
+q
+ls
+ls -a
+cat << a
+>
+ls > a
+cat < a
+cat << ls
+cat << aa
+cat << a
+w
+cat << a
+ls
+cat << a
+ls
+cat << a

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/09 17:53:18 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 18:04:57 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,9 @@ int	is_built_in(t_cmd_lst *lst)
 	char	**builtin_list;
 	t_tripl	tripl;
 
-	tripl = tripl_init();
+	// tripl = tripl_init();
+	tripl.x = -1;
+	tripl.z = FALSE;
 	builtin_list = malloc(sizeof(char *) * 2);
 	if (!builtin_list)
 		return (0);

@@ -215,3 +215,26 @@ ls
 echo a
 exit
 ls | wc
+ls
+ls | wc
+ls
+ls | wc
+ls
+echo a
+ls | wc
+ls
+ls | wc
+ls
+ls | wc
+ls > a
+cat a
+ls >> a
+cat a
+ls > a
+cat < a
+exit
+ls
+ls | wc
+ls
+echo a
+ls | wc

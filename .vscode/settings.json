@@ -1,4 +1,5 @@
 {
     "files.autoSave": "onWindowChange",
-    "editor.fontSize": 15
+    "editor.fontSize": 15,
+    "C_Cpp.errorSquiggles": "Disabled"
 }

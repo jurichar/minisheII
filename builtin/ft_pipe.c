@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
+/*   Updated: 2021/08/09 17:33:38 by jurichar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
@@ -5,6 +17,8 @@ int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 	pid_t	pid;
 
 	pid = fork();
+	if (pid < 0)
+		perror("pid");
 	if ((pid) == 0)
 	{
 		if (in != 0)
@@ -37,8 +51,6 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	n = lst->nb_p;
 	i = -1;
 	in = 0;
-	int x = dup(0);
-	int y = dup(1);
 	while (++i < n)
 	{
 		pipe(lst->fd);

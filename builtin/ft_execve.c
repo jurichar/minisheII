@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/09 14:22:42 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 16:28:03 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
+
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();

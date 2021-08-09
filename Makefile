@@ -20,6 +20,7 @@ SRC_BUILTIN =	built_cd.c \
 				built_unset.c \
 				ft_execve.c \
 				ft_pipe.c \
+				built_utils.c \
 				ft_redir.c
 
 SRC_SRCS =	main.c \
@@ -35,7 +36,7 @@ SRC_SRCS =	main.c \
 		historic.c \
 		parse_redir.c \
 		skip.c \
-		cmd_utils.c
+		cmd_utils.c 
 
 SRC = 	$(addprefix $(DIR_SRCS), $(SRC_SRCS)) \
 		$(addprefix $(DIR_BUILTIN), $(SRC_BUILTIN))

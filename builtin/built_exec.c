@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   built_exec.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
+/*   Updated: 2021/08/09 17:53:18 by jurichar         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 int	exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd)
@@ -19,128 +31,78 @@ int	exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd)
 	return (0);
 }
 
-char	**join_args(char *s, char **args)
+t_tripl	tripl_init(void)
 {
-	char	**new;
-	int		len;
-	int		i;
+	t_tripl	tripl;
 
-	len = 0;
-	while (args[len])
-		len++;
-	new = malloc(sizeof(char *) * (len + 2));
-	len = 0;
-	i = 1;
-	new[0] = s;
-	while (args[len])
-	{
-		new[i] = args[len];
-		i++;
-		len++;
-	}
-	new[i] = NULL;
-	return (new);
-}
+	tripl.x = -1;
+	tripl.y = 0;
+	tripl.z = FALSE;
 
-char	*get_env_by_name(t_env_lst *envlst, char *name)
-{
-	if (!envlst)
-		return (0);
-	while (envlst)
-	{
-		if (ft_strcmp(envlst->name, name) == 0)
-			return (envlst->content);
-		envlst = envlst->next;
-	}
-	return (0);
+	return (tripl);
 }
 
 int	is_built_in(t_cmd_lst *lst)
 {
 	char	**builtin_list;
-	int		builtin;
-	int		i;
-	
+	t_tripl	tripl;
+
+	tripl = tripl_init();
 	builtin_list = malloc(sizeof(char *) * 2);
 	if (!builtin_list)
 		return (0);
 	builtin_list[0] = ft_strdup("cd");
-	builtin_list[1] = ft_strdup("export");
-	builtin_list[2] = ft_strdup("export");
+	builtin_list[1] = ft_strdup("echo");
+	builtin_list[2] = ft_strdup("pwd");
 	builtin_list[3] = ft_strdup("export");
-	builtin_list[4] = ft_strdup("export");
-	builtin_list[5] = ft_strdup("export");
+	builtin_list[4] = ft_strdup("unset");
+	builtin_list[5] = ft_strdup("env");
 	builtin_list[6] = ft_strdup("exit");
 	builtin_list[7] = NULL;
-	builtin = FALSE;
-	i = -1;
-	while (builtin_list[++i] && i <= 8)
+	while (builtin_list[++tripl.x] && tripl.x <= 8)
 	{
-		if (ft_strcmp(builtin_list[i], lst->cmd) == 0)
+		tripl.y = ft_strcmp(builtin_list[tripl.x], lst->cmd);
+		if (tripl.y == FALSE)
 		{
-			builtin = TRUE;
+			tripl.z = TRUE;
 			break ;
 		}
 	}
-	return (builtin);
+	return (tripl.z);
 }
 
 void	fd_close(int fd[2])
 {
 	dup2(fd[0], 0);
-	close(fd[0]);
+	if (fd[0] != 1)
+		close(fd[0]);
 	dup2(fd[1], 1);
-	close(fd[1]);
+	if (fd[1] != 1)
+		close(fd[1]);
 }
 
 void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 {
-	int i;
-	int builtin;
-	int fd[2];
-	pid_t	pid;
+	int		builtin;
+	int		fd[2];
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
 	if (!lst)
-		return;
+		return ;
 	while (lst)
 	{
 		if ((*lst)->redir != NULL)
 		{
 			ft_redir(*lst, envlst);
 			exec_ve(*lst, envlst);
-			dup2(fd[0], 0);
-			close(fd[0]);
-			dup2(fd[1], 1);
-			close(fd[1]);
-			return ;
 		}
 		else if ((*lst)->sep == '|')
-		{
 			pipor(*lst, envlst);
-			// exec_ve(*lst, envlst);
-			dup2(fd[0], 0);
-			close(fd[0]);
-			dup2(fd[1], 1);
-			close(fd[1]);
-			return ;
-		}
 		else
 			exec_ve(*lst, envlst);
-		dup2(fd[0], 0);
-		close(fd[0]);
-		dup2(fd[1], 1);
-		close(fd[1]);
-		if ((*lst)->next && (*lst)->sep == ';')
-		{
-			*lst = (*lst)->next;
-			get_built_in(lst, envlst, envp);
-		}
-		break;
+		fd_close(fd);
+		break ;
 	}
-	if (fd[0] != 1)
-		close(fd[0]);
-	if (fd[1] != 1)
-		close(fd[1]);
+	fd_close(fd);
 }

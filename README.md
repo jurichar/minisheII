@@ -54,7 +54,7 @@
 
 - [x] pwd sans option
 
-- [] export sans option
+- [ ] export sans option
 
 - [ ] unset sans option
 
@@ -63,6 +63,8 @@
 - [x] exit sans option
 
 ## ToFix
+
+- "cat < test.sh" : .sh no such file or directory
 
 - "ls >a" a fix
 

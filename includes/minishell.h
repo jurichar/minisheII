@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/08 21:18:45 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 17:52:14 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,12 @@ typedef struct s_redir
 	struct s_redir	*next;
 }		t_redir;
 
-typedef struct s_cmd
+typedef struct s_tripl
 {
-    char **argv;
-} t_cmd;
+    int x;
+	int y;
+	int z;
+} t_tripl;
 
 typedef struct s_cmd_lst
 {
@@ -160,26 +162,24 @@ int				historic_size(void);
 */
 void			set_term_ncan(void);
 void			set_term_can(struct termios term);
-
 int				get_next_line(int fd, char **line);
 char			*insert_char(char *start, char c, char *end);
 int				minishell_launch(char **av, char **envp);
 int				minishell_cd(t_fct_params *params);
 int				minishell_echo(t_fct_params *params);
 int				minishell_pwd(t_fct_params *params);
-int				exec_built_in (t_cmd_lst *lst, t_env_lst *envlst, int fd);
+int				exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd);
 int 			exec_ve(t_cmd_lst *lst, t_env_lst *envlst);
 int				minishell_execute(char **av, char **envp, t_env_lst *lst);
 char			*del_char(char *src, int pos);
 void			clear_and_print(int len, char *s, int pos);
-
 void			ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp);
 void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
 void			print_point_char(char **str);
-char	**join_args(char *s, char **args);
-char *get_env_by_name(t_env_lst *envlst, char *name);
-void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
-int pipor (t_cmd_lst *lst, t_env_lst *envlst);
-int	is_built_in(t_cmd_lst *lst);
+char			**join_args(char *s, char **args);
+char			 *get_env_by_name(t_env_lst *envlst, char *name);
+void			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int				pipor(t_cmd_lst *lst, t_env_lst *envlst);
+int				is_built_in(t_cmd_lst *lst);
 
 #endif

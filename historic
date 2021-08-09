@@ -248,3 +248,102 @@ ls
 ps
 ls 
 ls | wc | cat -e
+ls
+ls | wc
+ks
+ls
+exit
+ls
+ls | wc
+exit
+ls
+ls | wc
+ls > c
+cat c
+cat < c
+exit
+ls
+lllll
+lllllllllllllllllllll
+ifjoeih
+exit
+ls | wc > a
+ls
+cat a
+exit
+echo a
+echo truc
+exit
+cd ..
+ls
+pwd
+cd ..
+ls
+cd ..
+ls
+cd ..
+ls
+env
+exit
+env
+export
+ls
+export o=ww
+env
+exit
+ls
+ls > a
+ls
+cat a
+rm a
+rm c
+cat < test.sh
+ls
+ls > a
+cat < a
+cat < test.sh
+exit
+;s
+ls
+ls > a
+cat a
+ls | wc
+ls
+ps
+exit
+ls > a | wc
+ls
+cat a
+exit
+ls | wc > a
+ls
+cat a
+rm a
+ls
+ls | wc > a
+ls
+l
+ls
+exit
+ls
+echo a
+echo a > a
+;ls
+ls
+cat a
+ls
+rm a
+ls
+echo a > a
+ls
+ehoc a
+echo a
+ls
+echo a
+ls
+echo a
+ls
+echo a > a
+ls
+echo a
+exit

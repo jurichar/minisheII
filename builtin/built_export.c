@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/08 19:32:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/09 16:27:43 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,7 @@ int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 }
 */
 
-int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
+int	builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	printf ("A FAIRE !");
 	return (0);

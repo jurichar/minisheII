@@ -389,3 +389,17 @@ ls
 cat << a
 ls
 cat << a
+ls
+cat << a
+ls
+l
+ls
+exit
+ls
+ls ; ls
+ls
+echo a
+ls | wc
+valgrind ./minishell
+ls
+exit

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/05 16:31:16 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/10 17:52:31 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,8 +202,6 @@ buf, ft_substr(line, cur_pos, ft_strlen(line) - cur_pos));
 //		printf("line = %s len = %lu\n", line, ft_strlen(line));
 	}
 	set_term_can(term);
-	if (db == 1)
-		printf(YLW "line =" ZERO " %s\n", line);
 	return (line);
 }
 

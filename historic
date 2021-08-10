@@ -403,3 +403,24 @@ ls | wc
 valgrind ./minishell
 ls
 exit
+ls
+echo a
+ls > a
+ls
+ls | wc
+ls
+echo a
+ls | wc
+echo a
+ls | wc
+echo a
+ls | wc
+echo a
+ls | wc
+echo a
+ls | wc
+echo a
+ls | wc
+echo a
+ls
+exit

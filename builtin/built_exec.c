@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/10 18:03:01 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/10 18:45:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	is_built_in(t_cmd_lst *lst)
 	tripl.x = 0;
 	tripl.y = 0;
 	tripl.z = FALSE;
-	builtin_list = malloc(sizeof(char *) * 9);
+	builtin_list = malloc((sizeof(char *) * 8));
 	if (!builtin_list)
 		return (0);
 	builtin_list[0] = ft_strdup("cd");
@@ -61,8 +61,8 @@ int	is_built_in(t_cmd_lst *lst)
 	builtin_list[4] = ft_strdup("unset");
 	builtin_list[5] = ft_strdup("env");
 	builtin_list[6] = ft_strdup("exit");
-	builtin_list[7] = "\0";
-	while (tripl.x <= 7)
+	builtin_list[7] = 0;
+	while (tripl.x < 7)
 	{
 		tripl.y = ft_strcmp(builtin_list[tripl.x], lst->cmd);
 		if (tripl.y == FALSE)
@@ -72,6 +72,13 @@ int	is_built_in(t_cmd_lst *lst)
 		}
 		tripl.x++;
 	}
+	free(builtin_list[0]);
+	free(builtin_list[1]);
+	free(builtin_list[2]);
+	free(builtin_list[3]);
+	free(builtin_list[4]);
+	free(builtin_list[5]);
+	free(builtin_list[6]);
 	free(builtin_list);
 	return (tripl.z);
 }

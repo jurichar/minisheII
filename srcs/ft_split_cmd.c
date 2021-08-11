@@ -53,7 +53,9 @@ int		cmd_counter(char *str, char *separator, int *pipe)
 		if (!is_separator(str[i], separator)
 		&& (is_separator(str[i + 1], separator) || str[i + 1] == '\0'))
 		{
-			if (str[i + 1] == '|')
+			if ((str[i] == '&' && str[i + 1] != '&') || (str[i + 1] == '&' && str[i + 2] != '&'))
+				return (-1);
+			if (str[i + 1] == '|' && str[i + 2] != '|')
 				(*pipe)++;
 			count++;
 		}
@@ -151,6 +153,8 @@ void	ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 			ft_split_args(buf, lst, env);
 		while (str[i] && !is_separator(str[i], SEP))
 			i++;
+		if (str[i] == '|' && str[i + 1] == '|')
+			(*lst)->sep = '-';
 		(*lst)->sep = str[i];
 		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)
 			lst_begin = *lst;

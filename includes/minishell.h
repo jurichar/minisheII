@@ -40,7 +40,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define SEP ";|"
+# define SEP ";|&"
 // colors : +10 for background color
 
 # define ZERO "\033[0m"

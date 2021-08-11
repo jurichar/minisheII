@@ -44,6 +44,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 			waitpid(pid, NULL, 0);
 		i++;
 	}
+	printf("strerror il dit ca wesh: %s\n", strerror(errno));
 	printf("errno == %d\n", errno);
 	if (errno == 10)
 		g_exit_code = 0;

@@ -105,7 +105,6 @@ char	*get_line(int up, int db)
 	//ft_putstr_fd(BLU ARROW" " ZERO, 1);
 	line = readline(BLU ARROW" " ZERO);
 	add_history(line);
-	printf("line == %s\n", line);
 	/*
 	while (1)
 	{

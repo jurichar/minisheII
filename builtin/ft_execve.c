@@ -31,7 +31,10 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 		cmd = ft_strjoin(cmd, lst->cmd);
 		args = join_args(cmd, lst->args);
 		if (pid < 0)
+		{
+			printf("perror pas content:\n");
 			perror("pid");
+		}
 		else if (pid == 0)
 		{
 			if (execve(cmd, args, lst->envp) == -1)

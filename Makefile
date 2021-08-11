@@ -49,7 +49,7 @@ all: $(NAME)
 
 $(NAME): lib $(OBJ) 
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) -g3 -O0 $(OBJ) -I libft/ -lft -L libft/ -o $(NAME)
+	@$(CC) -g3 -O0 $(OBJ) -I libft/ -lft -L libft/ -o $(NAME) -lreadline
 	@printf $(GRN)"[Minishell ready !!]%-30s\n"
 	@printf $(END)
 

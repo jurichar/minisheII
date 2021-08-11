@@ -109,7 +109,6 @@ int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	if (!*lst->args)
 	{
-		printf("hello\n");
 		print_sorted(envlst);
 		return (0);
 	}

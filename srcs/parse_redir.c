@@ -46,27 +46,24 @@ int	which_redir(char *str)
 		else
 			return (2);
 	}
-	else
-		return (0);
+	return (0);
 }
-
-
 /*
 **REDIR_DUP
 **
 **Allocate a new redirection list element. Also store the redirection type in
 **new->redir and the file name in new->arg
 */
-t_redir	*redir_dup(char *s)
+void	redir_dup(t_redir **list, char *s)
 {
 	int			start;
 	int			len;
 	char		*redir;
 	t_redir		*new;
 
+	new = *list;
 	start = 0;
 	len = 0;
-	new = malloc(sizeof(t_redir));
 	new->redir = which_redir(s);
 	while (s[start] && (s[start] == '>' || s[start] == '<'))
 		start++;
@@ -77,7 +74,6 @@ t_redir	*redir_dup(char *s)
 	new->arg = ft_substr(s, start, len - 2);
 	// printf("redir = %s.\n", new->arg);
 	new->next = NULL;
-	return (new);
 }
 
 /*SKIP_REDIR
@@ -133,17 +129,20 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 	{
 		if (is_redir(s, i))
 		{
-
 			//printf("lst = %p redir position = %p redir content = %p\n", lst, &lst->redir, lst->redir);
-			lst->redir = redir_dup(&s[i]);
+			if (tmp == NULL)
+				lst->redir = malloc(sizeof(t_redir));
+			redir_dup(&lst->redir, &s[i]);				
 			if (tmp == NULL)
 				tmp = lst->redir;
+			lst->redir->next = malloc(sizeof(t_redir));
 			lst->redir = lst->redir->next;
 			i += skip_redir(&s[i]);
 		}
 		new[len] = s[i];
 		len++;
 	}
+
 	lst->redir = tmp;
 	new[len] = '\0';
 	return (new);

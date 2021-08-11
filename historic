@@ -1,0 +1,18 @@
+echo poyet > a >  b > c
+echo pouet >a > b > c
+ls
+ls >x
+ls
+ls >x
+ls > x
+echo a > b > c
+ls
+echo pouet > a > b > c
+echo a > b > c > d
+echo a > B > C > D
+echo a > B > C > D > F
+echo A > B > C > D
+echo A > B > X > D
+echo A > B > C > D
+echo a > b > c
+cat c

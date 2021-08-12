@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include <libc.h>
+#include <stdio.h>
 
 struct command
 {
@@ -30,9 +30,9 @@ int spawn_proc (int in, int out, struct command *cmd)
 
 int main ()
 {
-    const char *ls[] = { "ls", "-l", 0 };
-    const char *wc[] = { "wc", 0 };
-    const char *cat[] = { "cat", "-e", 0 };
+    const char *ls[] = { "cat", 0 };
+    const char *wc[] = { "cat", 0 };
+    const char *cat[] = { "ls", 0 };
 
     struct command cmd [] = { {ls}, {wc}, {cat}} ;
 

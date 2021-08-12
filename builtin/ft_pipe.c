@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/09 17:33:38 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/12 13:58:25 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 {
-	pid_t	pid;
+	pid_t	pid = 0;
 
 	pid = fork();
 	if (pid < 0)
@@ -31,7 +31,7 @@ int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 			dup2(out, 1);
 			close(out);
 		}
-		exec_ve (lst, envlst);
+		exec_ve(lst, envlst);
 		exit(0);
 	}
 	else
@@ -45,7 +45,6 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	int		n;
 	int		i;
-	pid_t	pid;
 	int		in;
 
 	n = lst->nb_p;
@@ -63,5 +62,11 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	{
 		dup2 (in, 0);
 	}
-	return (exec_ve(lst, envlst));
+	if ((lst)->redir != NULL)
+	{
+		ft_redir(lst, envlst);
+		return exec_ve(lst, envlst);
+	}
+	else
+		return (exec_ve(lst, envlst));
 }

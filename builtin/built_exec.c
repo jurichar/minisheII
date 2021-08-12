@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/10 18:45:16 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/12 14:22:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,10 +110,11 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst, char **envp)
 			exec_ve(*lst, envlst);
 		}
 		else if ((*lst)->sep == '|')
+		{
 			pipor(*lst, envlst);
+		}
 		else
 			exec_ve(*lst, envlst);
-		fd_close(fd);
 		break ;
 	}
 	fd_close(fd);

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/12 13:43:18 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/16 19:31:37 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 		if (execve(cmd, args, lst->envp) == -1)
 			g_exit_code = errno;
 	}
+	if (errno == 2)
+	{
+		perror(ft_itoa(errno));
+		g_exit_code = errno;
+		exit(errno);
+	}
 	free(args);
 	free(path);
 	return (g_exit_code);
@@ -71,10 +77,11 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 		exec_ve_rel(lst, envlst, pid);
 	}
 	else
+	{
 		waitpid(pid, NULL, 0);
-	g_exit_code = errno;
-	if (g_exit_code == 2)
-		exit(g_exit_code);
+	}
+//	g_exit_code = errno;
+	// printf("g = %d\n", g_exit_code);
 	free(lst->cmd);
 	free(lst->args);
 	return (1);

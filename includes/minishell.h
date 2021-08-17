@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 23:07:08 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:29:18 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,15 +112,15 @@ int				is_space(char c);
 **BUILT_IN
 **
 */
-void			get_built_in (t_cmd_lst **lst, t_env_lst *envlst, char **envp);
-int				builtin_exit(t_cmd_lst *lst);
-int				builtin_echo(t_cmd_lst *lst, t_env_lst *env, int fd);
+void			get_built_in (t_cmd_lst **lst, t_env_lst *envlst);
+int				builtin_exit();
+int				builtin_echo(t_cmd_lst *lst, int fd);
 int				builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int n);
-int				builtin_pwd(t_cmd_lst *lst, t_env_lst *envlst);
+int				builtin_pwd();
 int				builtin_unset(t_cmd_lst *lst, t_env_lst *env);
 int				builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
 int				builtin_export_sort(t_env_lst *envlst);
-int				builtin_env(t_cmd_lst *lst, t_env_lst *envlst);
+int				builtin_env(t_env_lst *envlst);
 /*
 **
 **ENVIRONEMENT RELATED

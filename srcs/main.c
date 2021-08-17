@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 00:24:58 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:27:58 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	free_cmds(t_cmd_lst *lst)
 {
-	int i;
-	int j;
-
 	if (lst)
 	{
-		i = -1;
 		while (lst->next)
 		{
 			free(lst);
@@ -27,43 +23,6 @@ void	free_cmds(t_cmd_lst *lst)
 		}
 		free(lst);
 	}
-}
-
-void	print_cmd(t_cmd_lst *lst)
-{
-	int i;
-	int j;
-
-	if (!lst)
-		return ;
-	i = -1;
-	while (lst)
-	{
-		printf("> commande avec ses args respectif:\n> %s\n>\n", lst->cmd);
-		lst = lst->next;
-	}
-}
-
-t_cmd_lst	*lst_cmd(char *line, t_env_lst *env, char **envp)
-{
-	t_cmd_lst	*lst;
-	int		fd;
-	char	*tmp;
-
-	lst = NULL;
-	if (*line && line)
-	{
-		tmp = get_historic(1);
-		if ((ft_strcmp(tmp, line)) != 0)
-		{
-			fd = open("./historic", O_WRONLY|O_CREAT|O_APPEND);
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			close(fd);
-		}
-		ft_split_cmd2(&lst, line, env, envp);
-	}
-	return (lst);
 }
 
 void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
@@ -87,19 +46,13 @@ void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	return;
 }
 
-char	*get_line(int up)
+char	*get_line( void )
 {
 	char	*line;
 	struct	termios term;
-	char	buf;
-	int		len;
-	int		cur_pos;
-	char	*tmp;
 
 	tcgetattr(0, &term);
 	line = ft_strdup("");
-	len = 0;
-	cur_pos = 0;
 	line = readline(BLU ARROW" "ZERO);
 	add_history(line);
 	return (line);
@@ -136,6 +89,8 @@ int		main(int ac, char **av, char **envp)
 {
 	t_env_lst *envlst;
 	t_cmd_lst *lst;
+	(void) ac;
+	(void) av;
 
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
@@ -149,12 +104,12 @@ int		main(int ac, char **av, char **envp)
 	signal(SIGQUIT, INThandler);
 	while (1)
 	{
-		lst_cmd2(get_line(0), envlst, &lst, envp);
+		lst_cmd2(get_line(), envlst, &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
-			get_built_in(&lst, envlst, envp);
+			get_built_in(&lst, envlst);
 			lst = ft_new_cmd_list(envp);
 		}
 	}
 	return (0);
-} // faut mute les touches qu on a pas le droit de use genre TAB
+ }

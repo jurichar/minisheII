@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/04 19:00:27 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:21:10 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_putstr_non_printable(char *str)
 	}
 }
 
-char	*get_arg(char *s, t_env_lst *env, int slash, char *tmp)
+char	*get_arg(char *s, t_env_lst *env, int slash)
 {
 	char	*arg;
 	char	*ret;
@@ -115,7 +115,7 @@ char	*ft_strdup_space_sep(char *str, t_env_lst *env)
 	while (str[++lenght] && !is_sep(str[lenght]))
 	{
 		if ((str[i] == '"' && str[i + 1] == '$') || str[i] == '$')
-			return (get_arg(str, env, 0, NULL));
+			return (get_arg(str, env, 0));
 		else if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{
 			quote = 1;
@@ -154,7 +154,6 @@ int		args_counter(char *str)
 {
 	int		i;
 	int		count;
-	char	*arg;
 
 	i = 0;
 	count = 1;
@@ -204,7 +203,6 @@ char	*get_cmd_name(char *s)
 
 void	ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env)
 {
-	char	**args;
 	char	*tmp;
 	int		args_count;
 	int		i;

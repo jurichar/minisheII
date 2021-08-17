@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:40:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/09 18:36:55 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:21:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ t_redir	*redir_dup(char *s)
 {
 	int			start;
 	int			len;
-	char		*redir;
 	t_redir		*new;
 
 	start = 0;

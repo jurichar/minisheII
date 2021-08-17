@@ -13,3 +13,25 @@ exit
 ls
 cat
 ls
+echo q
+echo a | wc
+ls
+lol
+exit
+cd a
+exit
+cd a
+exit
+ls
+lsi
+exit
+lsi
+ps
+exit
+echo a
+exit
+cd o
+exit
+ls
+lsi
+exit

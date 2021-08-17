@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 23:06:31 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 00:24:58 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,9 @@ void  INThandler(int sig)
 	}
 	if (sig == 2)
 	{
-		printf ("^C\n");
-		kill(getpid(), 2);
+		int pid = getpid();
+		printf ("pid = %d\n", pid + 1);
+		kill(pid+1, SIGKILL);
 		exit(g_exit_code);
 	}
 	if (sig == 11)
@@ -143,12 +144,12 @@ int		main(int ac, char **av, char **envp)
 	lst = ft_new_cmd_list(envp);
 	envlst = NULL;
 	envlst = get_env(envlst, envp);
+	signal(SIGSEGV, INThandler);
+	signal(SIGINT, INThandler);
+	signal(SIGQUIT, INThandler);
 	while (1)
 	{
-		// signal(SIGSEGV, INThandler);
-		// //signal(SIGINT, INThandler);
-		// signal(SIGQUIT, INThandler);
-		lst_cmd2(get_line(0), envlst, &lst, envp); // ok
+		lst_cmd2(get_line(0), envlst, &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, envlst, envp);

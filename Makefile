@@ -13,6 +13,7 @@ CC = gcc -g3
 SRC_BUILTIN =	built_cd.c \
 				built_echo.c \
 				built_export.c \
+				built_export_sort.c \
 				built_env.c \
 				built_pwd.c \
 				built_exec.c \

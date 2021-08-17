@@ -56,6 +56,7 @@ typedef struct s_env_lst
 {
 	char				*name;
 	char				*content;
+	int					equal;
 	int					len;
 	struct s_env_lst	*next;
 }				t_env_lst;
@@ -115,6 +116,7 @@ int				builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int n);
 int				builtin_pwd(t_cmd_lst *lst, t_env_lst *envlst);
 int				builtin_unset(t_cmd_lst *lst, t_env_lst *env);
 int				builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
+int				builtin_export_sort(t_env_lst *envlst);
 int				builtin_env(t_cmd_lst *lst, t_env_lst *envlst);
 /*
 **
@@ -122,7 +124,7 @@ int				builtin_env(t_cmd_lst *lst, t_env_lst *envlst);
 **
 */
 t_env_lst		*ft_cmd_lstnew_env(char *v_name, char *v_content);
-t_env_lst		*ft_lstnew_env(char *v_name, char *v_content);
+t_env_lst		*ft_lstnew_env(char *v_name, int equal, char *v_content);
 t_env_lst		*get_env(t_env_lst *list, char **envp);
 void			ft_env_remove_if(t_env_lst **begin, void *data, int (*cmp)());
 /*

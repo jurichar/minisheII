@@ -15,22 +15,22 @@
 void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	int		i;
-	int		fd;
-	char	*line;
-	fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
-	dup2(lst->fd[1], 1);
-	while (42)
-	{
-		line = readline("> ");
-		if (ft_strcmp(lst->redir->arg, line) == 0)
-		{
-			free(line);
-			break;
-		}
-		write (fd, line, ft_strlen(line));
-		free(line);
-	}
-	close(fd);
+	// int		fd;
+	// char	*line;
+	// fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
+	// dup2(lst->fd[1], 1);
+	// while (42)
+	// {
+	// 	line = readline("> ");
+	// 	if (ft_strcmp(lst->redir->arg, line) == 0)
+	// 	{
+	// 		free(line);
+	// 		break;
+	// 	}
+	// 	write (fd, line, ft_strlen(line));
+	// 	free(line);
+	// }
+	// close(fd);
 }
 
 

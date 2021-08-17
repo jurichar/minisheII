@@ -100,7 +100,7 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 	while (envp[0][++j])
 		;
 	content = ft_substr(ft_strchr(envp[0], '=') + 1, 0, j);
-	list = ft_lstnew_env(name, content);
+	list = ft_lstnew_env(name, 1, content);
 	free(name);
 	free(content);
 	begin = list;
@@ -114,7 +114,7 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		while (envp[i][++j])
 			;
 		content = ft_substr(ft_strchr(envp[i], '=') + 1, 0, j);
-		list->next = ft_lstnew_env(name, content);
+		list->next = ft_lstnew_env(name, 1, content);
 		free(name);
 		free(content);
 		list = list->next;

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/10 17:52:31 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/05 16:31:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,12 +99,13 @@ char	*get_line(int up, int db)
 
 	tcgetattr(0, &term);
 	line = ft_strdup("");
-	set_term_ncan();
+	//set_term_ncan();
 	len = 0;
 	cur_pos = 0;
-	ft_putstr_fd(BLU ARROW" " ZERO, 1);
-	line = malloc(sizeof(char));
-	*line = '\0';
+	//ft_putstr_fd(BLU ARROW" " ZERO, 1);
+	line = readline(BLU ARROW" " ZERO);
+	add_history(line);
+	/*
 	while (1)
 	{
 		read(STDIN_FILENO, &buf, 1);
@@ -164,13 +165,13 @@ char	*get_line(int up, int db)
 				get_to_cur_pos(ft_strlen(line), cur_pos);
 				len--;
 			}
-			/*if (cur_pos > 0)
+			if (cur_pos > 0)
 			{
 				ft_putstr_fd("\b \b", 1);
 				line = del_char(line, cur_pos);
 				len--;
 				cur_pos--;
-			}*/
+			}
 //			printf("\nline = %s\n", line);
 		}
 		else if (buf == 3) // ctrl + c
@@ -201,7 +202,10 @@ buf, ft_substr(line, cur_pos, ft_strlen(line) - cur_pos));
 //		printf("buf = %c\n", buf);
 //		printf("line = %s len = %lu\n", line, ft_strlen(line));
 	}
-	set_term_can(term);
+	*/
+	//set_term_can(term);
+	if (db == 1)
+		printf(YLW "line =" ZERO " %s\n", line);
 	return (line);
 }
 

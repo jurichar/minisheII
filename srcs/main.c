@@ -6,11 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2021/08/17 22:47:06 by jurichar         ###   ########.fr       */
-=======
-/*   Updated: 2021/08/17 19:30:52 by jurichar         ###   ########.fr       */
->>>>>>> origin/master2
+/*   Updated: 2021/08/17 23:01:10 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +62,6 @@ t_cmd_lst	*lst_cmd(char *line, t_env_lst *env, char **envp)
 			close(fd);
 		}
 		ft_split_cmd2(&lst, line, env, envp);
-		//free(line);
 	}
 	return (lst);
 }
@@ -91,6 +86,8 @@ void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	}
 	return;
 }
+
+// CECI EST UN TEST, BRANCHE MASTER 2 !!!
 
 char	*get_line(int up)
 {

@@ -102,8 +102,8 @@ char	*get_line(int up, int db)
 	//set_term_ncan();
 	len = 0;
 	cur_pos = 0;
-	//ft_putstr_fd(BLU ARROW" " ZERO, 1);
-	line = readline(BLU ARROW" " ZERO);
+	ft_putstr_fd(BLU ARROW" " ZERO, 1);
+	line = readline(NULL);
 	add_history(line);
 	/*
 	while (1)

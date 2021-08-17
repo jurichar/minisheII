@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/16 19:31:37 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 17:27:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,7 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 		cmd = ft_strjoin(path[i], "/");
 		cmd = ft_strjoin(cmd, lst->cmd);
 		args = join_args(cmd, lst->args);
-		if (execve(cmd, args, lst->envp) == -1)
-			g_exit_code = errno;
-	}
-	if (errno == 2)
-	{
-		perror(ft_itoa(errno));
-		g_exit_code = errno;
-		exit(errno);
+		execve(cmd, args, lst->envp);
 	}
 	free(args);
 	free(path);
@@ -65,23 +58,48 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst, pid_t pid)
 int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
+	int status;
 
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();
-	if (pid < 0)
-		perror("pid2");
+	if (pid == -1)
+		perror("fork() failed (exec_ve)");
 	else if (pid == 0)
 	{
 		exec_ve_abs(lst, envlst, pid);
 		exec_ve_rel(lst, envlst, pid);
+		perror("Exec failed");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
-		waitpid(pid, NULL, 0);
+		printf("Coordinator: forked and waiting for process %d\n", pid);
+
+        int status;
+        if ( waitpid(pid, &status, 0) != -1 ) {
+            if ( WIFEXITED(status) ) {
+                int returned = WEXITSTATUS(status);
+                printf("Exited normally with status %d\n", returned);
+            }
+            else if ( WIFSIGNALED(status) ) {
+                int signum = WTERMSIG(status);
+                printf("Exited due to receiving signal %d\n", signum);
+            }
+            else if ( WIFSTOPPED(status) ) {
+                int signum = WSTOPSIG(status);
+                printf("Stopped due to receiving signal %d\n", signum);
+            }
+            else {
+                printf("Something strange just happened.\n");
+            }
+        }
+        else {
+            perror("waitpid() failed");
+            exit(EXIT_FAILURE);
+        }
+		g_exit_code = status;
 	}
-//	g_exit_code = errno;
-	// printf("g = %d\n", g_exit_code);
 	free(lst->cmd);
 	free(lst->args);
 	return (1);

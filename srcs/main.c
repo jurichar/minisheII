@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 17:48:59 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 19:30:52 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	return;
 }
 
-char	*get_line(int up, int db)
+char	*get_line(int up)
 {
 	char	*line;
 	struct	termios term;
@@ -99,16 +99,11 @@ char	*get_line(int up, int db)
 
 	tcgetattr(0, &term);
 	line = ft_strdup("");
-	//set_term_ncan();
 	len = 0;
 	cur_pos = 0;
 	ft_putstr_fd(BLU ARROW" " ZERO, 1);
 	line = readline(NULL);
 	add_history(line);
-	
-	//set_term_can(term);
-	if (db == 1)
-		printf(YLW "line =" ZERO " %s\n", line);
 	return (line);
 }
 
@@ -119,11 +114,29 @@ void print_point_char(char **str)
 		ft_putstr_fd(str[i], 1);
 }
 
+void  INThandler(int sig)
+{
+	if (sig == 3)
+	{
+		printf ("signal SIGQUIT\n");
+		exit(g_exit_code);
+	}
+	if (sig == 2)
+	{
+		printf ("^C\n");
+		kill(getpid(), 2);
+		exit(g_exit_code);
+	}
+	if (sig == 11)
+	{
+		exit(g_exit_code);
+	}
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	t_env_lst *envlst;
 	t_cmd_lst *lst;
-	int db;
 
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
@@ -134,8 +147,11 @@ int		main(int ac, char **av, char **envp)
 	envlst = get_env(envlst, envp);
 	while (1)
 	{
+		// signal(SIGSEGV, INThandler);
+		// //signal(SIGINT, INThandler);
+		// signal(SIGQUIT, INThandler);
 		//lst = lst_cmd(get_line(0, db), envlst); // ok
-		lst_cmd2(get_line(0, db), envlst, &lst, envp); // ok
+		lst_cmd2(get_line(0), envlst, &lst, envp); // ok
 		// print_cmd(lst);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{

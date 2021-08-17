@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/09 17:52:14 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 18:11:56 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # include <sys/wait.h>
 # include <unistd.h>
 # include <termios.h>
+# include <signal.h>
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libft/libft.h"

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/17 17:27:24 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 23:10:39 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	{
 		exec_ve_abs(lst, envlst, pid);
 		exec_ve_rel(lst, envlst, pid);
+		signal(SIGINT, INThandler);
 		perror("Exec failed");
 		exit(EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 18:11:56 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 23:07:08 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,5 +186,5 @@ char			 *get_env_by_name(t_env_lst *envlst, char *name);
 void			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 int				pipor(t_cmd_lst *lst, t_env_lst *envlst);
 int				is_built_in(t_cmd_lst *lst);
-
+void			INThandler(int sig);
 #endif

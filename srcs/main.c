@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 23:01:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 23:06:31 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	return;
 }
 
-// CECI EST UN TEST, BRANCHE MASTER 2 !!!
-
 char	*get_line(int up)
 {
 	char	*line;
@@ -150,13 +148,10 @@ int		main(int ac, char **av, char **envp)
 		// signal(SIGSEGV, INThandler);
 		// //signal(SIGINT, INThandler);
 		// signal(SIGQUIT, INThandler);
-		//lst = lst_cmd(get_line(0, db), envlst); // ok
 		lst_cmd2(get_line(0), envlst, &lst, envp); // ok
-		// print_cmd(lst);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, envlst, envp);
-			// free(lst);
 			lst = ft_new_cmd_list(envp);
 		}
 	}

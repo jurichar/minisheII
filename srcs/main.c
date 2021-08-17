@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/05 16:31:16 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/17 17:48:59 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,104 +105,7 @@ char	*get_line(int up, int db)
 	ft_putstr_fd(BLU ARROW" " ZERO, 1);
 	line = readline(NULL);
 	add_history(line);
-	/*
-	while (1)
-	{
-		read(STDIN_FILENO, &buf, 1);
-		if (buf == 10) // return
-		{
-			write(1, "\n", 1);
-			break ;
-		}
-		else if (buf == 27) // esc
-		{
-			read(STDIN_FILENO, &buf, 1);
-			if (buf == '[')
-			{
-				read(STDIN_FILENO, &buf, 1);
-				if (buf == 'D' && cur_pos > 0)
-				{
-					ft_putstr_fd("\b", 1);
-					cur_pos--;
-				}
-				else if (buf == 'C' && cur_pos < len)
-				{
-					ft_putstr_fd("\e[1C", 1);
-					cur_pos++;
-				}
-				else if (buf == 'A' && up < historic_size())
-				{
-					len = ft_strlen(line);
-					free(line);
-					up++;
-					line = get_historic(up);
-//					printf("hist = %s\tcur_pos = %d\n", line, cur_pos);
-					clear_and_print(len, line, cur_pos);
-					cur_pos = ft_strlen(line);
-					len = cur_pos;
-//`					printf("\tcur_pos = %d\n", cur_pos);
-				}
-				else if (buf == 'B' && up != 0)
-				{
-					len = ft_strlen(line);
-					free(line);
-					up--;
-					line = get_historic(up);
-					clear_and_print(len, line, cur_pos);
-					cur_pos = ft_strlen(line);
-					len = cur_pos;
-				}
-			}
-		}
-		else if (buf == 127)  // del
-		{
-			if (cur_pos > 0)
-			{
-				line = del_char(line, cur_pos);
-				clear_and_print(len, line, cur_pos);
-				write(1, " \b", 2);
-				cur_pos--;
-				get_to_cur_pos(ft_strlen(line), cur_pos);
-				len--;
-			}
-			if (cur_pos > 0)
-			{
-				ft_putstr_fd("\b \b", 1);
-				line = del_char(line, cur_pos);
-				len--;
-				cur_pos--;
-			}
-//			printf("\nline = %s\n", line);
-		}
-		else if (buf == 3) // ctrl + c
-		{
-			set_term_can(term);
-			exit(0);
-		}
-		else
-		{
-			if (cur_pos == len)
-			{
-				write(1, &buf, 1);
-				line = ft_realloc(line, len + 1);
-				line[len] = buf;
-				len++;
-				cur_pos++;
-			}
-			else
-			{
-				tmp = insert_char(ft_substr(line, 0, cur_pos),
-buf, ft_substr(line, cur_pos, ft_strlen(line) - cur_pos));
-				free(line);
-				line = ft_strdup(tmp);
-				cur_pos = ft_strlen(line);
-				clear_and_print(len, line, cur_pos);
-			}
-		}
-//		printf("buf = %c\n", buf);
-//		printf("line = %s len = %lu\n", line, ft_strlen(line));
-	}
-	*/
+	
 	//set_term_can(term);
 	if (db == 1)
 		printf(YLW "line =" ZERO " %s\n", line);

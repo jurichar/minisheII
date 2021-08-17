@@ -1,0 +1,6 @@
+ls
+ls -a
+ls | ls | wc
+ls | wc
+ls | wwww
+exit

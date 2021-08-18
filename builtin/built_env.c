@@ -6,13 +6,13 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:03 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/09 17:49:51 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:23:37 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_env(t_cmd_lst *lst, t_env_lst *envlst)
+int	builtin_env(t_env_lst *envlst)
 {
 	while (envlst)
 	{

@@ -6,19 +6,11 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 14:24:47 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/03 14:46:04 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:12:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-t_env_lst	*env_copy(t_env_lst *src)
-{
-	t_env_lst *begin;
-
-	begin =
-}
-*/
 
 t_cmd_lst	*ft_new_cmd_list(char **envp)
 {

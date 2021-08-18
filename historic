@@ -1,30 +1,110 @@
 ls
-ls -a
-ls | ls | wc
+cat
+ls
+exit
+ls
+exit
+ls
+cat
+ls
+exit
+cat
+exit
+cat
+ls
+cat
+echo $?
+exit
+ls
+cat
+ls
+cat
+ls
+cat
+ls
+cat
+w
+f
+
+l
+ll
+ls
+cat
+catexir
+exit
+ls
+cat
+ls
+cat
+ls
+l
+ls
+cat
+ls
+l
+s
+cat
+exit
+ls
+cat
+cat | cat | ls
+exit
+cat
+exit
+cat
+exit
+cat
+catexit
+exit
+ls
+cat
+exit
+cat
+ls
+exit
+cat
+ls
+cat
+ls
+cat
+ls
+exit
+ls
+cat
+ls
+lsexit
+eixt
+exit
+ls
+exit
+ls
+l
+sl
+ls
+exity
+exit
+ls
+exit
+ls
 ls | wc
-ls | wwww
+cat | ls
+ls | wc | cat -e
+ls
+ls | cat -e
+ls | cat -e | cat -e
+ls
+ls | cat -e | cat -e
 exit
 ls
-l
+ls | wc 
+ls | wc | cat -e
 exit
 ls
-l
+ls | cat -e
+ls | cat -e | cat -e
+ls | wc
 ls
-exit
-ls
-exit
-ls
-cat
-ls
-cat
-exit
-ls
-exit
-lsi
-dpl
-ls
-cat
-ls
-cat
-ls
-cat
+env
+unset SHELL
+env
+unset TMPDIR

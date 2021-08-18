@@ -14,9 +14,24 @@
 
 int	valid_identifier(char c, int pos)
 {
-	if (pos == 1 && (c == '_' || (c >= 'a' && c <= 'z')
-		|| (c >= 'A' && c <= 'Z')))
+	if (pos == 1 && (c == '_' || (ft_isalpha(c))))
 		return (1);
+	else if (pos == 2 && (c == '_' || (ft_isalnum(c))))
+		return (1);
+	return (0);
+}
+
+int	check_name(char *s)
+{
+	if (valid_identifier(*s, 1))
+		return (1);
+	s++;
+	while (*s && *s != '+' && *s != '=')
+	{
+		if (valid_identifier(*s, 2))
+			return (1);
+		s++;
+	}
 	return (0);
 }
 
@@ -35,10 +50,10 @@ int		export_var(t_cmd_lst *lst, t_env_lst *envlst)
 	while (var[++i])
 	{
 		j = 0;
-		while (var[i][j] && var[i][j] != '=')
-			j++;
-		if (valid_identifier(var[i][j], 1) || var[i][0] == '=')
-			printf("export: `%s': not a valid identifier", &var[i][j]);
+		if (check_name(var[i]))
+		{
+			i++;
+		}
 		else
 		{
 			if (var[i][j] == '\0' || var[i][j])

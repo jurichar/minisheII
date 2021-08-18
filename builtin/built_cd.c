@@ -6,13 +6,13 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/08 17:34:43 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:22:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	builtin_cd_tild(t_cmd_lst *lst, t_env_lst *envlst)
+int	builtin_cd_tild(t_env_lst *envlst)
 {
 	while (envlst)
 	{
@@ -41,7 +41,7 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int ret)
 		ret = chdir(envlst->content);
 	}
 	else if (ft_strcmp(lst->args[0], "~") == 0)
-		ret = builtin_cd_tild(lst, envlst);
+		ret = builtin_cd_tild(envlst);
 	else
 		ret = chdir(lst->args[0]);
 	if (ret == -1)

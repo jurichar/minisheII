@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 21:50:09 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 23:03:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_line( void )
 
 	tcgetattr(0, &term);
 	line = ft_strdup("");
-	line = readline(BLU ARROW" "ZERO);
+	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
 	add_history(line);
 	return (line);
 }
@@ -67,12 +67,24 @@ void print_point_char(char **str)
 
 void no_act_handler(int sig)
 {
-	// if (sig == 2)
-	// {
-	// 	printf("\b\b");
-	// 	printf(BLU ARROW ZERO);
-	// 	printf("\n");
-	// }
+	if (sig == SIGINT)
+	{
+		write(1,BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 44);
+	}
+	if (sig == 11)
+	{
+		printf("\b\bexit");
+		exit(g_exit_code);
+	}
+	return;
+}
+
+void first_act(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "^C\n", 3);
+	}
 	if (sig == 11)
 	{
 		printf("\b\bexit");
@@ -87,9 +99,9 @@ int		main(int ac, char **av, char **envp)
 	t_cmd_lst *lst;
 	(void) ac;
 	(void) av;
-	signal(SIGINT, no_act_handler);
-	signal(SIGSEGV, no_act_handler);
-	signal(SIGQUIT, no_act_handler);
+	// signal(SIGINT, first_act);
+	// signal(SIGSEGV, first_act);
+	// signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 
@@ -101,6 +113,9 @@ int		main(int ac, char **av, char **envp)
 	{
 		// if ( waitpid(pid, NULL, 0) != -1 )
 		lst_cmd(get_line(), envlst, &lst, envp);
+		signal(SIGINT, no_act_handler);
+		signal(SIGSEGV, no_act_handler);
+		signal(SIGQUIT, no_act_handler);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, envlst);

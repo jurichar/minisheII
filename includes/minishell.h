@@ -123,8 +123,8 @@ t_env_lst	*env_sort(t_env_lst *list, int i);
 int			builtin_export_sort(t_env_lst *envlst);
 
 // built_export
-int	valid_identifier(char c, int pos);
-int	check_name(char *s);
+int		valid_identifier(char c, int pos);
+int		check_name(char *s);
 int		export_var(char **var, t_env_lst **envlst);
 int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
 

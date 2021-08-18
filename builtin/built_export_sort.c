@@ -58,12 +58,12 @@ int	builtin_export_sort(t_env_lst *envlst)
 	t_env_lst *begin;
 	t_env_lst *export_cmd_lst;
 
-	begin = ft_lstnew_env(envlst->name, 1, envlst->content);
+	begin = ft_lstnew_env(envlst->name, envlst->equal, envlst->content);
 	export_cmd_lst = begin;
 	envlst = envlst->next;
 	while (envlst)
 	{
-		export_cmd_lst->next = ft_lstnew_env(envlst->name, 1, envlst->content);
+		export_cmd_lst->next = ft_lstnew_env(envlst->name, envlst->equal, envlst->content);
 		export_cmd_lst = export_cmd_lst->next;
 		envlst = envlst->next;
 	}

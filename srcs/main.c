@@ -97,9 +97,6 @@ int		main(int ac, char **av, char **envp)
 	lst = ft_new_cmd_list(envp);
 	envlst = NULL;
 	envlst = get_env(envlst, envp);
-	signal(SIGSEGV, INThandler);
-	signal(SIGINT, INThandler);
-	signal(SIGQUIT, INThandler);
 	while (1)
 	{
 		// if ( waitpid(pid, NULL, 0) != -1 )

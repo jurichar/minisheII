@@ -1,30 +1,42 @@
 ls
-ls -a
-ls | ls | wc
-ls | wc
-ls | wwww
-exit
+cat
 ls
-l
-exit
+cat
 ls
-l
-ls
-exit
+cat
 ls
 exit
 ls
 cat
 ls
-cat
 exit
 ls
+cat
+ls
+echo q
+echo a | wc
+ls
+lol
+exit
+cd a
+exit
+cd a
+exit
+ls
+lsi
 exit
 lsi
-dpl
+ps
+exit
+echo a
+exit
+cd o
+exit
 ls
-cat
+lsi
+exit
 ls
-cat
+echo a
+ls | wc
 ls
-cat
+exit

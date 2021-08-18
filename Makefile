@@ -8,7 +8,7 @@ END="\033[0m"
 DIR_BUILTIN = builtin/
 DIR_SRCS = srcs/
 
-CC = gcc -g3
+CC = gcc -g3 -Wall -Wextra -Werror
 
 SRC_BUILTIN =	built_cd.c \
 				built_echo.c \

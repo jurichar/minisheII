@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/16 18:38:31 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 01:39:49 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	int		i;
+	( void ) lst;
+	( void ) envlst;
+	return ;
+	// int		i;
 	// int		fd;
 	// char	*line;
 	// fd = open(".tmp", O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -33,40 +36,21 @@ void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 	// close(fd);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-void	ft_redir_out_double(t_cmd_lst *lst, t_env_lst *envlst)
+void	ft_redir_out_double(t_cmd_lst *lst)
 {
 	int fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
 	dup2(fd, 1);
 	close(fd);
 }
 
-void	ft_redir_out(t_cmd_lst *lst, t_env_lst *envlst)
+void	ft_redir_out(t_cmd_lst *lst)
 {
 	int fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 	dup2(fd, 1);
 	close(fd);
 }
 
-void	ft_redir_in(t_cmd_lst *lst, t_env_lst *envlst)
+void	ft_redir_in(t_cmd_lst *lst)
 {
 	int fd = open(lst->redir->arg, O_RDONLY);
 	dup2(fd, 0);
@@ -76,11 +60,11 @@ void	ft_redir_in(t_cmd_lst *lst, t_env_lst *envlst)
 void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	if (lst->redir->redir == 1)
-		ft_redir_in(lst, envlst);
+		ft_redir_in(lst);
 	else if (lst->redir->redir == 2)
-		ft_redir_out(lst, envlst);
+		ft_redir_out(lst);
 	else if (lst->redir->redir == 3)
-		ft_redir_out_double(lst, envlst);
+		ft_redir_out_double(lst);
 	else if (lst->redir->redir == 4)
 		ft_redir_in_double(lst, envlst);
 }

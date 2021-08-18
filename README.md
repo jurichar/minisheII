@@ -64,6 +64,10 @@
 
 ## ToFix
 
+- mute TAB
+
+- reparer historique
+
 - unset fonctionne pas
 
 - export sans '=' , export ecrase pas, export avec +=

@@ -35,3 +35,8 @@ exit
 ls
 lsi
 exit
+ls
+echo a
+ls | wc
+ls
+exit

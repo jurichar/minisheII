@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:29:18 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 02:08:22 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,92 +99,120 @@ typedef struct s_fct_params
 }				t_fct_params;
 
 /*
-**
-**IS FUNCTION
-**
+BUILT IN 
 */
-int				is_sep(char c);
-int				is_redir(char *s, int index);
-int				is_separator(char c, char *charset);
-int				is_space(char c);
+// built_cd
+int	builtin_cd_tild(t_env_lst *envlst);
+int	builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int ret);
+// built_echo
+int	is_n(char *s);
+int	builtin_echo(t_cmd_lst *lst, int fd);
+// built_env
+int	builtin_env(t_env_lst *envlst);
+// built_exec
+int	exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd);
+int	is_built_in(t_cmd_lst *lst);
+void	fd_close(int fd[2]);
+void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst);
+// built_exit
+int	builtin_exit( void );
+// built_export_sort
+int	env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i);
+t_env_lst	*env_sort(t_env_lst *list, int i);
+int	builtin_export_sort(t_env_lst *envlst);
+// built_export
+int	valid_identifier(char c, int pos);
+int	check_name(char *s);
+int		export_var(t_cmd_lst *lst, t_env_lst *envlst);
+int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
+// built_pwd
+int	builtin_pwd();
+// built_unset
+int	builtin_unset(t_cmd_lst *lst, t_env_lst *env);
+// built_utils
+char	**join_args(char *s, char **args);
+char	*get_env_by_name(t_env_lst *envlst, char *name);
+// ft_execve
+int	check_built_in(t_cmd_lst *lst, t_env_lst *envlst);
+int	exec_ve_abs(t_cmd_lst *lst);
+int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst);
+int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst);
+// ft_pipe
+int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst);
+int	pipor(t_cmd_lst *lst, t_env_lst *envlst);
+// ft_redir
+void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst);
+void	ft_redir_out_double(t_cmd_lst *lst);
+void	ft_redir_out(t_cmd_lst *lst);
+void	ft_redir_in(t_cmd_lst *lst);
+void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+// safe export
+t_env_lst	*env_sort(t_env_lst *list, int i);
+int	builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
+
 /*
-**
-**BUILT_IN
-**
+MAIN
 */
-void			get_built_in (t_cmd_lst **lst, t_env_lst *envlst);
-int				builtin_exit();
-int				builtin_echo(t_cmd_lst *lst, int fd);
-int				builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int n);
-int				builtin_pwd();
-int				builtin_unset(t_cmd_lst *lst, t_env_lst *env);
-int				builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
-int				builtin_export_sort(t_env_lst *envlst);
-int				builtin_env(t_env_lst *envlst);
-/*
-**
-**ENVIRONEMENT RELATED
-**
-*/
-t_env_lst		*ft_cmd_lstnew_env(char *v_name, char *v_content);
+// cmd_utils
+char	*get_cmd(char *s);
+// ft_is
+int	is_space(char c);
+int	is_sep(char c);
+int	is_redir(char *s, int i);
+// ft_lstnew_env
 t_env_lst		*ft_lstnew_env(char *v_name, int equal, char *v_content);
-t_env_lst		*get_env(t_env_lst *list, char **envp);
-void			ft_env_remove_if(t_env_lst **begin, void *data, int (*cmp)());
-/*
-**
-**REDIRECTION FUNCTIONS
-**
-*/
-void    		redir_type(t_cmd_lst *lst);
-char			*get_redir(char *s, t_cmd_lst *lst);
-int				how_many_redir(char *s);
-/*
-**
-**PARSER RELATED AND TOOLS
-**
-*/
-t_cmd_lst		*ft_new_cmd_list(char **envp);
-t_cmd_lst		*ft_split_cmd(char *str, t_env_lst *env);
-void			ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
-void			get_to_cur_pos(int from, int to);
-int				get_to_next_quote(char *s, int i);
-int				skip_space(char *s);
-int				pass_cmd_name(char *s, int i);
-int				ft_whereis_char(char *s, int c);
-char			*ft_strjoin_till_space(char const *s1, char const *s2);
-char			*get_cmd(char *s);
-/*
-**
-**HISTORIC
-**
-*/
-char			*get_historic(int up);
-int				historic_size(void);
-/*
-**
-**TERMINAL CANONIC MANAGEMENT
-**
-*/
-void			set_term_ncan(void);
-void			set_term_can(struct termios term);
-int				get_next_line(int fd, char **line);
-char			*insert_char(char *start, char c, char *end);
-int				minishell_launch(char **av, char **envp);
-int				minishell_cd(t_fct_params *params);
-int				minishell_echo(t_fct_params *params);
-int				minishell_pwd(t_fct_params *params);
-int				exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd);
-int 			exec_ve(t_cmd_lst *lst, t_env_lst *envlst);
-int				minishell_execute(char **av, char **envp, t_env_lst *lst);
-char			*del_char(char *src, int pos);
-void			clear_and_print(int len, char *s, int pos);
-void			ft_split_cmd2(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp);
-void			lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
-void			print_point_char(char **str);
-char			**join_args(char *s, char **args);
-char			 *get_env_by_name(t_env_lst *envlst, char *name);
-void			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
-int				pipor(t_cmd_lst *lst, t_env_lst *envlst);
-int				is_built_in(t_cmd_lst *lst);
-void			INThandler(int sig);
+// ft_split_arg
+void	ft_putchar(char c);
+void	print_hex(char c);
+void	ft_putstr_non_printable(char *str);
+char	*get_arg(char *s, t_env_lst *env, int slash);
+char	*ft_strdup_space_sep(char *str, t_env_lst *env);
+int		args_counter(char *str);
+char	*get_cmd_name(char *s);
+void	ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
+// ft_split_cmd
+int		is_separator(char c, char *separator);
+char	*ft_strdup_sep(char *str, char *separator);
+int		cmd_counter(char *str, char *separator, int *pipe);
+void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp);
+// get_next_line
+char	*ft_strndup(char *s, int n);
+int		fill_line(char **file_content, char **line);
+int		manage_return(char **file_content, char **line, int ret, char *buffer);
+int		get_next_line(int fd, char **line);
+// historic
+int		historic_size(void);
+char	*get_historic(int up);
+// list_tool
+t_cmd_lst	*ft_new_cmd_list(char **envp);
+void	ft_env_remove_if(t_env_lst **begin_list, void *data_ref, int (*cmp)());
+// main
+void	free_cmds(t_cmd_lst *lst);
+void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
+char	*get_line( void );
+void print_point_char(char **str);
+void  INThandler(int sig);
+// manage_input
+void	get_to_cur_pos(int from, int to);
+char	*del_char(char *src, int pos);
+void	clear_and_print(int len, char *s, int pos);
+char	*insert_char(char *start, char c, char *end);
+// parse_redir
+int	how_many_redir(char *s);
+int	which_redir(char *str);
+t_redir	*redir_dup(char *s);
+int	skip_redir(char *s);
+char	*get_redir(char *s, t_cmd_lst *lst);
+// set canonic
+void set_term_ncan(void);
+void set_term_can(struct termios term);
+// skip
+int	skip_space(char *s);
+// utils
+int		ft_whereis_char(char *s, int c);
+char	*ft_strjoin_till_space(char const *s1, char const *s2);
+int		get_to_next_quote(char *s, int i);
+int		pass_cmd_name(char *s, int i);
+t_env_lst	*get_env(t_env_lst *list, char **envp);
+
 #endif

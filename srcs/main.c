@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:27:58 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 02:08:44 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	free_cmds(t_cmd_lst *lst)
 	}
 }
 
-void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
+void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
 	int		fd;
 	char	*tmp;
@@ -41,7 +41,7 @@ void	lst_cmd2(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 			write(fd, "\n", 1);
 			close(fd);
 		}
-		ft_split_cmd2(lst, line, env, envp);
+		ft_split_cmd(lst, line, env, envp);
 	}
 	return;
 }
@@ -104,7 +104,7 @@ int		main(int ac, char **av, char **envp)
 	signal(SIGQUIT, INThandler);
 	while (1)
 	{
-		lst_cmd2(get_line(), envlst, &lst, envp);
+		lst_cmd(get_line(), envlst, &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, envlst);

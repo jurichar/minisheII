@@ -41,84 +41,102 @@ int	check_name(char *s)
 	return (0);
 }
 
-int	export_cat(t_env_lst **list, char *name, char *content)
+void	find_var(t_env_lst **ptr, char *name)
 {
-	t_env_lst	*ptr;
-	char		*tmp;
+	while ((*ptr)->next && (ft_strcmp((*ptr)->name, name) != 0))
+		*ptr = (*ptr)->next;
+}
 
-	ptr = *list;
-	while (ptr && (ft_strcmp(ptr->name, name) != 0))
-		ptr = ptr->next;
-	if (ptr == NULL)
-		return (1);
-	tmp = ptr->content;
-	ptr->content = ft_strjoin(ptr->content, content);
-	if (ptr->content == NULL)
+int	export_cat(t_env_lst **list, char *str)
+{
+	char		*tmp;
+	char		*content;
+
+	content = ft_substr(ft_strchr(str, '=') + 1, 0, ft_strlen(ft_strchr(str, '=') + 1));
+	if (content == NULL)
 	{
-		free(ptr);
-		return (2);
+		printf("error: fatal\n");
+		return (1);
 	}
-	free(ptr);
+	if ((*list)->content == NULL)
+	{
+		(*list)->content = content;
+		return (0);
+	}
+	tmp = (*list)->content;
+	(*list)->content = ft_strjoin((*list)->content, content);
+	if ((*list)->content == NULL)
+	{
+		printf("error: fatal\n");
+		free(tmp);
+		return (1);
+	}
+	if ((*list)->equal == 0)
+		(*list)->equal = 1;
+	free(tmp);
 	return (0);
 }
 
-int		export_var(char **var, t_env_lst **envlst)
+int	export_add(t_env_lst **list, char *str)
+{
+	char	*content;
+
+	content = ft_substr(ft_strchr(str, '=') + 1, 0, ft_strlen(ft_strchr(str, '=') + 1));
+	if (content == NULL)
+	{
+		printf("error: fatal\n");
+		return (1);
+	}
+	if ((*list)->content)
+		free((*list)->content);
+	(*list)->content = content;
+	if ((*list)->equal == 0)
+		(*list)->equal = 1;
+	return (0);
+}
+
+int	export_var(char **var, t_env_lst **envlst)
 {
 	t_env_lst	*ptr;
 	char		*name;
-	char		*content;
 	int			i;
 	int			ret;
 
-	ptr = *envlst;
-	while (ptr->next)
-		ptr = ptr->next;
 	i = -1;
 	while (var[++i])
 	{
+		ptr = *envlst;
 		ret = check_name(var[i]);
-		name = NULL;
-		content = NULL;
-		printf("ret = %d\n", ret);
-		if (ret == 2)
-		{
+		if (ret == 0)
+			continue ;
+		if (ret == 1)
 			name = ft_substr(var[i], 0, ft_whereis_char(var[i], '='));
-			content = ft_substr(ft_strchr(var[i], '=') + 1, 0, ft_strlen(ft_strchr(var[i], '=') + 1));
-
-			printf("OH\n");
+		else if (ret == 2)
+			name = ft_substr(var[i], 0, ft_whereis_char(var[i], '+'));
+		else if (ret == 3)
+			name = ft_strdup(var[i]);
+		find_var(&ptr, name);
+		if (ft_strcmp(ptr->name, name))
+		{
+			if (ret != 3)
+				ptr->next = ft_lstnew_env(name, 1, NULL);
+			else
+				ptr->next = ft_lstnew_env(name, 0, NULL);
+			ptr = ptr->next;
 		}
 		if (ret == 1)
-		{
-			if (!name)
-				name = ft_substr(var[i], 0, ft_whereis_char(var[i], '='));
-			ptr->next = ft_lstnew_env(name, 1, NULL);
-			if (!content && ft_strchr(var[i], '=') + 1)
-			{
-				content = ft_substr(ft_strchr(var[i], '=') + 1, 0, ft_strlen(ft_strchr(var[i], '=') + 1));
-				ptr->next->content = ft_strdup(content);
-			}
-			ptr = ptr->next;
-			free(name);
-			free(content);
-		}
-		else if (ret == 3) 
-		{
-			name = ft_substr(var[i], 0, ft_whereis_char(var[i], '='));
-			ptr->next = ft_lstnew_env(name, 0, NULL);
-			ptr = ptr->next;
-		}
+			ret = export_add(&ptr, var[i]);
+		if (ret == 2)
+			ret = export_cat(&ptr, var[i]);	
+		free(name);
 	}
 	return (0);
 }
 
 int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	printf("OH!\n");
 	if (!*lst->args)
-	{
 		builtin_export_sort(envlst);
-		return (0);
-	}
 	else
 		return (export_var(lst->args, &envlst));
 	return (0);

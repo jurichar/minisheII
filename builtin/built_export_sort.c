@@ -71,7 +71,12 @@ int	builtin_export_sort(t_env_lst *envlst)
 	while (export_cmd_lst)
 	{
 		printf("declare -x ");
-		printf("%s=\"%s\"\n", export_cmd_lst->name, export_cmd_lst->content);
+		if (export_cmd_lst->content)
+			printf("%s=\"%s\"\n", export_cmd_lst->name, export_cmd_lst->content);
+		else if (export_cmd_lst->equal)
+			printf("%s=\"\"\n", export_cmd_lst->name);
+		else
+			printf("%s\n", export_cmd_lst->name);
 		export_cmd_lst = export_cmd_lst->next;
 	}
 	return (0);

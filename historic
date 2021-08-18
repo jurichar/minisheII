@@ -108,3 +108,36 @@ env
 unset SHELL
 env
 unset TMPDIR
+;s
+ls
+bash
+ls
+cat
+ls
+bash
+ls
+exit
+ls
+env
+unset TMPDIR
+export POUET
+export MACHIN
+ls
+export
+export a=a
+export cou
+ls
+exit
+export
+ls
+echo a
+ls
+export
+export a
+export
+export a
+export a=a
+ls
+ls | wc
+cat | cat | ls
+ls

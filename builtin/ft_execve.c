@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/18 19:01:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 21:43:29 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,19 +55,12 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	return (g_exit_code);
 }
 
-void no_act_handler(int sig)
-{
-	if (sig == 11)
-	{
-		exit(g_exit_code);
-	}
-	return;
-}
-
 int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
 	int		status;
+	int		returned;
+	int		signum;
 
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
@@ -83,33 +76,28 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	}
 	else
 	{
-		int returned;
-		int signum;
-		// printf("Coordinator: forked and waiting for process %d\n", pid);
-		signal(SIGINT, no_act_handler);
-		signal(SIGSEGV, no_act_handler);
-		signal(SIGQUIT, no_act_handler);
-        if ( waitpid(pid, &status, 0) != -1 ) {
-            if ( WIFEXITED(status) ) {
-                returned = WEXITSTATUS(status);
-                // printf("Exited normally with status %d\n", returned);
-            }
-            else if ( WIFSIGNALED(status) ) {
-                signum = WTERMSIG(status);
-                printf("Exited due to receiving signal %d\n", signum);
-            }
-            else if ( WIFSTOPPED(status) ) {
-                signum = WSTOPSIG(status);
-                printf("Stopped due to receiving signal %d\n", signum);
-            }
-            else {
-                printf("Something strange just happened.\n");
-            }
-        }
-        else {
-            perror("waitpid() failed");
-            exit(EXIT_FAILURE);
-        }
+		if (waitpid(pid, &status, 0) != -1)
+		{
+			if (WIFEXITED(status))
+				returned = WEXITSTATUS(status);
+			else if (WIFSIGNALED(status))
+			{
+				signum = WTERMSIG(status);
+				printf("Exited due to receiving signal %d\n", signum);
+			}
+			else if (WIFSTOPPED(status))
+			{
+				signum = WSTOPSIG(status);
+				printf("Stopped due to receiving signal %d\n", signum);
+			}
+			else
+				printf("Something strange just happened.\n");
+		}
+		else
+		{
+			perror("waitpid() failed");
+			exit(EXIT_FAILURE);
+		}
 		g_exit_code = status;
 	}
 	free(lst->cmd);

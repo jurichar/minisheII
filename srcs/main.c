@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 17:53:02 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 21:32:56 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,31 @@ void print_point_char(char **str)
 		ft_putstr_fd(str[i], 1);
 }
 
+void no_act_handler(int sig)
+{
+	// if (sig == 2)
+	// {
+	// 	printf("\b\b");
+	// 	printf(BLU ARROW ZERO);
+	// 	printf("\n");
+	// }
+	if (sig == 11)
+	{
+		printf("\b\bexit");
+		exit(g_exit_code);
+	}
+	return;
+}
+
 int		main(int ac, char **av, char **envp)
 {
 	t_env_lst *envlst;
 	t_cmd_lst *lst;
 	(void) ac;
 	(void) av;
-
+	signal(SIGINT, no_act_handler);
+	signal(SIGSEGV, no_act_handler);
+	signal(SIGQUIT, no_act_handler);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 
@@ -81,6 +99,7 @@ int		main(int ac, char **av, char **envp)
 	envlst = get_env(envlst, envp);
 	while (1)
 	{
+		// if ( waitpid(pid, NULL, 0) != -1 )
 		lst_cmd(get_line(), envlst, &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/18 18:58:40 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/18 21:44:19 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 {
-	pid_t	pid = 0;
+	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
@@ -65,7 +65,7 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	if ((lst)->redir != NULL)
 	{
 		ft_redir(lst, envlst);
-		return exec_ve(lst, envlst);
+		return (exec_ve(lst, envlst));
 	}
 	else
 		return (exec_ve(lst, envlst));

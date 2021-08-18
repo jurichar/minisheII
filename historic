@@ -1,1 +1,52 @@
 ls
+export a
+ls
+export
+export a
+export
+export b
+export
+export a=0
+ls
+cat
+ls
+make
+ls
+make
+ls
+make
+ls
+exit
+ls
+exit
+ls
+ls
+
+exit
+ls
+lsexit
+
+ls
+exit
+ls
+exit
+ls
+lsl
+ls
+lsi
+ls
+lslexit
+exit
+ls
+./minishell 
+lsls
+ls
+exit
+ls
+sl
+ls
+bash
+./minishell 
+ls
+l
+ls

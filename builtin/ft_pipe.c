@@ -31,7 +31,7 @@ int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 			dup2(out, 1);
 			close(out);
 		}
-		exec_ve(lst, envlst);
+		exec_ve(lst, &envlst);
 		exit(0);
 	}
 	else
@@ -65,8 +65,8 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	if ((lst)->redir != NULL)
 	{
 		ft_redir(lst, envlst);
-		return (exec_ve(lst, envlst));
+		return (exec_ve(lst, &envlst));
 	}
 	else
-		return (exec_ve(lst, envlst));
+		return (exec_ve(lst, &envlst));
 }

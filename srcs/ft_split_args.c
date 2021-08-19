@@ -41,12 +41,13 @@ void	ft_putstr_non_printable(char *str)
 
 char	*get_arg(char *s, t_env_lst *env, int slash)
 {
-	char	*arg;
 	char	*ret;
+	char	*tmp;
 	int		len;
 	int		quote;
 	int		end_quote;
 
+	(void)slash;
 	quote = 0;
 	if (s[0] == '"')
 	{
@@ -56,66 +57,61 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 	s++;
 	len = 0;
 	end_quote = 0;
-	while (s[len] && !is_sep(s[len]) && !is_space(s[len]) && s[len] != '\\' && s[len] != '"' && s[len] != '\'')
+	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
+		&& s[len] != '\\' && s[len] != '"' && s[len] != '\'' && s[len] != '/')
 	{
-		if ((quote == 1 && s[len] == '"') || s[len] == '\\')
-			break ;
-		if (s[len] == '/')
-		{
-			slash = 1;
-			break ;
-		}
-		if (quote == 0 && end_quote == 0 && (s[len] == '\'' || s[len] == '"'))
-			end_quote = get_to_next_quote(s, len);
-		if (end_quote != 0 && len == end_quote)
-			break ;
 		len++;
 	}
-	if (quote == 1)
-		ret = ft_substr(s, 0, len);
-	else
-		arg = ft_substr(s, 0, len);
-	if ((ft_strcmp(arg, "?") == 0))
-		return (ft_itoa(g_exit_code));
-	while (env && (ft_strcmp(arg, env->name) != 0))
+	ret = ft_substr(s, 0, len);
+	if ((ft_strcmp(ret, "?") == 0))
+	{
+		tmp = ret;
+		ret = ft_strjoin(ft_itoa(g_exit_code), &s[len]);
+		free(tmp);
+		return (ret);
+	}
+	if (s[len] == '\0' || (s[len] == '"' && quote == 1))
+		return (ret);
+	while (env && (ft_strcmp(ret, env->name) != 0))
 		env = env->next;
 	if (env != NULL)
 	{
-		free(arg);
-		arg = ft_strdup(env->content);
+		tmp = ret;
+		ret = ft_strjoin(env->content, &s[len]);
+		free(tmp);
 	}
 	else
 	{
-		free(arg);
-		arg = NULL;
+		free(ret);
+		return (&s[len]);
 	}
-	if (is_space(s[len]))
-		return (arg);
-	if (arg && slash == 0)
-		ret = ft_strjoin_till_space(arg, s + len + 1);
-	else if (arg && slash == 1)
-		ret = ft_strjoin_till_space(arg, s + len);
-	else
-		ret = ft_substr(s + len + 1, 0, ft_whereis_char(s + len, ' '));
-	free(arg);
 	return (ret);
 }
 
-char	*ft_strdup_space_sep(char *str, t_env_lst *env)
+char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 {
 	int		i;
 	int		j;
 	int		lenght;
 	int		quote;
 	char	*copy;
+	char	*str;
+	char	*var;
 
 	lenght = -1;
-	i = 0;
+	i = -1;
 	quote = 0;
-	while (str[++lenght] && !is_sep(str[lenght]))
+	str = ft_strdup(s);
+	while (str[++i] && !is_sep(str[i]))
 	{
 		if ((str[i] == '"' && str[i + 1] == '$') || str[i] == '$')
-			return (get_arg(str, env, 0));
+		{
+			var = get_arg(&str[i], env, 0);
+			str = ft_substr(str, 0, i);
+			copy = str;
+			str = ft_strjoin(str, var);
+			free(copy);
+		}
 		else if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{
 			quote = 1;

@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int	builtin_unset(t_cmd_lst *lst, t_env_lst *env)
+int	builtin_unset(t_cmd_lst *lst, t_env_lst **env)
 {
 	int	i;
 	int	j;
@@ -34,7 +34,7 @@ int	builtin_unset(t_cmd_lst *lst, t_env_lst *env)
 				return (1);
 			}
 		}
-		ft_env_remove_if(&env, lst->args[i], &ft_strcmp);
+		ft_env_remove_if(env, lst->args[i], &ft_strcmp);
 	}
 	return (0);
 }

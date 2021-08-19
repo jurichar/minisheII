@@ -12,7 +12,7 @@
 
 #include "../includes/minishell.h"
 
-int	check_built_in(t_cmd_lst *lst, t_env_lst *envlst)
+int	check_built_in(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	if (is_built_in(lst) == TRUE)
 	{
@@ -55,7 +55,7 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	return (g_exit_code);
 }
 
-int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
+int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	pid_t	pid;
 	int		status;
@@ -70,7 +70,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst *envlst)
 	else if (pid == 0)
 	{
 		exec_ve_abs(lst);
-		exec_ve_rel(lst, envlst);
+		exec_ve_rel(lst, *envlst);
 		perror("Exec failed");
 		exit(EXIT_FAILURE);
 	}

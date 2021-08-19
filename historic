@@ -114,3 +114,101 @@ ls
 cat test
 ls | wc | cat -e | cat -e | cat -e
 sleep 2 | sleep 2 | sleep 2
+ls
+ls | wc
+s
+l
+ls
+l
+ls
+s
+lss
+ls
+sls
+ls
+ls | wc
+ls
+ls | wc
+ls
+ls | wc
+s
+ls
+ls | wc
+ct|ct|l
+ls
+ls | wc
+ls
+ls | wc
+ps
+ls | wc
+ps
+ls
+ls | wc
+ls
+ls | wc
+ls
+ls | wc
+cat | ls
+ls | wc
+ls
+ls | wc
+lsd
+ls | wc 
+ls | cat
+ls| wc
+ls | wc
+ls | wc |ls
+ls | wc
+./minishell 
+ls | wc
+ps
+ls 
+ls | cat
+ls | wc 
+exit
+d
+< makefile  cat | wc
+cat | wc 
+ls | wc
+l
+;s
+s
+l
+;s
+l
+ls
+;sss
+ls
+l
+lss
+ls
+l
+ps
+ls
+l
+sl
+ls
+l
+sl
+ls
+ls | wc
+ls  | wc
+ls
+ ls | wc 
+ls | wc
+cat | cat | ls
+ls
+ps
+ps -la
+ps -aux
+ps -au
+sleep 2 | sleep 2 | sleep 2
+sleep 2
+sleep 2 
+sleep 2
+sleep 2 | sleep 2
+sleep 2 | sleep 2 | sleep 2
+cat | cat | ls
+ls
+cat | ls
+ls | wc

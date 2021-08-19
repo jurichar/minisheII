@@ -109,7 +109,7 @@ int	skip_redir(char *s)
 /*
 **GET_REDIR
 **
-**New will store a string that cointain redirection inside without redirection
+**New will store a string that cointain the s string without the redirections
 **while allocating n list->redir with redir_dup and storing inside the structure
 **all the redirection information
 */
@@ -117,7 +117,7 @@ int	skip_redir(char *s)
 char	*get_redir(char *s, t_cmd_lst *lst)
 {
 	char	*new;
-	t_redir *tmp;
+	t_redir *begin;
 	int		len;
 	int		i;
 
@@ -130,26 +130,29 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 		len++;
 	}
 	new = malloc(sizeof(char) * (len + 1));
-	tmp = NULL;
+	begin = NULL;
 	i = -1;
 	len = 0;
 	while (s[++i])
 	{
 		if (is_redir(s, i))
 		{
-
-			//printf("lst = %p redir position = %p redir content = %p\n", lst, &lst->redir, lst->redir);
-			lst->redir = redir_dup(&s[i]);
-			if (tmp == NULL)
-				tmp = lst->redir;
-			lst->redir = lst->redir->next;
+			if (begin == NULL)
+			{
+				lst->redir = redir_dup(&s[i]);
+				begin = lst->redir;
+			}
+			else
+			{
+				lst->redir->next = redir_dup(&s[i]);
+				lst->redir = lst->redir->next;
+			}
 			i += skip_redir(&s[i]);
 		}
 		new[len] = s[i];
 		len++;
 	}
-	lst->redir = tmp;
+	lst->redir = begin;
 	new[len] = '\0';
 	return (new);
 }
-

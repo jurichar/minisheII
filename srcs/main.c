@@ -113,12 +113,12 @@ int		main(int ac, char **av, char **envp)
 	{
 		// if ( waitpid(pid, NULL, 0) != -1 )
 		lst_cmd(get_line(), envlst, &lst, envp);
-		signal(SIGINT, no_act_handler);
-		signal(SIGSEGV, no_act_handler);
-		signal(SIGQUIT, no_act_handler);
+		// signal(SIGINT, no_act_handler);
+		// signal(SIGSEGV, no_act_handler);
+		// signal(SIGQUIT, no_act_handler);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
-			get_built_in(&lst, envlst);
+			get_built_in(&lst, &envlst);
 			lst = ft_new_cmd_list(envp);
 		}
 	}

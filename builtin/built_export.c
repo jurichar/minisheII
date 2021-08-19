@@ -133,11 +133,11 @@ int	export_var(char **var, t_env_lst **envlst)
 	return (0);
 }
 
-int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
+int		builtin_export(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	if (!*lst->args)
-		builtin_export_sort(envlst);
+		builtin_export_sort(*envlst);
 	else
-		return (export_var(lst->args, &envlst));
+		return (export_var(lst->args, envlst));
 	return (0);
 }

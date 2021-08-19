@@ -126,7 +126,7 @@ int			builtin_export_sort(t_env_lst *envlst);
 int		valid_identifier(char c, int pos);
 int		check_name(char *s);
 int		export_var(char **var, t_env_lst **envlst);
-int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
+int		builtin_export(t_cmd_lst *lst, t_env_lst **envlst);
 
 // built_pwd
 int	builtin_pwd();
@@ -149,10 +149,6 @@ void	ft_redir_out_double(t_cmd_lst *lst);
 void	ft_redir_out(t_cmd_lst *lst);
 void	ft_redir_in(t_cmd_lst *lst);
 void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
-
-// safe export
-t_env_lst	*env_sort(t_env_lst *list, int i);
-int	builtin_export(t_cmd_lst *lst, t_env_lst *envlst);
 
 /*
 MAIN

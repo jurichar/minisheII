@@ -1,0 +1,116 @@
+ls
+ls | wc
+ls << a
+cat << a
+ls
+cat mh
+ls
+ls << a
+ls << aa
+exit
+ls << a
+exit
+ls << a
+cat mh
+ls << A
+ls << a
+ls << 
+ls
+ls << a
+ls << aexit
+ls
+ls << a
+ls
+ls << a
+ls <<a
+ls << a
+cat << a
+ls
+ls << a
+cat << a
+ls << axit
+ls << a
+cat << a
+ls
+cat < a
+ls
+ls > a
+cat < a
+cat < b
+cat << a
+cat mh
+cat << a
+ls
+ls << a
+cat << a
+cat mh
+ls 
+ls << a
+cat << a
+ls
+ls << a
+cat << a
+ls << a
+cat << a
+cat << aexit
+ls
+ls << a 
+<< a
+ls << a
+rm mh
+ls << a
+<< a
+ls
+cat mh
+<< a
+cat mh
+<< a
+cat mh
+cat  mh
+cat   mmh
+cat   mh
+<< a
+cat mh
+<< a
+cat mh
+<< a
+cat << a
+ls
+ls << a
+cat << a
+<< a
+cat << a
+cat << 
+<< lolilolololololol
+wc  << lol
+ls
+cat mh
+ls
+cat << a
+ls
+ls -la
+cat .tmp
+cat << a
+wc -l << a
+bash
+wc << lol
+<< a
+sleep 2 | sleep 2 | sleep 2
+sleep 2 | sleep 2
+cat | sleep 2
+cat | slee2
+cat >> .test
+cat .test 
+< makefile cat >> .test
+cat .test
+< makefile cat >> test
+ls
+< makefile cat > test
+ls 
+ls -la
+cat .test 
+rm .test
+ls
+cat test
+ls | wc | cat -e | cat -e | cat -e
+sleep 2 | sleep 2 | sleep 2

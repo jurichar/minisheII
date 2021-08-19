@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/18 21:51:55 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/19 16:00:25 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,7 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst)
 		{
 			ft_redir(*lst, envlst);
 			exec_ve(*lst, envlst);
+			unlink(".lol");
 		}
 		else if ((*lst)->sep == '|')
 		{

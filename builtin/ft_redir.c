@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/18 21:49:04 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/19 16:02:34 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,44 @@
 
 void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	( void ) lst;
-	( void ) envlst;
-	return ;
+	(void) envlst;
+	// (void) lst;
+	int	fd, fd0;
+	char *line = "";
+	char **ret;
+	int i;
+
+	ret = ft_realloc_double(NULL);
+	fd0 = open(".lol", O_CREAT | O_RDWR | O_TRUNC , 0777);
+	printf ("fd0 : %d\n", fd0);
+	i = 0;
+	// dup2(fd, 1);
+	while (ft_strcmp(line, lst->redir->arg) != 0)
+	{
+		line = readline("> ");
+		ret[i] = ft_strdup(line);
+		ret = ft_realloc_double(ret);
+		if (ft_strcmp(line, lst->redir->arg) != 0)
+		{
+			ft_putstr_fd(line, fd0);
+			ft_putstr_fd("\n", fd0);
+		}
+		i++;
+	}
+	close(fd0);
+	fd = open(".lol", O_RDWR, 0664);
+	dup2(fd, 0);
+	close(fd);
+	
+	//printf ("%d\n",exec_ve(lst, envlst));
+	/*
+	int j = -1;
+	while (++j <= i - 2)
+	{
+		printf ("%s\n" ,ret[j]);
+		free(ret[j]);
+	}
+	*/
 }
 
 void	ft_redir_out_double(t_cmd_lst *lst)

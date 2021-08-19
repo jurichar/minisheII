@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 23:03:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/19 11:40:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void no_act_handler(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1,BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 44);
+		write(1,BLU"\nMI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 45);
 	}
 	if (sig == 11)
 	{
@@ -83,7 +83,7 @@ void first_act(int sig)
 {
 	if (sig == SIGINT)
 	{
-		write(1, "^C\n", 3);
+				write(1,BLU"\nMI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 45);
 	}
 	if (sig == 11)
 	{
@@ -99,9 +99,9 @@ int		main(int ac, char **av, char **envp)
 	t_cmd_lst *lst;
 	(void) ac;
 	(void) av;
-	// signal(SIGINT, first_act);
-	// signal(SIGSEGV, first_act);
-	// signal(SIGQUIT, first_act);
+	signal(SIGINT, first_act);
+	signal(SIGSEGV, first_act);
+	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 

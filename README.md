@@ -40,11 +40,11 @@
 
 ## signaux
 
-- [ ] ctrl-C
+- [x] ctrl-C
 
-- [ ] ctrl-D
+- [x] ctrl-D
 
-- [ ] ctrl-\
+- [x] ctrl-\
 
 ## builtins
 
@@ -54,7 +54,7 @@
 
 - [x] pwd sans option
 
-- [ ] export sans option
+- [x] export sans option
 
 - [ ] unset sans option
 
@@ -65,6 +65,8 @@
 ## ToFix
 
 - mute TAB
+
+- fleche du haut apres une commande
 
 - reparer historique
 

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/10 13:56:11 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/19 11:29:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,8 +136,7 @@ int	export_var(char **var, t_env_lst **envlst)
 int		builtin_export(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	if (!*lst->args)
-		builtin_export_sort(envlst);
-	else
+		builtin_export_sort(envlst);	else
 		return (export_var(lst->args, &envlst));
 	return (0);
 }

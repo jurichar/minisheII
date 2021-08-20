@@ -151,3 +151,8 @@ ls
 ls | wc
 cat | cat | ls
 ls
+ls | wc
+ls
+ps
+ls
+ls | wc

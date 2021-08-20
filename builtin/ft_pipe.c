@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 18:43:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/20 13:08:35 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,80 +81,62 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 /*
 int pipor(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	int i = 0;
-	int pipefds[2];
-	pid_t pid[2];
-	int numPipes = lst->nb_p;
+	int commandNr = lst->nb_p;
+	int pid[commandNr];
 
-	
+	int totalPipes = (commandNr - 1) * 2;
+	int pipes[totalPipes];
 
+	// Initializing pipes
+	for(int x = 0; x < totalPipes; x += 2)
+		pipe(pipes + x);
 
-}
-
-int pipor(t_cmd_lst *lst, t_env_lst *envlst)
-{
-	int numPipes = lst->nb_p;
-	int status;
-	int i = 0;
-	pid_t pid[numPipes - 1];
-	int pipefds[2*numPipes];
-	printf ("nb of p = %d\n", numPipes);
-	for(i = 0; i < (numPipes * 2); i++)
+	for (int i = 0; i < commandNr; i++)
 	{
-		if(pipe(pipefds + (i * 2)) < 0) {
-			perror("couldn't pipe");
-			exit(EXIT_FAILURE);
-		}
-	}
-	int x = 0;
-	int j = 0;
-	while(x <= (numPipes)) 
-	{
-		pid[x] = fork();
-		if(pid[x] < 0)
+		if ((pid[i] = fork()) < 0) 
 		{
-			perror("error");
-			exit(EXIT_FAILURE);
+		printf("*** ERROR: forking child process failed\n");
+		exit(-1);
 		}
-		else if(pid[x] == 0) 
+		else if (pid[i] == 0)
 		{
-			if(x == 0)
+			if(i == 0)
 			{
-				//dup2(pipefds[0], 0); // dup2(fd[0], 0) okk 1000%
-				dup2(pipefds[1], 1); // dup2(fd[1], 1)okkkk00%
-				for(i = 0; i < numPipes * 2; i++) // close all fds
-					close(pipefds[i]);
-			printf(" ici ?%d",exec_ve(lst, &envlst));
-			
+				dup2(pipes[1], 1);
+				for(int x = 0; x < totalPipes; x++)
+					close(pipes[x]);
+				exec_ve(lst, envlst);
+				perror("Wrong Command Specified!");
+				exit(1);
 			}
-			else //if(j == numPipes * 2)
+			else if(i == commandNr - 1)
 			{
-				dup2(pipefds[0], 0); // dup2(fd[0], 0)
-				for(i = 0; i < numPipes * 2; i++) // close all fds
-					close(pipefds[i]);
-			printf(" ici ?%d",exec_ve(lst, &envlst));
+				dup2(pipes[totalPipes - 2], 0);
+				for(int x = 0; x < totalPipes; x++)
+				close(pipes[x]);
+				exec_ve(lst, envlst);
+				perror("Wrong Command Specified!");
+				exit(1);
 			}
-		//	write(2, "ici\n", 4);
-		//	ft_putstr_fd(ft_itoa(j), 2);
-			// else if(j != 0 )
-			// {
-			// 	dup2(pipefds[j - 2], 0);
-			// 	dup2(pipefds[j - 1], 1);
-			// }
+			else
+			{
+				dup2(pipes[i + (i - 2)], 0);
+				dup2(pipes[i + i + 1], 1);
+				for(int x = 0; x < totalPipes; x++)
+					close(pipes[x]);
+				exec_ve(lst, envlst);
+				perror("Wrong Command Specified!");
+				exit(1);
+			}
+			lst = lst->next;
 		}
-		lst = lst->next;
-		j+=2;
-		x++;
 	}
+	// close pipes
+	for(int x = 0; x < totalPipes; x++)
+		close(pipes[x]);
 
-	for(i = 0; i < (numPipes * 2); i++){
-		close(pipefds[i]);
-	}
-	for(i = 0; i < (numPipes - 1) ; i++)
-		waitpid(pid[i], NULL,0);
-
-	for(i = 0; i < (numPipes + 1) ; i++)
-		wait(&status);
+	for (int i = 0; i < commandNr; i++)
+		waitpid(pid[i], NULL, 0);
 	return 0;
 }
 */

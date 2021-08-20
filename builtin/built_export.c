@@ -118,10 +118,18 @@ int	export_var(char **var, t_env_lst **envlst)
 		find_var(&ptr, name);
 		if (ft_strcmp(ptr->name, name))
 		{
+			printf("addr->next == %p\n", ptr->next);
 			if (ret != 3)
+			{
+				printf("HELLO\n");
 				ptr->next = ft_lstnew_env(name, 1, NULL);
+			}	
 			else
+			{
+				printf("OLLEH\n");
 				ptr->next = ft_lstnew_env(name, 0, NULL);
+			}
+			printf("coucou\n");
 			ptr = ptr->next;
 		}
 		if (ret == 1)

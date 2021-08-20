@@ -56,7 +56,7 @@
 
 - [x] export sans option
 
-- [ ] unset sans option
+- [x] unset sans option
 
 - [x] env sans option ni argument
 
@@ -70,17 +70,7 @@
 
 - reparer historique
 
-- unset fonctionne pas
-
-- export sans '=' , export ecrase pas, export avec +=
-
-- export avec plusieurs, doit ecraser. diff entr env et list export.
-
 - format du nom de variable.
-
-- premier char, alpha ou _ puis alpha ou num
-essayer unset de la premiere var de l'env, puis env
-expension
 
 - echo $HOME $HOME $HOME
 /home/user42 /home/user42`

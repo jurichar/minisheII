@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/18 21:51:55 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/19 16:00:25 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,23 +28,23 @@ void	act_handler(int sig)
 	return ;
 }
 
-int	exec_built_in(t_cmd_lst *lst, t_env_lst *envlst, int fd)
+int	exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd)
 {
 	signal(SIGINT, act_handler);
 	if (ft_strcmp(lst->cmd, "echo") == 0)
 		return (builtin_echo(lst, fd));
 	else if (ft_strcmp(lst->cmd, "cd") == 0)
-		return (builtin_cd(lst, envlst, 0));
+		return (builtin_cd(lst, *envlst, 0));
 	else if (ft_strcmp(lst->cmd, "exit") == 0)
 		return (builtin_exit());
 	else if (ft_strcmp(lst->cmd, "pwd") == 0)
 		return (builtin_pwd());
-	else if (ft_strcmp(lst->cmd, "env") == 0)
-		return (builtin_env(envlst));
 	else if (ft_strcmp(lst->cmd, "unset") == 0)
 		return (builtin_unset(lst, envlst));
 	else if (ft_strcmp(lst->cmd, "export") == 0)
 		return (builtin_export(lst, envlst));
+	else if (ft_strcmp(lst->cmd, "env") == 0)
+		return (builtin_env(*envlst));
 	return (0);
 }
 
@@ -98,7 +98,7 @@ void	fd_close(int fd[2])
 		close(fd[1]);
 }
 
-void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst)
+void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 {
 	int		fd[2];
 
@@ -110,12 +110,13 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst *envlst)
 	{
 		if ((*lst)->redir != NULL)
 		{
-			ft_redir(*lst, envlst);
+			ft_redir(*lst, *envlst);
 			exec_ve(*lst, envlst);
+			unlink(".lol");
 		}
 		else if ((*lst)->sep == '|')
 		{
-			pipor(*lst, envlst);
+			pipor(*lst, *envlst);
 		}
 		else
 			exec_ve(*lst, envlst);

@@ -1,158 +1,214 @@
 ls
-cat
+ls | wc
+ls << a
+cat << a
 ls
+cat mh
+ls
+ls << a
+ls << aa
 exit
-ls
+ls << a
 exit
+ls << a
+cat mh
+ls << A
+ls << a
+ls << 
 ls
-cat
+ls << a
+ls << aexit
 ls
-exit
-cat
-exit
-cat
+ls << a
 ls
-cat
-echo $?
-exit
+ls << a
+ls <<a
+ls << a
+cat << a
 ls
-cat
+ls << a
+cat << a
+ls << axit
+ls << a
+cat << a
 ls
-cat
+cat < a
 ls
-cat
+ls > a
+cat < a
+cat < b
+cat << a
+cat mh
+cat << a
 ls
-cat
-w
-f
-
-l
-ll
+ls << a
+cat << a
+cat mh
+ls 
+ls << a
+cat << a
 ls
-cat
-catexir
-exit
+ls << a
+cat << a
+ls << a
+cat << a
+cat << aexit
 ls
-cat
+ls << a 
+<< a
+ls << a
+rm mh
+ls << a
+<< a
 ls
-cat
+cat mh
+<< a
+cat mh
+<< a
+cat mh
+cat  mh
+cat   mmh
+cat   mh
+<< a
+cat mh
+<< a
+cat mh
+<< a
+cat << a
 ls
-l
+ls << a
+cat << a
+<< a
+cat << a
+cat << 
+<< lolilolololololol
+wc  << lol
 ls
-cat
+cat mh
 ls
-l
+cat << a
+ls
+ls -la
+cat .tmp
+cat << a
+wc -l << a
+bash
+wc << lol
+<< a
+sleep 2 | sleep 2 | sleep 2
+sleep 2 | sleep 2
+cat | sleep 2
+cat | slee2
+cat >> .test
+cat .test 
+< makefile cat >> .test
+cat .test
+< makefile cat >> test
+ls
+< makefile cat > test
+ls 
+ls -la
+cat .test 
+rm .test
+ls
+cat test
+ls | wc | cat -e | cat -e | cat -e
+sleep 2 | sleep 2 | sleep 2
+ls
+ls | wc
 s
-cat
-exit
+l
 ls
-cat
-cat | cat | ls
-exit
-cat
-exit
-cat
-exit
-cat
-catexit
-exit
+l
 ls
-echo q
-echo a | wc
+s
+lss
 ls
-lol
-exit
-cd a
-exit
-cd a
-exit
-cat
+sls
 ls
-lsi
-exit
-cat
-ls
-lsi
-exit
-ls
-echo a
 ls | wc
 ls
-exit
+ls | wc
 ls
-cat
+ls | wc
+s
 ls
-lsexit
-eixt
-exit
+ls | wc
+ct|ct|l
 ls
+ls | wc
+ls
+ls | wc
+ps
+ls | wc
+ps
+ls
+ls | wc
+ls
+ls | wc
+ls
+ls | wc
+cat | ls
+ls | wc
+ls
+ls | wc
+lsd
+ls | wc 
+ls | cat
+ls| wc
+ls | wc
+ls | wc |ls
+ls | wc
+./minishell 
+ls | wc
+ps
+ls 
+ls | cat
+ls | wc 
 exit
+d
+< makefile  cat | wc
+cat | wc 
+ls | wc
+l
+;s
+s
+l
+;s
+l
+ls
+;sss
+ls
+l
+lss
+ls
+l
+ps
 ls
 l
 sl
 ls
-exity
-exit
-ls
-exit
+l
+sl
 ls
 ls | wc
-cat | ls
-ls | wc | cat -e
+ls  | wc
 ls
-ls | cat -e
-ls | cat -e | cat -e
-ls
-ls | cat -e | cat -e
-exit
-ls
-ls | wc 
-ls | wc | cat -e
-exit
-ls
-ls | cat -e
-ls | cat -e | cat -e
-ls | wc
-ls
-env
-unset SHELL
-env
-unset TMPDIR
-;s
-ls
-bash
-ls
-cat
-ls
-bash
-ls
-exit
-ls
-env
-unset TMPDIR
-export POUET
-export MACHIN
-ls
-export
-export a=a
-export cou
-ls
-exit
-export
-ls
-echo a
-ls
-export
-export a
-export
-export a
-export a=a
-ls
+ ls | wc 
 ls | wc
 cat | cat | ls
 ls
-ls | wc
-ls
 ps
+ps -la
+ps -aux
+ps -au
+sleep 2 | sleep 2 | sleep 2
+sleep 2
+sleep 2 
+sleep 2
+sleep 2 | sleep 2
+sleep 2 | sleep 2 | sleep 2
+cat | cat | ls
 ls
+cat | ls
 ls | wc

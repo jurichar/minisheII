@@ -48,6 +48,7 @@ void	ft_env_remove_if(t_env_lst **begin_list, void *data_ref, int (*cmp)())
 			free(tmp->name);
 			free(tmp->content);
 			free(tmp);
+			tmp = NULL;
 		}
 		list = list->next;
 	}
@@ -56,7 +57,8 @@ void	ft_env_remove_if(t_env_lst **begin_list, void *data_ref, int (*cmp)())
 	{
 		*begin_list = list->next;
 		free(list->name);
-		free(list->name);
+		list->name = NULL;
+		free(list->content);
 		free(list);
 	}
 }

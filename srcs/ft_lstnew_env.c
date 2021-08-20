@@ -21,7 +21,7 @@ t_env_lst		*ft_lstnew_env(char *v_name, int equal, char *v_content)
 		return (NULL);
 	new->name = ft_strdup(v_name);
 	new->equal = equal;
-	if (equal)
+	if (equal && v_content)
 		new->content = ft_strdup(v_content);
 	else
 		new->content = NULL;

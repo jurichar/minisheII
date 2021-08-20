@@ -36,6 +36,7 @@
 # include <signal.h>
 # include <stdlib.h>
 # include <fcntl.h>
+# include <dirent.h> 
 # include "../libft/libft.h"
 
 # define TRUE 1

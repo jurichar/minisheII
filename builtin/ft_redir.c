@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 16:02:34 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/20 16:09:58 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,8 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 		ft_redir_out_double(lst);
 	else if (lst->redir->redir == 4)
 		ft_redir_in_double(lst, envlst);
+	if (lst->sep == '|')
+	{
+		pipor(lst, envlst);
+	}
 }

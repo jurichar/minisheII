@@ -212,3 +212,124 @@ cat | cat | ls
 ls
 cat | ls
 ls | wc
+ls
+ls | wc
+ls
+ls | wc
+ls
+exit
+ls
+ls | wc
+ls | wc | cat -w
+ls | wc | cat -e
+ls | wc | cat -e | cat -e
+ls
+ls | wc
+ls
+ls | wc
+ls | wc | cat -e
+l
+ls
+ss
+;s
+ls
+ ls | wc
+ ls | wc | cat -e
+ ls | wc | cat -e | cat -e
+cat | cat | ls
+ls | wc
+cat | ls
+cat | cat | cat | ls
+cat | cat | cat | wc
+ls 
+ls | wc
+cat | ls
+cat
+sleep 2 | sleep 2 | sleep 2
+bash
+ls | wc
+./minishell 
+ls | wc
+ls | wc | cat -e
+ls | wc
+ls | wcexit
+ls | wc
+ls
+ls | wc
+ls |wc
+ls
+ls | wc
+ls
+ps
+ps -la
+top
+top minishell 
+ps
+top 83377
+ps
+ps 83377
+ps minishell 
+ps ./minishell
+ps minishell ls
+ps | wc
+ls | wc
+bash
+bash --posix
+ls
+ls | wc
+ls
+cat | cat | ls
+ls | wc
+cat | ls
+sleep 2 | sleep 2
+ls
+ls | wc
+ls 
+ls | wc
+cat | cat | ls
+ls | wc > a
+ls
+ls | wc > a
+exit
+ls | wc
+ls | wc | cat -e
+ls
+ls | wc
+ls | wc > a
+cat a
+bash
+ls | wc
+ls
+ls | wc
+rm a
+ls
+a | cat -e
+bash
+ls > a | wc
+cat a
+ls > b | wc
+cat b
+ls | wc > a
+cat a
+cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | ls
+ls
+sleep 2 | sleep 2 | sleep 2
+ps
+ls
+cat | cat | cat | cat | ls
+ps
+cat | cat | ls
+ps
+sleep 2 | sleep 2 | sleep 2
+sleep 2 | sleep 2 
+sleep 2 | sleep 2 | sleep 2
+ps
+sleep 2 | sleep 2 | sleep 2 | sleep 2 | sleep 2
+ps
+cat | cat | cat | cat | ls
+p
+ps
+cat |cat | cat | cat | ls
+ls | wc | cat -e | cat -e
+p
+ps

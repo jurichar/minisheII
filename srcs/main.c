@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/20 13:12:41 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/20 14:36:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void first_act(int sig)
 	}
 	if (sig == 11)
 	{
-		printf("\b\bexit");
+		printf("\b\bexit\n");
 		exit(g_exit_code);
 	}
 	return;
@@ -102,6 +102,7 @@ int		main(int ac, char **av, char **envp)
 	signal(SIGINT, first_act);
 	signal(SIGSEGV, first_act);
 	signal(SIGQUIT, first_act);
+	signal(SIGPIPE, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 

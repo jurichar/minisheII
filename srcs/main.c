@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/20 14:36:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/23 15:13:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,11 +112,7 @@ int		main(int ac, char **av, char **envp)
 	envlst = get_env(envlst, envp);
 	while (1)
 	{
-		// if ( waitpid(pid, NULL, 0) != -1 )
 		lst_cmd(get_line(), envlst, &lst, envp);
-		// signal(SIGINT, no_act_handler);
-		// signal(SIGSEGV, no_act_handler);
-		// signal(SIGQUIT, no_act_handler);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 		{
 			get_built_in(&lst, &envlst);

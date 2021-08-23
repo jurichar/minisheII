@@ -6,31 +6,14 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 16:00:25 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/23 15:17:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	act_handler(int sig)
-{
-	if (sig == 2)
-	{
-		printf("\b\b");
-		printf(BLU ARROW ZERO);
-		printf("\n");
-	}
-	if (sig == 11)
-	{
-		printf("\b\bexit pouet");
-		exit(g_exit_code);
-	}
-	return ;
-}
-
 int	exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd)
 {
-	signal(SIGINT, act_handler);
 	if (ft_strcmp(lst->cmd, "echo") == 0)
 		return (builtin_echo(lst, fd));
 	else if (ft_strcmp(lst->cmd, "cd") == 0)

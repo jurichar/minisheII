@@ -197,13 +197,15 @@ char	*get_cmd_name(char *s)
 	return (cmd);
 }
 
-void	ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env)
+void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 {
 	char	*tmp;
+	char	*str;
 	int		args_count;
 	int		i;
 	int		j;
 
+	str = find_wildcard(s);
 	if (how_many_redir(str) > 0)
 	{
 		tmp = get_redir(str, *lst);

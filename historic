@@ -1,0 +1,21 @@
+ls
+cd ..
+cd /Users/lp1
+cd /Users
+ls
+cd ..
+cd /Users/lp1
+ls
+pwd
+ls
+pwd
+ls 
+ls | grep "bu"
+ls | grep "builtin"
+ls
+locate builtin
+pzd
+pwd
+ping
+ping 8.8.8.8
+ping google.fr

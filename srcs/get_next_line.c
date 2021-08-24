@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 18:21:42 by lebourre          #+#    #+#             */
-/*   Updated: 2021/06/29 21:49:43 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:03:00 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,9 +86,11 @@ int		get_next_line(int fd, char **line)
 	char		*tmp;
 	int			ret;
 
-	if (!(buff = malloc(sizeof(char) * (4096 + 1)))
-	|| fd < 0 || !line || 4096 <= 0)
+	if (!(buff = malloc(sizeof(char) * (4096 + 1))) || fd < 0 || !line || 4096 <= 0)
+	{
+		free(buff);
 		return (-1);
+	}
 	while ((ret = read(fd, buff, 4096)) > 0)
 	{
 		buff[ret] = '\0';

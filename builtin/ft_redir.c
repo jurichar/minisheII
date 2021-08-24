@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 16:02:34 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:06:50 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,17 +41,6 @@ void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
 	close(fd0);
 	fd = open(".lol", O_RDWR, 0664);
 	dup2(fd, 0);
-	close(fd);
-	
-	//printf ("%d\n",exec_ve(lst, envlst));
-	/*
-	int j = -1;
-	while (++j <= i - 2)
-	{
-		printf ("%s\n" ,ret[j]);
-		free(ret[j]);
-	}
-	*/
 }
 
 void	ft_redir_out_double(t_cmd_lst *lst)
@@ -83,6 +72,13 @@ void	ft_redir_in(t_cmd_lst *lst)
 
 void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
+	while (lst->redir->next)
+	{
+		printf ("Coucou\n");
+
+		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		lst->redir = lst->redir->next;
+	}
 	if (lst->redir->redir == 1)
 		ft_redir_in(lst);
 	else if (lst->redir->redir == 2)

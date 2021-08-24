@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 18:40:45 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 19:19:56 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst)
 {
 	pid_t	pid;
 	(void ) lst;
-	(void ) envst;
+	(void ) envlst;
 
 	pid = fork();
 	if (pid < 0)

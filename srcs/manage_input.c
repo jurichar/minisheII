@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   manage_input.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 14:27:19 by lebourre          #+#    #+#             */
-/*   Updated: 2021/05/21 15:41:10 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:04:04 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*del_char(char *src, int pos)
 	int		i;
 
 //	printf("\nline = %s\npos = %d\n", src, pos);
-	res = malloc(sizeof(char *) * ft_strlen(src));
+	res = malloc(sizeof(char) * ft_strlen(src));
 	if (res == NULL)
 		return (NULL);
 	i = -1;

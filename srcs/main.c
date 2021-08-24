@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/19 11:40:42 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 23:02:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 
 void	free_cmds(t_cmd_lst *lst)
 {
+	void *nextl;
 	if (lst)
 	{
 		while (lst->next)
 		{
+			nextl = lst->next;
 			free(lst);
-			lst = lst->next;
+			lst = nextl;
 		}
 		free(lst);
 	}
@@ -27,20 +29,19 @@ void	free_cmds(t_cmd_lst *lst)
 
 void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
-	int		fd;
-	char	*tmp;
+	// int		fd;
+	// char	*tmp;
 
-	fd = 0;
 	if (*line && line)
 	{
-		tmp = get_historic(1);
-		if ((ft_strcmp(tmp, line)) != 0)
-		{
-			fd = open("./historic", O_WRONLY|O_CREAT|O_APPEND, 0655);
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			close(fd);
-		}
+		// tmp = get_historic(1);
+		// if ((ft_strcmp(tmp, line)) != 0)
+		// {
+		// 	fd = open("./historic", O_WRONLY|O_CREAT|O_APPEND, 0655);
+		// 	write(fd, line, ft_strlen(line));
+		// 	write(fd, "\n", 1);
+		// 	close(fd);
+		// }
 		ft_split_cmd(lst, line, env, envp);
 	}
 	return;
@@ -49,12 +50,11 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 char	*get_line( void )
 {
 	char	*line;
-	struct	termios term;
+	// struct	termios term;
 
-	tcgetattr(0, &term);
-	line = ft_strdup("");
+	// tcgetattr(0, &term);
 	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
-	add_history(line);
+	// add_history(line);
 	return (line);
 }
 
@@ -99,9 +99,9 @@ int		main(int ac, char **av, char **envp)
 	t_cmd_lst *lst;
 	(void) ac;
 	(void) av;
-	signal(SIGINT, first_act);
-	signal(SIGSEGV, first_act);
-	signal(SIGQUIT, first_act);
+	// signal(SIGINT, first_act);
+	// signal(SIGSEGV, first_act);
+	// signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 

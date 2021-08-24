@@ -8,7 +8,9 @@ END="\033[0m"
 DIR_BUILTIN = builtin/
 DIR_SRCS = srcs/
 
-CC = gcc -g3 -Wall -Wextra -Werror
+CC = clang -g3 -Wall -Wextra -Werror -Wsometimes-uninitialized -Uninitialized # --analyze # -std=c11 -pedantic
+
+FLIB = -g3 -I libft/ -lft -L libft/ -g3 -o
 
 SRC_BUILTIN =	built_cd.c \
 				built_echo.c \
@@ -51,14 +53,14 @@ all: $(NAME)
 
 $(NAME): lib $(OBJ) 
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) -g3 -O0 $(OBJ) -g3 -I libft/ -lft -L libft/ -g3 -o $(NAME) -lreadline
+	@$(CC) $(OBJ) $(FLIB) $(NAME) -lreadline
 	@printf $(GRN)"[Minishell ready !!]%-30s\n"
 	@printf $(END)
 
 sani: lib $(OBJ)
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) -g3 -O0 -fsanitize=address $(OBJ) -I libft/ -lft -L libft/ -o $(NAME) -lreadline
-	@printf $(GRN)"[Minishell ready !]\n"
+	@$(CC) $(OBJ) -g3 -O0 -fsanitize=address $(FLIB) $(NAME) -lreadline
+	@printf $(GRN)"[Minishell ready !]%-30s\n"
 	@printf $(END)
 
 

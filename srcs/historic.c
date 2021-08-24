@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   historic.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 14:12:29 by lebourre          #+#    #+#             */
-/*   Updated: 2021/05/21 14:21:26 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/08/24 22:53:41 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ char	*get_historic(int up)
 	}
 	else
 	{
-		res = malloc(sizeof(char));
+		res = malloc(sizeof(char) + 1);
 		res = ft_strdup("");
 	}
-	free(line);
+	// free(line);
 	close(fd);
 	return (res);
 }

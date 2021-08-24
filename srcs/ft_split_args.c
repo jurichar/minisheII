@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:21:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 23:17:51 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,9 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 			break ;
 		len++;
 	}
+	arg = NULL;
 	if (quote == 1)
-		ret = ft_substr(s, 0, len);
+		printf("analyze said its not ok\n"); // ret = ft_substr(s, 0, len); 
 	else
 		arg = ft_substr(s, 0, len);
 	if ((ft_strcmp(arg, "?") == 0))

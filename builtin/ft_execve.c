@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/23 14:14:52 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 23:14:30 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 		args = join_args(cmd, lst->args);
 		execve(cmd, args, lst->envp);
 	}
-	free(args);
 	free(path);
 	return (g_exit_code);
 }
@@ -59,9 +58,9 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	pid_t	pid;
 	int		status;
-	int		returned;
-	int		signum;
+	int		signum ;
 
+	signum = 0;
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();
@@ -79,7 +78,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		if (waitpid(pid, &status, 0) != -1)
 		{
 			if (WIFEXITED(status))
-				returned = WEXITSTATUS(status);
+				signum = WEXITSTATUS(status);
 			else if (WIFSIGNALED(status))
 			{
 				signum = WTERMSIG(status);
@@ -98,7 +97,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 			perror("waitpid() failed");
 			exit(EXIT_FAILURE);
 		}
-		g_exit_code = status;
+		g_exit_code = signum;
 	}
 	free(lst->cmd);
 	free(lst->args);

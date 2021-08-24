@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:40:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:21:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/24 21:14:35 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_redir	*redir_dup(char *s)
 	t_redir		*new;
 
 	start = 0;
-	len = 0;
 	new = malloc(sizeof(t_redir));
 	new->redir = which_redir(s);
 	while (s[start] && (s[start] == '>' || s[start] == '<'))

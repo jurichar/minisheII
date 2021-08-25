@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/24 23:16:03 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/25 00:57:18 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,32 +29,21 @@ void	free_cmds(t_cmd_lst *lst)
 
 void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
-	// int		fd;
-	// char	*tmp;
-
-	if (*line && line)
+	if (line)
 	{
-		// tmp = get_historic(1);
-		// if ((ft_strcmp(tmp, line)) != 0)
-		// {
-		// 	fd = open("./historic", O_WRONLY|O_CREAT|O_APPEND, 0655);
-		// 	write(fd, line, ft_strlen(line));
-		// 	write(fd, "\n", 1);
-		// 	close(fd);
-		// }
 		ft_split_cmd(lst, line, env, envp);
 	}
-	return;
+	return ;
 }
 
 char	*get_line( void )
 {
 	char	*line;
 	// struct	termios term;
-
+	
 	// tcgetattr(0, &term);
 	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
-	// add_history(line);
+	add_history(line);
 	return (line);
 }
 

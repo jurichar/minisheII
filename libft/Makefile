@@ -20,8 +20,8 @@ SRC = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c \
 OBJ = $(SRC:.c=.o)
 
 NAME = libft.a
-CC = clang
-CFLAGS = -Wall -Wextra -Werror --analyze
+CC = gcc
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 all: $(NAME)

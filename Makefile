@@ -1,96 +1,138 @@
+# NAME = minishell
+
+# RED="\033[1;31m"
+# GRN="\033[1;32m"
+# YLW="\033[1;33m"
+# END="\033[0m"
+
+# SRC_DIR = ./srcs/
+# SRC_NAMES = $(shell ls $(SRC_DIR) | grep -E ".+\.c")
+# SRC = $(addprefix $(SRC_DIR), $(SRC_NAMES))
+
+# DIR_INCLUDES = ./includes/
+
+# BUILTIN_DIR = ./builtin/
+# BUILTIN_NAMES = $(shell ls $(BUILTIN_DIR) | grep -E ".+\.c")
+# BUILTIN = $(addprefix $(BUILTIN_DIR), $(BUILTIN_NAMES))
+
+# LIBDIR = ./libft/
+# LIBFT = ./libft/libft.a
+
+# CC = gcc
+# CLFLAGS =# -g3 -Wall -Wextra -Werror
+# BUG = 	-Wsometimes-uninitialized -Uninitialized \
+# 		--analyze -std=c11 -pedantic
+
+# RM = rm -f
+
+# BUILDDIR = ./build/
+
+# BUILDOBJS = $(addprefix $(BUILDDIR), $(SRC_NAMES:.c=.o), $(BUILTIN_NAMES:.c=.o))
+
+
+# all: $(BUILDDIR) $(LIBFT) $(NAME)
+
+# $(BUILDDIR):
+# 	mkdir -p $(BUILDDIR)
+
+# $(BUILDDIR)%.o:$(SRCDIR)%.c
+# 	$(CC) $(CFLAGS) -I$(LIBINC) -I$(INC) -o $@ -c $<
+
+
+# $(NAME): $(BUILDOBJS)
+# 	$(CC) \
+# 	$(CFLAGS) -o \
+# 	$(NAME) $(BUILDOBJS) $(LIBFT)
+
+
+# sani: lib $(OBJ)
+# 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
+# 	@$(CC) $(OBJ) -g3 -O0 -fsanitize=address $(FLIB) $(NAME) -lreadline
+# 	@printf $(GRN)"[Minishell ready !]%-30s\n"
+# 	@printf $(END)
+
+
+# $(LIBFT):
+# 	make -C $(LIBDIR)
+
+# clean:
+# 	rm -rf $(BUILDDIR)
+# 	make -C $(LIBDIR) clean
+
+# fclean: clean
+# 	@$(RM) $(NAME)
+# 	@$(RM) a
+
+# cleanlib:
+# 	@printf $(RED)"[Libft remove...]%-30s\r"
+# 	@printf $(END)
+# 	@make fclean -C libft
+
+# clear:	fclean cleanlib
+# 	@$(RM) historic
+
+# re: fclean all
+
+# .PHONY : all fclean clear re
+# .SILENT:
+
+# Project file
 NAME = minishell
 
-RED="\033[1;31m"
-GRN="\033[1;32m"
-YLW="\033[1;33m"
-END="\033[0m"
+# Project builds and dirs
+SRCDIR = ./srcs/
+BUILDIR = ./builtin/
+SRCNAMES = $(shell ls $(SRCDIR) | grep -E ".+\.c")
+BUILNAMES = $(shell ls $(BUILDIR) | grep -E ".+\.c")
+SRC = $(addprefix $(SRCDIR), $(SRCNAMES))
+BUIL = $(addprefix $(BUILDIR), $(BUILNAMES))
+INC = ./includes/
+BUILDDIR = ./build/
+BUILDOBJS = $(addprefix $(BUILDDIR), $(SRCNAMES:.c=.o))
 
-DIR_BUILTIN = builtin/
-DIR_SRCS = srcs/
+# Libft builds and dirs
+LIBDIR = ./libft/
+LIBFT = ./libft/libft.a
+LIBINC = ./libft/includes/
 
-CC = clang -g3 -Wall -Wextra -Werror -Wsometimes-uninitialized -Uninitialized # --analyze # -std=c11 -pedantic
+# Optimization and Compiler flags and commands
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra
 
-FLIB = -g3 -I libft/ -lft -L libft/ -g3 -o
+# Debugging flags
+DEBUG = -g
 
-SRC_BUILTIN =	built_cd.c \
-				built_echo.c \
-				built_export.c \
-				built_export_sort.c \
-				built_env.c \
-				built_pwd.c \
-				built_exec.c \
-				built_exit.c \
-				built_unset.c \
-				ft_execve.c \
-				ft_pipe.c \
-				built_utils.c \
-				ft_redir.c
+# Main rule
+all: $(BUILDDIR) $(LIBFT) $(NAME)
 
-SRC_SRCS =	main.c \
-		ft_split_args.c \
-		list_tools.c \
-		ft_is.c \
-		ft_split_cmd.c \
-		get_next_line.c \
-		utils.c \
-		ft_lstnew_env.c \
-		set_canonic.c \
-		manage_input.c \
-		historic.c \
-		parse_redir.c \
-		skip.c \
-		cmd_utils.c 
+# Object dir rule
+$(BUILDDIR):
+	mkdir -p $(BUILDDIR)
 
-SRC = 	$(addprefix $(DIR_SRCS), $(SRC_SRCS)) \
-		$(addprefix $(DIR_BUILTIN), $(SRC_BUILTIN))
+# Objects rule
+$(BUILDDIR)%.o:$(SRCDIR)%.c
+	$(CC) $(CFLAGS) -I$(LIBINC) -I$(INC) -o $@ -c $<
 
-OBJ = $(SRC:.c=.o)
+# Project file rule
+$(NAME): $(BUILDOBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(BUILDOBJS) $(LIBFT)
 
-RM = rm -f
+# Libft rule
+$(LIBFT):
+	make -C $(LIBDIR)
 
-all: $(NAME)
-
-
-$(NAME): lib $(OBJ) 
-	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) $(OBJ) $(FLIB) $(NAME) -lreadline
-	@printf $(GRN)"[Minishell ready !!]%-30s\n"
-	@printf $(END)
-
-sani: lib $(OBJ)
-	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) $(OBJ) -g3 -O0 -fsanitize=address $(FLIB) $(NAME) -lreadline
-	@printf $(GRN)"[Minishell ready !]%-30s\n"
-	@printf $(END)
-
-
-lib:
-	@printf $(YLW)"[Libft compilation...]%-30s\r"
-	@make -C libft/
-	@printf $(GRN)"[Libft done !]%-30s\r"
-	@printf $(END)
-
+# Cleaning up the build files
 clean:
-	@printf $(RED)"[Minishell remove...]%-30s\r"
-	@printf $(END)
-	@$(RM) $(OBJ)
+	rm -rf $(BUILDDIR)
+	make -C $(LIBDIR) clean
 
+# Getting rid of the project file
 fclean: clean
-	@$(RM) $(NAME)
-	@$(RM) a
+	rm -rf $(NAME)
+	make -C $(LIBDIR) fclean
 
-cleanlib:
-	@printf $(RED)"[Libft remove...]%-30s\r"
-	@printf $(END)
-	@make fclean -C libft
-
-clear: fclean cleanlib
-	@$(RM) historic
-
+# Do both of the above
 re: fclean all
 
-go : re
-	@printf $(GRN)"[Launch Minishell...]\n"
-	@printf $(END)
-	@./minishell
-.SILENT:
+# Just in case those files exist in the root dir
+.PHONY: all fclean clean re

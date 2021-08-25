@@ -21,6 +21,7 @@ char	**ft_realloc_double(char **str)
 	{
 		if (!(new = malloc(sizeof(char *) * 2)))
 			return (NULL);
+		new[0] = NULL;
 		new[1] = NULL;
 		return (new);
 	}
@@ -35,6 +36,7 @@ char	**ft_realloc_double(char **str)
 		new[i] = ft_strdup(str[i]);
 		free(str[i]);
 	}
+	new[i] = NULL;
 	new[i + 1] = NULL;
 	free(str);
 	return (new);

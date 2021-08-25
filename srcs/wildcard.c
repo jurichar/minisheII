@@ -166,43 +166,46 @@ char    *find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
     char    *tmp;
 
     new = ft_strdup(s);
-    while (new[++i])
+    while (new[i])
     {
         if (!is_space(new[i]))
-            ptr_begin_wd = &new[i];
-        while (new[i + 1] && !is_space(new[i]))
         {
-            if (new[i] == '"')
-              i = get_to_next_quote(new, i);
-            if (new[i] == '*' && (i > 0 && new[i - 1] != '\\'))
+            ptr_begin_wd = &new[i];
+            while (new[i] && !is_space(new[i]))
             {
-                wd = wildcard(ptr_begin_wd);
-                while (new[i] && !is_space(new[i]))
+                if (new[i] == '"')
+                i = get_to_next_quote(new, i);
+                if (new[i] == '*' && (i > 0 && new[i - 1] != '\\'))
                 {
-                    if (new[i] == '"')
-                        i = get_to_next_quote(s, i);
-                    i++;
+                    wd = wildcard(ptr_begin_wd);
+                    while (new[i] && !is_space(new[i]))
+                    {
+                        if (new[i] == '"')
+                            i = get_to_next_quote(s, i);
+                        i++;
+                    }
+                    ptr_post_wd = ft_strdup(&new[i]);
+                    if (wd)
+                    {
+                        
+                        tmp = ft_substr(new, 0, ptr_begin_wd - new);
+                        free(new);
+                        new = ft_calloc(sizeof(char), ft_strlen(tmp) + ft_strlen(wd) + ft_strlen(ptr_post_wd) + 1);
+                        ft_strncpy(new, tmp, ft_strlen(tmp));
+                        free(tmp);
+                        j = ft_strlen(new);
+                        ft_strncpy(&new[j], wd, ft_strlen(wd));
+                        free(wd);
+                        j = ft_strlen(new);
+                        ft_strncpy(&new[j], ptr_post_wd, ft_strlen(ptr_post_wd));
+                    }
+                    free(ptr_post_wd);
                 }
-                ptr_post_wd = ft_strdup(&new[i]);
-                if (wd)
-                {
-                    
-                    tmp = ft_substr(new, 0, ptr_begin_wd - new);
-                    free(new);
-                    new = ft_calloc(sizeof(char), ft_strlen(tmp) + ft_strlen(wd) + ft_strlen(ptr_post_wd) + 1);
-                    ft_strncpy(new, tmp, ft_strlen(tmp));
-                    free(tmp);
-                    j = ft_strlen(new);
-                    ft_strncpy(&new[j], wd, ft_strlen(wd));
-                    free(wd);
-                    j = ft_strlen(new);
-                    ft_strncpy(&new[j], ptr_post_wd, ft_strlen(ptr_post_wd));
-                }
-                free(ptr_post_wd);
-            }
-            if (new[i + 1])
                 i++;
+            }
         }
+        else
+            i++;
     }
     return (new);
 }

@@ -112,7 +112,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 		}
 	}
 	i = -1;
-	while (str[++i] && !(is_sep(str[i])))
+	while (str[++lenght] && !is_sep(str[lenght]))
 	{
 		if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{

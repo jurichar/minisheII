@@ -39,6 +39,7 @@ SRC_SRCS =	main.c \
 		historic.c \
 		parse_redir.c \
 		skip.c \
+		wildcard.c \
 		cmd_utils.c 
 
 SRC = 	$(addprefix $(DIR_SRCS), $(SRC_SRCS)) \
@@ -62,7 +63,6 @@ sani: lib $(OBJ)
 	@$(CC) $(OBJ) -g3 -O0 -fsanitize=address $(FLIB) $(NAME) -lreadline
 	@printf $(GRN)"[Minishell ready !]%-30s\n"
 	@printf $(END)
-
 
 lib:
 	@printf $(YLW)"[Libft compilation...]%-30s\r"

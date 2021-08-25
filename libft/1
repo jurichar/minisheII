@@ -21,7 +21,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = libft.a
 CC = clang
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror --analyze
 RM = rm -f
 
 all: $(NAME)

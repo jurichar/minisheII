@@ -26,17 +26,16 @@
 # define MINISHELL_H
 
 # include <stdio.h>
+# include "../libft/libft.h"
 # include <errno.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
-# include <unistd.h>
 # include <termios.h>
 # include <signal.h>
-# include <stdlib.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+# include <dirent.h>
 
 # define TRUE 1
 # define FALSE 0
@@ -52,6 +51,7 @@
 # define MAG "\033[1;35m"
 # define CYAN "\033[1;36m"
 # define ARROW ">"//"\u1405"
+# define WILDC 1
 
 int	g_exit_code;
 
@@ -220,5 +220,7 @@ char	*ft_strjoin_till_space(char const *s1, char const *s2);
 int		get_to_next_quote(char *s, int i);
 int		pass_cmd_name(char *s, int i);
 t_env_lst	*get_env(t_env_lst *list, char **envp);
+// wildcard
+char    	*find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i);
 
 #endif

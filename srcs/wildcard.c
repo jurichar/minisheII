@@ -177,6 +177,7 @@ char    *find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
             if (new[i] == '*' && (i > 0 && new[i - 1] != '\\'))
             {
                 wd = wildcard(ptr_begin_wd);
+                printf("wd = %s\n", wd);
                 while (new[i] && !is_space(new[i]))
                 {
                     if (new[i] == '"')
@@ -204,5 +205,6 @@ char    *find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
                 i++;
         }
     }
+    printf("new = %s\n", new);
     return (new);
 }

@@ -110,7 +110,11 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			str = ft_strjoin(str, var);
 			free(copy);
 		}
-		else if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
+	}
+	i = -1;
+	while (str[++i] && !(is_sep(str[i])))
+	{
+		if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{
 			quote = 1;
 			j = get_to_next_quote(str, lenght);
@@ -204,6 +208,7 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		j;
 
 	str = find_wildcard(s, NULL, NULL, -1);
+	printf("str = %s\n", str);
 	if (how_many_redir(str) > 0)
 	{
 		tmp = get_redir(str, *lst);
@@ -224,10 +229,12 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 		while (str[j] && is_space(str[j]))
 			j++;
 		(*lst)->args[i - 1] = ft_strdup_space_sep(&str[j], env);
+		printf("arg = %s\n", (*lst)->args[i - 1]);
 		if (str[j] == '\'' || str[j] == '"')
 			j = get_to_next_quote(str, j);
 		while (!is_space(str[j]) && str[j])
 			j++;
 	}
 	(*lst)->args[i - 1] = NULL;
+	free(str);
 }

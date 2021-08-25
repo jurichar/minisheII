@@ -54,7 +54,7 @@ char	*get_line( void )
 
 	// tcgetattr(0, &term);
 	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
-	// add_history(line);
+	add_history(line);
 	return (line);
 }
 

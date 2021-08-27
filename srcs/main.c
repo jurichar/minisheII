@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/27 15:58:53 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/08/27 16:14:56 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 char	*get_line( void )
 {
 	char	*line;
-	// struct	termios term;
-	
-	// tcgetattr(0, &term);
+
 	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
 	add_history(line);
 	return (line);

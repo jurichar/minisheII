@@ -38,3 +38,34 @@ fclean: clean
 re: fclean all
 
 .PHONY: clean fclean bonus
+
+# CC = gcc
+
+# CFLAGS =
+
+# INCLUDE =
+
+# LDFLAGS =
+
+# NAME = tester
+
+# SRCS = $(addprefix srcs/,$(shell ls srcs/ | egrep '.c'))
+
+# BUILT = $(addprefix builtin/,$(shell ls builtin/ | egrep '.c'))
+
+# OBJ = $(SRCS:.c=.o) $(BUILT:.c=.o)
+
+# all: $(NAME)
+
+# tester: $(OBJ)
+# 				$(CC) -o $@ $^ $(LDFLAGS)
+
+# main.o: includes/minishell.h
+
+# %.o:	%.c
+# 		$(CC) -o $@ -c $< $(CFLAGS)
+# clean:
+# 			rm -f */*.o core
+
+# mrproper:	clean
+# 			rm -f $(NAME)

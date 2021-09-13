@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 03:39:16 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:01:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	free_cmds(t_cmd_lst *lst)
 {
-	void *nextl;
+	void	*nextl;
+
 	if (lst)
 	{
 		while (lst->next)
@@ -39,48 +40,40 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 char	*get_line( void )
 {
 	char	*line;
-	char *ret;
-	
+	char	*ret;
+
 	while (1)
 	{
 		line = readline("minishell-1.0$ ");
 		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
 		if (strlen(line) > 0)
-		{
 			add_history(line);
-		}
 		strcpy(ret, line);
 		free(line);
 		line = NULL;
-		return ret;
+		return (ret);
 	}
 }
 
-void print_point_char(char **str)
-{
-	int i = -1;
-	while (str[++i])
-		ft_putstr_fd(str[i], 1);
-}
-
-void first_act(int sig)
+void	first_act(int sig)
 {
 	if (sig == SIGINT)
 	{
-				write(1,"\nminishell-1.0$ ", 3);
+		write(1, "\nminishell-1.0$ ", 16);
 	}
 	if (sig == 11)
 	{
 		printf("\b\bexit\n");
 		exit(g_exit_code);
 	}
-	return;
+	return ;
 }
 
-int		main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **envp)
 {
-	t_env_lst *envlst;
-	t_cmd_lst *lst;
+	t_env_lst	*envlst;
+	t_cmd_lst	*lst;
+
 	(void) ac;
 	(void) av;
 	signal(SIGINT, first_act);
@@ -88,7 +81,7 @@ int		main(int ac, char **av, char **envp)
 	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
-		return 0; 
+		return (0);
 	lst = NULL;
 	lst = ft_new_cmd_list(envp);
 	envlst = NULL;
@@ -103,4 +96,4 @@ int		main(int ac, char **av, char **envp)
 		}
 	}
 	return (0);
- }
+}

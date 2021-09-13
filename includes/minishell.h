@@ -6,10 +6,9 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 05:50:13 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:08:55 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 /***
  *      __  __ _       _     _          _ _  
@@ -40,8 +39,8 @@
 
 # define TRUE 1
 # define FALSE 0
-
 # define SEP ";|"
+
 // colors : +10 for background color
 
 # define ZERO "\033[0m"
@@ -51,7 +50,7 @@
 # define BLU "\033[1;34m"
 # define MAG "\033[1;35m"
 # define CYAN "\033[1;36m"
-# define ARROW ">"//"\u1405"
+# define ARROW ">"
 
 int	g_exit_code;
 
@@ -73,10 +72,10 @@ typedef struct s_redir
 
 typedef struct s_tripl
 {
-    int x;
-	int y;
-	int z;
-} t_tripl;
+	int	x;
+	int	y;
+	int	z;
+}		t_tripl;
 
 typedef struct s_cmd_lst
 {
@@ -90,22 +89,22 @@ typedef struct s_cmd_lst
 	int					fd[2];
 	int					nb_p;
 	int					builtin;
-}				t_cmd_lst;
+}			t_cmd_lst;
 
 typedef struct s_fct_params
 {
 	char				**av;
 	struct s_fct_params	*env_list;
-}				t_fct_params;
+}		t_fct_params;
 
 typedef struct s_pipor
 {
-	int nbc;
-	int *pid;
-	int tpipes;
-	int *pipes;
-	int i;
-}				t_pipor;
+	int	nbc;
+	int	*pid;
+	int	tpipes;
+	int	*pipes;
+	int	i;
+}		t_pipor;
 
 /*
 BUILT IN 
@@ -135,15 +134,15 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst);
 int	builtin_exit( void );
 
 // built_export_sort
-int			env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i);
+int	env_swap(t_env_lst **curr, t_env_lst **prev, t_env_lst **begin, int i);
 t_env_lst	*env_sort(t_env_lst *list, int i);
-int			builtin_export_sort(t_env_lst *envlst);
+int	builtin_export_sort(t_env_lst *envlst);
 
 // built_export
-int		valid_identifier(char c, int pos);
-int		check_name(char *s);
-int		export_var(char **var, t_env_lst **envlst);
-int		builtin_export(t_cmd_lst *lst, t_env_lst **envlst);
+int	valid_identifier(char c, int pos);
+int	check_name(char *s);
+int	export_var(char **var, t_env_lst **envlst);
+int	builtin_export(t_cmd_lst *lst, t_env_lst **envlst);
 
 // built_pwd
 int	builtin_pwd();

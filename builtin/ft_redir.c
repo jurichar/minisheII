@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 03:40:03 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 07:48:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,9 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 	int		fd0;
 	int		fd;
 	char	*line;
-	char	**ret;
 	int		i;
 
 	line = "";
-	ret = ft_realloc_double(NULL);
 	fd0 = open(".lol", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	i = 0;
 	while (ft_strcmp(line, lst->redir->arg) != 0)

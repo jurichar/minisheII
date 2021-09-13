@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 06:43:43 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 07:47:27 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,6 @@ typedef struct s_pipor
 	int	*pid;
 	int	tpipes;
 	int	*pipes;
-	int	i;
 }		t_pipor;
 
 /*

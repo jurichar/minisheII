@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/27 16:14:56 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 01:44:45 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,21 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 char	*get_line( void )
 {
 	char	*line;
-
-	line = readline(BLU"MI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO);
-	add_history(line);
-	return (line);
+	char *ret;
+	
+	while (1)
+	{
+		line = readline("> ");
+		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
+		if (strlen(line) > 0)
+		{
+			add_history(line);
+		}
+		strcpy(ret, line);
+		free(line);
+		line = NULL;
+		return ret;
+	}
 }
 
 void print_point_char(char **str)
@@ -52,25 +63,11 @@ void print_point_char(char **str)
 		ft_putstr_fd(str[i], 1);
 }
 
-void no_act_handler(int sig)
-{
-	if (sig == SIGINT)
-	{
-		write(1,BLU"\nMI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 45);
-	}
-	if (sig == 11)
-	{
-		printf("\b\bexit");
-		exit(g_exit_code);
-	}
-	return;
-}
-
 void first_act(int sig)
 {
 	if (sig == SIGINT)
 	{
-				write(1,BLU"\nMI"GRN"NI"YLW"SH"CYAN"ELL "ARROW" "ZERO, 45);
+				write(1,"\n> ", 3);
 	}
 	if (sig == 11)
 	{
@@ -86,9 +83,9 @@ int		main(int ac, char **av, char **envp)
 	t_cmd_lst *lst;
 	(void) ac;
 	(void) av;
-	// signal(SIGINT, first_act);
-	// signal(SIGSEGV, first_act);
-	// signal(SIGQUIT, first_act);
+	signal(SIGINT, first_act);
+	signal(SIGSEGV, first_act);
+	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return 0; 

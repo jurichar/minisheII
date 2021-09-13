@@ -1,4 +1,4 @@
-SRC = $(shell ls | egrep  "[.]"c)
+SRC = $(shell ls | egrep "[.]"c)
 OBJ = $(SRC:.c=.o)
 
 NAME = libft.a

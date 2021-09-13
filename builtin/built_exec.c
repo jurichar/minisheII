@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/23 15:17:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 02:05:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,18 @@ int	exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd)
 	else if (ft_strcmp(lst->cmd, "env") == 0)
 		return (builtin_env(*envlst));
 	return (0);
+}
+
+void	free_point_char(char ***str)
+{
+	int i = -1;
+	while (str[++i])
+	{
+		free(str[i]);
+		str[i] = NULL;
+	}
+	free(str);
+	str = NULL;
 }
 
 int	is_built_in(t_cmd_lst *lst)
@@ -60,14 +72,7 @@ int	is_built_in(t_cmd_lst *lst)
 		}
 		tripl.x++;
 	}
-	free(builtin_list[0]);
-	free(builtin_list[1]);
-	free(builtin_list[2]);
-	free(builtin_list[3]);
-	free(builtin_list[4]);
-	free(builtin_list[5]);
-	free(builtin_list[6]);
-	free(builtin_list);
+	free_point_char(&builtin_list);
 	return (tripl.z);
 }
 

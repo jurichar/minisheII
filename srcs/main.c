@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 01:44:45 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 03:39:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*get_line( void )
 	
 	while (1)
 	{
-		line = readline("> ");
+		line = readline("minishell-1.0$ ");
 		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
 		if (strlen(line) > 0)
 		{
@@ -67,7 +67,7 @@ void first_act(int sig)
 {
 	if (sig == SIGINT)
 	{
-				write(1,"\n> ", 3);
+				write(1,"\nminishell-1.0$ ", 3);
 	}
 	if (sig == 11)
 	{

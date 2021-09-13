@@ -6,24 +6,23 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/24 23:15:47 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 03:40:03 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst)
+void	ft_redir_in_double(t_cmd_lst *lst)
 {
-	(void) envlst;
-	// (void) lst;
-	int	fd, fd0;
-	char *line = "";
-	char **ret;
-	int i;
+	int		fd0;
+	int		fd;
+	char	*line;
+	char	**ret;
+	int		i;
 
+	line = "";
 	ret = ft_realloc_double(NULL);
-	fd0 = open(".lol", O_CREAT | O_RDWR | O_TRUNC , 0777);
-	printf ("fd0 : %d\n", fd0);
+	fd0 = open(".lol", O_CREAT | O_RDWR | O_TRUNC, 0777);
 	i = 0;
 	while (ft_strcmp(line, lst->redir->arg) != 0)
 	{
@@ -71,8 +70,6 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	while (lst->redir->next)
 	{
-		printf ("Coucou\n");
-
 		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
 		lst->redir = lst->redir->next;
 	}
@@ -83,7 +80,7 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	else if (lst->redir->redir == 3)
 		ft_redir_out_double(lst);
 	else if (lst->redir->redir == 4)
-		ft_redir_in_double(lst, envlst);
+		ft_redir_in_double(lst);
 	if (lst->sep == '|')
 	{
 		pipor(lst, envlst);

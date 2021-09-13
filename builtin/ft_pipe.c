@@ -6,82 +6,75 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/24 23:14:58 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 05:51:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int pipor(t_cmd_lst *lst, t_env_lst *envlst)
+t_pipor	init_pipor(t_cmd_lst *lst)
 {
-	int nbc;
-	nbc = lst->nb_p + 1;
-	int pid[nbc];
-	int tpipes;
-	tpipes = (nbc - 1) * 2;
-	int pipes[tpipes];
-	int x;
+	t_pipor	pip;
+	int		i;
 
-	x = 0;
-	while(x < tpipes)
-	{ 
-		pipe(pipes + x);
-		x += 2;
-	}
-	int i = 0;
-	while (i < nbc)
+	pip.nbc = lst->nb_p + 1;
+	pip.tpipes = (pip.nbc - 1) * 2;
+	pip.pipes = malloc(sizeof(int) * pip.tpipes);
+	pip.pid = malloc(sizeof(int) * pip.nbc);
+	i = 0;
+	while (i < pip.tpipes)
 	{
-		pid[i] = fork();
-		if (pid[i] < 0)
-		{
+		pipe(pip.pipes + i);
+		i += 2;
+	}
+	return (pip);
+}
+
+void	fork_error(t_pipor pip, int i)
+{
+	if (pip.pid[i] < 0)
+	{
 		printf("fork error\n");
 		exit(-1);
-		}
-		else if (pid[i] == 0)
+	}
+}
+
+void	clean_pid(t_pipor *pip)
+{
+	int	i;
+
+	i = 0;
+	while (i < pip->nbc)
+	{
+		waitpid(pip->pid[i], NULL, 0);
+		i++;
+	}
+}
+
+int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
+{
+	t_pipor	pip;
+	int		i;
+
+	pip = init_pipor(lst);
+	i = 0;
+	while (i < pip.nbc)
+	{
+		pip.pid[i] = fork();
+		fork_error(pip, i);
+		if (pip.pid[i] == 0)
 		{
-			if(i == 0) // first cmd
-			{
-				dup2(pipes[1], 1);
-				for(int x = 0; x < tpipes; x++)
-					close(pipes[x]);
-				exec_ve(lst, &envlst);
-				exit(1);
-			}
-			else if(i == nbc - 1) // last
-			{
-				dup2(pipes[tpipes - 2], 0);
-				for(int x = 0; x < tpipes; x++)
-					close(pipes[x]);
-				if (lst->redir != NULL)
-					ft_redir(lst, envlst);
-				exec_ve(lst, &envlst);
-				exit(1);
-			}
-			else // other cmd
-			{
-				dup2(pipes[i + (i - 2)], 0);
-				dup2(pipes[i + i + 1], 1);
-				for(int x = 0; x < tpipes; x++)
-					close(pipes[x]);
-				exec_ve(lst, &envlst);
-				exit(1);
-			}
+			if (i == 0)
+				pipor_first(pip, lst, envlst);
+			else if (i == pip.nbc - 1)
+				pipor_mid(pip, lst, envlst);
+			else
+				pipor_last(pip, lst, envlst, i);
 		}
 		i++;
 		lst = lst->next;
 	}
-	x = 0;
-	while(x < tpipes)
-	{
-		close(pipes[x]);
-		x++;
-	}
-	
-	x = 0;
-	while (x < nbc)
-	{
-		waitpid(pid[x], NULL, 0);
-		x++;
-	}
-	return 0;
+	close_pipor(&pip);
+	clean_pid(&pip);
+	return (0);
 }

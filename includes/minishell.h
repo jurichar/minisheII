@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/27 14:27:27 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 05:50:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,39 @@ typedef struct s_fct_params
 	struct s_fct_params	*env_list;
 }				t_fct_params;
 
+typedef struct s_pipor
+{
+	int nbc;
+	int *pid;
+	int tpipes;
+	int *pipes;
+	int i;
+}				t_pipor;
+
 /*
 BUILT IN 
 */
+//builtin_init
+void	free_point_char(char **str);
+void	init_built_in(char **str);
+int	is_built_in(t_cmd_lst *lst);
+
 // built_cd
 int	builtin_cd_tild(t_env_lst *envlst);
 int	builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int ret);
+
 // built_echo
 int	is_n(char *s);
 int	builtin_echo(t_cmd_lst *lst, int fd);
+
 // built_env
 int	builtin_env(t_env_lst *envlst);
+
 // built_exec
 int	exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd);
-int	is_built_in(t_cmd_lst *lst);
 void	fd_close(int fd[2]);
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst);
+
 // built_exit
 int	builtin_exit( void );
 
@@ -130,21 +147,34 @@ int		builtin_export(t_cmd_lst *lst, t_env_lst **envlst);
 
 // built_pwd
 int	builtin_pwd();
+
 // built_unset
 int	builtin_unset(t_cmd_lst *lst, t_env_lst **env);
+
 // built_utils
 char	**join_args(char *s, char **args);
 char	*get_env_by_name(t_env_lst *envlst, char *name);
+
 // ft_execve
 int	check_built_in(t_cmd_lst *lst, t_env_lst **envlst);
 int	exec_ve_abs(t_cmd_lst *lst);
 int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst);
 int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst);
+
 // ft_pipe
-int	forkito(int in, int out, t_cmd_lst *lst, t_env_lst *envlst);
+t_pipor	init_pipor(t_cmd_lst *lst);
+void	fork_error(t_pipor pip, int i);
+void	clean_pid(t_pipor *pip);
 int	pipor(t_cmd_lst *lst, t_env_lst *envlst);
+
+// ft_pipe_utils
+void	close_pipor(t_pipor *pip);
+void	pipor_first(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst);
+void	pipor_mid(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst);
+void	pipor_last(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst, int i);
+
 // ft_redir
-void	ft_redir_in_double(t_cmd_lst *lst, t_env_lst *envlst);
+void	ft_redir_in_double(t_cmd_lst *lst);
 void	ft_redir_out_double(t_cmd_lst *lst);
 void	ft_redir_out(t_cmd_lst *lst);
 void	ft_redir_in(t_cmd_lst *lst);

@@ -9,7 +9,7 @@ CC = gcc
 
 INCLUDES = -I libft/
 
-CFLAGS = -Wall -Wextra -Werror $(INCLUDES) --analyze
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
 LDFLAGS = -L libft/ -lft
 

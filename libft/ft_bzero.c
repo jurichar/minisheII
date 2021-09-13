@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/16 18:21:33 by lebourre          #+#    #+#             */
-/*   Updated: 2021/04/27 14:20:05 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:52:43 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	long i;
+	long	i;
 
 	i = -1;
 	while (++i < (long)n)
-		((char*)s)[i] = '\0';
+		((char *)s)[i] = '\0';
 }

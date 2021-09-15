@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:21:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/15 15:11:44 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putchar(char c)
 
 void	print_hex(char c)
 {
-	char *hex;
+	char	*hex;
 
 	hex = "0123456789abcdef";
 	ft_putchar('\\');
@@ -60,17 +60,14 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 	{
 		len++;
 	}
-	ret = ft_substr(s, 0, len);
-	if ((ft_strcmp(ret, "?") == 0))
-	{
-		tmp = ret;
-		ret = ft_strjoin(ft_itoa(g_exit_code), &s[len]);
-		free(tmp);
-		return (ret);
-	}
-	if (s[len] == '\0' || (s[len] == '"' && quote == 1))
-		return (ret);
-	while (env && (ft_strcmp(ret, env->name) != 0))
+	arg = NULL;
+	if (quote == 1)
+		printf("analyze said its not ok\n");
+	else
+		arg = ft_substr(s, 0, len);
+	if ((ft_strcmp(arg, "?") == 0))
+		return (ft_itoa(g_exit_code));
+	while (env && (ft_strcmp(arg, env->name) != 0))
 		env = env->next;
 	if (env != NULL)
 	{
@@ -130,7 +127,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			break ;
 		}
 		if ((str[lenght + 1] == '\'' || str[lenght + 1] == '"')
-		&& str[lenght] == '\\')
+			&& str[lenght] == '\\')
 			lenght += 2;
 	}
 	if (!(copy = malloc(sizeof(char) * lenght + 1)))

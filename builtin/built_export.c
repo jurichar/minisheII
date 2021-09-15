@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/19 16:28:24 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:46:37 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	export_cat(t_env_lst **list, char *str)
 	char		*tmp;
 	char		*content;
 
-	content = ft_substr(ft_strchr(str, '=') + 1, 0, ft_strlen(ft_strchr(str, '=') + 1));
+	content = ft_substr(ft_strchr(str, '=') + 1, 0,
+			ft_strlen(ft_strchr(str, '=') + 1));
 	if (content == NULL)
 	{
 		printf("error: fatal\n");
@@ -81,7 +82,8 @@ int	export_add(t_env_lst **list, char *str)
 {
 	char	*content;
 
-	content = ft_substr(ft_strchr(str, '=') + 1, 0, ft_strlen(ft_strchr(str, '=') + 1));
+	content = ft_substr(ft_strchr(str, '=') + 1, 0,
+			ft_strlen(ft_strchr(str, '=') + 1));
 	if (content == NULL)
 	{
 		printf("error: fatal\n");

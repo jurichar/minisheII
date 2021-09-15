@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/22 18:21:42 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/24 21:03:00 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:03:19 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strndup(char *s, int n)
 	return (new);
 }
 
-int		fill_line(char **file_content, char **line)
+int	fill_line(char **file_content, char **line)
 {
 	int		len;
 	char	*tmp;
@@ -57,7 +57,7 @@ int		fill_line(char **file_content, char **line)
 	return (1);
 }
 
-int		manage_return(char **file_content, char **line, int ret, char *buffer)
+int	manage_return(char **file_content, char **line, int ret, char *buffer)
 {
 	free(buffer);
 	if (ret < 0)
@@ -79,9 +79,9 @@ int		manage_return(char **file_content, char **line, int ret, char *buffer)
 	}
 }
 
-int		get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
-	static char *file_content;
+	static char	*file_content;
 	char		*buff;
 	char		*tmp;
 	int			ret;

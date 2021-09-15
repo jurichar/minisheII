@@ -5,45 +5,16 @@ GRN="\033[1;32m"
 YLW="\033[1;33m"
 END="\033[0m"
 
-DIR_BUILTIN = builtin/
-DIR_SRCS = srcs/
+CC = gcc
 
-CC = clang -g3 -Wall -Wextra -Werror -Wsometimes-uninitialized -Uninitialized # --analyze # -std=c11 -pedantic
+INCLUDES = -I libft/
 
-FLIB = -g3 -I libft/ -lft -L libft/ -g3 -o
+CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
-SRC_BUILTIN =	built_cd.c \
-				built_echo.c \
-				built_export.c \
-				built_export_sort.c \
-				built_env.c \
-				built_pwd.c \
-				built_exec.c \
-				built_exit.c \
-				built_unset.c \
-				ft_execve.c \
-				ft_pipe.c \
-				built_utils.c \
-				ft_redir.c
+LDFLAGS = -L libft/ -lft
 
-SRC_SRCS =	main.c \
-		ft_split_args.c \
-		list_tools.c \
-		ft_is.c \
-		ft_split_cmd.c \
-		get_next_line.c \
-		utils.c \
-		ft_lstnew_env.c \
-		set_canonic.c \
-		manage_input.c \
-		historic.c \
-		parse_redir.c \
-		skip.c \
-		wildcard.c \
-		cmd_utils.c 
-
-SRC = 	$(addprefix $(DIR_SRCS), $(SRC_SRCS)) \
-		$(addprefix $(DIR_BUILTIN), $(SRC_BUILTIN))
+SRC = 	$(addprefix srcs/,$(shell ls srcs/ | egrep "[.]"c)) \
+		$(addprefix builtin/, $(shell ls builtin/ | egrep "[.]"c))
 
 OBJ = $(SRC:.c=.o)
 
@@ -51,46 +22,50 @@ RM = rm -f
 
 all: $(NAME)
 
-
-$(NAME): lib $(OBJ) 
-	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) $(OBJ) $(FLIB) $(NAME) -lreadline
+$(NAME): lib $(OBJ)
+	@printf $(YLW)"[Minishell compilation...]%-30s\n"
+	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME) -lreadline
 	@printf $(GRN)"[Minishell ready !!]%-30s\n"
 	@printf $(END)
 
-sani: lib $(OBJ)
-	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) $(OBJ) -g3 -O0 -fsanitize=address $(FLIB) $(NAME) -lreadline
-	@printf $(GRN)"[Minishell ready !]%-30s\n"
-	@printf $(END)
-
 lib:
-	@printf $(YLW)"[Libft compilation...]%-30s\r"
+	@printf $(YLW)"[Libft compilation...]%-30s\n"
 	@make -C libft/
-	@printf $(GRN)"[Libft done !]%-30s\r"
+	@printf $(GRN)"[Libft ready !!]%-30s\n"
 	@printf $(END)
 
 clean:
-	@printf $(RED)"[Minishell remove...]%-30s\r"
-	@printf $(END)
+	@printf $(RED)"[Minishell remove...]%-30s\n"
 	@$(RM) $(OBJ)
+	@printf $(RED)"[All .o files removed !!]%-30s\n"
+	@printf $(END)
 
 fclean: clean
+	@printf $(RED)"[Minishell remove...]%-30s\n"
 	@$(RM) $(NAME)
-	@$(RM) a
-
-cleanlib:
-	@printf $(RED)"[Libft remove...]%-30s\r"
+	@printf $(RED)"[Minishell removed !!]%-30s\n"
 	@printf $(END)
-	@make fclean -C libft
 
-clear: fclean cleanlib
+clear: fclean
+	@printf $(RED)"[Libft remove...]%-30s\n"
+	@make fclean -C libft
+	@printf $(RED)"[Minishell remove !!]%-30s\n"
 	@$(RM) historic
+	@printf $(END)
 
 re: fclean all
 
-go : re
-	@printf $(GRN)"[Launch Minishell...]\n"
-	@printf $(END)
-	@./minishell
 .SILENT:
+
+# tester: $(OBJ)
+# 				$(CC) -o $@ $^ $(LDFLAGS)
+
+# main.o: includes/minishell.h
+
+# %.o:	%.c
+# 		$(CC) -o $@ -c $< $(CFLAGS)
+# clean:
+# 			rm -f */*.o core
+
+# mrproper:	clean
+# 			rm -f $(NAME)

@@ -6,7 +6,7 @@
 
 - [x] gestions d'erreurs
 
-- [ ] pas d'interpretation de quote ouverte, de \ ou de ;.
+- [ ] pas d'interpretation de quote ouverte, de \ ou de ;
 
 - [x] UNE globale (et expliquer pourquoi).
 
@@ -30,7 +30,7 @@
 
 - [x] ">>"
 
-- [ ] "<<"
+- [x] "<<"
 
 - [ ] multiple redir.
 
@@ -81,15 +81,3 @@
 - "cat < test.sh" : .sh no such file or directory
 
 - "ls >a" a fix
-
-## Docs
-
-### Pipe
-
-- [Link 1](http://www.zeitoun.net/articles/communication-par-tuyau/start\n)
-
-- [Link 2](http://www.zeitoun.net/_media/articles/communication-par-tuyau/stdxxx_2.png\n)
-
-- [Link 3](http://www.rozmichelle.com/pipes-forks-dups/\n)
-
-- [Link 4](https://tldp.org/LDP/lpg/node11.html\n)

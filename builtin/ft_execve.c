@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/08/24 21:12:56 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/13 03:34:23 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,13 +54,35 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	return (g_exit_code);
 }
 
-int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
+void	exec_error(pid_t pid)
 {
-	pid_t	pid;
 	int		status;
 	int		signum ;
 
 	signum = 0;
+	if (waitpid(pid, &status, 0) != -1)
+	{
+		if (WIFEXITED(status))
+			signum = WEXITSTATUS(status);
+		else if (WIFSIGNALED(status))
+			signum = WTERMSIG(status);
+		else if (WIFSTOPPED(status))
+			signum = WSTOPSIG(status);
+		else
+			printf("Something strange just happened.\n");
+	}
+	else
+	{
+		perror("waitpid() failed");
+		exit(EXIT_FAILURE);
+	}
+	g_exit_code = signum;
+}
+
+int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
+{
+	pid_t	pid;
+
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();
@@ -74,31 +96,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		exit(EXIT_FAILURE);
 	}
 	else
-	{
-		if (waitpid(pid, &status, 0) != -1)
-		{
-			if (WIFEXITED(status))
-				signum = WEXITSTATUS(status);
-			else if (WIFSIGNALED(status))
-			{
-				signum = WTERMSIG(status);
-				printf("Exited due to receiving signal %d\n", signum);
-			}
-			else if (WIFSTOPPED(status))
-			{
-				signum = WSTOPSIG(status);
-				printf("Stopped due to receiving signal %d\n", signum);
-			}
-			else
-				printf("Something strange just happened.\n");
-		}
-		else
-		{
-			perror("waitpid() failed");
-			exit(EXIT_FAILURE);
-		}
-		g_exit_code = signum;
-	}
+		exec_error(pid);
 	free(lst->cmd);
 	free(lst->args);
 	return (1);

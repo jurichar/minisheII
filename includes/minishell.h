@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/15 15:09:53 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/15 15:14:02 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@
 # define BLU "\033[1;34m"
 # define MAG "\033[1;35m"
 # define CYAN "\033[1;36m"
-# define ARROW ">"
+# define ARROW ">"//"\u1405"
+# define WILDC 1
 
 int	g_exit_code;
 

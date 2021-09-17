@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
 
 LDFLAGS = -L libft/ -lft
 
-SRC = 	$(addprefix srcs/,$(shell ls srcs/ | egrep "[.]"c)) \
+SRC = 	$(addprefix srcs/, $(shell ls srcs/ | egrep "[.]"c)) \
 		$(addprefix builtin/, $(shell ls builtin/ | egrep "[.]"c))
 
 OBJ = $(SRC:.c=.o)
@@ -23,33 +23,33 @@ RM = rm -f
 all: $(NAME)
 
 $(NAME): lib $(OBJ)
-	@printf $(YLW)"[Minishell compilation...]%-30s\n"
+	@printf $(YLW)"[Minishell compilation...]%-30s\r"
 	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME) -lreadline
-	@printf $(GRN)"[Minishell ready !!]%-30s\n"
+	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
 
 lib:
-	@printf $(YLW)"[Libft compilation...]%-30s\n"
+	@printf $(YLW)"[Libft compilation...]%-30s\r"
 	@make -C libft/
-	@printf $(GRN)"[Libft ready !!]%-30s\n"
+	@printf $(GRN)"[Libft ready !!]%-30s\r"
 	@printf $(END)
 
 clean:
-	@printf $(RED)"[Minishell remove...]%-30s\n"
+	@printf $(RED)"[Minishell remove...]%-30s\r"
 	@$(RM) $(OBJ)
-	@printf $(RED)"[All .o files removed !!]%-30s\n"
+	@printf $(RED)"[All .o files removed !!]%-30s\r"
 	@printf $(END)
 
 fclean: clean
-	@printf $(RED)"[Minishell remove...]%-30s\n"
+	@printf $(RED)"[Minishell remove...]%-30s\r"
 	@$(RM) $(NAME)
-	@printf $(RED)"[Minishell removed !!]%-30s\n"
+	@printf $(RED)"[Minishell removed !!]%-30s\r"
 	@printf $(END)
 
 clear: fclean
-	@printf $(RED)"[Libft remove...]%-30s\n"
+	@printf $(RED)"[Libft remove...]%-30s\r"
 	@make fclean -C libft
-	@printf $(RED)"[Minishell remove !!]%-30s\n"
+	@printf $(RED)"[Minishell remove !!]%-30s\r"
 	@$(RM) historic
 	@printf $(END)
 

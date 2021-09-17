@@ -208,7 +208,7 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		j;
 
 	str = find_wildcard(s, NULL, NULL, 0);
-	printf("str = %s\n", str);
+	// printf("str = %s\n", str);
 	if (how_many_redir(str) > 0)
 	{
 		tmp = get_redir(str, *lst);

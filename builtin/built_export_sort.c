@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export_sort.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/17 16:53:24 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/17 16:54:08 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/09/13 06:49:02 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,19 +53,19 @@ t_env_lst	*env_sort(t_env_lst *list, int i)
 	return (begin);
 }
 
-int	builtin_export_sort(t_env_lst *envlst)
+int	builtin_export_sort(t_env_lst *e)
 {
-	t_env_lst *begin;
-	t_env_lst *export_cmd_lst;
+	t_env_lst	*begin;
+	t_env_lst	*export_cmd_lst;
 
-	begin = ft_lstnew_env(envlst->name, envlst->equal, envlst->content);
+	begin = ft_lstnew_env(e->name, e->equal, e->content);
 	export_cmd_lst = begin;
-	envlst = envlst->next;
-	while (envlst)
+	e = e->next;
+	while (e)
 	{
-		export_cmd_lst->next = ft_lstnew_env(envlst->name, envlst->equal, envlst->content);
+		export_cmd_lst->next = ft_lstnew_env(e->name, e->equal, e->content);
 		export_cmd_lst = export_cmd_lst->next;
-		envlst = envlst->next;
+		e = e->next;
 	}
 	export_cmd_lst = env_sort(begin, 0);
 	while (export_cmd_lst)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_s_tolower.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/17 17:11:20 by lebourre          #+#    #+#             */
-/*   Updated: 2021/02/17 17:13:41 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/09/13 07:03:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	*ft_s_tolower(char *s)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (s[i])

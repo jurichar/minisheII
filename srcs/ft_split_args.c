@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/18 01:21:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/15 15:13:17 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_putchar(char c)
 
 void	print_hex(char c)
 {
-	char *hex;
+	char	*hex;
 
 	hex = "0123456789abcdef";
 	ft_putchar('\\');
@@ -130,7 +130,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			break ;
 		}
 		if ((str[lenght + 1] == '\'' || str[lenght + 1] == '"')
-		&& str[lenght] == '\\')
+			&& str[lenght] == '\\')
 			lenght += 2;
 	}
 	if (!(copy = malloc(sizeof(char) * lenght + 1)))

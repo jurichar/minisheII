@@ -23,7 +23,9 @@ char *ft_strstr(char *str, char *to_find)
 		j = 0;
 		while (to_find[j] == str[i + j])
 		{
-			if (to_find[j + 1] == '\0' || (to_find[j + 1] == WILDC))
+			if (to_find[j + 1] == '\0' && str[i + j + 1] == '\0')
+				return (&str[i + 1]);
+            if (to_find[j + 1] == WILDC)
 				return (&str[i + 1]);
 			j++;
 		}
@@ -72,7 +74,7 @@ char    **get_match(char *wd, char **files)
         file = files[i];
         while (wd[j])
         {
-            if (j == 0 && j != WILDC && wd[j] != file[0])
+            if (j == 0 && wd[j] != WILDC && wd[j] != file[0])
                 break ;
             if (wd[j] != WILDC)
             {
@@ -174,7 +176,7 @@ char    *find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
             while (new[i] && !is_space(new[i]))
             {
                 if (new[i] == '"')
-                i = get_to_next_quote(new, i);
+                    i = get_to_next_quote(new, i);
                 if (new[i] == '*' && (i > 0 && new[i - 1] != '\\'))
                 {
                     wd = wildcard(ptr_begin_wd);
@@ -187,7 +189,6 @@ char    *find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
                     ptr_post_wd = ft_strdup(&new[i]);
                     if (wd)
                     {
-                        
                         tmp = ft_substr(new, 0, ptr_begin_wd - new);
                         free(new);
                         new = ft_calloc(sizeof(char), ft_strlen(tmp) + ft_strlen(wd) + ft_strlen(ptr_post_wd) + 1);

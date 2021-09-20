@@ -9,7 +9,9 @@ CC = gcc
 
 INCLUDES = -I libft/
 
-CFLAGS = -Wall -Wextra -Werror $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -g3 $(INCLUDES)
+
+DEBUG = -fsanitize=address -fno-omit-frame-pointer
 
 LDFLAGS = -L libft/ -lft
 
@@ -24,7 +26,7 @@ all: $(NAME)
 
 $(NAME): lib $(OBJ)
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	@$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME) -lreadline
+	@$(CC) $(CFLAGS) $(DEBUG) $(OBJ) $(LDFLAGS) -o $(NAME) -lreadline
 	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
 

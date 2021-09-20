@@ -20,10 +20,11 @@ char	**ft_realloc_double(char **str)
 	if (!str)
 	{
 		new = malloc(sizeof(char *) * 2);
-	if (!new)
-		return (NULL);
-	new[1] = NULL;
-	return (new);
+		if (!new)
+			return (NULL);
+		new[0] = NULL;
+		new[1] = NULL;
+		return (new);
 	}
 	i = 0;
 	while (str[i])

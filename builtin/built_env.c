@@ -16,7 +16,10 @@ int	builtin_env(t_env_lst *envlst)
 {
 	while (envlst)
 	{
-		printf("%s=%s\n", envlst->name, envlst->content);
+		if (envlst->equal && envlst->content)
+			printf("%s=%s\n", envlst->name, envlst->content);
+		else if (envlst->equal && !envlst->content)
+			printf("%s=\n", envlst->name, envlst->content);
 		envlst = envlst->next;
 	}
 	return (0);

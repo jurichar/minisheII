@@ -45,11 +45,17 @@ int		cmd_counter(char *str, char *separator, int *pipe)
 {
 	int i;
 	int count;
+	int	quote;
 
 	i = -1;
 	count = 0;
+	quote = 0;
 	while (str[++i])
 	{
+		if (quote == 0 && (str[i] == '\'' || str[i] == '"')
+			quote = get_to_next_quote(str, i);
+		if (quote && i == quote)
+			quote = 0;
 		if (!is_separator(str[i], separator)
 		&& (is_separator(str[i + 1], separator) || str[i + 1] == '\0'))
 		{

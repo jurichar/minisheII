@@ -57,19 +57,21 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 	len = 0;
 	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
 		&& s[len] != '\\' && s[len] != '"' && s[len] != '\'' && s[len] != '/')
-	{
 		len++;
-	}
 	ret = ft_substr(s, 0, len);
 	if ((ft_strcmp(ret, "?") == 0))
 	{
 		tmp = ret;
 		ret = ft_strjoin(ft_itoa(g_exit_code), &s[len]);
 		free(tmp);
+		if (quote == 1)
+		{
+			tmp = ret;
+			ret = ft_strjoin("\"", tmp);
+			free (tmp);
+		}
 		return (ret);
 	}
-	if (s[len] == '\0' || (s[len] == '"' && quote == 1))
-		return (ret);
 	while (env && (ft_strcmp(ret, env->name) != 0))
 		env = env->next;
 	if (env != NULL)
@@ -77,11 +79,17 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 		tmp = ret;
 		ret = ft_strjoin(env->content, &s[len]);
 		free(tmp);
+		if (quote == 1)
+		{
+			tmp = ret;
+			ret = ft_strjoin("\"", tmp);
+			free (tmp);
+		}
 	}
 	else
 	{
 		free(ret);
-		return (&s[len]);
+		return (NULL);
 	}
 	return (ret);
 }
@@ -97,30 +105,41 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	char	*str;
 	char	*var;
 
-	lenght = -1;
 	i = -1;
 	quote = 0;
 	str = ft_strdup(s);
-	while (str[++i] && !is_sep(str[i]))
+	while (str[++i])
 	{
+		if (str[i] == '\'' || str[i] == '"')
+			quote = get_to_next_quote(str, i);
+		if (quote && i == quote)
+			quote = 0;
+		if (quote == 0 && is_sep(str[i]))
+			break ;
 		if ((str[i] == '"' && str[i + 1] == '$') || str[i] == '$')
 		{
 			var = get_arg(&str[i], env, 0);
-			str = ft_substr(str, 0, i);
-			copy = str;
-			str = ft_strjoin(str, var);
-			free(copy);
+			if (var != NULL)
+			{
+				str = ft_substr(str, 0, i);
+				copy = str;
+				str = ft_strjoin(str, var);
+				free(copy);
+				free(var);
+			}
 		}
 	}
+	quote = 0;
 	i = -1;
-	while (str[++lenght] && !is_sep(str[lenght]))
+	lenght = -1;
+	while (str[++lenght])
 	{
-		if (lenght == 0 && quote == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
+		if (quote == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{
 			quote = 1;
 			j = get_to_next_quote(str, lenght);
 		}
-		if (quote == 0 && is_space(str[lenght]))
+		if (quote == 0 && (is_space(str[lenght]) || is_sep(str[lenght])))
 			break ;
 		else if (quote == 1 && lenght == j && str[lenght + 1] == ' ')
 			break ;
@@ -146,10 +165,9 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			begin_quote = i;
 			quote = get_to_next_quote(str, i);
 		}	
-
 		if (str[i] == '\\' && str[i - 1] != '\\')
 			copy[j++] = str[i++ + 1];
-		if ((str[i] == '\'' || str[i] == '"') && (i == begin_quote || i == quote))
+		if (quote && (str[i] == '\'' || str[i] == '"') && (i == begin_quote || i == quote))
 		{
 			if (i == quote)
 				quote = 0;
@@ -159,6 +177,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			copy[j++] = str[i];
 	}
 	copy[j] = '\0';
+	printf("copy == %s\n", str);
 	return (copy);
 }
 
@@ -222,7 +241,6 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		j;
 
 	str = find_wildcard(s, NULL, NULL, 0);
-	// printf("str = %s\n", str);
 	if (how_many_redir(str) > 0)
 	{
 		tmp = get_redir(str, *lst);
@@ -238,16 +256,18 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	(*lst)->cmd = get_cmd_name(&str[j]);
 	while (!is_space(str[j]) && str[j])
 			j++;
-	while (++i < args_count)
+	while (++i < args_count && str[j])
 	{
 		while (str[j] && is_space(str[j]))
 			j++;
 		(*lst)->args[i - 1] = ft_strdup_space_sep(&str[j], env);
 		printf("arg = %s\n", (*lst)->args[i - 1]);
-		if (str[j] == '\'' || str[j] == '"')
-			j = get_to_next_quote(str, j);
 		while (!is_space(str[j]) && str[j])
+		{
+			if (str[j] == '\'' || str[j] == '"')
+				j = get_to_next_quote(str, j);
 			j++;
+		}
 	}
 	(*lst)->args[i - 1] = NULL;
 	free(str);

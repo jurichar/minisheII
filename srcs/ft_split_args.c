@@ -91,6 +91,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	int		i;
 	int		j;
 	int		lenght;
+	int		begin_quote;
 	int		quote;
 	char	*copy;
 	char	*str;
@@ -114,7 +115,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	i = -1;
 	while (str[++lenght] && !is_sep(str[lenght]))
 	{
-		if (lenght == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
+		if (lenght == 0 && quote == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
 		{
 			quote = 1;
 			j = get_to_next_quote(str, lenght);
@@ -137,11 +138,24 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 		return (NULL);
 	i = -1;
 	j = 0;
+	quote = 0;
 	while (++i < lenght)
 	{
+		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
+		{
+			begin_quote = i;
+			quote = get_to_next_quote(str, i);
+		}	
+
 		if (str[i] == '\\' && str[i - 1] != '\\')
 			copy[j++] = str[i++ + 1];
-		if (!(str[i] == '\'' || str[i] == '"'))
+		if ((str[i] == '\'' || str[i] == '"') && (i == begin_quote || i == quote))
+		{
+			if (i == quote)
+				quote = 0;
+			continue ;
+		}
+		else
 			copy[j++] = str[i];
 	}
 	copy[j] = '\0';

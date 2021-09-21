@@ -19,7 +19,7 @@ int	builtin_env(t_env_lst *envlst)
 		if (envlst->equal && envlst->content)
 			printf("%s=%s\n", envlst->name, envlst->content);
 		else if (envlst->equal && !envlst->content)
-			printf("%s=\n", envlst->name, envlst->content);
+			printf("%s=\n", envlst->name);
 		envlst = envlst->next;
 	}
 	return (0);

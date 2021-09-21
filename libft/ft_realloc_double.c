@@ -27,6 +27,7 @@ char	**ft_realloc_double(char **str)
 	char	**new;
 	int		i;
 
+	new = NULL;
 	if (!str)
 		return (set_null_tab(new));
 	i = 0;

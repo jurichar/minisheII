@@ -48,6 +48,11 @@ void	first_act(int sig)
 		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
+	if (sig == 8)
+	{
+		printf("cou1cou\n");
+		exit(0);
+	}
 }
 
 char	*get_line( void )

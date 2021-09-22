@@ -100,7 +100,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 {
 	int		i;
 	int		j;
-	int		lenght;
+	int		len;
 	int		begin_quote;
 	int		quote;
 	char	*copy;
@@ -139,27 +139,26 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	}
 	quote = 0;
 	i = -1;
-	lenght = -1;
-	while (str[++lenght])
+	len = -1;
+	while (str[++len])
 	{
-		if (quote == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
-			quote = get_to_next_quote(s, lenght);
+		if (quote == 0 && (str[len] == '\'' || str[len] == '"'))
+			quote = get_to_next_quote(s, len);
 		if (!str[quote])
 			quote = 0;
-		if (quote == 0 && (is_space(str[lenght]) || is_sep(str[lenght])))
+		if (quote == 0 && (is_space(str[len]) || is_sep(str[len])))
 			break ;
-		else if (quote && lenght == quote && str[lenght + 1] == ' ')
+		else if (quote && len == quote && str[len + 1] == ' ')
 			break ;
-		else if (quote && lenght == quote)
+		else if (quote && len == quote)
 			quote = 0;
 	}
-	if (!(copy = malloc(sizeof(char) * lenght + 1)))
+	if (!(copy = malloc(sizeof(char) * len + 1)))
 		return (NULL);
-	printf("lenght == %d\n", lenght);
 	i = -1;
 	j = 0;
 	quote = 0;
-	while (++i < lenght)
+	while (++i < len)
 	{
 		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
 		{
@@ -178,7 +177,6 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			copy[j++] = str[i];
 	}
 	copy[j] = '\0';
-	printf("copy == %s\n", copy);
 	return (copy);
 }
 
@@ -208,28 +206,59 @@ int		args_counter(char *str)
 char	*get_cmd_name(char *s)
 {
 	int		i;
+	int		j;
+	int		quote;
+	int		begin_quote;
 	int		len;
 	char	*cmd;
 
-	len = 0;
 	i = 0;
-	while (s[i] && is_space(s[i]))
-		i++;
-	while (s[i] && !is_space(s[i]))
+	len = -1;
+	while (s[++len])
 	{
-		len++;
-		i++;
+		if (quote == 0 && (s[len] == '\'' || s[len] == '"'))
+			quote = get_to_next_quote(s, len);
+		if (!s[quote])
+			quote = 0;
+		if (quote == 0 && (is_space(s[len]) || is_sep(s[len])))
+			break ;
+		else if (quote && len == quote && s[len + 1] == ' ')
+			break ;
+		else if (quote && len == quote)
+			quote = 0;
 	}
 	cmd = malloc(sizeof(char) * (len + 1));
-	i = skip_space(s);
-	len = 0;
-	while (s[i] && !is_space(s[i]))
+	if (!cmd)
+		return (NULL);
+	i = -1;
+	j = 0;
+	quote = 0;
+	while (++i < len)
 	{
-		cmd[len] = s[i];
-		i++;
-		len++;
+		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
+		{
+			begin_quote = i;
+			quote = get_to_next_quote(s, i);
+		}
+		if (!s[quote])
+			quote = 0;
+		if (quote && (s[i] == '\'' || s[i] == '"') && (i == begin_quote || i == quote))
+		{
+			if (i == quote)
+				quote = 0;
+			continue ;
+		}
+		else
+			cmd[j++] = s[i];
 	}
-	cmd[len] = '\0';
+	cmd[j] = '\0';
+	// while (s[i] && !is_space(s[i]))
+	// {
+	// 	cmd[len] = s[i];
+	// 	i++;
+	// 	len++;
+	// }
+	// cmd[len] = '\0';
 	return (cmd);
 }
 

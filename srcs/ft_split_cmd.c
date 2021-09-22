@@ -69,13 +69,13 @@ int		cmd_counter(char *str, int *pipe)
 		if (!is_separator(str, str[i], i)
 		&& (is_separator(str, str[i + 1], i + 1) || str[i + 1] == '\0'))
 		{
-			//if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))
-			//{
+			if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))
+			{
 				(*pipe)++;
 				count++;
-			//}
-			//if (str[i + 1] == '\0')
-			//	count++;
+			}
+			if (str[i + 1] == '\0')
+				count++;
 		}
 	}
 	return (count);

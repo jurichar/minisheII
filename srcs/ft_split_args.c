@@ -123,6 +123,8 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			if (str[i] == '"')
 			{
 				quote = get_to_next_quote(str, i);
+				if (str[quote])
+					i++;
 			}
 			var = get_arg(&str[i], env, 0);
 			if (var != NULL)

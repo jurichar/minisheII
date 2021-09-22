@@ -19,10 +19,16 @@ char	*get_cmd(char *s)
 	int		i;
 	int		quote;
 
-	len = 0;
 	quote = 0;
+	len = 0;
 	while (s[len] && !is_separator(s, s[len], len))
+	{
+		if (quote = 0 (s[len] == '"' || s[len] == '\''))
+		{
+			quote = get_
+		}
 		len++;
+	}	
 	cmd = malloc(sizeof(char) * (len + 1));
 	if (cmd == NULL)
 		return (NULL);

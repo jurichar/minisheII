@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/20 11:24:34 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/22 15:16:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,14 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 
 void	first_act(int sig)
 {
-		if (sig == SIGINT)
-		{
-			write (1, "\nminishell-1.0$ ", 16);
-		}
-		if (sig == 11)
-		{
-			printf("\b\bexit\n");
-			exit(g_exit_code);
-		}
-		g_exit_code += 127 + sig;
+	g_exit_code = 128 + sig;
+	write(STDOUT_FILENO, "\n", 1);
+	if (isatty(0))
+	{
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+	}
 }
 
 char	*get_line( void )
@@ -58,6 +56,7 @@ char	*get_line( void )
 
 	while (1)
 	{
+		// printf ("coucou");
 		line = readline("minishell-1.0$ ");
 		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
 		if (ft_strlen(line) > 0)
@@ -77,9 +76,9 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	
-	// signal(SIGINT, first_act);
-	// signal(SIGSEGV, first_act);
-	// signal(SIGQUIT, first_act);
+	signal(SIGINT, first_act);
+	signal(SIGSEGV, first_act);
+	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

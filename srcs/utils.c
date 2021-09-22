@@ -54,25 +54,14 @@ int		get_to_next_quote(char *s, int i)
 	if (s[i] == '\'')
 	{
 		i++;
-		while (s[i])
-		{
-			if (s[i] == '\'' && s[i - 1] != '\\')
-				break ;
-				//end_quote = 1;
-			//if (end_quote == 1 && (s[i] == ' ' || s[i] == '\0'))
-			//	break ;
+		while (s[i] && s[i] != '\'')
 			i++;
-		}
 	}
 	else if (s[i] == '"')
 	{
 		i++;
 		while (s[i] && s[i] != '"')
-		{
-			if (s[i] == '"' && s[i - 1] != '\\')
-				break ;
 			i++;
-		}
 	}
 	return (i);
 }

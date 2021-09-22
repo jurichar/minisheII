@@ -71,7 +71,6 @@ int		cmd_counter(char *str, int *pipe)
 		{
 			//if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))
 			//{
-				printf("coucou pipe\n");
 				(*pipe)++;
 				count++;
 			//}
@@ -94,7 +93,6 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	if (!str || !*str)
 		return ;
 	cmd_count = cmd_counter(str, &lst_begin->nb_p);
-	printf("cmd_count == %d\n", cmd_count);
 	j = -1;
 	i = 0;
 	while (++j < cmd_count)
@@ -102,7 +100,6 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 		if (is_separator(str, str[i], i))
 			i++;
 		buf = get_cmd(&str[i]);
-		printf("buf == %s\n", buf);
 		if (str[i])
 			ft_split_args(buf, lst, env);
 		while (str[i] && !is_separator(str, str[i], i))

@@ -50,13 +50,15 @@ char	*get_arg(char *s, t_env_lst *env, int slash)
 	quote = 0;
 	if (s[0] == '"')
 	{
-		s++;
-		quote = 1;
+		quote = get_to_next_quote(s, 0);
+		if (!s[quote])
+			quote = 0;
+		else
+			s++;
 	}
 	s++;
 	len = 0;
-	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
-		&& s[len] != '\\' && s[len] != '"' && s[len] != '\'' && s[len] != '/')
+	while (s[len] && !is_sep(s[len]) && !is_space(s[len]) && s[len] != '"' && s[len] != '\'' && s[len] != '/')
 		len++;
 	ret = ft_substr(s, 0, len);
 	if ((ft_strcmp(ret, "?") == 0))
@@ -118,6 +120,10 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			break ;
 		if ((str[i] == '"' && str[i + 1] == '$') || str[i] == '$')
 		{
+			if (str[i] == '"')
+			{
+				quote = get_to_next_quote(str, i);
+			}
 			var = get_arg(&str[i], env, 0);
 			if (var != NULL)
 			{
@@ -135,26 +141,19 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	while (str[++lenght])
 	{
 		if (quote == 0 && (str[lenght] == '\'' || str[lenght] == '"'))
-		{
-			quote = 1;
-			j = get_to_next_quote(str, lenght);
-		}
+			quote = get_to_next_quote(s, lenght);
+		if (!str[quote])
+			quote = 0;
 		if (quote == 0 && (is_space(str[lenght]) || is_sep(str[lenght])))
 			break ;
-		else if (quote == 1 && lenght == j && str[lenght + 1] == ' ')
+		else if (quote && lenght == quote && str[lenght + 1] == ' ')
 			break ;
-		else if (quote == 1 && lenght == j && str[lenght + 1] != ' ')
-		{
-			while (ft_isalnum(str[++lenght]))
-				i++;
-			break ;
-		}
-		if ((str[lenght + 1] == '\'' || str[lenght + 1] == '"')
-			&& str[lenght] == '\\')
-			lenght += 2;
+		else if (quote && lenght == quote)
+			quote = 0;
 	}
 	if (!(copy = malloc(sizeof(char) * lenght + 1)))
 		return (NULL);
+	printf("lenght == %d\n", lenght);
 	i = -1;
 	j = 0;
 	quote = 0;
@@ -164,9 +163,9 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 		{
 			begin_quote = i;
 			quote = get_to_next_quote(str, i);
-		}	
-		if (str[i] == '\\' && str[i - 1] != '\\')
-			copy[j++] = str[i++ + 1];
+		}
+		if (!str[quote])
+			quote = 0;
 		if (quote && (str[i] == '\'' || str[i] == '"') && (i == begin_quote || i == quote))
 		{
 			if (i == quote)
@@ -177,7 +176,7 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 			copy[j++] = str[i];
 	}
 	copy[j] = '\0';
-	printf("copy == %s\n", str);
+	printf("copy == %s\n", copy);
 	return (copy);
 }
 
@@ -261,7 +260,6 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 		while (str[j] && is_space(str[j]))
 			j++;
 		(*lst)->args[i - 1] = ft_strdup_space_sep(&str[j], env);
-		printf("arg = %s\n", (*lst)->args[i - 1]);
 		while (!is_space(str[j]) && str[j])
 		{
 			if (str[j] == '\'' || str[j] == '"')

@@ -32,7 +32,7 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
 	if (line)
 	{
-		check_line(line);
+	//	check_line(line);
 		ft_split_cmd(lst, line, env, envp);
 	}
 	return ;
@@ -78,9 +78,9 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	
-	// signal(SIGINT, first_act);
-	// signal(SIGSEGV, first_act);
-	// signal(SIGQUIT, first_act);
+	signal(SIGINT, first_act);
+	signal(SIGSEGV, first_act);
+	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

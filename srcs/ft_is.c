@@ -21,7 +21,7 @@ int	is_space(char c)
 
 int	is_sep(char c)
 {
-	if (c == '|' || c == ';')
+	if (c == '|')
 		return (1);
 	return (0);
 }
@@ -30,7 +30,7 @@ int	is_redir(char *s, int i)
 {
 	if ((i == 0 && (s[i] == '>' || s[i] == '<'))
 		|| (i > 0 && (s[i] == '>' || s[i] == '<')
-			&& (s[i - 1] != '\\' || s[i - 1] != '\'' || s[i - 1] != '"')))
+			&& (s[i - 1] != '\'' || s[i - 1] != '"')))
 		return (1);
 	return (0);
 }

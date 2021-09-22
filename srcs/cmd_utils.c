@@ -17,9 +17,11 @@ char	*get_cmd(char *s)
 	char	*cmd;
 	int		len;
 	int		i;
+	int		quote;
 
 	len = 0;
-	while (s[len] && !is_separator(s[len], SEP))
+	quote = 0;
+	while (s[len] && !is_separator(s, s[len], len))
 		len++;
 	cmd = malloc(sizeof(char) * (len + 1));
 	if (cmd == NULL)

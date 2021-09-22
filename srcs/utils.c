@@ -57,9 +57,10 @@ int		get_to_next_quote(char *s, int i)
 		while (s[i])
 		{
 			if (s[i] == '\'' && s[i - 1] != '\\')
-				end_quote = 1;
-			if (end_quote == 1 && (s[i] == ' ' || s[i] == '\0'))
 				break ;
+				//end_quote = 1;
+			//if (end_quote == 1 && (s[i] == ' ' || s[i] == '\0'))
+			//	break ;
 			i++;
 		}
 	}

@@ -203,9 +203,9 @@ char		*get_cmd_name(char *s);
 void		ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
 
 // ft_split_cmd
-int			is_separator(char c, char *separator);
-char		*ft_strdup_sep(char *str, char *separator);
-int			cmd_counter(char *str, char *separator, int *pipe);
+int			is_separator(char *s, char c, int pos);
+char		*ft_strdup_sep(char *str);
+int			cmd_counter(char *str, int *pipe);
 void		ft_split_cmd(t_cmd_lst **l, char *s, t_env_lst *env, char **e);
 
 // get_next_line

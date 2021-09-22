@@ -12,25 +12,35 @@
 
 #include "../includes/minishell.h"
 
-int		is_separator(char c, char *separator)
+int		is_separator(char *s, char c, int pos)
 {
-	int i;
+	int	i;
+	int	quote;
 
+	if (c != '|')
+		return (0);
 	i = -1;
-	while (separator[++i])
-		if (separator[i] == c)
+	quote = 0;
+	while (s[++i])
+	{
+		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
+			quote = get_to_next_quote(s, i);
+		if (quote == 1 && i == quote)
+			quote = 0;
+		if (i == pos && quote == 0)
 			return (1);
+	}
 	return (0);
 }
 
-char	*ft_strdup_sep(char *str, char *separator)
+char	*ft_strdup_sep(char *str)
 {
 	int		i;
 	int		lenght;
 	char	*copy;
 
 	lenght = 0;
-	while (str[lenght] && !is_separator(str[lenght], separator))
+	while (str[lenght] && !is_separator(str, str[lenght], lenght))
 		lenght++;
 	if (!(copy = malloc(sizeof(char) * lenght + 1)))
 		return (NULL);
@@ -41,7 +51,7 @@ char	*ft_strdup_sep(char *str, char *separator)
 	return (copy);
 }
 
-int		cmd_counter(char *str, char *separator, int *pipe)
+int		cmd_counter(char *str, int *pipe)
 {
 	int i;
 	int count;
@@ -52,16 +62,21 @@ int		cmd_counter(char *str, char *separator, int *pipe)
 	quote = 0;
 	while (str[++i])
 	{
-		if (quote == 0 && (str[i] == '\'' || str[i] == '"')
+		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
 			quote = get_to_next_quote(str, i);
 		if (quote && i == quote)
 			quote = 0;
-		if (!is_separator(str[i], separator)
-		&& (is_separator(str[i + 1], separator) || str[i + 1] == '\0'))
+		if (!is_separator(str, str[i], i)
+		&& (is_separator(str, str[i + 1], i + 1) || str[i + 1] == '\0'))
 		{
-			if (str[i + 1] == '|')
+			//if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))
+			//{
+				printf("coucou pipe\n");
 				(*pipe)++;
-			count++;
+				count++;
+			//}
+			//if (str[i + 1] == '\0')
+			//	count++;
 		}
 	}
 	return (count);
@@ -78,17 +93,19 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	lst_begin = *lst;
 	if (!str || !*str)
 		return ;
-	cmd_count = cmd_counter(str, SEP, &lst_begin->nb_p);
+	cmd_count = cmd_counter(str, &lst_begin->nb_p);
+	printf("cmd_count == %d\n", cmd_count);
 	j = -1;
 	i = 0;
 	while (++j < cmd_count)
 	{
-		while (str[i] && is_separator(str[i], SEP))
+		if (is_separator(str, str[i], i))
 			i++;
 		buf = get_cmd(&str[i]);
+		printf("buf == %s\n", buf);
 		if (str[i])
 			ft_split_args(buf, lst, env);
-		while (str[i] && !is_separator(str[i], SEP))
+		while (str[i] && !is_separator(str, str[i], i))
 			i++;
 		(*lst)->sep = str[i];
 		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)

@@ -32,6 +32,7 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
 	if (line)
 	{
+		check_line(line);
 		ft_split_cmd(lst, line, env, envp);
 	}
 	return ;

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/22 15:16:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:29:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	return ;
 }
 
-void	first_act(int sig)
+void	sig_handler(int sig)
 {
 	g_exit_code = 128 + sig;
 	write(STDOUT_FILENO, "\n", 1);
@@ -63,19 +63,18 @@ char	*get_line( void )
 	if (ft_strlen(line) > 0)
 		add_history(line);
 	return (line);
-}
+	// char	*ret;
 
-int	main(int ac, char **av, char **envp)
-{
-	t_env_lst	*envlst;
-	t_cmd_lst	*lst;
+	// while (1)
+	// {
+		// printf ("coucou");
 
 	(void) ac;
 	(void) av;
 	
-	signal(SIGINT, first_act);
-	signal(SIGSEGV, first_act);
-	signal(SIGQUIT, first_act);
+	signal(SIGINT, sig_handler);
+	signal(SIGSEGV, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

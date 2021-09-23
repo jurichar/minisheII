@@ -71,9 +71,11 @@ int	which_redir(char *str)
 */
 t_redir	*redir_dup(char *s)
 {
+	int			i;
 	int			start;
-	int			len;
+	int			pos;
 	t_redir		*new;
+	int			quote;
 
 	start = 0;
 	new = malloc(sizeof(t_redir));
@@ -81,10 +83,30 @@ t_redir	*redir_dup(char *s)
 	while (s[start] && (s[start] == '>' || s[start] == '<'))
 		start++;
 	start += skip_space(&s[start]);
-	len = start;
-	while (s[len] && !is_space(s[len]))
-		len++;
-	new->arg = ft_substr(s, start, len - 2);
+	pos = start;
+	quote = 0;
+	i = 0;
+	new->arg = ft_realloc(NULL, 0);
+	while (s[pos])
+	{
+		if (quote == 0 && (s[pos] == '\'' || s[pos] == '"'))
+		{
+			quote = get_to_next_quote(s, pos);
+			pos++;
+			continue ;
+		}	
+		if (quote && pos == quote)
+		{
+			pos++;
+			quote = 0;
+			continue ;
+		}	
+		if (quote == 0 && is_space(s[pos]))
+			break ;
+		new->arg = ft_realloc(new->arg, ft_strlen(new->arg));
+		new->arg[i++] = s[pos++];
+	}
+	//new->arg = ft_substr(s, start, pos - 1);
 	// printf("redir = %s.\n", new->arg);
 	new->next = NULL;
 	return (new);
@@ -114,6 +136,10 @@ int	skip_redir(char *s, int i)
 		i++;
 	if (s[i] == '\0')
 		return (-1);
+	while (ft_isalnum(s[i]))
+		i++;
+	if (s[i] == '\'' || s[i] == '"')
+		i = get_to_next_quote(s, i) + 1;
 	while (ft_isalnum(s[i]))
 		i++;
 	return (i);

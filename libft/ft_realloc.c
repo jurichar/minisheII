@@ -17,7 +17,6 @@ char	*ft_realloc(char *str, int buffer_size)
 	char	*new;
 	size_t	curr_len;
 
-	curr_len = ft_strlen(str);
 	if (!str)
 	{
 		new = malloc(sizeof(char) * (buffer_size + 1));
@@ -26,6 +25,7 @@ char	*ft_realloc(char *str, int buffer_size)
 		ft_bzero(new, buffer_size + 1);
 		return (new);
 	}
+	curr_len = ft_strlen(str);
 	new = malloc(sizeof(char *) * curr_len + buffer_size + 1);
 	if (!new)
 		return (NULL);

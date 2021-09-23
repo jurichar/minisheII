@@ -72,10 +72,10 @@ int	main(int ac, char **av, char **envp)
 
 	(void) ac;
 	(void) av;
-	
-	signal(SIGINT, first_act);
-	signal(SIGSEGV, first_act);
-	signal(SIGQUIT, first_act);
+
+	signal(SIGINT, sig_handler);
+	signal(SIGSEGV, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

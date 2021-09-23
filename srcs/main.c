@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/22 15:16:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/23 11:29:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 	return ;
 }
 
-void	first_act(int sig)
+void	sig_handler(int sig)
 {
 	g_exit_code = 128 + sig;
 	write(STDOUT_FILENO, "\n", 1);
@@ -48,30 +48,30 @@ void	first_act(int sig)
 		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == 8)
+	if (sig == 11)
 	{
-		printf("cou1cou\n");
-		exit(0);
+		printf("\b\bexit\n");
+		exit(g_exit_code);
 	}
 }
 
 char	*get_line( void )
 {
 	char	*line;
-	char	*ret;
+	// char	*ret;
 
-	while (1)
-	{
+	// while (1)
+	// {
 		// printf ("coucou");
 		line = readline("minishell-1.0$ ");
-		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
+		// ret = malloc(sizeof(char) * ft_strlen(line) + 1);
 		if (ft_strlen(line) > 0)
 			add_history(line);
-		strcpy(ret, line);
-		free(line);
-		line = NULL;
-		return (ret);
-	}
+		// strcpy(ret, line);
+		// free(line);
+		// line = NULL;
+		return (line);
+	// }
 }
 
 int	main(int ac, char **av, char **envp)
@@ -82,9 +82,9 @@ int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	
-	signal(SIGINT, first_act);
-	signal(SIGSEGV, first_act);
-	signal(SIGQUIT, first_act);
+	signal(SIGINT, sig_handler);
+	signal(SIGSEGV, sig_handler);
+	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

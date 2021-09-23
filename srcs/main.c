@@ -55,7 +55,7 @@ void	sig_handler(int sig)
 	}
 }
 
-char	*get_line( void )
+char	*get_line(void)
 {
 	char	*line;
 
@@ -63,18 +63,19 @@ char	*get_line( void )
 	if (ft_strlen(line) > 0)
 		add_history(line);
 	return (line);
-	// char	*ret;
+}
 
-	// while (1)
-	// {
-		// printf ("coucou");
 int	main(int ac, char **av, char **envp)
+{
+	t_env_lst	*envlst;
+	t_cmd_lst	*lst;
+
 	(void) ac;
 	(void) av;
 	
-	signal(SIGINT, sig_handler);
-	signal(SIGSEGV, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	signal(SIGINT, first_act);
+	signal(SIGSEGV, first_act);
+	signal(SIGQUIT, first_act);
 	g_exit_code = 0;
 	if (ac != 1 || envp == NULL)
 		return (0);

@@ -68,7 +68,7 @@ char	*get_line( void )
 	// while (1)
 	// {
 		// printf ("coucou");
-
+int	main(int ac, char **av, char **envp)
 	(void) ac;
 	(void) av;
 	

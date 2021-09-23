@@ -84,7 +84,7 @@ t_redir	*redir_dup(char *s)
 	len = start;
 	while (s[len] && !is_space(s[len]))
 		len++;
-	new->arg = ft_substr(s, start, len - 2);
+	new->arg = ft_substr(s, start, len - 1);
 	// printf("redir = %s.\n", new->arg);
 	new->next = NULL;
 	return (new);

@@ -48,30 +48,21 @@ void	first_act(int sig)
 		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == 8)
+	if( sig== 11)
 	{
-		printf("cou1cou\n");
-		exit(0);
+		printf ("\b\bexit\n");
+		exit(g_exit_code);
 	}
 }
 
 char	*get_line( void )
 {
 	char	*line;
-	char	*ret;
 
-	while (1)
-	{
-		// printf ("coucou");
-		line = readline("minishell-1.0$ ");
-		ret = malloc(sizeof(char) * ft_strlen(line) + 1);
-		if (ft_strlen(line) > 0)
-			add_history(line);
-		strcpy(ret, line);
-		free(line);
-		line = NULL;
-		return (ret);
-	}
+	line = readline("minishell-1.0$ ");
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (line);
 }
 
 int	main(int ac, char **av, char **envp)

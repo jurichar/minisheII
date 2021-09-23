@@ -17,14 +17,20 @@ int	how_many_redir(char *s)
 {
 	int		i;
 	int		count;
+	int		quote;
 
 	i = -1;
 	count = 0;
-	while (s[++i] && !is_sep(s[i]))
+	quote = 0;
+	while (s[++i])
 	{
-		if ((i == 0 && (s[i] == '>' || s[i] == '<'))
-			|| (i > 0 && (s[i] == '>' || s[i] == '<')
-			&& (s[i - 1] != '\'' || s[i - 1] != '"')))
+		if (quote == 0 && is_sep(s[i]))
+			break ;
+		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
+			quote = get_to_next_quote(s, i);
+		if (quote && quote == i)
+			quote = 0;
+		if (quote == 0 && (s[i] == '>' || s[i] == '<'))
 		{
 			if ((s[i] == '>' && s[i + 1] == '>')
 				|| (s[i] == '<' && s[i + 1] == '<'))
@@ -32,6 +38,7 @@ int	how_many_redir(char *s)
 			count++;
 		}
 	}
+	printf("count == %d\n", count);
 	return (count);
 }
 
@@ -77,7 +84,7 @@ t_redir	*redir_dup(char *s)
 	len = start;
 	while (s[len] && !is_space(s[len]))
 		len++;
-	new->arg = ft_substr(s, start, len - 2);
+	new->arg = ft_substr(s, start, len - 1);
 	// printf("redir = %s.\n", new->arg);
 	new->next = NULL;
 	return (new);
@@ -87,15 +94,22 @@ t_redir	*redir_dup(char *s)
 **
 **return the index of the character next to the end of a redirection file name
 */
-int	skip_redir(char *s)
+int	skip_redir(char *s, int i)
 {
-	int	i;
-
-	i = 0;
-	while (s[i] && (s[i] == '>' || s[i] == '<'))
-		i++;
-	if (i == 3 || s[i] == '\0')
-		return (-1);
+	if (s[i] == '>')
+	{
+		while (s[i] && s[i] == '>')
+			i++;
+		if (i == 3 || s[i] == '\0' || s[i] == '<')
+			return (-1);
+	}
+	else if (s[i] == '<')
+	{
+		while (s[i] && s[i] == '<')
+			i++;
+		if (i == 3 || s[i] == '\0' || s[i] == '>')
+			return (-1);
+	}
 	while (s[i] && is_space(s[i]))
 		i++;
 	if (s[i] == '\0')
@@ -124,8 +138,10 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 	i = -1;
 	while (s[++i])
 	{
-		if (is_redir(s, i))
-			i += skip_redir(&s[i]);
+		if (is_redir(s, s[i], i))
+			i = skip_redir(s, i);
+		if (i == -1)
+			return ("syntax error\n");
 		len++;
 	}
 	new = malloc(sizeof(char) * (len + 1));
@@ -134,7 +150,7 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 	len = 0;
 	while (s[++i])
 	{
-		if (is_redir(s, i))
+		if (is_redir(s, s[i], i))
 		{
 			if (begin == NULL)
 			{
@@ -146,7 +162,7 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 				lst->redir->next = redir_dup(&s[i]);
 				lst->redir = lst->redir->next;
 			}
-			i += skip_redir(&s[i]);
+			i = skip_redir(s, i);
 		}
 		new[len] = s[i];
 		len++;

@@ -240,6 +240,13 @@ char		*get_redir(char *s, t_cmd_lst *lst);
 // skip
 int			skip_space(char *s);
 
+// env_var_tools
+char    *insert_env_var(char *str, int i, int quote, t_env_lst *env);
+char    *find_env_var(char *str, t_env_lst *env);
+
+// dup_tools
+char	*ft_strdup_space_sep(char *s, t_env_lst *env);
+
 // utils
 int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);

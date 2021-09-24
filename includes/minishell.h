@@ -187,7 +187,7 @@ char		*get_cmd(char *s);
 // ft_is
 int			is_space(char c);
 int			is_sep(char c);
-int			is_redir(char *s, int i);
+int			is_redir(char *s, char c, int pos);
 
 // ft_lstnew_env
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
@@ -234,7 +234,7 @@ char		*insert_char(char *start, char c, char *end);
 int			how_many_redir(char *s);
 int			which_redir(char *str);
 t_redir		*redir_dup(char *s);
-int			skip_redir(char *s);
+int			skip_redir(char *s, int i);
 char		*get_redir(char *s, t_cmd_lst *lst);
 
 // skip

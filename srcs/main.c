@@ -48,30 +48,21 @@ void	sig_handler(int sig)
 		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if (sig == 11)
+	if( sig== 11)
 	{
-		printf("\b\bexit\n");
+		printf ("\b\bexit\n");
 		exit(g_exit_code);
 	}
 }
 
-char	*get_line( void )
+char	*get_line(void)
 {
 	char	*line;
-	// char	*ret;
 
-	// while (1)
-	// {
-		// printf ("coucou");
-		line = readline("minishell-1.0$ ");
-		// ret = malloc(sizeof(char) * ft_strlen(line) + 1);
-		if (ft_strlen(line) > 0)
-			add_history(line);
-		// strcpy(ret, line);
-		// free(line);
-		// line = NULL;
-		return (line);
-	// }
+	line = readline("minishell-1.0$ ");
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (line);
 }
 
 int	main(int ac, char **av, char **envp)
@@ -81,7 +72,7 @@ int	main(int ac, char **av, char **envp)
 
 	(void) ac;
 	(void) av;
-	
+
 	signal(SIGINT, sig_handler);
 	signal(SIGSEGV, sig_handler);
 	signal(SIGQUIT, sig_handler);

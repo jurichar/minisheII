@@ -92,7 +92,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 	{
 		exec_ve_abs(lst);
 		exec_ve_rel(lst, *envlst);
-		perror("Exec failed");
+		printf("minishell: %s: command not found\n", lst->cmd);
 		exit(EXIT_FAILURE);
 	}
 	else

@@ -90,6 +90,15 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	char		*buf;
 
 	lst_begin = *lst;
+	buf = get_redir(str, lst_begin);
+	if (ft_strcmp("syntax error\n", buf) == 0)
+	{
+		printf("syntax error\n");
+		lst_begin->cmd = "NIL";
+		return ;
+	}
+	else
+		free(buf);
 	if (!str || !*str)
 		return ;
 	cmd_count = cmd_counter(str, &lst_begin->nb_p);

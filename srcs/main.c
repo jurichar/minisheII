@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/23 11:29:13 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/27 14:07:17 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 void	sig_handler(int sig)
 {
 	g_exit_code = 128 + sig;
+	if (sig == 3)
+		printf ("\b\b  ");
 	write(STDOUT_FILENO, "\n", 1);
 	if (isatty(0))
 	{
@@ -48,7 +50,7 @@ void	sig_handler(int sig)
 		// rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if( sig== 11)
+	if( sig == 11)
 	{
 		printf ("\b\bexit\n");
 		exit(g_exit_code);

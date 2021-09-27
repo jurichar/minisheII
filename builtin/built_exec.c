@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 03:35:14 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/24 14:45:50 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,10 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 	{
 		if ((*lst)->redir != NULL)
 		{
+			if ((*lst)->sep == '|')
+			{
+				pipor(*lst, *envlst);
+			}
 			ft_redir(*lst, *envlst);
 			exec_ve(*lst, envlst);
 			unlink(".lol");

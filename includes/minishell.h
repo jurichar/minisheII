@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/17 16:34:48 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/27 15:59:47 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # include <readline/history.h>
 # include <sys/types.h>
 # include <sys/wait.h>
+# include <unistd.h>
+# include <signal.h>
+# include <stdlib.h>
 # include <termios.h>
 # include <signal.h>
 # include <fcntl.h>

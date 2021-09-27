@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/23 11:29:13 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/27 16:00:07 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	sig_handler(int sig)
 	if (isatty(0))
 	{
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+        rl_replace_line("", 0);
 		rl_redisplay();
 	}
 	if (sig == 11)

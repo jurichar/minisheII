@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/27 16:00:07 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/28 11:00:46 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	sig_handler(int sig)
 	}
 	if (sig == 11)
 	{
-		printf("\b\bexit\n");
+		printf("\b\b exit\n");
 		exit(g_exit_code);
 	}
 }
@@ -58,20 +58,11 @@ void	sig_handler(int sig)
 char	*get_line( void )
 {
 	char	*line;
-	// char	*ret;
 
-	// while (1)
-	// {
-		// printf ("coucou");
-		line = readline("minishell-1.0$ ");
-		// ret = malloc(sizeof(char) * ft_strlen(line) + 1);
-		if (ft_strlen(line) > 0)
-			add_history(line);
-		// strcpy(ret, line);
-		// free(line);
-		// line = NULL;
-		return (line);
-	// }
+	line = readline("minishell-1.0$ ");
+	if (ft_strlen(line) > 0)
+		add_history(line);
+	return (line);
 }
 
 int	main(int ac, char **av, char **envp)

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/27 15:59:47 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/28 10:23:55 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,14 @@
 # include <stdio.h>
 # include "../libft/libft.h"
 # include <errno.h>
+# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <unistd.h>
+# include <stdlib.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <unistd.h>
-# include <signal.h>
 # include <stdlib.h>
 # include <termios.h>
 # include <signal.h>

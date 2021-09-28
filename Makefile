@@ -13,7 +13,7 @@ CFLAGS = -Wall -Wextra -Werror -g3 $(INCLUDES)
 
 DEBUG = -fsanitize=address -fno-omit-frame-pointer
 
-LDFLAGS = -L libft/ -lftexport
+LDFLAGS = libft/libft.a
 
 SRC = 	$(addprefix srcs/, $(shell ls srcs/ | egrep "[.]"c)) \
 		$(addprefix builtin/, $(shell ls builtin/ | egrep "[.]"c))
@@ -24,10 +24,9 @@ RM = rm -f
 
 all: $(NAME)
 
-$(NAME): lib $(OBJ)
+$(NAME): lib
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"
-	# @$(CC) $(CFLAGS) $(OBJ) $(LDFLAGS) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
-	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib -I ~/.brew/opt/readline/include
+	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib $(LDFLAGS) -I ~/.brew/opt/readline/include
 	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
 
@@ -39,7 +38,6 @@ lib:
 
 clean:
 	@printf $(RED)"[Minishell remove...]%-30s\r"
-	@$(RM) $(OBJ)
 	@printf $(RED)"[All .o files removed !!]%-30s\r"
 	@printf $(END)
 

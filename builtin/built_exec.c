@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 03:35:14 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/29 16:56:34 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,10 @@ void	fd_close(int fd[2])
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 {
 	int		fd[2];
-
 	fd[0] = dup(0);
 	fd[1] = dup(1);
 	if (!lst)
 		return ;
-	while (lst)
-	{
 		if ((*lst)->redir != NULL)
 		{
 			ft_redir(*lst, *envlst);
@@ -58,12 +55,8 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 			unlink(".lol");
 		}
 		else if ((*lst)->sep == '|')
-		{
 			pipor(*lst, *envlst);
-		}
 		else
 			exec_ve(*lst, envlst);
-		break ;
-	}
 	fd_close(fd);
 }

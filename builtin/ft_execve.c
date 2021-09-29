@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 03:34:23 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/29 17:16:22 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 	{
 		exec_ve_abs(lst);
 		exec_ve_rel(lst, *envlst);
-		perror("Exec failed");
+		printf("minishell: %s: command not found\n", lst->cmd);
 		exit(EXIT_FAILURE);
 	}
 	else

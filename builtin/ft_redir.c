@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/28 15:14:33 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/09/29 16:59:09 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,6 @@ void	ft_redir_in(t_cmd_lst *lst)
 
 void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	if (lst->sep == '|')
-	{
-		pipor(lst, envlst);
-	}
 	while (lst->redir->next)
 	{
 		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
@@ -79,5 +75,6 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 		ft_redir_out_double(lst);
 	else if (lst->redir->redir == 4)
 		ft_redir_in_double(lst);
-
+	if (lst->sep == '|')
+		pipor(lst, envlst);
 }

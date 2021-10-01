@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/28 10:23:55 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:58:27 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,8 +192,8 @@ char		*get_cmd(char *s);
 // ft_is
 int			is_space(char c);
 int			is_sep(char c);
-int			is_redir(char *s, int i);
-
+// int			is_redir(char *s, int i);
+int	is_redir(char *s, char c, int pos);
 // ft_lstnew_env
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 
@@ -239,7 +239,7 @@ char		*insert_char(char *start, char c, char *end);
 int			how_many_redir(char *s);
 int			which_redir(char *str);
 t_redir		*redir_dup(char *s);
-int			skip_redir(char *s);
+int	skip_redir(char *s, int i);
 char		*get_redir(char *s, t_cmd_lst *lst);
 
 // skip

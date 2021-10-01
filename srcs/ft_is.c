@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:08:34 by lebourre          #+#    #+#             */
-/*   Updated: 2021/06/29 19:39:06 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/01 15:58:10 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,24 @@ int	is_sep(char c)
 	return (0);
 }
 
-int	is_redir(char *s, int i)
+
+int	is_redir(char *s, char c, int pos)
 {
-	if ((i == 0 && (s[i] == '>' || s[i] == '<'))
-		|| (i > 0 && (s[i] == '>' || s[i] == '<')
-			&& (s[i - 1] != '\'' || s[i - 1] != '"')))
-		return (1);
+	int	i;
+	int	quote;
+
+	if (c != '>' && c != '<')
+		return (0);
+	i = -1;
+	quote = 0;
+	while (s[++i])
+	{
+		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
+			quote = get_to_next_quote(s, i);
+		if (quote == 1 && i == quote)
+			quote = 0;
+		if (i == pos && quote == 0)
+			return (1);
+	}
 	return (0);
 }

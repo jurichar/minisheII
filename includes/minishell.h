@@ -196,7 +196,7 @@ t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 void		ft_putchar(char c);
 void		print_hex(char c);
 void		ft_putstr_non_printable(char *str);
-char		*get_arg(char *s, t_env_lst *env, int slash);
+char		*get_arg(char *s, t_env_lst *env);
 char		*ft_strdup_space_sep(char *str, t_env_lst *env);
 int			args_counter(char *str);
 char		*get_cmd_name(char *s);

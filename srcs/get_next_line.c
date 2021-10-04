@@ -18,7 +18,8 @@ char	*ft_strndup(char *s, int n)
 	int		i;
 
 	i = 0;
-	if (!(new = malloc(sizeof(char) * n + 1)))
+	new = malloc(sizeof(char) * n + 1);
+	if (new == NULL)
 		return (NULL);
 	while (s[i] && i < n)
 	{
@@ -79,33 +80,45 @@ int	manage_return(char **file_content, char **line, int ret, char *buffer)
 	}
 }
 
+char	*cat_content(char *file_content, char *buff)
+{
+	char	*tmp;
+
+	tmp = ft_strjoin(file_content, buff);
+	if (tmp == NULL)
+	{
+		free(file_content);
+		return (NULL);
+	}
+	free(file_content);
+	file_content = tmp;
+	return (file_content);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*file_content;
 	char		*buff;
-	char		*tmp;
 	int			ret;
 
-	if (!(buff = malloc(sizeof(char) * (4096 + 1))) || fd < 0 || !line || 4096 <= 0)
-	{
-		free(buff);
+	buff = malloc(sizeof(char) * 4096 + 1);
+	if (buff == NULL || !line || fd < 0)
 		return (-1);
-	}
-	while ((ret = read(fd, buff, 4096)) > 0)
+	ret = read(fd, buff, 4096);
+	while (ret > 0)
 	{
 		buff[ret] = '\0';
 		if (file_content == NULL)
 			file_content = ft_strdup(buff);
 		else
 		{
-			tmp = ft_strjoin(file_content, buff);
-			if (tmp == NULL)
+			file_content = cat_content(file_content, buff);
+			if (file_content == NULL)
 				return (-1);
-			free(file_content);
-			file_content = tmp;
 		}
 		if (ft_strchr(file_content, '\n'))
 			break ;
+		ret = read(fd, buff, 4096);
 	}
 	return (manage_return(&file_content, line, ret, buff));
 }

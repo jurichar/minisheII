@@ -193,13 +193,8 @@ int			is_redir(char *s, char c, int pos);
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 
 // ft_split_arg
-void		ft_putchar(char c);
-void		print_hex(char c);
-void		ft_putstr_non_printable(char *str);
-char		*get_arg(char *s, t_env_lst *env);
-char		*ft_strdup_space_sep(char *str, t_env_lst *env);
 int			args_counter(char *str);
-char		*get_cmd_name(char *s);
+char		*get_cmd_name(char *s, int i, int j, int quote);
 void		ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
 
 // ft_split_cmd
@@ -240,11 +235,17 @@ char		*get_redir(char *s, t_cmd_lst *lst);
 // skip
 int			skip_space(char *s);
 
-// env_var_tools
+// env_var_manager
 char    *insert_env_var(char *str, int i, int quote, t_env_lst *env);
 char    *find_env_var(char *str, t_env_lst *env);
 
+// env_var_tools
+char    *set_start(char *s, int *quote);
+char    *get_ret_value(char *ret, char *s, int quote, int len);
+
 // dup_tools
+void	get_line_without_quote(char	*str, char *copy, int len, int quote);
+char	*malloc_cmdname(char *s, int *ptr_len);
 char	*ft_strdup_space_sep(char *s, t_env_lst *env);
 
 // utils

@@ -12,6 +12,34 @@
 
 #include "../includes/minishell.h"
 
+char	*malloc_cmdname(char *s, int *ptr_len)
+{
+	int		quote;
+	char	*cmd;
+	int		len;
+
+	len = -1;
+	quote = 0;
+	while (s[++len])
+	{
+		if (quote == 0 && (s[len] == '\'' || s[len] == '"'))
+			quote = get_to_next_quote(s, len);
+		if (!s[quote])
+			quote = 0;
+		if (quote == 0 && (is_space(s[len]) || is_sep(s[len])))
+			break ;
+		else if (quote && len == quote && s[len + 1] == ' ')
+			break ;
+		else if (quote && len == quote)
+			quote = 0;
+	}
+	cmd = malloc(sizeof(char) * (len + 1));
+	if (!cmd)
+		return (NULL);
+	*ptr_len = len;
+	return (cmd);
+}
+
 char	*malloc_line(char *str, int *ptr_len)
 {
 	int		quote;
@@ -33,22 +61,21 @@ char	*malloc_line(char *str, int *ptr_len)
 		else if (quote && len == quote)
 			quote = 0;
 	}
-	if (!(line = malloc(sizeof(char) * len + 1)))
+	line = malloc(sizeof(char) * len + 1);
+	if (!line)
 		return (NULL);
 	*ptr_len = len;
 	return (line);
 }
 
-void	get_line_without_quote(char	*str, char *copy, int len)
+void	get_line_without_quote(char	*str, char *copy, int len, int quote)
 {
 	int		i;
 	int		j;
 	int		begin_quote;
-	int		quote;
 
 	i = -1;
 	j = 0;
-	quote = 0;
 	while (++i < len)
 	{
 		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
@@ -79,6 +106,6 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	str = ft_strdup(s);
 	str = find_env_var(str, env);
 	copy = malloc_line(str, &len);
-	get_line_without_quote(str, copy, len);
+	get_line_without_quote(str, copy, len, 0);
 	return (copy);
 }

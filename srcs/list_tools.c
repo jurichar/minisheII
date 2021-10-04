@@ -48,7 +48,6 @@ void	ft_env_remove_if(t_env_lst **begin_list, void *data_ref, int (*cmp)())
 			free(tmp->name);
 			free(tmp->content);
 			free(tmp);
-			tmp = NULL;
 		}
 		list = list->next;
 	}

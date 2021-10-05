@@ -44,19 +44,20 @@ void	fd_close(int fd[2])
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 {
 	int		fd[2];
+
 	fd[0] = dup(0);
 	fd[1] = dup(1);
 	if (!lst)
 		return ;
-		if ((*lst)->redir != NULL)
-		{
-			ft_redir(*lst, *envlst);
-			exec_ve(*lst, envlst);
-			unlink(".lol");
-		}
-		else if ((*lst)->sep == '|')
-			pipor(*lst, *envlst);
-		else
-			exec_ve(*lst, envlst);
+	if ((*lst)->redir != NULL)
+	{
+		ft_redir(*lst, *envlst);
+		exec_ve(*lst, envlst);
+		unlink(".lol");
+	}
+	else if ((*lst)->sep == '|')
+		pipor(*lst, *envlst);
+	else
+		exec_ve(*lst, envlst);
 	fd_close(fd);
 }

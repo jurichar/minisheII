@@ -12,30 +12,13 @@
 
 #include "../includes/minishell.h"
 
-/*
-**REDIR_DUP
-**
-**Allocate a new redirection list element. Also store the redirection type in
-**new->redir and the file name in new->arg
-*/
-t_redir	*redir_dup(char *s)
+void	set_redir(char *s, int pos, t_redir **new)
 {
-	int			i;
-	int			start;
-	int			pos;
-	t_redir		*new;
-	int			quote;
+	int	quote;
+	int	i;
 
-	start = 0;
-	new = malloc(sizeof(t_redir));
-	new->redir = which_redir(s);
-	while (s[start] && (s[start] == '>' || s[start] == '<'))
-		start++;
-	start += skip_space(&s[start]);
-	pos = start;
-	quote = 0;
 	i = 0;
-	new->arg = ft_realloc(NULL, 0);
+	quote = 0;
 	while (s[pos])
 	{
 		if (quote == 0 && (s[pos] == '\'' || s[pos] == '"'))
@@ -52,10 +35,33 @@ t_redir	*redir_dup(char *s)
 		}	
 		if (quote == 0 && is_space(s[pos]))
 			break ;
-		new->arg = ft_realloc(new->arg, ft_strlen(new->arg));
-		new->arg[i++] = s[pos++];
+		(*new)->arg = ft_realloc((*new)->arg, ft_strlen((*new)->arg));
+		(*new)->arg[i++] = s[pos++];
 	}
-	new->next = NULL;
+	(*new)->next = NULL;
+}
+
+/*
+**REDIR_DUP
+**
+**Allocate a new redirection list element. Also store the redirection type in
+**new->redir and the file name in new->arg
+*/
+t_redir	*redir_dup(char *s)
+{
+	int			start;
+	int			pos;
+	t_redir		*new;
+
+	start = 0;
+	new = malloc(sizeof(t_redir));
+	new->redir = which_redir(s);
+	while (s[start] && (s[start] == '>' || s[start] == '<'))
+		start++;
+	start += skip_space(&s[start]);
+	pos = start;
+	new->arg = ft_realloc(NULL, 0);
+	set_redir(s, pos, &new);
 	return (new);
 }
 
@@ -92,6 +98,11 @@ int	skip_redir(char *s, int i)
 	return (i);
 }
 
+char	*get_line_without_redir(char *s, t_cmd_lst *lst)
+{
+	
+}
+
 /*
 **GET_REDIR
 **
@@ -102,7 +113,7 @@ int	skip_redir(char *s, int i)
 char	*get_redir(char *s, t_cmd_lst *lst)
 {
 	char	*new;
-	t_redir *begin;
+	t_redir	*begin;
 	int		len;
 	int		i;
 

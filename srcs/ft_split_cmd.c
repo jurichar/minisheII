@@ -12,55 +12,13 @@
 
 #include "../includes/minishell.h"
 
-int	is_separator(char *s, char c, int pos)
-{
-	int	i;
-	int	quote;
-
-	if (c != '|')
-		return (0);
-	i = -1;
-	quote = 0;
-	while (s[++i])
-	{
-		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
-			quote = get_to_next_quote(s, i);
-		if (quote == 1 && i == quote)
-			quote = 0;
-		if (i == pos && quote == 0)
-			return (1);
-	}
-	return (0);
-}
-
-char	*ft_strdup_sep(char *str)
-{
-	int		i;
-	int		lenght;
-	char	*copy;
-
-	lenght = 0;
-	while (str[lenght] && !is_separator(str, str[lenght], lenght))
-		lenght++;
-	copy = malloc(sizeof(char) * lenght + 1);
-	if (!copy)
-		return (NULL);
-	i = -1;
-	while (++i < lenght)
-		copy[i] = str[i];
-	copy[i] = '\0';
-	return (copy);
-}
-
-int	cmd_counter(char *str, int *pipe)
+int	cmd_counter(char *str, int *pipe, int quote)
 {
 	int	i;
 	int	count;
-	int	quote;
 
 	i = -1;
 	count = 0;
-	quote = 0;
 	while (str[++i])
 	{
 		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
@@ -82,13 +40,39 @@ int	cmd_counter(char *str, int *pipe)
 	return (count);
 }
 
+void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
+{
+	t_set_line	inc;
+	t_cmd_lst	*lst_begin;
+	char		*buf;
+
+	inc.j = -1;
+	inc.i = 0;
+	lst_begin = *lst;
+	inc.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
+	while (++inc.j < inc.cmd_count)
+	{
+		if (is_separator(str, str[inc.i], inc.i))
+			inc.i++;
+		buf = get_cmd(&str[inc.i]);
+		if (str[inc.i])
+			ft_split_args(buf, lst, env);
+		while (str[inc.i] && !is_separator(str, str[inc.i], inc.i))
+			inc.i++;
+		(*lst)->sep = str[inc.i];
+		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)
+			lst_begin = *lst;
+		if (inc.j + 1 < inc.cmd_count)
+			(*lst)->next = ft_new_cmd_list(envp);
+		*lst = (*lst)->next;
+	}
+	*lst = lst_begin;
+}
+
 void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 {
 	t_cmd_lst	*lst_begin;
-	int			cmd_count;
 	int			i;
-	int			j;
-	char		*buf;
 
 	lst_begin = *lst;
 	i = check_redir(str);
@@ -100,24 +84,5 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	}
 	if (!str || !*str)
 		return ;
-	cmd_count = cmd_counter(str, &lst_begin->nb_p);
-	j = -1;
-	i = 0;
-	while (++j < cmd_count)
-	{
-		if (is_separator(str, str[i], i))
-			i++;
-		buf = get_cmd(&str[i]);
-		if (str[i])
-			ft_split_args(buf, lst, env);
-		while (str[i] && !is_separator(str, str[i], i))
-			i++;
-		(*lst)->sep = str[i];
-		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)
-			lst_begin = *lst;
-		if (j + 1 < cmd_count)
-			(*lst)->next = ft_new_cmd_list(envp);
-		*lst = (*lst)->next;
-	}
-	*lst = lst_begin;
+	set_line(str, lst, env, envp);
 }

@@ -114,6 +114,13 @@ typedef struct s_pipor
 	int	*pipes;
 }		t_pipor;
 
+typedef struct s_set_line
+{
+	int	i;
+	int	j;
+	int	cmd_count;
+}				t_set_line;
+
 /*
 BUILT IN 
 */
@@ -141,15 +148,20 @@ void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst);
 // built_exit
 int			builtin_exit( void );
 
+//built_export_tools
+void		find_var(t_env_lst **ptr, char *name);
+int			valid_identifier(char c, int pos);
+int			check_name(char *s);
+
+
 // built_export_sort
 int			env_swap(t_env_lst **c, t_env_lst **p, t_env_lst **b, int i);
 t_env_lst	*env_sort(t_env_lst *list, int i);
 int			builtin_export_sort(t_env_lst *envlst);
 
 // built_export
-int			valid_identifier(char c, int pos);
-int			check_name(char *s);
 int			export_var(char **var, t_env_lst **envlst);
+int			export_cat(t_env_lst **list, char *str, char *tmp, char *content);
 int			builtin_export(t_cmd_lst *lst, t_env_lst **envlst);
 
 // built_pwd
@@ -194,6 +206,7 @@ MAIN
 char		*get_cmd(char *s);
 
 // ft_is
+int			is_separator(char *s, char c, int pos);
 int			is_space(char c);
 int			is_sep(char c);
 int			is_redir(char *s, char c, int pos);
@@ -207,9 +220,7 @@ char		*get_cmd_name(char *s, int i, int j, int quote);
 void		ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
 
 // ft_split_cmd
-int			is_separator(char *s, char c, int pos);
-char		*ft_strdup_sep(char *str);
-int			cmd_counter(char *str, int *pipe);
+int			cmd_counter(char *str, int *pipe, int quote);
 void		ft_split_cmd(t_cmd_lst **l, char *s, t_env_lst *env, char **e);
 
 // get_next_line
@@ -256,6 +267,7 @@ char    *set_start(char *s, int *quote);
 char    *get_ret_value(char *ret, char *s, int quote, int len);
 
 // dup_tools
+char		*ft_strdup_sep(char *str);
 void	get_line_without_quote(char	*str, char *copy, int len, int quote);
 char	*malloc_cmdname(char *s, int *ptr_len);
 char	*ft_strdup_space_sep(char *s, t_env_lst *env);

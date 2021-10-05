@@ -235,11 +235,11 @@ void		clear_and_print(int len, char *s, int pos);
 char		*insert_char(char *start, char c, char *end);
 
 // redir_tools
-int     check_redir(char *s);
+int     	check_redir(char *s);
+int			which_redir(char *str);
+int			how_many_redir(char *s);
 
 // parse_redir
-int			how_many_redir(char *s);
-int			which_redir(char *str);
 t_redir		*redir_dup(char *s);
 int			skip_redir(char *s, int i);
 char		*get_redir(char *s, t_cmd_lst *lst);

@@ -12,57 +12,6 @@
 
 #include "../includes/minishell.h"
 
-
-int	how_many_redir(char *s)
-{
-	int		i;
-	int		count;
-	int		quote;
-
-	i = -1;
-	count = 0;
-	quote = 0;
-	while (s[++i])
-	{
-		if (quote == 0 && is_sep(s[i]))
-			break ;
-		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
-			quote = get_to_next_quote(s, i);
-		if (quote && quote == i)
-			quote = 0;
-		if (quote == 0 && (s[i] == '>' || s[i] == '<'))
-		{
-			if ((s[i] == '>' && s[i + 1] == '>')
-				|| (s[i] == '<' && s[i + 1] == '<'))
-				i++;
-			count++;
-		}
-	}
-	printf("count == %d\n", count);
-	return (count);
-}
-
-int	which_redir(char *str)
-{
-	if (str[0] == '<')
-	{
-		if (str[1] == '<')
-			return (IN_DOUBLE);
-		else
-			return (IN);
-	}
-	else if (str[0] == '>')
-	{
-		if (str[1] ==  '>')
-			return (OUT_DOUBLE);
-		else
-			return (OUT);
-	}
-	else
-		return (0);
-}
-
-
 /*
 **REDIR_DUP
 **
@@ -106,8 +55,6 @@ t_redir	*redir_dup(char *s)
 		new->arg = ft_realloc(new->arg, ft_strlen(new->arg));
 		new->arg[i++] = s[pos++];
 	}
-	//new->arg = ft_substr(s, start, pos - 1);
-	// printf("redir = %s.\n", new->arg);
 	new->next = NULL;
 	return (new);
 }
@@ -152,7 +99,6 @@ int	skip_redir(char *s, int i)
 **while allocating n list->redir with redir_dup and storing inside the structure
 **all the redirection information
 */
-
 char	*get_redir(char *s, t_cmd_lst *lst)
 {
 	char	*new;
@@ -161,8 +107,6 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 	int		i;
 
 	len = check_redir(s);
-	if (len == -1)
-			return ("syntax error\n");
 	new = malloc(sizeof(char) * (len + 1));
 	begin = NULL;
 	i = -1;

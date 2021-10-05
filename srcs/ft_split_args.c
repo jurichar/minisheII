@@ -112,7 +112,6 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);
 	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));
-	i = 0;
 	j = 0;
 	while (is_space(str[j]) && str[j])
 		j++;

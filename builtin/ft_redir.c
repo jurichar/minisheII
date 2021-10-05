@@ -71,13 +71,13 @@ void    ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
                 open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
                 lst->redir = lst->redir->next;
         }
-        if (lst->redir->redir == 1)
-                ft_redir_in(lst);
-        else if (lst->redir->redir == 2)
+        if (lst->redir->redir == OUT)
                 ft_redir_out(lst);
-        else if (lst->redir->redir == 3)
+        else if (lst->redir->redir == OUT_DOUBLE)
                 ft_redir_out_double(lst);
-        else if (lst->redir->redir == 4)
+        else if (lst->redir->redir == IN)
+                ft_redir_in(lst);
+        else if (lst->redir->redir == IN_DOUBLE)
                 ft_redir_in_double(lst);
         if (lst->sep == '|')
                 pipor(lst, envlst);

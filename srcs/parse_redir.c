@@ -47,16 +47,16 @@ int	which_redir(char *str)
 	if (str[0] == '<')
 	{
 		if (str[1] == '<')
-			return (4);
+			return (IN_DOUBLE);
 		else
-			return (1);
+			return (IN);
 	}
 	else if (str[0] == '>')
 	{
 		if (str[1] ==  '>')
-			return (3);
+			return (OUT_DOUBLE);
 		else
-			return (2);
+			return (OUT);
 	}
 	else
 		return (0);
@@ -160,16 +160,9 @@ char	*get_redir(char *s, t_cmd_lst *lst)
 	int		len;
 	int		i;
 
-	len = 0;
-	i = -1;
-	while (s[++i])
-	{
-		if (is_redir(s, s[i], i))
-			i = skip_redir(s, i);
-		if (i == -1)
+	len = check_redir(s);
+	if (len == -1)
 			return ("syntax error\n");
-		len++;
-	}
 	new = malloc(sizeof(char) * (len + 1));
 	begin = NULL;
 	i = -1;

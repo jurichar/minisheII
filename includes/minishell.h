@@ -44,6 +44,10 @@
 # define TRUE 1
 # define FALSE 0
 # define SEP ";|"
+# define OUT 1
+# define OUT_DOUBLE 2
+# define IN 3
+# define IN_DOUBLE 4
 
 // colors : +10 for background color
 
@@ -229,6 +233,9 @@ void		get_to_cur_pos(int from, int to);
 char		*del_char(char *src, int pos);
 void		clear_and_print(int len, char *s, int pos);
 char		*insert_char(char *start, char c, char *end);
+
+// redir_tools
+int     check_redir(char *s);
 
 // parse_redir
 int			how_many_redir(char *s);

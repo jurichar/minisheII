@@ -105,7 +105,6 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 {
 	char	*str;
 	int		args_count;
-	int		i;
 	int		j;
 
 	str = find_wildcard(s, NULL, NULL, 0);

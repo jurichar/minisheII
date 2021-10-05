@@ -79,6 +79,7 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	if (i == -1)
 	{
 		printf("syntax error\n");
+		g_exit_code = 1;
 		lst_begin->cmd = "NIL";
 		return ;
 	}

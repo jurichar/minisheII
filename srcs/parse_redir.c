@@ -98,9 +98,32 @@ int	skip_redir(char *s, int i)
 	return (i);
 }
 
-char	*get_line_without_redir(char *s, t_cmd_lst *lst)
+char	*get_line_without_redir(char *s, char *new, t_cmd_lst **lst, int i)
 {
-	
+	t_redir	*begin;
+	int		len;
+
+	len = 0;
+	begin = NULL;
+	while (s[++i])
+	{
+		if (is_redir(s, s[i], i))
+		{
+			if (begin == NULL)
+			{
+				(*lst)->redir = redir_dup(&s[i]);
+				begin = (*lst)->redir;
+			}
+			else
+				add_redir(lst, s, i);
+			i = skip_redir(s, i);
+		}
+		new[len] = s[i];
+		len++;
+	}
+	(*lst)->redir = begin;
+	new[len] = '\0';
+	return (new);
 }
 
 /*
@@ -113,35 +136,10 @@ char	*get_line_without_redir(char *s, t_cmd_lst *lst)
 char	*get_redir(char *s, t_cmd_lst *lst)
 {
 	char	*new;
-	t_redir	*begin;
 	int		len;
-	int		i;
 
 	len = check_redir(s);
 	new = malloc(sizeof(char) * (len + 1));
-	begin = NULL;
-	i = -1;
-	len = 0;
-	while (s[++i])
-	{
-		if (is_redir(s, s[i], i))
-		{
-			if (begin == NULL)
-			{
-				lst->redir = redir_dup(&s[i]);
-				begin = lst->redir;
-			}
-			else
-			{
-				lst->redir->next = redir_dup(&s[i]);
-				lst->redir = lst->redir->next;
-			}
-			i = skip_redir(s, i);
-		}
-		new[len] = s[i];
-		len++;
-	}
-	lst->redir = begin;
-	new[len] = '\0';
+	new = get_line_without_redir(s, new, &lst, -1);
 	return (new);
 }

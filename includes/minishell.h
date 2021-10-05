@@ -58,7 +58,7 @@
 # define BLU "\033[1;34m"
 # define MAG "\033[1;35m"
 # define CYAN "\033[1;36m"
-# define ARROW ">"//"\u1405"
+# define ARROW ">"
 # define WILDC 1
 
 int	g_exit_code;
@@ -153,7 +153,6 @@ void		find_var(t_env_lst **ptr, char *name);
 int			valid_identifier(char c, int pos);
 int			check_name(char *s);
 
-
 // built_export_sort
 int			env_swap(t_env_lst **c, t_env_lst **p, t_env_lst **b, int i);
 t_env_lst	*env_sort(t_env_lst *list, int i);
@@ -246,7 +245,8 @@ void		clear_and_print(int len, char *s, int pos);
 char		*insert_char(char *start, char c, char *end);
 
 // redir_tools
-int     	check_redir(char *s);
+void		add_redir(t_cmd_lst **lst, char *s, int i);
+int			check_redir(char *s);
 int			which_redir(char *str);
 int			how_many_redir(char *s);
 
@@ -259,18 +259,18 @@ char		*get_redir(char *s, t_cmd_lst *lst);
 int			skip_space(char *s);
 
 // env_var_manager
-char    *insert_env_var(char *str, int i, int quote, t_env_lst *env);
-char    *find_env_var(char *str, t_env_lst *env);
+char		*insert_env_var(char *str, int i, int quote, t_env_lst *env);
+char		*find_env_var(char *str, t_env_lst *env);
 
 // env_var_tools
-char    *set_start(char *s, int *quote);
-char    *get_ret_value(char *ret, char *s, int quote, int len);
+char		*set_start(char *s, int *quote);
+char		*get_ret_value(char *ret, char *s, int quote, int len);
 
 // dup_tools
 char		*ft_strdup_sep(char *str);
-void	get_line_without_quote(char	*str, char *copy, int len, int quote);
-char	*malloc_cmdname(char *s, int *ptr_len);
-char	*ft_strdup_space_sep(char *s, t_env_lst *env);
+void		get_line_without_quote(char	*str, char *copy, int len, int quote);
+char		*malloc_cmdname(char *s, int *ptr_len);
+char		*ft_strdup_space_sep(char *s, t_env_lst *env);
 
 // utils
 int			ft_whereis_char(char *s, int c);
@@ -279,6 +279,7 @@ int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
 t_env_lst	*get_env(t_env_lst *list, char **envp);
 // wildcard
-char    	*find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i);
+char		*find_wildcard(char *s, char *ptr_begin_wd,
+				char *ptr_post_wd, int i);
 
 #endif

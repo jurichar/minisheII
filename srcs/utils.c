@@ -12,9 +12,9 @@
 
 #include "../includes/minishell.h"
 
-int		ft_whereis_char(char *s, int c)
+int	ft_whereis_char(char *s, int c)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && s[i] != c)
@@ -32,7 +32,8 @@ char	*ft_strjoin_till_space(char const *s1, char const *s2)
 	if (!s1 || !s2)
 		return (NULL);
 	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!(new = malloc(sizeof(char) * (len + 1))))
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
 		return (NULL);
 	i = -1;
 	while (s1[++i])
@@ -46,9 +47,9 @@ char	*ft_strjoin_till_space(char const *s1, char const *s2)
 	return (new);
 }
 
-int		get_to_next_quote(char *s, int i)
+int	get_to_next_quote(char *s, int i)
 {
-	int end_quote;
+	int	end_quote;
 
 	end_quote = 0;
 	if (s[i] == '\'')
@@ -66,7 +67,7 @@ int		get_to_next_quote(char *s, int i)
 	return (i);
 }
 
-int		pass_cmd_name(char *s, int i)
+int	pass_cmd_name(char *s, int i)
 {
 	while ((s[i] >= 9 && s[i] <= 13) || s[i] == ' ')
 		i++;
@@ -77,11 +78,11 @@ int		pass_cmd_name(char *s, int i)
 
 t_env_lst	*get_env(t_env_lst *list, char **envp)
 {
-	int		i;
-	int		j;
-	char	*name;
-	char	*content;
-	t_env_lst *begin;
+	int			i;
+	int			j;
+	char		*name;
+	char		*content;
+	t_env_lst	*begin;
 
 	j = 0;
 	while (envp[0][j] != '=')

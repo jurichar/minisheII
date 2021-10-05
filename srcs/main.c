@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/28 14:00:00 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/05 20:09:45 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,10 @@ void	sig_handler(int sig)
 {
 	g_exit_code = 128 + sig;
 	if (sig == 3)
-		printf ("\b\b  ");
+	{
+		write(1, "\b\b  \b\b", 6);
+		return;
+	}
 	write(STDOUT_FILENO, "\n", 1);
 	if (isatty(0))
 	{
@@ -52,7 +55,7 @@ void	sig_handler(int sig)
 	}
 	if( sig == 11)
 	{
-		printf("\b\b exit\n");
+		printf("\b exit\n");
 		exit(g_exit_code);
 	}
 }

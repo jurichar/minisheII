@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:10:52 by lebourre          #+#    #+#             */
-/*   Updated: 2021/07/12 11:28:16 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/05 19:42:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,6 @@ char	*ft_strjoin_till_space(char const *s1, char const *s2)
 
 int		get_to_next_quote(char *s, int i)
 {
-	int end_quote;
-
-	end_quote = 0;
 	if (s[i] == '\'')
 	{
 		i++;

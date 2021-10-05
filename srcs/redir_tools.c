@@ -6,11 +6,17 @@
 /*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 16:44:08 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/05 16:44:09 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/05 20:06:33 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	add_redir(t_cmd_lst **lst, char *s, int i)
+{
+	(*lst)->redir->next = redir_dup(&s[i]);
+	(*lst)->redir = (*lst)->redir->next;
+}
 
 int	how_many_redir(char *s)
 {
@@ -51,7 +57,7 @@ int	which_redir(char *str)
 	}
 	else if (str[0] == '>')
 	{
-		if (str[1] ==  '>')
+		if (str[1] == '>')
 			return (OUT_DOUBLE);
 		else
 			return (OUT);
@@ -60,14 +66,14 @@ int	which_redir(char *str)
 		return (0);
 }
 
-int     check_redir(char *s)
+int	check_redir(char *s)
 {
-    int i;
-    int len;
+	int	i;
+	int	len;
 
-    len = 0;
-    i = -1;
-    while (s[++i])
+	len = 0;
+	i = -1;
+	while (s[++i])
 	{
 		if (is_redir(s, s[i], i))
 			i = skip_redir(s, i);
@@ -75,5 +81,5 @@ int     check_redir(char *s)
 			return (i);
 		len++;
 	}
-    return (len);
+	return (len);
 }

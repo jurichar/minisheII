@@ -65,30 +65,26 @@ char	*get_cmd_name(char *s, int i, int j, int quote)
 	return (cmd);
 }
 
-void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
+char	*manage_redir(char *str, t_cmd_lst **lst)
 {
 	char	*tmp;
-	char	*str;
-	int		args_count;
-	int		i;
-	int		j;
 
-	str = find_wildcard(s, NULL, NULL, 0);
 	if (how_many_redir(str) > 0)
 	{
 		tmp = get_redir(str, *lst);
 		free(str);
 		str = tmp;
 	}
+	return (str);
+}
+
+void	set_words(char *str, t_cmd_lst **lst, t_env_lst *env, int j)
+{
+	int	i;
+	int	args_count;
+
 	args_count = args_counter(str);
-	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));
 	i = 0;
-	j = 0;
-	while (is_space(str[j]) && str[j])
-		j++;
-	(*lst)->cmd = get_cmd_name(&str[j], -1, 0, 0);
-	while (!is_space(str[j]) && str[j])
-		j++;
 	while (++i < args_count && str[j])
 	{
 		while (str[j] && is_space(str[j]))
@@ -103,4 +99,23 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	}
 	(*lst)->args[i - 1] = NULL;
 	free(str);
+}
+
+void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
+{
+	char	*str;
+	int		args_count;
+	int		j;
+
+	str = find_wildcard(s, NULL, NULL, 0);
+	str = manage_redir(str, lst);
+	args_count = args_counter(str);
+	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));
+	j = 0;
+	while (is_space(str[j]) && str[j])
+		j++;
+	(*lst)->cmd = get_cmd_name(&str[j], -1, 0, 0);
+	while (!is_space(str[j]) && str[j])
+		j++;
+	set_words(str, lst, env, j);
 }

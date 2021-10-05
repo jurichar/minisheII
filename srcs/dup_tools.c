@@ -12,6 +12,25 @@
 
 #include "../includes/minishell.h"
 
+char	*ft_strdup_sep(char *str)
+{
+	int		i;
+	int		lenght;
+	char	*copy;
+
+	lenght = 0;
+	while (str[lenght] && !is_separator(str, str[lenght], lenght))
+		lenght++;
+	copy = malloc(sizeof(char) * lenght + 1);
+	if (!copy)
+		return (NULL);
+	i = -1;
+	while (++i < lenght)
+		copy[i] = str[i];
+	copy[i] = '\0';
+	return (copy);
+}
+
 char	*malloc_cmdname(char *s, int *ptr_len)
 {
 	int		quote;

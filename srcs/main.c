@@ -31,10 +31,7 @@ void	free_cmds(t_cmd_lst *lst)
 void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
 {
 	if (line)
-	{
-	//	check_line(line);
 		ft_split_cmd(lst, line, env, envp);
-	}
 	return ;
 }
 
@@ -50,10 +47,10 @@ void	sig_handler(int sig)
 	if (isatty(0))
 	{
 		rl_on_new_line();
-        rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
-	if( sig == 11)
+	if (sig == 11)
 	{
 		printf("\b exit\n");
 		exit(g_exit_code);
@@ -77,7 +74,6 @@ int	main(int ac, char **av, char **envp)
 
 	(void) ac;
 	(void) av;
-
 	signal(SIGINT, sig_handler);
 	signal(SIGSEGV, sig_handler);
 	signal(SIGQUIT, sig_handler);

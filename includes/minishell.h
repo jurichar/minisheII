@@ -210,7 +210,8 @@ int			is_space(char c);
 int			is_sep(char c);
 int			is_redir(char *s, char c, int pos);
 
-// ft_lstnew_env
+// env_tools
+t_env_lst	*get_env(t_env_lst *list, char **envp);
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 
 // ft_split_arg
@@ -277,7 +278,6 @@ int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);
 int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
-t_env_lst	*get_env(t_env_lst *list, char **envp);
 // wildcard
 char		*find_wildcard(char *s, char *ptr_begin_wd,
 				char *ptr_post_wd, int i);

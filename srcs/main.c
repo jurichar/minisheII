@@ -41,7 +41,7 @@ void	sig_handler(int sig)
 	if (sig == 3)
 	{
 		write(1, "\b\b  \b\b", 6);
-		return;
+		return ;
 	}
 	write(STDOUT_FILENO, "\n", 1);
 	if (isatty(0))

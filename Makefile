@@ -16,7 +16,8 @@ DEBUG = -fsanitize=address -fno-omit-frame-pointer
 LDFLAGS = libft/libft.a
 
 SRC = 	$(addprefix srcs/, $(shell ls srcs/ | egrep "[.]"c)) \
-		$(addprefix builtin/, $(shell ls builtin/ | egrep "[.]"c))
+		$(addprefix builtin/, $(shell ls builtin/ | egrep "[.]"c)) \
+		$(addprefix exec/, $(shell ls exec/ | egrep "[.]"c))
 
 OBJ = $(SRC:.c=.o)
 
@@ -38,6 +39,7 @@ lib:
 
 clean:
 	@printf $(RED)"[Minishell remove...]%-30s\r"
+	@$(RM) $(OBJ)
 	@printf $(RED)"[All .o files removed !!]%-30s\r"
 	@printf $(END)
 

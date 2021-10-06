@@ -28,3 +28,49 @@ t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content)
 	new->next = NULL;
 	return (new);
 }
+
+t_env_lst	*set_first_elem(t_env_lst **list, char **envp)
+{
+	int			j;
+	char		*name;
+	char		*content;
+
+	j = 0;
+	while (envp[0][j] != '=')
+		j++;
+	name = ft_substr(envp[0], 0, j);
+	while (envp[0][++j])
+		;
+	content = ft_substr(ft_strchr(envp[0], '=') + 1, 0, j);
+	*list = ft_lstnew_env(name, 1, content);
+	free(name);
+	free(content);
+	return (*list);
+}
+
+t_env_lst	*get_env(t_env_lst *list, char **envp)
+{
+	int			i;
+	int			j;
+	char		*name;
+	char		*content;
+	t_env_lst	*begin;
+
+	begin = set_first_elem(&list, envp);
+	i = 0;
+	while (envp[++i])
+	{
+		j = -1;
+		while (envp[i][++j] != '=')
+			;
+		name = ft_substr(envp[i], 0, j);
+		while (envp[i][++j])
+			;
+		content = ft_substr(ft_strchr(envp[i], '=') + 1, 0, j);
+		list->next = ft_lstnew_env(name, 1, content);
+		free(name);
+		free(content);
+		list = list->next;
+	}
+	return (begin);
+}

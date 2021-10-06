@@ -278,7 +278,17 @@ int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);
 int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
+
+// wildcard_tools
+char		*ft_strstr(char *str, char *to_find);
+int			check_match(char *file, char *wd);
+char		*join_words(char **tab, char *res);
+char		*insert_match(char *new, char *ptr_begin_wd,
+				char *ptr_post_wd, char *wd);
+char		*wildcard_found(char *new, char *ptr_begin_wd, int i);
+
 // wildcard
+char		*wildcard(char *to_find);
 char		*find_wildcard(char *s, char *ptr_begin_wd,
 				char *ptr_post_wd, int i);
 

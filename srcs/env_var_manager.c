@@ -78,6 +78,12 @@ char	*insert_env_var(char *str, int i, int quote, t_env_lst *env)
 		free(copy);
 		free(var);
 	}
+	else
+	{
+		copy = str;
+		str = ft_substr(str, 0, i);
+		free(copy);
+	}
 	return (str);
 }
 

@@ -72,18 +72,18 @@ void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
 void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 {
 	t_cmd_lst	*lst_begin;
-	int			i;
+	char		*s;
 
+	s = ft_strdup(str);
 	lst_begin = *lst;
-	i = check_redir(str);
-	if (i == -1)
+	if (check_redir(str) == -1)
 	{
 		printf("syntax error\n");
 		g_exit_code = 1;
 		lst_begin->cmd = "NIL";
 		return ;
 	}
-	if (!str || !*str)
+	if (!s || !*s)
 		return ;
-	set_line(str, lst, env, envp);
+	set_line(s, lst, env, envp);
 }

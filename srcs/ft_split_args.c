@@ -107,6 +107,7 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		args_count;
 	int		j;
 
+	str = find_env_var(s, env);
 	str = find_wildcard(s, NULL, 0);
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);

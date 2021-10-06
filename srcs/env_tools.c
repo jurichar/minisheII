@@ -48,6 +48,16 @@ t_env_lst	*set_first_elem(t_env_lst **list, char **envp)
 	return (*list);
 }
 
+char	*inc_shlvl(char *shlvl)
+{
+	int	nb;
+
+	nb = ft_atoi(shlvl);
+	nb++;
+	free(shlvl);
+	return (ft_itoa(nb));
+}
+
 t_env_lst	*get_env(t_env_lst *list, char **envp)
 {
 	int			i;
@@ -67,6 +77,8 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		while (envp[i][++j])
 			;
 		content = ft_substr(ft_strchr(envp[i], '=') + 1, 0, j);
+		if (ft_strcmp(name, "SHLVL") == 0)
+			content = inc_shlvl(content);
 		list->next = ft_lstnew_env(name, 1, content);
 		free(name);
 		free(content);

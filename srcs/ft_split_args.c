@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/15 15:13:17 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:39:02 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		args_count;
 	int		j;
 
-	str = find_wildcard(s, NULL, NULL, 0);
+	str = find_wildcard(s, NULL, 0);
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);
 	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));

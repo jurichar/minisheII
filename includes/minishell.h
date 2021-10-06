@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/28 10:23:55 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:38:37 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,6 @@ char		*wildcard_found(char *new, char *ptr_begin_wd, int i);
 
 // wildcard
 char		*wildcard(char *to_find);
-char		*find_wildcard(char *s, char *ptr_begin_wd,
-				char *ptr_post_wd, int i);
+char		*find_wildcard(char *s, char *ptr_begin_wd, int i);
 
 #endif

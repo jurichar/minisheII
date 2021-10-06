@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:27:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/21 14:32:28 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/06 16:38:08 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ char	**get_match(char *wd, char **files)
 {
 	char	**ret_files;
 	int		i;
-	int		j;
 	int		k;
 	char	*file;
 
@@ -51,7 +50,6 @@ char	**get_match(char *wd, char **files)
 	k = 0;
 	while (files[++i])
 	{
-		j = 0;
 		file = files[i];
 		if (check_match(file, wd))
 		{
@@ -120,12 +118,11 @@ char	*wildcard(char *to_find)
 	return (res);
 }
 
-char	*find_wildcard(char *s, char *ptr_begin_wd, char *ptr_post_wd, int i)
+char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 {
 	char	*new;
 
 	new = ft_strdup(s);
-	ptr_post_wd = "LOL\n";
 	while (new[i])
 	{
 		if (!is_space(new[i]))

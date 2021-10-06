@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:08:34 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/01 15:58:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/05 12:49:28 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	is_sep(char c)
 		return (1);
 	return (0);
 }
-
 
 int	is_redir(char *s, char c, int pos)
 {

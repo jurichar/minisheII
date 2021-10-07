@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_args.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/06 16:39:02 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:13:19 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,14 @@ void	set_words(char *str, t_cmd_lst **lst, t_env_lst *env, int j)
 void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 {
 	char	*str;
+	char	*buf;
 	int		args_count;
 	int		j;
 
 	str = find_env_var(s, env);
+	buf = str;
 	str = find_wildcard(s, NULL, 0);
+	free(buf);
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);
 	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));

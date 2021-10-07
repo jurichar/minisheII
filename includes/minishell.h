@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/06 16:38:37 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:52:55 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,7 @@ void		ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 MAIN
 */
 // cmd_utils
+void		ft_free_cmd(t_cmd_lst *lst);
 char		*get_cmd(char *s);
 
 // ft_is
@@ -211,6 +212,7 @@ int			is_sep(char c);
 int			is_redir(char *s, char c, int pos);
 
 // env_tools
+void		ft_free_env(t_env_lst *lst);
 t_env_lst	*get_env(t_env_lst *list, char **envp);
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 

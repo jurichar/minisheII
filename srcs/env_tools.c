@@ -1,16 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnew_env.c                                    :+:      :+:    :+:   */
+/*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:23:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 06:50:19 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 16:50:10 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void		ft_free_env(t_env_lst *lst)
+{
+	t_env_lst	*ptr;
+	while (lst)
+	{
+		free(lst->name);
+		free(lst->content);
+		ptr = lst->next;
+		free(lst);
+		lst = ptr;
+	}
+}
 
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content)
 {

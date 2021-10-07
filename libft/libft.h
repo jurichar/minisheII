@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/18 15:04:01 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 06:56:46 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 15:43:23 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ t_list			*ft_lstnew(void *content);
 t_list			*ft_lstlast(t_list *lst);
 t_list			*ft_lstmap(t_list *l, void *(*f)(void *), void (*d)(void *));
 int				ft_lstsize(t_list *lst);
+void			ft_free_double_char(char **tab);
 void			ft_lstadd_front(t_list **alst, t_list *new_list);
 void			ft_lstadd_back(t_list **alst, t_list *new_list);
 void			ft_lstdelone(t_list *lst, void (*del)(void*));

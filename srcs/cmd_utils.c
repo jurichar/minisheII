@@ -3,14 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/13 03:41:57 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:06:05 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_free_cmd(t_cmd_lst *lst)
+{
+	t_cmd_lst	*ptr;
+
+	while (lst)
+	{
+		free(lst->cmd);
+		ft_free_double_char(lst->args);
+		ptr = lst->next;
+		free(lst);
+		lst = ptr;
+	}
+}
 
 char	*get_cmd(char *s)
 {

@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_exit.c                                       :+:      :+:    :+:   */
+/*   ft_free_double_char.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/08 17:36:08 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:10:55 by lebourre         ###   ########.fr       */
+/*   Created: 2021/10/07 15:41:39 by lebourre          #+#    #+#             */
+/*   Updated: 2021/10/07 15:41:49 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "libft.h"
 
-int	builtin_exit(void)
+void	ft_free_double_char(char **tab)
 {
-	printf("exit code = %d\n", g_exit_code);
-	exit(g_exit_code);
-	return (g_exit_code);
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+		free(tab[i]);
+	free(tab);
 }

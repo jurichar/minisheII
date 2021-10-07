@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 03:34:23 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:17:56 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,15 @@ int	exec_ve_abs(t_cmd_lst *lst)
 	args = join_args(lst->cmd, lst->args);
 	if (execve(lst->cmd, args, lst->envp) == -1)
 		g_exit_code = 1;
+	ft_free_double_char(args);
 	return (g_exit_code);
 }
 
 int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
-{	
+{
 	char	**path;
 	char	**args;
+	//char	*buf;
 	char	*cmd;
 	int		i;
 
@@ -46,11 +48,15 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	while (path[++i])
 	{
 		cmd = ft_strjoin(path[i], "/");
+	//	buf = cmd;
 		cmd = ft_strjoin(cmd, lst->cmd);
+		//free(buf);
 		args = join_args(cmd, lst->args);
 		execve(cmd, args, lst->envp);
+		free(cmd);
+		//ft_free_double_char(args);
 	}
-	free(path);
+	//ft_free_double_char(path);
 	return (g_exit_code);
 }
 
@@ -97,7 +103,5 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 	}
 	else
 		exec_error(pid);
-	free(lst->cmd);
-	free(lst->args);
 	return (1);
 }

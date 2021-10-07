@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dup_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:37:54 by lebourre          #+#    #+#             */
-/*   Updated: 2021/09/23 17:37:56 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:10:18 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,5 +126,6 @@ char	*ft_strdup_space_sep(char *s, t_env_lst *env)
 	str = find_env_var(str, env);
 	copy = malloc_line(str, &len);
 	get_line_without_quote(str, copy, len, 0);
+	free(str);
 	return (copy);
 }

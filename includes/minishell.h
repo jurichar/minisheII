@@ -61,7 +61,7 @@
 # define ARROW ">"
 # define WILDC 1
 
-int	g_exit_code;
+extern int	g_exit_code;
 
 typedef struct s_env_lst
 {

@@ -12,6 +12,8 @@
 
 #include "../includes/minishell.h"
 
+int	g_exit_code = 0;
+
 void	free_cmds(t_cmd_lst *lst)
 {
 	void	*nextl;

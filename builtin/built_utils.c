@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 17:48:32 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:20:29 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:45:14 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ char	**join_args(char *s, char **args)
 	new = malloc(sizeof(char *) * (len + 2));
 	len = 0;
 	i = 1;
-	new[0] = s;
+	new[0] = ft_strdup(s);
 	while (args[len])
 	{
-		new[i] = args[len];
+		new[i] = ft_strdup(args[len]);
 		i++;
 		len++;
 	}

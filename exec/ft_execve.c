@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:22:20 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/07 17:45:53 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	char	**path;
 	char	**args;
 	char	*cmd;
+	char	*buf;
 	int		i;
 
 	i = -1;
@@ -47,11 +48,15 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	while (path[++i])
 	{
 		cmd = ft_strjoin(path[i], "/");
+		buf = cmd;
 		cmd = ft_strjoin(cmd, lst->cmd);
 		args = join_args(cmd, lst->args);
 		execve(cmd, args, lst->envp);
+		ft_free_double_char(args);
+		free(cmd);
+		free(buf);
 	}
-	free(path);
+	ft_free_double_char(path);
 	return (g_exit_code);
 }
 

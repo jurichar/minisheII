@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/07 15:15:48 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:23:51 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd)
 	if (ft_strcmp(lst->cmd, "echo") == 0)
 		return (builtin_echo(lst, fd));
 	else if (ft_strcmp(lst->cmd, "cd") == 0)
-		return (builtin_cd(lst, *envlst, 0));
+		return (builtin_cd(lst, envlst, 0));
 	else if (ft_strcmp(lst->cmd, "exit") == 0)
 		return (builtin_exit());
 	else if (ft_strcmp(lst->cmd, "pwd") == 0)

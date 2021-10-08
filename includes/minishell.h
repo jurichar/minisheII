@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 16:52:55 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:24:12 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ int			is_built_in(t_cmd_lst *lst);
 
 // built_cd
 int			builtin_cd_tild(t_env_lst *envlst);
-int			builtin_cd(t_cmd_lst *lst, t_env_lst *envlst, int ret);
+int			builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret);
 
 // built_echo
 int			is_n(char *s);

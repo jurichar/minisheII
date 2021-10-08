@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:27:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 18:06:57 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/08 11:06:35 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,5 +140,6 @@ char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 		else
 			i++;
 	}
+	free(s);
 	return (new);
 }

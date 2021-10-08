@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 17:06:05 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/07 18:07:50 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_cmd(char *s)
 	len = 0;
 	while (s[len] && !is_separator(s, s[len], len))
 		len++;
-	cmd = malloc(sizeof(char) * (len + 1));
+	cmd = malloc(sizeof(char) * (len + 2));
 	if (cmd == NULL)
 		return (NULL);
 	i = -1;

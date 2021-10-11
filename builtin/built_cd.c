@@ -12,42 +12,59 @@
 
 #include "../includes/minishell.h"
 
-// void	update_oldpwd(t_env_lst **begin_lst, char *new_pwd)
-// {
-// 	t_env_lst	*lst_oldpwd;
-// 	t_env_lst	*lst_pwd;
-// 	char		*buf;
+void	add_invisible_pwd(t_env_lst **lst)
+{
+	t_env_lst	*pwd;
+	char		*buf;
 
-// 	lst_oldpwd = *begin_lst;
-// 	lst_pwd = *begin_lst;
-// 	while (lst_oldpwd)
-// 	{
-// 		if (ft_strcmp(lst->name, "OLDPWD") == 0)
-// 			break ;
-// 		lst_oldpwd = lst_oldpwd->next;
-// 	}
-// 	while (lst_pwd)
-// 	{
-// 		if (ft_strcmp(lst->name, "PWD") == 0)
-// 			break ;
-// 		lst_pwd = lst_pwd->next;
-// 	}
-// 	if (lst_pwd && lst_oldpwd)
-// 	{
-// 		lst_oldpwd->content = ft_strdup(lst_pwd->content);
-// 		free(lst_pwd->content);
-// 		buf = malloc(sizeof(char) * 100);
-// 		buf = getcwd(buf, 100);
-// 		lst_pwd->content = buf;
-// 	}
-// 	else if (lst_oldpwd && !lst_pwd)
-// 	{
-// 		if (lst_oldpwd->content)
-// 		{
+	pwd = *lst;
+	while (pwd->next)
+		pwd = pwd->next;
+	buf = malloc(sizeof(char) * 100);
+	buf = getcwd(buf, 100);
+	pwd->next = ft_lstnew_env("PWD", 1, buf);
+	free(buf);
+	pwd->next->visible = 0;
+}
 
-// 		}
-// 	}
-// }
+void	update_oldpwd(t_env_lst **lst)
+{
+	t_env_lst	*lst_oldpwd;
+	t_env_lst	*lst_pwd;
+	char		*buf;
+
+	lst_oldpwd = *lst;
+	lst_pwd = *lst;
+	while (lst_oldpwd)
+	{
+		if (ft_strcmp(lst_oldpwd->name, "OLDPWD") == 0)
+			break ;
+		lst_oldpwd = lst_oldpwd->next;
+	}
+	while (lst_pwd)
+	{
+		if (ft_strcmp(lst_pwd->name, "PWD") == 0)
+			break ;
+		lst_pwd = lst_pwd->next;
+	}
+	if (lst_pwd && lst_oldpwd)
+	{
+		lst_oldpwd->content = ft_strdup(lst_pwd->content);
+		free(lst_pwd->content);
+		buf = malloc(sizeof(char) * 100);
+		buf = getcwd(buf, 100);
+		lst_pwd->content = buf;
+	}
+	else if (lst_oldpwd && !lst_pwd)
+	{
+		if (lst_oldpwd->content)
+		{
+			free(lst_oldpwd->content);
+			lst_oldpwd->content = NULL;
+		}
+		add_invisible_pwd(lst);
+	}
+}
 
 int	builtin_cd_tild(t_env_lst *envlst)
 {
@@ -86,6 +103,6 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 		printf("cd: %s: No such file or directory\n", lst->args[0]);
 		ret = 1;
 	}
-//	update_oldpwd(envlst, lst->args[0]);
+	update_oldpwd(envlst);
 	return (ret);
 }

@@ -69,10 +69,11 @@ char	*get_line(void)
 	return (line);
 }
 
-int	main(int ac, char **av, char **envp)
+int	main(int ac, char **av, char **env)
 {
 	t_env_lst	*envlst;
 	t_cmd_lst	*lst;
+	char		**envp;
 
 	(void) ac;
 	(void) av;
@@ -80,8 +81,9 @@ int	main(int ac, char **av, char **envp)
 	signal(SIGSEGV, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;
-	if (ac != 1 || envp == NULL)
+	if (ac != 1 || env == NULL)
 		return (0);
+	envp = ft_strdoubledup(env);
 	lst = NULL;
 	envlst = NULL;
 	envlst = get_env(envlst, envp);

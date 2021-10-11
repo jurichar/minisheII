@@ -67,6 +67,7 @@ typedef struct s_env_lst
 {
 	char				*name;
 	char				*content;
+	int					vis
 	int					equal;
 	int					len;
 	struct s_env_lst	*next;
@@ -175,7 +176,7 @@ char		*get_env_by_name(t_env_lst *envlst, char *name);
 
 // ft_execve
 int			check_built_in(t_cmd_lst *lst, t_env_lst **envlst);
-int			exec_ve_abs(t_cmd_lst *lst);
+int			exec_ve_abs(t_cmd_lst *lst, t_env_lst *envlst);
 int			exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst);
 int			exec_ve(t_cmd_lst *lst, t_env_lst **envlst);
 
@@ -260,6 +261,10 @@ char		*get_redir(char *s, t_cmd_lst *lst);
 
 // skip
 int			skip_space(char *s);
+
+// update_envp
+int		get_env_size(t_env_lst *lst);
+char	**update_envp(t_env_lst *lst, int size_env);
 
 // env_var_manager
 char		*insert_env_var(char *str, int i, int quote, t_env_lst *env);

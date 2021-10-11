@@ -92,6 +92,7 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		if (ft_strcmp(name, "SHLVL") == 0)
 			content = inc_shlvl(content);
 		list->next = ft_lstnew_env(name, 1, content);
+		list->visible = 1;
 		free(name);
 		free(content);
 		list = list->next;

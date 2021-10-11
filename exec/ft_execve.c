@@ -22,11 +22,13 @@ int	check_built_in(t_cmd_lst *lst, t_env_lst **envlst)
 	return (0);
 }
 
-int	exec_ve_abs(t_cmd_lst *lst)
+int	exec_ve_abs(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	char	**args;
 
 	args = join_args(lst->cmd, lst->args);
+	ft_free_double_char(lst->envp);
+	lst->envp = update_envp(envlst, get_env_size(envlst));
 	if (execve(lst->cmd, args, lst->envp) == -1)
 		g_exit_code = 1;
 	ft_free_double_char(args);
@@ -96,7 +98,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		perror("fork() failed (exec_ve)");
 	else if (pid == 0)
 	{
-		exec_ve_abs(lst);
+		exec_ve_abs(lst, *envlst);
 		exec_ve_rel(lst, *envlst);
 		printf("minishell: %s: command not found\n", lst->cmd);
 		exit(EXIT_FAILURE);

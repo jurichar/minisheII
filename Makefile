@@ -31,6 +31,12 @@ $(NAME): lib
 	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
 
+debug: lib
+	@printf $(YLW)"[Minishell compilation...]%-30s\r"
+	$(CC) $(CFLAGS) $(DEBUG) $(SRC) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib $(LDFLAGS) -I ~/.brew/opt/readline/include
+	@printf $(GRN)"[Minishell ready !!]%-30s\r"
+	@printf $(END)
+
 lib:
 	@printf $(YLW)"[Libft compilation...]%-30s\r"
 	@make -C libft/

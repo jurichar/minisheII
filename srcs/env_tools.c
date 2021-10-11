@@ -65,8 +65,7 @@ char	*inc_shlvl(char *shlvl)
 {
 	int	nb;
 
-	nb = ft_atoi(shlvl);
-	nb++;
+	nb = ft_atoi(shlvl) + 1;
 	free(shlvl);
 	return (ft_itoa(nb));
 }

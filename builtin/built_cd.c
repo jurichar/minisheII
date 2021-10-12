@@ -27,11 +27,37 @@ void	add_invisible_pwd(t_env_lst **lst)
 	pwd->next->visible = 0;
 }
 
+void	change_data(t_env_lst **old_ptr, t_env_lst **pwd_ptr, t_env_lst **lst)
+{
+	t_env_lst	*lst_pwd;
+	t_env_lst	*lst_oldpwd;
+	char		*buf;
+
+	lst_oldpwd = *old_ptr;
+	lst_pwd = *pwd_ptr;
+	if (lst_pwd)
+	{
+		if (lst_oldpwd)
+			lst_oldpwd->content = ft_strdup(lst_pwd->content);
+		buf = malloc(sizeof(char) * 100);
+		buf = getcwd(buf, 100);
+		lst_pwd->content = buf;
+	}
+	else if (lst_oldpwd && !lst_pwd)
+	{
+		if (lst_oldpwd->content)
+		{
+			free(lst_oldpwd->content);
+			lst_oldpwd->content = NULL;
+		}
+		add_invisible_pwd(lst);
+	}
+}
+
 void	update_oldpwd(t_env_lst **lst)
 {
 	t_env_lst	*lst_oldpwd;
 	t_env_lst	*lst_pwd;
-	char		*buf;
 
 	lst_oldpwd = *lst;
 	lst_pwd = *lst;
@@ -47,23 +73,9 @@ void	update_oldpwd(t_env_lst **lst)
 			break ;
 		lst_pwd = lst_pwd->next;
 	}
-	if (lst_pwd && lst_oldpwd)
-	{
-		lst_oldpwd->content = ft_strdup(lst_pwd->content);
-		free(lst_pwd->content);
-		buf = malloc(sizeof(char) * 100);
-		buf = getcwd(buf, 100);
-		lst_pwd->content = buf;
-	}
-	else if (lst_oldpwd && !lst_pwd)
-	{
-		if (lst_oldpwd->content)
-		{
-			free(lst_oldpwd->content);
-			lst_oldpwd->content = NULL;
-		}
-		add_invisible_pwd(lst);
-	}
+	if (lst_oldpwd)
+		free(lst_oldpwd->content);
+	change_data(&lst_oldpwd, &lst_pwd, lst);
 }
 
 int	builtin_cd_tild(t_env_lst *envlst)
@@ -80,20 +92,7 @@ int	builtin_cd_tild(t_env_lst *envlst)
 int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 {
 	if (lst->args[0] == NULL)
-	{
-		while (*envlst)
-		{
-			if (ft_strcmp("HOME", (*envlst)->name) == 0)
-				break ;
-			(*envlst) = (*envlst)->next;
-		}
-		if (*envlst == NULL)
-		{
-			ft_putstr_fd("minishell: cd: HOME not set\n", 1);
-			return (1);
-		}
-		ret = chdir((*envlst)->content);
-	}
+		ret = built_cd_home(envlst, ret);
 	else if (ft_strcmp(lst->args[0], "~") == 0)
 		ret = builtin_cd_tild(*envlst);
 	else

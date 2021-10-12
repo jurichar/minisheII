@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/08 11:10:00 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 14:26:00 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,20 @@ char	*get_arg(char *s, t_env_lst *env)
 	return (ret);
 }
 
+char	*insert_env_var2(char *str, char *var, int i)
+{
+	char	*copy;
+
+	copy = str;
+	str = ft_substr(str, 0, i);
+	free(copy);
+	copy = str;
+	str = ft_strjoin(str, var);
+	free(copy);
+	free(var);
+	return (str);
+}
+
 char	*insert_env_var(char *str, int i, int quote, t_env_lst *env)
 {
 	char	*copy;
@@ -69,15 +83,7 @@ char	*insert_env_var(char *str, int i, int quote, t_env_lst *env)
 	}
 	var = get_arg(&str[i], env);
 	if (var != NULL)
-	{
-		copy = str;
-		str = ft_substr(str, 0, i);
-		free(copy);
-		copy = str;
-		str = ft_strjoin(str, var);
-		free(copy);
-		free(var);
-	}
+		str = insert_env_var2(str, var, i);
 	else
 	{
 		copy = str;

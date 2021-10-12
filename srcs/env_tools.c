@@ -12,9 +12,10 @@
 
 #include "../includes/minishell.h"
 
-void		ft_free_env(t_env_lst *lst)
+void	ft_free_env(t_env_lst *lst)
 {
 	t_env_lst	*ptr;
+
 	while (lst)
 	{
 		free(lst->name);
@@ -38,6 +39,7 @@ t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content)
 		new->content = ft_strdup(v_content);
 	else
 		new->content = NULL;
+	new->visible = 1;
 	new->next = NULL;
 	return (new);
 }
@@ -92,7 +94,6 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		if (ft_strcmp(name, "SHLVL") == 0)
 			content = inc_shlvl(content);
 		list->next = ft_lstnew_env(name, 1, content);
-		list->visible = 1;
 		free(name);
 		free(content);
 		list = list->next;

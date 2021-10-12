@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/08 11:24:12 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 14:25:34 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ typedef struct s_env_lst
 {
 	char				*name;
 	char				*content;
-	int					vis
+	int					visible;
 	int					equal;
 	int					len;
 	struct s_env_lst	*next;
@@ -129,6 +129,9 @@ BUILT IN
 void		free_point_char(char **str);
 void		init_built_in(char **str);
 int			is_built_in(t_cmd_lst *lst);
+
+// built_cd_home
+int			built_cd_home(t_env_lst **envlst, int ret);
 
 // built_cd
 int			builtin_cd_tild(t_env_lst *envlst);
@@ -263,8 +266,8 @@ char		*get_redir(char *s, t_cmd_lst *lst);
 int			skip_space(char *s);
 
 // update_envp
-int		get_env_size(t_env_lst *lst);
-char	**update_envp(t_env_lst *lst, int size_env);
+int			get_env_size(t_env_lst *lst);
+char		**update_envp(t_env_lst *lst, int size_env);
 
 // env_var_manager
 char		*insert_env_var(char *str, int i, int quote, t_env_lst *env);

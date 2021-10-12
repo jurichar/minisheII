@@ -1,23 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdoublelen.c                                  :+:      :+:    :+:   */
+/*   built_cd_home.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/12 14:22:14 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 14:22:15 by lebourre         ###   ########.fr       */
+/*   Created: 2021/10/12 14:21:27 by lebourre          #+#    #+#             */
+/*   Updated: 2021/10/12 14:26:18 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-size_t	ft_strdoublelen(char **tab)
+int	built_cd_home(t_env_lst **envlst, int ret)
 {
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
+	while (*envlst)
+	{
+		if (ft_strcmp("HOME", (*envlst)->name) == 0)
+			break ;
+		(*envlst) = (*envlst)->next;
+	}
+	if (*envlst == NULL)
+	{
+		ft_putstr_fd("minishell: cd: HOME not set\n", 1);
+		return (1);
+	}
+	ret = chdir((*envlst)->content);
+	return (ret);
 }

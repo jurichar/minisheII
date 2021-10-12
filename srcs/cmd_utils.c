@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 15:25:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:26:22 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,34 @@ void	ft_free_cmd(t_cmd_lst *lst)
 		free(lst);
 		lst = ptr;
 	}
+}
+
+char	*clear_parenthesis(char *s)
+{
+	char	*res;
+	int		i;
+	int		j;
+	int		quote;
+
+	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!res)
+		return (NULL);
+	quote = 0;
+	i = -1;
+	j = 0;
+	while (s[++i])
+	{
+		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
+			quote = get_to_next_quote(s, i);
+		if (quote && i == quote)
+			quote = 0;
+		if (quote == 0 && (s[i] == '(' || s[i] == ')'))
+			continue ;
+		res[j++] = s[i];
+	}
+	res[j] = '\0';
+	free (s);
+	return (res);
 }
 
 char	*get_cmd(char *s)

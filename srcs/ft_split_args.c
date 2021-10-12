@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/08 11:10:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:25:12 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,8 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	int		args_count;
 	int		j;
 
-	str = find_env_var(s, env);
+	str = clear_parenthesis(s);
+	str = find_env_var(str, env);
 	str = find_wildcard(str, NULL, 0);
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);

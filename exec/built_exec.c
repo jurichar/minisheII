@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/08 11:23:51 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:27:15 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,23 @@ void	fd_close(int fd[2])
 		close(fd[1]);
 }
 
+void	find_next_cmd(char sep, t_cmd_lst **lst)
+{
+	int	sep_phlvl;
+
+	sep_phlvl = (*lst)->sep_phlvl;
+	if (sep == AND)
+	{
+		while ((*lst) && !((*lst)->sep_phlvl <= sep_phlvl && (*lst)->sep == OR))
+			*lst = (*lst)->next;
+	}
+	else
+	{
+		while ((*lst) && !((*lst)->sep_phlvl <= sep_phlvl && (*lst)->sep == AND))
+			*lst = (*lst)->next;
+	}
+}
+
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 {
 	int		fd[2];
@@ -59,5 +76,16 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 		pipor(*lst, *envlst);
 	else
 		exec_ve(*lst, envlst);
+	if ((*lst)->sep == AND && g_exit_code == 0)
+		get_built_in(&(*lst)->next, envlst);
+	else if ((*lst)->sep == OR && g_exit_code != 0)
+		get_built_in(&(*lst)->next, envlst);
+	else if (((*lst)->sep == AND && g_exit_code != 0)
+		|| ((*lst)->sep == OR && g_exit_code == 0))
+	{
+		find_next_cmd((*lst)->sep, lst);
+		if (*lst)
+			get_built_in(&(*lst)->next, envlst);		
+	}
 	fd_close(fd);
 }

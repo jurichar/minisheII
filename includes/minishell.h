@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 15:17:34 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:15:25 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@
 # define CYAN "\033[1;36m"
 # define ARROW ">"
 # define WILDC 1
+# define OR 1
+# define AND 2
 
 extern int	g_exit_code;
 
@@ -100,6 +102,7 @@ typedef struct s_cmd_lst
 	int					nb_p;
 	int					builtin;
 	int					phlvl;
+	int					sep_phlvl;
 }			t_cmd_lst;
 
 typedef struct s_fct_params
@@ -121,6 +124,7 @@ typedef struct s_set_line
 	int	i;
 	int	j;
 	int	cmd_count;
+	int	phlvl;
 }				t_set_line;
 
 /*
@@ -207,6 +211,7 @@ void		ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 MAIN
 */
 // cmd_utils
+char		*clear_parenthesis(char *s);
 void		ft_free_cmd(t_cmd_lst *lst);
 char		*get_cmd(char *s);
 

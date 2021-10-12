@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:08:34 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 15:32:42 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:37:24 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	is_separator(char *s, char c, int pos)
 	int	i;
 	int	quote;
 
-	if (c != '|' || c != '&')
+	if (c != '|' && c != '&')
 		return (0);
 	if (s[pos] == '&' && s[pos + 1] != '&')
 		return (0);

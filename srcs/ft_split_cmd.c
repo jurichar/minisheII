@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 17:01:01 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 18:20:10 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,68 @@ int	cmd_counter(char *str, int *pipe, int quote)
 				(*pipe)++;
 				count++;
 			}
-			if (str[i + 1] == '\0')
+			else
 				count++;
 		}
 	}
 	return (count);
 }
 
+int	find_phlvl(char *s, int pos)
+{
+	int	i;
+	int	phlvl;
+
+	phlvl = 0;
+	i = skip_space(s);
+	while (s[i] && i != pos)
+	{
+		if (s[i] == '\'' || s[i] == '"')
+			i = get_to_next_quote(s, i);
+		if (s[i] == '(')
+			phlvl++;
+		else if (s[i] == ')')
+			phlvl--;
+		i++;
+	}
+	return (phlvl);
+}
+
 void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
 {
-	t_set_line	inc;
+	t_set_line	var;
 	t_cmd_lst	*lst_begin;
 	char		*buf;
 
-	inc.j = -1;
-	inc.i = 0;
+	var.j = -1;
+	var.i = 0;
+	var.phlvl = 0;
 	lst_begin = *lst;
-	inc.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
-	while (++inc.j < inc.cmd_count)
+	var.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
+	while (++var.j < var.cmd_count)
 	{
-		if (is_separator(str, str[inc.i], inc.i))
-			inc.i++;
-		buf = get_cmd(&str[inc.i]);
-		if (str[inc.i])
+		if (is_separator(str, str[var.i], var.i))
+		{
+			if ((str[var.i] == '|' && str[var.i + 1] == '|') || str[var.i] == '&')
+				var.i++;
+			var.i++;
+		}
+		(*lst)->phlvl = find_phlvl(str, var.i);
+		buf = get_cmd(&str[var.i]);
+		if (str[var.i])
 			ft_split_args(buf, lst, env);
-		while (str[inc.i] && !is_separator(str, str[inc.i], inc.i))
-			inc.i++;
-		(*lst)->sep = str[inc.i];
+		while (str[var.i] && !is_separator(str, str[var.i], var.i))
+			var.i++;
+		if (str[var.i] == '|' && str[var.i + 1] == '|')
+			(*lst)->sep = OR;
+		else if (str[var.i] == '&' && str[var.i + 1] == '&')
+			(*lst)->sep = AND;
+		else
+			(*lst)->sep = str[var.i];
+		(*lst)->sep_phlvl = find_phlvl(str, var.i);
 		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)
 			lst_begin = *lst;
-		if (inc.j + 1 < inc.cmd_count)
+		if (var.j + 1 < var.cmd_count)
 			(*lst)->next = ft_new_cmd_list(envp);
 		*lst = (*lst)->next;
 	}

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 14:25:34 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:17:34 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,7 @@ typedef struct s_cmd_lst
 	int					fd[2];
 	int					nb_p;
 	int					builtin;
+	int					phlvl;
 }			t_cmd_lst;
 
 typedef struct s_fct_params

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 18:07:50 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/12 15:25:15 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@ void	ft_free_cmd(t_cmd_lst *lst)
 
 	while (lst)
 	{
-		free(lst->cmd);
-		ft_free_double_char(lst->args);
+		if (lst->cmd && (ft_strcmp("NIL", lst->cmd)) != 0)
+			free(lst->cmd);
+		if (lst->args && *lst->args)
+			ft_free_double_char(lst->args);
 		ptr = lst->next;
 		free(lst);
 		lst = ptr;

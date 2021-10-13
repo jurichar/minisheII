@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/13 15:43:54 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:22:25 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,41 +53,43 @@ void	find_next_cmd(char sep, t_cmd_lst **lst)
 	}
 	else
 	{
-		while ((*lst) && !((*lst)->sep_phlvl <= sep_phlvl && (*lst)->sep == AND))
+		while ((*lst) && !((*lst)->sep_phlvl <= sep_phlvl
+				&& (*lst)->sep == AND))
 			*lst = (*lst)->next;
 	}
 }
 
-void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
+void	and_or_manager(t_cmd_lst **lst, t_env_lst **envlst)
 {
-	int		fd[2];
-	int 	i;
-
-	fd[0] = dup(0);
-	fd[1] = dup(1);
-	if (!lst)
-		return ;
-	if ((*lst)->redir != NULL)
-	{
-		i = ft_redir(*lst, *envlst);
-		if (i == 1)
-			exec_ve(*lst, envlst);
-		unlink(".lol");
-	}
-	else if ((*lst)->sep == '|')
-		pipor(*lst, *envlst);
-	else
-		exec_ve(*lst, envlst);
 	if ((*lst)->sep == AND && g_exit_code == 0)
-		get_built_in(&(*lst)->next, envlst);
+		get_built_in(&(*lst)->next, envlst, 0);
 	else if ((*lst)->sep == OR && g_exit_code != 0)
-		get_built_in(&(*lst)->next, envlst);
+		get_built_in(&(*lst)->next, envlst, 0);
 	else if (((*lst)->sep == AND && g_exit_code != 0)
 		|| ((*lst)->sep == OR && g_exit_code == 0))
 	{
 		find_next_cmd((*lst)->sep, lst);
 		if (*lst)
-			get_built_in(&(*lst)->next, envlst);		
+			get_built_in(&(*lst)->next, envlst, 0);
 	}
+}
+
+void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
+{
+	int	fd[2];
+
+	fd[0] = dup(0);
+	fd[1] = dup(1);
+	if ((*lst)->redir != NULL)
+	{
+		i = ft_redir(*lst, *envlst);
+		if (i == 1)
+			exec_ve(*lst, envlst);
+	}
+	else if ((*lst)->sep == '|')
+		pipor(*lst, *envlst);
+	else
+		exec_ve(*lst, envlst);
+	and_or_manager(lst, envlst);
 	fd_close(fd);
 }

@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/13 16:48:51 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:09:15 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ft_redir_out(t_cmd_lst *lst)
 int	ft_redir_in(t_cmd_lst *lst)
 {
 	int	fd;
+
 	if (access(lst->redir->arg, 0666) == -1)
 	{
 		printf ("minishell: %s: No such file or directory\n", lst->redir->arg);
@@ -87,12 +88,13 @@ int	ft_redir_in(t_cmd_lst *lst)
 
 int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	int i;
+	int	i;
 
 	i = TRUE;
-	while (lst->redir->next && (lst->redir->redir == OUT ||
-	 lst->redir->redir == OUT_DOUBLE) && (lst->redir->next->redir == OUT ||
-	  lst->redir->next->redir == OUT_DOUBLE))
+	while (lst->redir->next && (lst->redir->redir == OUT
+			|| lst->redir->redir == OUT_DOUBLE)
+		&& (lst->redir->next->redir == OUT
+			|| lst->redir->next->redir == OUT_DOUBLE))
 	{
 		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0666);
 		lst->redir = lst->redir->next;
@@ -107,5 +109,6 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 		ft_redir_in_double(lst);
 	if (lst->sep == '|')
 		pipor(lst, envlst);
+	unlink(".lol");
 	return (i);
 }

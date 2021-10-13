@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 15:46:01 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:16:50 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int			builtin_env(t_env_lst *envlst);
 // built_exec
 int			exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd);
 void		fd_close(int fd[2]);
-void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst);
+void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i);
 
 // built_exit
 int			builtin_exit( void );

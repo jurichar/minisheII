@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/12 18:27:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:43:54 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	find_next_cmd(char sep, t_cmd_lst **lst)
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 {
 	int		fd[2];
+	int 	i;
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
@@ -68,8 +69,9 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst)
 		return ;
 	if ((*lst)->redir != NULL)
 	{
-		ft_redir(*lst, *envlst);
-		exec_ve(*lst, envlst);
+		i = ft_redir(*lst, *envlst);
+		if (i == 1)
+			exec_ve(*lst, envlst);
 		unlink(".lol");
 	}
 	else if ((*lst)->sep == '|')

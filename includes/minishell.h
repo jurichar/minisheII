@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 14:13:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 15:46:01 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,8 +204,8 @@ void		pipor_last(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst, int i);
 void		ft_redir_in_double(t_cmd_lst *lst);
 void		ft_redir_out_double(t_cmd_lst *lst);
 void		ft_redir_out(t_cmd_lst *lst);
-void		ft_redir_in(t_cmd_lst *lst);
-void		ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int			ft_redir_in(t_cmd_lst *lst);
+int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 
 /*
 MAIN

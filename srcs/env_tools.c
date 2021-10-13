@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:23:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 16:50:10 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:07:48 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		free(content);
 		list = list->next;
 	}
+	check_oldpwd(&begin);
 	return (begin);
 }

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/08 14:33:35 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:15:51 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	update_oldpwd(t_env_lst **lst)
 			break ;
 		lst_oldpwd = lst_oldpwd->next;
 	}
+	lst_oldpwd->visible = 1;
 	while (lst_pwd)
 	{
 		if (ft_strcmp(lst_pwd->name, "PWD") == 0)
@@ -74,7 +75,10 @@ void	update_oldpwd(t_env_lst **lst)
 		lst_pwd = lst_pwd->next;
 	}
 	if (lst_oldpwd)
+	{
 		free(lst_oldpwd->content);
+		lst_oldpwd->content = NULL;
+	}	
 	change_data(&lst_oldpwd, &lst_pwd, lst);
 }
 

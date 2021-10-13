@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 18:15:25 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:13:15 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,6 +225,9 @@ int			is_redir(char *s, char c, int pos);
 void		ft_free_env(t_env_lst *lst);
 t_env_lst	*get_env(t_env_lst *list, char **envp);
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
+
+// env_tools2
+void		check_oldpwd(t_env_lst **begin);
 
 // ft_split_arg
 int			args_counter(char *str);

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 14:26:00 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:27:14 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*get_arg(char *s, t_env_lst *env)
 	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
 		&& s[len] != '"' && s[len] != '\'' && s[len] != '/')
 		len++;
+	if (quote && s[len] == '"')
+		len--;
 	ret = ft_substr(s, 0, len);
 	if ((ft_strcmp(ret, "?") == 0))
 		return (get_ret_value(ret, s, quote, len));
@@ -70,17 +72,11 @@ char	*insert_env_var2(char *str, char *var, int i)
 	return (str);
 }
 
-char	*insert_env_var(char *str, int i, int quote, t_env_lst *env)
+char	*insert_env_var(char *str, int i, t_env_lst *env)
 {
 	char	*copy;
 	char	*var;
 
-	if (str[i] == '"')
-	{
-		quote = get_to_next_quote(str, i);
-		if (str[quote])
-			i++;
-	}
 	var = get_arg(&str[i], env);
 	if (var != NULL)
 		str = insert_env_var2(str, var, i);
@@ -115,8 +111,8 @@ char	*find_env_var(char *str, t_env_lst *env)
 			quote = 0;
 		if (quote == 0 && is_sep(str[i]))
 			break ;
-		if ((str[i] == '"' && str[i + 1] == '$') || str[i] == '$')
-			s = insert_env_var(s, i, quote, env);
+		if (/*(str[i] == '"' && str[i + 1] == '$') || */str[i] == '$')
+			s = insert_env_var(s, i, env);
 	}
 	free(str);
 	return (s);

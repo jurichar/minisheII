@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 14:13:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 14:23:40 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -279,7 +279,7 @@ int			get_env_size(t_env_lst *lst);
 char		**update_envp(t_env_lst *lst, int size_env);
 
 // env_var_manager
-char		*insert_env_var(char *str, int i, int quote, t_env_lst *env);
+char		*insert_env_var(char *str, int i, t_env_lst *env);
 char		*find_env_var(char *str, t_env_lst *env);
 
 // env_var_tools

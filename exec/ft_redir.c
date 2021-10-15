@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/05 18:38:54 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 17:09:15 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 		i++;
 	}
 	close(fd0);
-	fd = open(".lol", O_RDWR, 0664);
+	fd = open(".lol", O_RDWR, 0666);
 	dup2(fd, 0);
 }
 
@@ -41,8 +41,14 @@ void	ft_redir_out_double(t_cmd_lst *lst)
 {
 	int	fd;
 
-	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0644);
+	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0666);
 	dup2(fd, 1);
+	if (lst->redir->next && lst->redir->next->redir == IN)
+	{
+		while (lst->redir->next && lst->redir->next->redir == IN)
+			lst->redir = lst->redir->next;
+		ft_redir_in(lst);
+	}
 	close(fd);
 }
 
@@ -50,25 +56,47 @@ void	ft_redir_out(t_cmd_lst *lst)
 {
 	int	fd;
 
-	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
+	printf ("coucou\n");
+	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	dup2(fd, 1);
+	if (lst->redir->next && lst->redir->next->redir == IN)
+	{
+		while (lst->redir->next && lst->redir->next->redir == IN)
+			lst->redir = lst->redir->next;
+		ft_redir_in(lst);
+	}
 	close(fd);
 }
 
-void	ft_redir_in(t_cmd_lst *lst)
+int	ft_redir_in(t_cmd_lst *lst)
 {
 	int	fd;
 
-	fd = open(lst->redir->arg, O_RDONLY);
-	dup2(fd, 0);
-	close(fd);
+	if (access(lst->redir->arg, 0666) == -1)
+	{
+		printf ("minishell: %s: No such file or directory\n", lst->redir->arg);
+		return (0);
+	}
+	else
+	{
+		fd = open(lst->redir->arg, O_RDONLY);
+		dup2(fd, 0);
+		close(fd);
+		return (1);
+	}
 }
 
-void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
+int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
-	while (lst->redir->next)
+	int	i;
+
+	i = TRUE;
+	while (lst->redir->next && (lst->redir->redir == OUT
+			|| lst->redir->redir == OUT_DOUBLE)
+		&& (lst->redir->next->redir == OUT
+			|| lst->redir->next->redir == OUT_DOUBLE))
 	{
-		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0644);
+		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0666);
 		lst->redir = lst->redir->next;
 	}
 	if (lst->redir->redir == OUT)
@@ -76,9 +104,11 @@ void	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	else if (lst->redir->redir == OUT_DOUBLE)
 		ft_redir_out_double(lst);
 	else if (lst->redir->redir == IN)
-		ft_redir_in(lst);
+		i = ft_redir_in(lst);
 	else if (lst->redir->redir == IN_DOUBLE)
 		ft_redir_in_double(lst);
 	if (lst->sep == '|')
 		pipor(lst, envlst);
+	unlink(".lol");
+	return (i);
 }

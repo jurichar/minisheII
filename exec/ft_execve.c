@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/07 17:45:53 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/13 16:57:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,10 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		perror("fork() failed (exec_ve)");
 	else if (pid == 0)
 	{
+		if (strcmp((lst)->cmd, "") == 0)
+		{
+			exit(EXIT_FAILURE);
+		}
 		exec_ve_abs(lst, *envlst);
 		exec_ve_rel(lst, *envlst);
 		printf("minishell: %s: command not found\n", lst->cmd);

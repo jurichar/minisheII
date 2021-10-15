@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 14:23:40 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/15 09:54:18 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,7 +152,7 @@ int			builtin_env(t_env_lst *envlst);
 // built_exec
 int			exec_built_in(t_cmd_lst *lst, t_env_lst **envlst, int fd);
 void		fd_close(int fd[2]);
-void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst);
+void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i);
 
 // built_exit
 int			builtin_exit( void );
@@ -204,8 +204,8 @@ void		pipor_last(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst, int i);
 void		ft_redir_in_double(t_cmd_lst *lst);
 void		ft_redir_out_double(t_cmd_lst *lst);
 void		ft_redir_out(t_cmd_lst *lst);
-void		ft_redir_in(t_cmd_lst *lst);
-void		ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int			ft_redir_in(t_cmd_lst *lst);
+int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 
 /*
 MAIN

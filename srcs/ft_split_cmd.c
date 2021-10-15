@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 18:20:10 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:40:34 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,11 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 
 	s = ft_strdup(str);
 	lst_begin = *lst;
+	if (check_parenthesis(s))
+	{
+		free(s);
+		return ;
+	}
 	if (check_redir(str) == -1)
 	{
 		printf("syntax error\n");

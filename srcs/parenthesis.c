@@ -6,22 +6,22 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/15 11:31:36 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:58:23 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int		check_surroundings(char *s, int pos, char pth)
-{
-	if (pth == '(')
-	{
-		while (--pos >= 0)
-		{
-			if ((!is_space(s[pos]) && 
-		}
-	}
-}
+// int		check_surroundings(char *s, int pos, char pth)
+// {
+// 	if (pth == '(')
+// 	{
+// 		while (--pos >= 0)
+// 		{
+// 			if ((!is_space(s[pos]) && 
+// 		}
+// 	}
+// }
 
 int	check_last_pth(char *s)
 {
@@ -55,16 +55,23 @@ int	check_fist_pth(char *s)
 	status = 0;
 	while (s[++i])
 	{
-		i = skip_space(&s[i]);
+		i += skip_space(&s[i]);
 		if (s[i] == '(' && (status == 0 || status == 2))
 			break ;
 		else if (s[i] == '(' && status == 1)
 			return (i);
 		if (s[i] == '&' && s[i + 1] == '&')
+		{
+			i++;
 			status = 2;
+		}	
+			
 		else if (s[i] == '|' && s[i + 1] == '|')
+		{
+			i++;
 			status = 2;
-		else
+		}	
+		else if (!is_space(s[i]))
 			status = 1;		
 	}
 	return (0);
@@ -74,36 +81,50 @@ int	check_fist_last_pth(char *s)
 {
 	int	ret;
 
-	ret = check_fist_pth(s);
-	if (check)
+	if (check_fist_pth(s))
 	{
 		printf("minishell: syntax error near unexpected token `('\n");
 		return (1);
 	}
-	if ()
+	ret = check_last_pth(s);
+	if (ret)
+	{
+		write(1, "minishell: syntax error near unexpected token `",
+			ft_strlen("minishell: syntax error near unexpected token `"));
+		while (s[++ret])
+		{
+			ret += skip_space(&s[ret]);
+			while (s[ret] && !is_space(s[ret]))
+				write(1, &s[ret++], 1);
+		}
+		write(1, "'\n", 2);
+		return (1);
+	}
+	return (0);
 }
 
 int		check_parenthesis(char *s)
 {
-	int	i;
-	int	ret;
+	//int	i;
+	//int	ret;
 
 	if (check_fist_last_pth(s))
 		return (1);
-	i = -1;
-	while (s[++i])
-	{
-		if (s[i] == '(')
-		{
-			ret = check_surroundings(s, i, '(');
-			if (ret == -1)
-				return (i);
-		}
-		else if (s[i] == ')')
-		{
-			ret = check_surroundings(s, i, ')');
-			if (ret == -1)
-				return (i);
-		}
-	}
+	return (0);
+	// i = -1;
+	// while (s[++i])
+	// {
+	// 	if (s[i] == '(')
+	// 	{
+	// 		ret = check_surroundings(s, i, '(');
+	// 		if (ret == -1)
+	// 			return (i);
+	// 	}
+	// 	else if (s[i] == ')')
+	// 	{
+	// 		ret = check_surroundings(s, i, ')');
+	// 		if (ret == -1)
+	// 			return (i);
+	// 	}
+	// }
 }

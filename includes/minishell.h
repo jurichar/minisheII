@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/15 09:54:18 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/15 11:40:04 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -297,6 +297,9 @@ int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);
 int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
+
+// parenthesis
+int			check_parenthesis(char *s);
 
 // wildcard_tools
 char		*ft_strstr(char *str, char *to_find);

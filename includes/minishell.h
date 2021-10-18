@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 16:04:26 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:32:27 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ void		fd_close(int fd[2]);
 void		get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i);
 
 // built_exit
-int			builtin_exit( void );
+int			builtin_exit(t_cmd_lst *lst);
 
 //built_export_tools
 void		find_var(t_env_lst **ptr, char *name);

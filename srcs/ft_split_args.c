@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:25:09 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:51:35 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*manage_redir(char *str, t_cmd_lst **lst)
 	return (str);
 }
 
-void	set_words(char *str, t_cmd_lst **lst, t_env_lst *env, int j)
+void	set_words(char *str, t_cmd_lst **lst, int j)
 {
 	int	i;
 	int	args_count;
@@ -89,7 +89,7 @@ void	set_words(char *str, t_cmd_lst **lst, t_env_lst *env, int j)
 	{
 		while (str[j] && is_space(str[j]))
 			j++;
-		(*lst)->args[i - 1] = ft_strdup_space_sep(&str[j], env);
+		(*lst)->args[i - 1] = ft_strdup_space_sep(&str[j]);
 		while (!is_space(str[j]) && str[j])
 		{
 			if (str[j] == '\'' || str[j] == '"')
@@ -101,15 +101,13 @@ void	set_words(char *str, t_cmd_lst **lst, t_env_lst *env, int j)
 	free(str);
 }
 
-void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
+void	ft_split_args(char *s, t_cmd_lst **lst)
 {
 	char	*str;
 	int		args_count;
 	int		j;
 
 	str = clear_parenthesis(s);
-	str = find_env_var(str, env);
-	str = find_wildcard(str, NULL, 0);
 	str = manage_redir(str, lst);
 	args_count = args_counter(str);
 	(*lst)->args = malloc(sizeof(char *) * (args_count + 1));
@@ -119,5 +117,5 @@ void	ft_split_args(char *s, t_cmd_lst **lst, t_env_lst *env)
 	(*lst)->cmd = get_cmd_name(&str[j], -1, 0, 0);
 	while (!is_space(str[j]) && str[j])
 		j++;
-	set_words(str, lst, env, j);
+	set_words(str, lst, j);
 }

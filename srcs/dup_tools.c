@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:37:54 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/07 18:23:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:39:24 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,13 @@ void	get_line_without_quote(char	*str, char *copy, int len, int quote)
 	copy[j] = '\0';
 }
 
-char	*ft_strdup_space_sep(char *s, t_env_lst *env)
+char	*ft_strdup_space_sep(char *s)
 {
 	char	*copy;
 	char	*str;
 	int		len;
 
 	str = ft_strdup(s);
-	str = find_env_var(str, env);
 	copy = malloc_line(str, &len);
 	get_line_without_quote(str, copy, len, 0);
 	free(str);

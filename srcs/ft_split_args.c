@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:56:25 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:33:00 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:01:51 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	args_counter(char *str)
 	i = 0;
 	count = 1;
 	i = pass_cmd_name(str, i);
-	while (str[i] && !is_sep(str[i + 1]))
+	while (str[i] && !is_separator(str, str[i + 1], i + 1))
 	{
 		if (str[i - 1] == ' ' && (str[i] == '\'' || str[i] == '"'))
 		{
@@ -29,7 +29,7 @@ int	args_counter(char *str)
 		}
 		else if (!is_space(str[i])
 			&& (is_space(str[i + 1]) || str[i + 1] == '\0'
-				|| is_sep(str[i + 1])))
+				|| is_separator(str, str[i + 1], i + 1)))
 			count++;
 		i++;
 	}

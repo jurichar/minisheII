@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 16:08:58 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:01:03 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int	cmd_counter(char *str, int *pipe, int quote)
 	{
 		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
 			quote = get_to_next_quote(str, i);
+		if (!str[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
-		if (!is_separator(str, str[i], i)
+		if (quote == 0 && !is_separator(str, str[i], i)
 			&& (is_separator(str, str[i + 1], i + 1) || str[i + 1] == '\0'))
 		{
 			if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))

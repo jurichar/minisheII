@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:59:33 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:02:39 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,15 +104,21 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 
 int	check_cmd(t_cmd_lst *lst)
 {
-	while (lst)
+	int ret = 1;
+	if (lst->sep == '|' || lst->sep == AND || lst->sep == OR)
 	{
-		if (lst->sep != 0 && !lst->next->cmd)
+		if (!(lst->next))
 		{
-			printf("caca\n");
+			printf ("syntax error\n");
+			ret = 0;
 		}
-		lst = lst->next;
+		else if (ft_strcmp(lst->next->cmd, "") == 0 || ft_strcmp(lst->next->cmd, "NIL") == 0)
+		{
+			printf ("syntax error\n");
+			ret = 0;
+		}
 	}
-	return (0);
+	return ret;
 }
 
 void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)

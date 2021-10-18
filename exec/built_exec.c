@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 15:59:26 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:02:07 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,7 @@ void	and_or_manager(t_cmd_lst **lst, t_env_lst **envlst)
 	}
 }
 
-int	parse_error(t_cmd_lst **lst)
-{
-	int ret = 1;
-	if ((*lst)->sep == '|' || (*lst)->sep == AND || (*lst)->sep == OR)
-	{
-		if (!((*lst)->next))
-		{
-			printf ("syntax error\n");
-			ret = 0;
-		}
-		else if (ft_strcmp((*lst)->next->cmd, "") == 0 || ft_strcmp((*lst)->next->cmd, "NIL") == 0)
-		{
-			printf ("syntax error\n");
-			ret = 0;
-		}
-	}
-	return ret;
-}
+
 
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 {

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:50:39 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:04:26 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -298,6 +298,11 @@ char		*ft_strjoin_till_space(char const *s1, char const *s2);
 int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
 
+// parenthesis2
+int			check_empty_pth(char *s);
+int			check_back_pth(char *s, int i, int pth_nb);
+int			check_front_pth(char *s, int i, int pth_nb, int inside);
+int			check_fist_last_pth(char *s);
 // parenthesis
 int			check_parenthesis(char *s);
 

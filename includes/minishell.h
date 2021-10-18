@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/15 11:40:04 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:50:39 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,11 +232,11 @@ void		check_oldpwd(t_env_lst **begin);
 // ft_split_arg
 int			args_counter(char *str);
 char		*get_cmd_name(char *s, int i, int j, int quote);
-void		ft_split_args(char *str, t_cmd_lst **lst, t_env_lst *env);
+void		ft_split_args(char *str, t_cmd_lst **lst);
 
 // ft_split_cmd
 int			cmd_counter(char *str, int *pipe, int quote);
-void		ft_split_cmd(t_cmd_lst **l, char *s, t_env_lst *env, char **e);
+void		ft_split_cmd(t_cmd_lst **l, char *s, char **e);
 
 // get_next_line
 char		*ft_strndup(char *s, int n);
@@ -250,7 +250,7 @@ void		ft_env_remove_if(t_env_lst **bl, void *data_ref, int (*cmp)());
 
 // main
 void		free_cmds(t_cmd_lst *lst);
-void		lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp);
+void		lst_cmd(char *line, t_cmd_lst **lst, char **envp);
 char		*get_line( void );
 void		print_point_char(char **str);
 
@@ -290,7 +290,7 @@ char		*get_ret_value(char *ret, char *s, int quote, int len);
 char		*ft_strdup_sep(char *str);
 void		get_line_without_quote(char	*str, char *copy, int len, int quote);
 char		*malloc_cmdname(char *s, int *ptr_len);
-char		*ft_strdup_space_sep(char *s, t_env_lst *env);
+char		*ft_strdup_space_sep(char *s);
 
 // utils
 int			ft_whereis_char(char *s, int c);

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 14:56:13 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:49:46 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	find_phlvl(char *s, int pos)
 	return (phlvl);
 }
 
-void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
+void	set_line(char *str, t_cmd_lst **lst, char **envp)
 {
 	t_set_line	var;
 	t_cmd_lst	*lst_begin;
@@ -82,7 +82,7 @@ void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
 		(*lst)->phlvl = find_phlvl(str, var.i);
 		buf = get_cmd(&str[var.i]);
 		if (str[var.i])
-			ft_split_args(buf, lst, env);
+			ft_split_args(buf, lst);
 		while (str[var.i] && !is_separator(str, str[var.i], var.i))
 			var.i++;
 		if (str[var.i] == '|' && str[var.i + 1] == '|')
@@ -114,7 +114,7 @@ int	check_cmd(t_cmd_lst *lst)
 	return (0);
 }
 
-void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
+void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 {
 	t_cmd_lst	*lst_begin;
 	char		*s;
@@ -135,7 +135,7 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, t_env_lst *env, char **envp)
 	}
 	if (!s || !*s)
 		return ;
-	set_line(s, lst, env, envp);
+	set_line(s, lst, envp);
 	if (check_cmd(lst_begin))
 	{
 		free(s);

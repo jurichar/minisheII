@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 17:18:22 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:50:25 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void	free_cmds(t_cmd_lst *lst)
 	}
 }
 
-void	lst_cmd(char *line, t_env_lst *env, t_cmd_lst **lst, char **envp)
+void	lst_cmd(char *line, t_cmd_lst **lst, char **envp)
 {
 	if (line)
-		ft_split_cmd(lst, line, env, envp);
+		ft_split_cmd(lst, line, envp);
 	return ;
 }
 
@@ -90,7 +90,7 @@ int	main(int ac, char **av, char **env)
 	while (1)
 	{
 		lst = ft_new_cmd_list(envp);
-		lst_cmd(get_line(), envlst, &lst, envp);
+		lst_cmd(get_line(), &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 			get_built_in(&lst, &envlst, 0);
 		ft_free_cmd(lst);

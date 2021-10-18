@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:58:07 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:45:31 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,7 @@ void		free_cmds(t_cmd_lst *lst);
 void		lst_cmd(char *line, t_cmd_lst **lst, char **envp);
 char		*get_line( void );
 void		print_point_char(char **str);
+void		sig_handler(int sig);
 
 // manage_input
 void		get_to_cur_pos(int from, int to);

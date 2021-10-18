@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 16:14:10 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:57:51 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		exec_ve_abs(lst, *envlst);
 		exec_ve_rel(lst, *envlst);
 		printf("minishell: %s: command not found\n", lst->cmd);
+		g_exit_code = 127;
 		exit(EXIT_FAILURE);
 	}
 	else

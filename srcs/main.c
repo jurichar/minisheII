@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:50:25 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:42:51 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,10 @@ char	*get_line(void)
 	char	*line;
 
 	line = readline("minishell-1.0$ ");
+	if (!line)
+	{
+		sig_handler(11);
+	}
 	if (ft_strlen(line) > 0)
 		add_history(line);
 	return (line);
@@ -78,7 +82,6 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	signal(SIGINT, sig_handler);
-	signal(SIGSEGV, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;
 	if (ac != 1 || env == NULL)

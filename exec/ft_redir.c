@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/13 17:09:15 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 18:53:57 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 	while (ft_strcmp(line, lst->redir->arg) != 0)
 	{
 		line = readline("> ");
+		if (!line)
+			break ;
 		if (ft_strcmp(line, lst->redir->arg) != 0)
 		{
 			ft_putstr_fd(line, fd0);

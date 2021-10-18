@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 16:29:03 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:33:32 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 	{
 		(*lst)->args[j] = find_env_var((*lst)->args[j], *envlst);
 		(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+		(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
 	}
 	if ((*lst)->redir != NULL)
 	{

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:37:54 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:39:24 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:43:45 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,32 +59,25 @@ char	*malloc_cmdname(char *s, int *ptr_len)
 	return (cmd);
 }
 
-char	*malloc_line(char *str, int *ptr_len)
+void	copy_until_space(char *dest, char *src)
 {
-	int		quote;
-	char	*line;
-	int		len;
+	int	i;
+	int	quote;
 
+	i = -1;
 	quote = 0;
-	len = -1;
-	while (str[++len])
+	while (src[++i])
 	{
-		if (quote == 0 && (str[len] == '\'' || str[len] == '"'))
-			quote = get_to_next_quote(str, len);
-		if (!str[quote])
+		if (quote == 0 && (src[i] == '\'' || src[i] == '"'))
+			quote = get_to_next_quote(src, i);
+		if (!src[quote])
 			quote = 0;
-		if (quote == 0 && (is_space(str[len]) || is_sep(str[len])))
-			break ;
-		else if (quote && len == quote && str[len + 1] == ' ')
-			break ;
-		else if (quote && len == quote)
+		if (quote && i == quote)
 			quote = 0;
+		if (quote == 0 && is_space(src[i]))
+			break ;
+		dest[i] = src[i];
 	}
-	line = malloc(sizeof(char) * len + 1);
-	if (!line)
-		return (NULL);
-	*ptr_len = len;
-	return (line);
 }
 
 void	get_line_without_quote(char	*str, char *copy, int len, int quote)
@@ -116,7 +109,7 @@ void	get_line_without_quote(char	*str, char *copy, int len, int quote)
 	copy[j] = '\0';
 }
 
-char	*ft_strdup_space_sep(char *s)
+char	*ft_strdup_space_sep(char *s, int quote)
 {
 	char	*copy;
 	char	*str;
@@ -124,7 +117,11 @@ char	*ft_strdup_space_sep(char *s)
 
 	str = ft_strdup(s);
 	copy = malloc_line(str, &len);
-	get_line_without_quote(str, copy, len, 0);
+	if (quote)
+		get_line_without_quote(str, copy, len, 0);
+	else
+		copy_until_space(copy, str);
+	
 	free(str);
 	return (copy);
 }

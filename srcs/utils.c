@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:10:52 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/05 19:42:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:35:53 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,4 +71,32 @@ int	pass_cmd_name(char *s, int i)
 	while (s[i] && !((s[i] >= 9 && s[i] <= 13) || s[i] == ' '))
 		i++;
 	return (i);
+}
+
+char	*malloc_line(char *str, int *ptr_len)
+{
+	int		quote;
+	char	*line;
+	int		len;
+
+	quote = 0;
+	len = -1;
+	while (str[++len])
+	{
+		if (quote == 0 && (str[len] == '\'' || str[len] == '"'))
+			quote = get_to_next_quote(str, len);
+		if (!str[quote])
+			quote = 0;
+		if (quote == 0 && (is_space(str[len]) || is_sep(str[len])))
+			break ;
+		else if (quote && len == quote && str[len + 1] == ' ')
+			break ;
+		else if (quote && len == quote)
+			quote = 0;
+	}
+	line = malloc(sizeof(char) * len + 1);
+	if (!line)
+		return (NULL);
+	*ptr_len = len;
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 16:32:27 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:36:29 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,13 +290,14 @@ char		*get_ret_value(char *ret, char *s, int quote, int len);
 char		*ft_strdup_sep(char *str);
 void		get_line_without_quote(char	*str, char *copy, int len, int quote);
 char		*malloc_cmdname(char *s, int *ptr_len);
-char		*ft_strdup_space_sep(char *s);
+char		*ft_strdup_space_sep(char *s, int quote);
 
 // utils
 int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);
 int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
+char		*malloc_line(char *str, int *ptr_len);
 
 // parenthesis2
 int			check_empty_pth(char *s);

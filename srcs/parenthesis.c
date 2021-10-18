@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:53:28 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:40:55 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ char	*get_to_first_pth(char *s)
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
 			quote = get_to_next_quote(s, i);
+		if (!s[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
 	}
@@ -42,6 +44,8 @@ int	check_unclosed_pth(char *s)
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
 			quote = get_to_next_quote(s, i);
+		if (!s[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
 		if (quote == 0 && s[i] == '(')

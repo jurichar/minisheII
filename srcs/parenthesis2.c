@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:54:51 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:40:57 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ int	check_empty_pth(char *s)
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
 			quote = get_to_next_quote(s, i);
+		if (!s[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
 		if (quote == 0 && s[i] == '(')
@@ -50,6 +52,8 @@ int	check_back_pth(char *s, int i, int pth_nb)
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
 			quote = get_to_next_quote(s, i);
+		if (!s[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
 		if (s[i] == ')' && quote == 0 && (status == 0 || status == 2))
@@ -79,6 +83,8 @@ int	check_front_pth(char *s, int i, int pth_nb, int inside)
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
 			quote = get_to_next_quote(s, i);
+		if (!s[quote])
+			quote = 0;
 		if (quote && i == quote)
 			quote = 0;
 		i += skip_space(&s[i]);

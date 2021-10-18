@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 16:11:21 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:14:10 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,6 @@ void	exec_error(pid_t pid)
 int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	pid_t	pid;
-	printf("cmd = %s\n", lst->cmd);
 
 	if (check_built_in(lst, envlst) == 1)
 		return (1);

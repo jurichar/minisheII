@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 16:13:19 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:14:21 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,27 +81,23 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
-	printf("cmd = %s\n", (*lst)->cmd);
 	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst);
 	j = -1;
 	while ((*lst)->args[++j])
 	{
 		(*lst)->args[j] = find_env_var((*lst)->args[j], *envlst);
 		(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
-	}	
+	}
 	if ((*lst)->redir != NULL)
 	{
-		if ((*lst)->redir != NULL)
-		{
-			i = ft_redir(*lst, *envlst);
-			if (i == 1)
-				exec_ve(*lst, envlst);
-		}
-		else if ((*lst)->sep == '|')
-			pipor(*lst, *envlst);
-		else
+		i = ft_redir(*lst, *envlst);
+		if (i == 1)
 			exec_ve(*lst, envlst);
-		and_or_manager(lst, envlst);
 	}
+	else if ((*lst)->sep == '|')
+		pipor(*lst, *envlst);
+	else
+		exec_ve(*lst, envlst);
+	and_or_manager(lst, envlst);
 	fd_close(fd);
 }

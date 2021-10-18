@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/13 17:22:25 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:43:49 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,22 +74,44 @@ void	and_or_manager(t_cmd_lst **lst, t_env_lst **envlst)
 	}
 }
 
+int	parse_error(t_cmd_lst **lst)
+{
+	int ret = 1;
+	if ((*lst)->sep == '|' || (*lst)->sep == AND || (*lst)->sep == OR)
+	{
+		if (!((*lst)->next))
+		{
+			printf ("syntax error\n");
+			ret = 0;
+		}
+		else if (ft_strcmp((*lst)->next->cmd, "") == 0 || ft_strcmp((*lst)->next->cmd, "NIL") == 0)
+		{
+			printf ("syntax error\n");
+			ret = 0;
+		}
+	}
+	return ret;
+}
+
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 {
 	int	fd[2];
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
-	if ((*lst)->redir != NULL)
+	if (parse_error(lst) == 1)
 	{
-		i = ft_redir(*lst, *envlst);
-		if (i == 1)
+		if ((*lst)->redir != NULL)
+		{
+			i = ft_redir(*lst, *envlst);
+			if (i == 1)
+				exec_ve(*lst, envlst);
+		}
+		else if ((*lst)->sep == '|')
+			pipor(*lst, *envlst);
+		else
 			exec_ve(*lst, envlst);
+		and_or_manager(lst, envlst);
 	}
-	else if ((*lst)->sep == '|')
-		pipor(*lst, *envlst);
-	else
-		exec_ve(*lst, envlst);
-	and_or_manager(lst, envlst);
 	fd_close(fd);
 }

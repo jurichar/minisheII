@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_tools2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 14:09:08 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/13 14:12:34 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:47:38 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	check_oldpwd(t_env_lst **begin)
 {
-	t_env_lst *lst;
+	t_env_lst	*lst;
 
 	lst = *begin;
 	while (lst && lst->next)

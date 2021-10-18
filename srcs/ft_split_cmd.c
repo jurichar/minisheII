@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 14:56:13 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/18 15:54:07 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ void	set_line(char *str, t_cmd_lst **lst, t_env_lst *env, char **envp)
 	{
 		if (is_separator(str, str[var.i], var.i))
 		{
-			if ((str[var.i] == '|' && str[var.i + 1] == '|') || str[var.i] == '&')
+			if ((str[var.i] == '|' && str[var.i + 1] == '|')
+				|| str[var.i] == '&')
 				var.i++;
 			var.i++;
 		}

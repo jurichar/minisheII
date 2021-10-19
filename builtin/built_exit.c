@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:08 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 16:39:00 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 12:21:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	builtin_exit(t_cmd_lst *lst)
 		g_exit_code = 1;
 		return (g_exit_code);
 	}
-	while (lst->args[0][i] && ft_isdigit(lst->args[0][i]))
+	while (lst->args[0] && lst->args[0][i] && ft_isdigit(lst->args[0][i]))
 		i++;
-	if (lst->args[0][i])
+	if (lst->args[0] && lst->args[0][i])
 	{
 		printf("minishell: exit: %s: numeric argument required\n", lst->args[0]);
 		g_exit_code = 1;

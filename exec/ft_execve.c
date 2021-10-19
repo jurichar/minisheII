@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 18:57:51 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:10:03 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	exec_error(pid_t pid)
 		if (WIFEXITED(status))
 			signum = WEXITSTATUS(status);
 		else if (WIFSIGNALED(status))
-			signum = WTERMSIG(status);
+			signum = WTERMSIG(status) + 128;
 		else if (WIFSTOPPED(status))
 			signum = WSTOPSIG(status);
 		else
@@ -106,7 +106,7 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 		exec_ve_rel(lst, *envlst);
 		printf("minishell: %s: command not found\n", lst->cmd);
 		g_exit_code = 127;
-		exit(EXIT_FAILURE);
+		exit(g_exit_code);
 	}
 	else
 		exec_error(pid);

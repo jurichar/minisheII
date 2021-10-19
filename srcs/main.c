@@ -6,13 +6,13 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 18:42:51 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:14:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	g_exit_code = 0;
+int g_exit_code;
 
 void	free_cmds(t_cmd_lst *lst)
 {
@@ -39,7 +39,6 @@ void	lst_cmd(char *line, t_cmd_lst **lst, char **envp)
 
 void	sig_handler(int sig)
 {
-	g_exit_code = 128 + sig;
 	if (sig == 3)
 	{
 		write(1, "\b\b  \b\b", 6);

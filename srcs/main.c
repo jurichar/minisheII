@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:14:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:42:17 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@ void	sig_handler(int sig)
 		write(1, "\b\b  \b\b", 6);
 		return ;
 	}
-	write(STDOUT_FILENO, "\n", 1);
+	if (sig == 2)
+		write(STDOUT_FILENO, "\n", 1);
 	if (isatty(0))
 	{
 		rl_on_new_line();

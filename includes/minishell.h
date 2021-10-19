@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 14:55:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:45:43 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -274,6 +274,10 @@ t_redir		*redir_dup(char *s);
 int			skip_redir(char *s, int i);
 char		*get_redir(char *s, t_cmd_lst *lst);
 
+// quote 
+int			quote_status(int quote, int i, char *s);
+int			get_to_next_quote(char *s, int i);
+
 // skip
 int			skip_space(char *s);
 
@@ -304,7 +308,7 @@ char		*malloc_line(char *str, int *ptr_len);
 
 // parenthesis2
 int			check_empty_pth(char *s);
-int			check_back_pth(char *s, int i, int pth_nb);
+int			check_back_pth(char *s, int i, int pth_nb, int status);
 int			check_front_pth(char *s, int i, int pth_nb, int inside);
 int			check_fist_last_pth(char *s);
 // parenthesis

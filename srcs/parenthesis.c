@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:40:55 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:18:55 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,11 @@ char	*get_to_first_pth(char *s)
 	return (&s[i]);
 }
 
-int	check_unclosed_pth(char *s)
+int	check_unclosed_pth(char *s, int quote, int level)
 {
 	int	i;
-	int	quote;
-	int	level;
 
 	i = -1;
-	quote = 0;
-	level = 0;
 	while (s[++i])
 	{
 		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
@@ -67,7 +63,7 @@ int	check_parenthesis(char *s)
 		return (1);
 	if (check_empty_pth(get_to_first_pth(s)))
 		return (1);
-	if (check_unclosed_pth(s))
+	if (check_unclosed_pth(s, 0, 0))
 		return (1);
 	return (0);
 }

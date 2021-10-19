@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:10:52 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:35:53 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:53:22 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,6 @@ char	*ft_strjoin_till_space(char const *s1, char const *s2)
 		new[i - 1] = '\0';
 	new[i] = '\0';
 	return (new);
-}
-
-int	get_to_next_quote(char *s, int i)
-{
-	if (s[i] == '\'')
-	{
-		i++;
-		while (s[i] && s[i] != '\'')
-			i++;
-	}
-	else if (s[i] == '"')
-	{
-		i++;
-		while (s[i] && s[i] != '"')
-			i++;
-	}
-	return (i);
 }
 
 int	pass_cmd_name(char *s, int i)

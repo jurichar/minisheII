@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:40:57 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 16:44:59 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,10 @@ int	check_empty_pth(char *s)
 	return (ret);
 }
 
-int	check_back_pth(char *s, int i, int pth_nb)
+int	check_back_pth(char *s, int i, int pth_nb, int status)
 {
-	int	status;
 	int	quote;
 
-	status = 0;
 	quote = 0;
 	while (--i >= 0)
 	{
@@ -68,61 +66,52 @@ int	check_back_pth(char *s, int i, int pth_nb)
 			status = 1;
 	}
 	if (i > 0)
-		return (check_back_pth(s, i, ++pth_nb));
+		return (check_back_pth(s, i, ++pth_nb, 0));
 	return (0);
 }
 
-int	check_front_pth(char *s, int i, int pth_nb, int inside)
+void	set_status(int *status, int *i, char *s, int quote)
+{
+	if (quote == 0 && s[*i] == '&' && s[*i + 1] == '&')
+	{
+		*i += 1;
+		*status = 2;
+	}	
+	else if (quote == 0 && s[*i] == '|' && s[*i + 1] == '|')
+	{
+		*i += 1;
+		*status = 2;
+	}
+	else if (!is_space(s[*i]))
+		*status = 1;
+}
+
+int	check_front_pth(char *s, int i, int pth_nb, int in)
 {
 	int	status;
-	int	quote;
+	int	qt;
 
 	status = 0;
-	quote = 0;
+	qt = 0;
 	while (s[++i])
 	{
-		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
-			quote = get_to_next_quote(s, i);
-		if (!s[quote])
-			quote = 0;
-		if (quote && i == quote)
-			quote = 0;
+		qt = quote_status(qt, i, s);
 		i += skip_space(&s[i]);
-		if (s[i] == '(' && quote == 0 && ((pth_nb == 0 && status == 0)
-				|| (inside && status == 0)))
+		if (s[i] == '(' && qt == 0 && ((pth_nb == 0 && status == 0) || (in
+					&& status == 0) || (s[i] == '(' && qt == 0 && status == 2)))
 		{
-			inside++;
+			in++;
 			break ;
 		}
-		else if (s[i] == '(' && quote == 0 && status == 2)
-		{
-			inside++;
-			break ;
-		}
-		else if (s[i] == '(' && quote == 0
-			&& inside == 0 && pth_nb && status == 0)
+		else if ((s[i] == '(' && qt == 0 && in == 0 && pth_nb
+				&& status == 0) || (qt == 0 && s[i] == '(' && status == 1))
 			return (i);
-		else if (quote == 0 && s[i] == '(' && status == 1)
-		{
-			return (i);
-		}
-		if (quote == 0 && s[i] == '&' && s[i + 1] == '&')
-		{
-			i++;
-			status = 2;
-		}	
-		else if (quote == 0 && s[i] == '|' && s[i + 1] == '|')
-		{
-			i++;
-			status = 2;
-		}
-		else if (!is_space(s[i]))
-			status = 1;
-		if (quote == 0 && s[i] == ')')
-			inside--;
+		set_status(&status, &i, s, qt);
+		if (qt == 0 && s[i] == ')')
+			in--;
 	}
 	if (s[i])
-		return (check_front_pth(s, i, ++pth_nb, inside));
+		return (check_front_pth(s, i, ++pth_nb, in));
 	return (0);
 }
 
@@ -135,7 +124,7 @@ int	check_fist_last_pth(char *s)
 		printf("minishell: syntax error near unexpected token `('\n");
 		return (1);
 	}
-	ret = check_back_pth(s, ft_strlen(s), 0);
+	ret = check_back_pth(s, ft_strlen(s), 0, 0);
 	if (ret)
 	{
 		write(1, "minishell: syntax error near unexpected token `",

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:14:26 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:20:38 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int g_exit_code;
+int	g_exit_code;
 
 void	free_cmds(t_cmd_lst *lst)
 {

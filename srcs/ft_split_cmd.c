@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:17:16 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:20:00 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,6 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 
 	lst_begin = *lst;
 	init_var_cmd(&var, str, lst_begin);
-	// var.j = -1;
-	// var.i = 0;
-	// var.phlvl = 0;
-	// var.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
 	while (++var.j < var.cmd_count)
 	{
 		if (is_separator(str, str[var.i], var.i))

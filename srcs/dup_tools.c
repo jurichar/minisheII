@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/23 17:37:54 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:43:45 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:29:37 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,6 @@ char	*ft_strdup_space_sep(char *s, int quote)
 		get_line_without_quote(str, copy, len, 0);
 	else
 		copy_until_space(copy, str);
-	
 	free(str);
 	return (copy);
 }

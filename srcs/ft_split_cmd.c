@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 18:01:03 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:17:16 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,9 @@ int	cmd_counter(char *str, int *pipe, int quote)
 		if (quote == 0 && !is_separator(str, str[i], i)
 			&& (is_separator(str, str[i + 1], i + 1) || str[i + 1] == '\0'))
 		{
+			count++;
 			if (str[i + 1] == '|' && (quote == 0 || i + 1 > quote))
-			{
 				(*pipe)++;
-				count++;
-			}
-			else
-				count++;
 		}
 	}
 	return (count);
@@ -68,32 +64,23 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 	t_cmd_lst	*lst_begin;
 	char		*buf;
 
-	var.j = -1;
-	var.i = 0;
-	var.phlvl = 0;
 	lst_begin = *lst;
-	var.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
+	init_var_cmd(&var, str, lst_begin);
+	// var.j = -1;
+	// var.i = 0;
+	// var.phlvl = 0;
+	// var.cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
 	while (++var.j < var.cmd_count)
 	{
 		if (is_separator(str, str[var.i], var.i))
-		{
-			if ((str[var.i] == '|' && str[var.i + 1] == '|')
-				|| str[var.i] == '&')
-				var.i++;
-			var.i++;
-		}
+			var.i += is_separator(str, str[var.i], var.i);
 		(*lst)->phlvl = find_phlvl(str, var.i);
 		buf = get_cmd(&str[var.i]);
 		if (str[var.i])
 			ft_split_args(buf, lst);
 		while (str[var.i] && !is_separator(str, str[var.i], var.i))
 			var.i++;
-		if (str[var.i] == '|' && str[var.i + 1] == '|')
-			(*lst)->sep = OR;
-		else if (str[var.i] == '&' && str[var.i + 1] == '&')
-			(*lst)->sep = AND;
-		else
-			(*lst)->sep = str[var.i];
+		(*lst)->sep = which_sep(str, var.i);
 		(*lst)->sep_phlvl = find_phlvl(str, var.i);
 		if (ft_strcmp(lst_begin->cmd, "NIL") == 0)
 			lst_begin = *lst;
@@ -106,7 +93,7 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 
 int	check_cmd(t_cmd_lst *lst)
 {
-	int ret;
+	int	ret;
 
 	ret = 0;
 	if (lst->sep == '|' || lst->sep == AND || lst->sep == OR)
@@ -116,7 +103,8 @@ int	check_cmd(t_cmd_lst *lst)
 			printf ("syntax error\n");
 			ret = 1;
 		}
-		else if (ft_strcmp(lst->next->cmd, "") == 0 || ft_strcmp(lst->next->cmd, "NIL") == 0)
+		else if (ft_strcmp(lst->next->cmd, "") == 0
+			|| ft_strcmp(lst->next->cmd, "NIL") == 0)
 		{
 			printf ("syntax error\n");
 			ret = 1;
@@ -147,10 +135,5 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 	if (!s || !*s)
 		return ;
 	set_line(s, lst, envp);
-	// if (check_cmd(lst_begin))
-	// {
-	// 	free(s);
-	// 	return ;
-	// }
 	free(s);
 }

@@ -6,11 +6,28 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 18:26:22 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:17:20 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	init_var_cmd(t_set_line *var, char *str, t_cmd_lst *lst_begin)
+{
+	var->j = -1;
+	var->i = 0;
+	var->phlvl = 0;
+	var->cmd_count = cmd_counter(str, &lst_begin->nb_p, 0);
+}
+
+int	which_sep(char *str, int i)
+{
+	if (str[i] == '|' && str[i + 1] == '|')
+		return (OR);
+	else if (str[i] == '&' && str[i + 1] == '&')
+		return (AND);
+	return (str[i]);
+}
 
 void	ft_free_cmd(t_cmd_lst *lst)
 {

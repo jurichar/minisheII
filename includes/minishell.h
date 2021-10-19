@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 18:45:31 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:55:15 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,8 @@ int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
 MAIN
 */
 // cmd_utils
+void		init_var_cmd(t_set_line *var, char *str, t_cmd_lst *lst_begin);
+int			which_sep(char *str, int i);
 char		*clear_parenthesis(char *s);
 void		ft_free_cmd(t_cmd_lst *lst);
 char		*get_cmd(char *s);

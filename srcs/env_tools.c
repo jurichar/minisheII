@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:23:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 15:45:46 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:31:30 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ t_env_lst	*get_env(t_env_lst *list, char **envp)
 		while (envp[i][++j] != '=')
 			;
 		name = ft_substr(envp[i], 0, j);
-		while (envp[i][++j])
-			;
+		j = ft_strlen(envp[i]);
 		content = ft_substr(ft_strchr(envp[i], '=') + 1, 0, j);
 		if (ft_strcmp(name, "SHLVL") == 0)
 			content = inc_shlvl(content);

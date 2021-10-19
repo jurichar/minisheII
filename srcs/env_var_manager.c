@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 17:22:18 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/19 14:39:12 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,10 @@ char	*get_arg(char *s, t_env_lst *env)
 		return (get_ret_value(ret, s, quote, len));
 	while (env && (ft_strcmp(ret, env->name) != 0))
 		env = env->next;
-	if (env != NULL)
-	{
-		free(ret);
-		ret = dup_var_from_list(env, s, len, quote);
-	}
-	else
-	{
-		free(ret);
+	free(ret);
+	if (env == NULL)
 		return (NULL);
-	}
+	ret = dup_var_from_list(env, s, len, quote);
 	return (ret);
 }
 

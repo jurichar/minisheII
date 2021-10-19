@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 18:53:57 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/19 15:38:40 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	ft_redir_out(t_cmd_lst *lst)
 {
 	int	fd;
 
-	printf ("coucou\n");
 	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	dup2(fd, 1);
 	if (lst->redir->next && lst->redir->next->redir == IN)

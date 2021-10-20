@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/20 14:51:05 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/20 16:02:12 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	update_oldpwd(t_env_lst **lst)
 			break ;
 		lst_oldpwd = lst_oldpwd->next;
 	}
-	lst_oldpwd->visible = 1;
 	while (lst_pwd)
 	{
 		if (ft_strcmp(lst_pwd->name, "PWD") == 0)
@@ -76,6 +75,7 @@ void	update_oldpwd(t_env_lst **lst)
 	}
 	if (lst_oldpwd)
 	{
+		lst_oldpwd->visible = 1;
 		free(lst_oldpwd->content);
 		lst_oldpwd->content = NULL;
 	}	

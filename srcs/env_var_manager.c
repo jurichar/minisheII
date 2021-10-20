@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 15:10:13 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/20 15:24:20 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ char	*find_env_var(char *str, t_env_lst *env)
 	int		quote;
 	char	*s;
 
+	if (!str || !*str)
+		return (NULL);
 	s = ft_strdup(str);
 	i = -1;
 	quote = 0;

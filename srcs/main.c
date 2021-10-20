@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 16:46:15 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:13:18 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,17 +86,19 @@ int	main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	if (ac != 1 || env == NULL)
 		return (0);
-	envp = ft_strdoubledup(env);
-	lst = NULL;
-	envlst = NULL;
-	envlst = get_env(envlst, envp);
 	while (1)
 	{
+		lst = NULL;
+		envlst = NULL;
+		envp = ft_strdoubledup(env);
+		envlst = get_env(envlst, envp);
 		lst = ft_new_cmd_list(envp);
 		lst_cmd(get_line(), &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 			get_built_in(&lst, &envlst, 0);
 		ft_free_cmd(lst);
+		ft_free_env(envlst);
+		ft_free_double_char(envp);
 	}
 	return (0);
 }

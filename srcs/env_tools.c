@@ -3,28 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_tools.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 14:23:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 14:31:30 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:13:41 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	ft_free_env(t_env_lst *lst)
-{
-	t_env_lst	*ptr;
-
-	while (lst)
-	{
-		free(lst->name);
-		free(lst->content);
-		ptr = lst->next;
-		free(lst);
-		lst = ptr;
-	}
-}
 
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content)
 {

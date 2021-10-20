@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 16:45:43 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 16:13:07 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,6 @@ MAIN
 void		init_var_cmd(t_set_line *var, char *str, t_cmd_lst *lst_begin);
 int			which_sep(char *str, int i);
 char		*clear_parenthesis(char *s);
-void		ft_free_cmd(t_cmd_lst *lst);
 char		*get_cmd(char *s);
 
 // ft_is
@@ -224,12 +223,15 @@ int			is_sep(char c);
 int			is_redir(char *s, char c, int pos);
 
 // env_tools
-void		ft_free_env(t_env_lst *lst);
 t_env_lst	*get_env(t_env_lst *list, char **envp);
 t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 
 // env_tools2
 void		check_oldpwd(t_env_lst **begin);
+
+// ft_free
+void		ft_free_env(t_env_lst *lst);
+void		ft_free_cmd(t_cmd_lst *lst);
 
 // ft_split_arg
 int			args_counter(char *str);

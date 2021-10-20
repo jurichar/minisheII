@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 12:10:52 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:53:22 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:49:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,21 +63,20 @@ char	*malloc_line(char *str, int *ptr_len)
 	int		len;
 
 	quote = 0;
-	len = -1;
-	while (str[++len])
+	len = 0;
+	line = NULL;
+	if (!str)
+		return (NULL);
+	while (str[len])
 	{
-		if (quote == 0 && (str[len] == '\'' || str[len] == '"'))
-			quote = get_to_next_quote(str, len);
-		if (!str[quote])
-			quote = 0;
+		quote = quote_status(quote, len, str);
 		if (quote == 0 && (is_space(str[len]) || is_sep(str[len])))
 			break ;
 		else if (quote && len == quote && str[len + 1] == ' ')
 			break ;
-		else if (quote && len == quote)
-			quote = 0;
+		len++;
 	}
-	line = malloc(sizeof(char) * len + 1);
+	line = ft_calloc(sizeof(char), len + 1);
 	if (!line)
 		return (NULL);
 	*ptr_len = len;

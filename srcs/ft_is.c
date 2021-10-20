@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/11 16:08:34 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:13:24 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 13:55:44 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	is_separator(char *s, char c, int pos)
 	quote = 0;
 	while (s[++i])
 	{
-		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
-			quote = get_to_next_quote(s, i);
-		if (quote == 1 && i == quote)
-			quote = 0;
+		quote = quote_status(quote, i, s);
 		if (i == pos && quote == 0)
 			return (type);
 	}

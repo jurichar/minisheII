@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 15:20:00 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:12:25 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,7 @@ int	cmd_counter(char *str, int *pipe, int quote)
 	count = 0;
 	while (str[++i])
 	{
-		if (quote == 0 && (str[i] == '\'' || str[i] == '"'))
-			quote = get_to_next_quote(str, i);
-		if (!str[quote])
-			quote = 0;
-		if (quote && i == quote)
-			quote = 0;
+		quote = quote_status(quote, i, str);
 		if (quote == 0 && !is_separator(str, str[i], i)
 			&& (is_separator(str, str[i + 1], i + 1) || str[i + 1] == '\0'))
 		{
@@ -68,7 +63,7 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 	init_var_cmd(&var, str, lst_begin);
 	while (++var.j < var.cmd_count)
 	{
-		if (is_separator(str, str[var.i], var.i))
+		if (var.j != 0 && is_separator(str, str[var.i], var.i))
 			var.i += is_separator(str, str[var.i], var.i);
 		(*lst)->phlvl = find_phlvl(str, var.i);
 		buf = get_cmd(&str[var.i]);

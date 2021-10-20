@@ -1,0 +1,10 @@
+a
+b
+builtin
+exec
+includes
+libft
+Makefile
+minishell
+README.md
+srcs

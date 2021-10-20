@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/05 16:44:08 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/05 20:06:33 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 17:18:07 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ int	check_redir(char *s)
 		if (i == -1)
 			return (i);
 		len++;
+		if (!s[i])
+			break ;
 	}
 	return (len);
 }

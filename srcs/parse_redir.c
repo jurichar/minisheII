@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:40:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/08/24 21:14:35 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/20 18:52:53 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	set_redir(char *s, int pos, t_redir **new)
 		}	
 		if (quote == 0 && is_space(s[pos]))
 			break ;
-		(*new)->arg = ft_realloc((*new)->arg, ft_strlen((*new)->arg));
+		(*new)->arg = ft_realloc((*new)->arg, ft_strlen((*new)->arg) + 1);
 		(*new)->arg[i++] = s[pos++];
 	}
 	(*new)->next = NULL;
@@ -118,6 +118,8 @@ char	*get_line_without_redir(char *s, char *new, t_cmd_lst **lst, int i)
 				add_redir(lst, s, i);
 			i = skip_redir(s, i);
 		}
+		if (!s[i])
+			break ;
 		new[len] = s[i];
 		len++;
 	}

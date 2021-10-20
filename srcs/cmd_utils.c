@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/25 03:40:31 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 16:11:24 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/20 16:52:03 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char	*clear_parenthesis(char *s)
 	int		j;
 	int		quote;
 
-	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	res = malloc(sizeof(char) * ft_strlen(s) + 1);
 	if (!res)
 		return (NULL);
 	quote = 0;

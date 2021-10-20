@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 16:44:59 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:19:04 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	check_empty_pth(char *s)
 	int	quote;
 	int	ret;
 
+	if (!*s)
+		return (0);
 	i = skip_space(&s[1]) + 1;
 	if (s[i] == ')')
 	{

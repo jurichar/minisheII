@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/14 20:05:21 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:51:05 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 	if (lst->args[0] == NULL)
 		ret = built_cd_home(envlst, ret);
 	else if (ft_strcmp(lst->args[0], "~") == 0)
-		ret = builtin_cd_tild(*envlst);
+		ret = chdir(getenv("HOME"));
 	else
 		ret = chdir(lst->args[0]);
 	if (ret == -1)
@@ -106,6 +106,9 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 		printf("minishell: cd: %s: No such file or directory\n", lst->args[0]);
 		ret = 1;
 	}
-	update_oldpwd(envlst);
+	if (ret != -2)
+		update_oldpwd(envlst);
+	if (ret == -2)
+		ret = 1;
 	return (ret);
 }

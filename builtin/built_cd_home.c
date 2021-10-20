@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd_home.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/12 14:21:27 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/12 14:26:18 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 14:42:40 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	built_cd_home(t_env_lst **envlst, int ret)
 	if (*envlst == NULL)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 1);
-		return (1);
+		return (-2);
 	}
 	ret = chdir((*envlst)->content);
 	return (ret);

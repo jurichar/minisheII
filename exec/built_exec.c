@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exec.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/18 18:02:12 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/20 15:10:02 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,11 +83,14 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 	fd[1] = dup(1);
 	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst);
 	j = -1;
-	while ((*lst)->args[++j])
+	if ((*lst)->args[0])
 	{
-		(*lst)->args[j] = find_env_var((*lst)->args[j], *envlst);
-		(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
-		(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
+		while ((*lst)->args[++j])
+		{
+			(*lst)->args[j] = find_env_var((*lst)->args[j], *envlst);
+			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+			(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
+		}
 	}
 	if ((*lst)->redir != NULL)
 	{

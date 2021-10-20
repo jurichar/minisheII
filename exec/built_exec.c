@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/20 16:20:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/20 16:37:43 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,9 @@ void	and_or_manager(t_cmd_lst **lst, t_env_lst **envlst)
 
 void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 {
-	int	fd[2];
-	int	j;
+	int		fd[2];
+	int		j;
+	char	*buf;
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
@@ -89,7 +90,9 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 		{
 			(*lst)->args[j] = find_env_var((*lst)->args[j], *envlst);
 			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+			buf = (*lst)->args[j];
 			(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
+			free(buf);
 		}
 	}
 	if ((*lst)->redir != NULL)

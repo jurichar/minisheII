@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 15:19:04 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/20 16:42:11 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ int	check_front_pth(char *s, int i, int pth_nb, int in)
 
 	status = 0;
 	qt = 0;
+	if (!s || !*s)
+		return (0);
 	while (s[++i])
 	{
 		qt = quote_status(qt, i, s);
@@ -111,6 +113,8 @@ int	check_front_pth(char *s, int i, int pth_nb, int in)
 		set_status(&status, &i, s, qt);
 		if (qt == 0 && s[i] == ')')
 			in--;
+		if (!s[i])
+			break ;
 	}
 	if (s[i])
 		return (check_front_pth(s, i, ++pth_nb, in));

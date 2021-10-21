@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/29 16:58:54 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/21 15:06:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	}
 	close_pipor(&pip);
 	clean_pid(&pip);
+	free (pip.pipes);
+	free (pip.pid);
 	return (0);
 }

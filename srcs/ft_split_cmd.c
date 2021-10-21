@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 15:19:21 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 14:35:51 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,10 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 		return ;
 	}
 	if (!s || !*s)
+	{
+		free(s);
 		return ;
+	}
 	set_line(s, lst, envp);
 	free(s);
 }

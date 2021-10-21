@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/20 16:02:12 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:21:32 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,10 @@ int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 		ret = chdir(getenv("HOME"));
 	else
 		ret = chdir(lst->args[0]);
+	printf("ret == %d\n", ret);
 	if (ret == -1)
 	{
+		ft_putstr_fd(strerror(errno), 1);
 		printf("minishell: cd: %s: No such file or directory\n", lst->args[0]);
 		ret = 1;
 	}

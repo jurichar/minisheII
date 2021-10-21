@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/21 14:49:15 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:42:35 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,8 +90,9 @@ void	exec_error(pid_t pid)
 int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 {
 	pid_t	pid;
+
 	if (!lst->cmd)
-		return 0;
+		return (0);
 	if (check_built_in(lst, envlst) == 1)
 		return (1);
 	pid = fork();

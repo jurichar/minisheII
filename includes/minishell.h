@@ -6,7 +6,7 @@
 /*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 16:13:07 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:39:22 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,9 @@ int			builtin_unset(t_cmd_lst *lst, t_env_lst **env);
 // built_utils
 char		**join_args(char *s, char **args);
 char		*get_env_by_name(t_env_lst *envlst, char *name);
+
+// expand
+void		expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst);
 
 // ft_execve
 int			check_built_in(t_cmd_lst *lst, t_env_lst **envlst);

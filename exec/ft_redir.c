@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/20 18:40:25 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:47:38 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,7 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 		if (!line)
 			break ;
 		if (ft_strcmp(line, lst->redir->arg) == 0)
-		{
-			break;
-		}
+			break ;
 		ft_putstr_fd("\n", fd0);
 		ft_putstr_fd(line, fd0);
 		free(line);
@@ -56,8 +54,9 @@ void	ft_redir_out_double(t_cmd_lst *lst)
 
 void	ft_redir_out(t_cmd_lst *lst)
 {
-	int	fd;
-	char *file;
+	int		fd;
+	char	*file;
+
 	file = lst->redir->arg;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	dup2(fd, 1);

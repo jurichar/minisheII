@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand.c                                           :+:      :+:    :+:   */
+/*   pth_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/21 16:54:04 by lebourre         ###   ########.fr       */
+/*   Created: 2021/10/21 17:28:20 by lebourre          #+#    #+#             */
+/*   Updated: 2021/10/21 17:31:25 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst)
+int	init_pth_var_check_s(t_pth_var *var, char *s, int i)
 {
-	char	*buf;
-	int		j;
-
-	j = -1;
-	if ((*lst)->args && (*lst)->args[0])
-	{
-		while ((*lst)->args[++j])
-		{
-			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst);
-			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
-			buf = (*lst)->args[j];
-			(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
-			free(buf);
-		}
-	}
+	var.qt = 0;
+	var.sts = 0;
+	if (!s || !*s || !s[i])
+		return (1);
+	return (0);
 }

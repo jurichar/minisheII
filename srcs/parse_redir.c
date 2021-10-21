@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/04 15:40:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 18:52:53 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:32:28 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_redir(char *s, int pos, t_redir **new)
 			quote = get_to_next_quote(s, pos);
 			pos++;
 			continue ;
-		}	
+		}
 		if (quote && pos == quote)
 		{
 			pos++;
@@ -120,8 +120,7 @@ char	*get_line_without_redir(char *s, char *new, t_cmd_lst **lst, int i)
 		}
 		if (!s[i])
 			break ;
-		new[len] = s[i];
-		len++;
+		new[len++] = s[i];
 	}
 	(*lst)->redir = begin;
 	new[len] = '\0';

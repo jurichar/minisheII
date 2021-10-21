@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 15:24:20 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:53:37 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,15 +96,12 @@ char	*find_env_var(char *str, t_env_lst *env)
 	quote = 0;
 	while (str[++i])
 	{
-		if (str[i] == '"')
-			quote = get_to_next_quote(str, i);
+		quote = double_quote_status(quote, i, s);
 		if (str[i] == '\'')
 		{
 			i = get_to_next_quote(str, i);
 			continue ;
 		}	
-		if (quote && i == quote)
-			quote = 0;
 		if (quote == 0 && is_sep(str[i]))
 			break ;
 		if (str[i] == '$')

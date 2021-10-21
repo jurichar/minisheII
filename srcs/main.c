@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 16:13:18 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 16:56:58 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	main(int ac, char **av, char **env)
 		return (0);
 	while (1)
 	{
-		lst = NULL;
 		envlst = NULL;
 		envp = ft_strdoubledup(env);
 		envlst = get_env(envlst, envp);

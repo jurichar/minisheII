@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/21 16:39:22 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 17:30:48 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,12 @@ typedef struct s_set_line
 	int	cmd_count;
 	int	phlvl;
 }				t_set_line;
+
+typedef struct s_pth_var
+{
+	int	qt;
+	int	sts;
+}				t_pth_var;
 
 /*
 BUILT IN 
@@ -279,7 +285,8 @@ t_redir		*redir_dup(char *s);
 int			skip_redir(char *s, int i);
 char		*get_redir(char *s, t_cmd_lst *lst);
 
-// quote 
+// quote
+int			double_quote_status(int quote, int i, char *s);
 int			quote_status(int quote, int i, char *s);
 int			get_to_next_quote(char *s, int i);
 
@@ -305,11 +312,14 @@ char		*malloc_cmdname(char *s, int *ptr_len);
 char		*ft_strdup_space_sep(char *s, int quote);
 
 // utils
+int			print_and_ret(char *to_print, int to_ret);
 int			ft_whereis_char(char *s, int c);
 char		*ft_strjoin_till_space(char const *s1, char const *s2);
-int			get_to_next_quote(char *s, int i);
 int			pass_cmd_name(char *s, int i);
 char		*malloc_line(char *str, int *ptr_len);
+
+// pth_utils
+int			init_pth_var_check_s(t_pth_var *var, char *s, int i);
 
 // parenthesis2
 int			check_empty_pth(char *s);

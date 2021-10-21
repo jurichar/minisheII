@@ -6,11 +6,22 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:50:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 16:31:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:52:44 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	double_quote_status(int quote, int i, char *s)
+{
+	if (quote == 0 && s[i] == '"')
+		quote = get_to_next_quote(s, i);
+	if (!s[quote])
+		quote = 0;
+	if (quote && i == quote)
+		quote = 0;
+	return (quote);
+}
 
 int	quote_status(int quote, int i, char *s)
 {

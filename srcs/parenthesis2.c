@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parenthesis2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/20 16:42:11 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/21 17:31:06 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ int	check_empty_pth(char *s)
 		return (0);
 	i = skip_space(&s[1]) + 1;
 	if (s[i] == ')')
-	{
-		printf("minishell: syntax error near unexpected token `)'\n");
-		return (1);
-	}
+		return (print_and_ret("minishell: syntax error near unexpected\
+ token `)'\n", 1));
 	quote = 0;
 	ret = 0;
 	while (s[i])
@@ -38,7 +36,6 @@ int	check_empty_pth(char *s)
 			quote = 0;
 		if (quote == 0 && s[i] == '(')
 			return (ret + check_empty_pth(&s[i]));
-		i++;
 	}
 	return (ret);
 }
@@ -90,35 +87,30 @@ void	set_status(int *status, int *i, char *s, int quote)
 
 int	check_front_pth(char *s, int i, int pth_nb, int in)
 {
-	int	status;
-	int	qt;
+	t_pth_var	v;
 
-	status = 0;
-	qt = 0;
-	if (!s || !*s)
+	if (init_pth_var_check_s(&v, s, i))
 		return (0);
 	while (s[++i])
 	{
-		qt = quote_status(qt, i, s);
+		v.qt = quote_v.sts(v.qt, i, s);
 		i += skip_space(&s[i]);
-		if (s[i] == '(' && qt == 0 && ((pth_nb == 0 && status == 0) || (in
-					&& status == 0) || (s[i] == '(' && qt == 0 && status == 2)))
+		if (s[i] == '(' && v.qt == 0 && ((pth_nb == 0 && v.sts == 0) || (in
+					&& v.sts == 0) || (s[i] == '(' && v.qt == 0 && v.sts == 2)))
 		{
 			in++;
 			break ;
 		}
-		else if ((s[i] == '(' && qt == 0 && in == 0 && pth_nb
-				&& status == 0) || (qt == 0 && s[i] == '(' && status == 1))
+		else if ((s[i] == '(' && v.qt == 0 && in == 0 && pth_nb
+				&& v.sts == 0) || (v.qt == 0 && s[i] == '(' && v.sts == 1))
 			return (i);
-		set_status(&status, &i, s, qt);
-		if (qt == 0 && s[i] == ')')
+		set_v.sts(&v.sts, &i, s, v.qt);
+		if (v.qt == 0 && s[i] == ')')
 			in--;
 		if (!s[i])
 			break ;
 	}
-	if (s[i])
-		return (check_front_pth(s, i, ++pth_nb, in));
-	return (0);
+	return (check_front_pth(s, i, ++pth_nb, in));
 }
 
 int	check_fist_last_pth(char *s)
@@ -126,10 +118,8 @@ int	check_fist_last_pth(char *s)
 	int	ret;
 
 	if (check_front_pth(s, -1, 0, 0))
-	{
-		printf("minishell: syntax error near unexpected token `('\n");
-		return (1);
-	}
+		return (print_and_ret("minishell: syntax error near unexpected\
+ token `('\n", 1));
 	ret = check_back_pth(s, ft_strlen(s), 0, 0);
 	if (ret)
 	{

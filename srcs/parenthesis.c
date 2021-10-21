@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/19 16:18:55 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:08:19 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,8 @@ int	check_unclosed_pth(char *s, int quote, int level)
 			level--;
 	}
 	if (level)
-	{
-		printf("minishell: syntax error: unclosed parenthesis\n");
-		return (1);
-	}
+		return (print_and_ret("minishell: syntax error: unclosed parenthesis\n",
+				1));
 	return (0);
 }
 

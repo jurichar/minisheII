@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/21 15:06:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/21 16:46:58 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	int		i;
 
 	pip = init_pipor(lst);
-	i = 0;
-	while (i < pip.nbc)
+	i = -1;
+	while (++i < pip.nbc)
 	{
 		pip.pid[i] = fork();
 		fork_error(pip, i);
@@ -71,7 +71,6 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 			else
 				pipor_last(pip, lst, envlst, i);
 		}
-		i++;
 		lst = lst->next;
 	}
 	close_pipor(&pip);

@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/21 17:31:06 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/21 17:42:52 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ int	check_front_pth(char *s, int i, int pth_nb, int in)
 		return (0);
 	while (s[++i])
 	{
-		v.qt = quote_v.sts(v.qt, i, s);
+		v.qt = quote_status(v.qt, i, s);
 		i += skip_space(&s[i]);
 		if (s[i] == '(' && v.qt == 0 && ((pth_nb == 0 && v.sts == 0) || (in
 					&& v.sts == 0) || (s[i] == '(' && v.qt == 0 && v.sts == 2)))
@@ -104,7 +104,7 @@ int	check_front_pth(char *s, int i, int pth_nb, int in)
 		else if ((s[i] == '(' && v.qt == 0 && in == 0 && pth_nb
 				&& v.sts == 0) || (v.qt == 0 && s[i] == '(' && v.sts == 1))
 			return (i);
-		set_v.sts(&v.sts, &i, s, v.qt);
+		set_status(&v.sts, &i, s, v.qt);
 		if (v.qt == 0 && s[i] == ')')
 			in--;
 		if (!s[i])

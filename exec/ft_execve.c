@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: user42 <user42@student.42.fr>              +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/21 16:42:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/22 16:02:00 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,12 @@ int	exec_ve(t_cmd_lst *lst, t_env_lst **envlst)
 	else if (pid == 0)
 	{
 		if (ft_strcmp((lst)->cmd, "") == 0)
-		{
 			exit(EXIT_FAILURE);
-		}
 		exec_ve_abs(lst, *envlst);
 		exec_ve_rel(lst, *envlst);
-		printf("minishell: %s: command not found\n", lst->cmd);
+		write (2, "minishell: ", ft_strlen("minishell: "));
+		write (2, lst->cmd, ft_strlen(lst->cmd));
+		write (2, ": command not found\n", ft_strlen(": command not found\n"));
 		g_exit_code = 127;
 		exit(g_exit_code);
 	}

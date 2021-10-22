@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 06:46:37 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:01:37 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ int	export_var(char **var, t_env_lst **envlst)
 		if (ret == 0)
 			continue ;
 		else
+		{
 			add_elem(ret, i, &ptr, var);
+			ptr->visible = 1;
+		}	
 	}
 	return (0);
 }

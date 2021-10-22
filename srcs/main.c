@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/21 16:56:58 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/22 17:05:06 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,18 +86,16 @@ int	main(int ac, char **av, char **env)
 	g_exit_code = 0;
 	if (ac != 1 || env == NULL)
 		return (0);
+	envlst = NULL;
+	envp = ft_strdoubledup(env);
+	envlst = get_env(envlst, envp);
 	while (1)
 	{
-		envlst = NULL;
-		envp = ft_strdoubledup(env);
-		envlst = get_env(envlst, envp);
 		lst = ft_new_cmd_list(envp);
 		lst_cmd(get_line(), &lst, envp);
 		if (ft_strcmp(lst->cmd, "NIL") != 0)
 			get_built_in(&lst, &envlst, 0);
 		ft_free_cmd(lst);
-		ft_free_env(envlst);
-		ft_free_double_char(envp);
 	}
 	return (0);
 }

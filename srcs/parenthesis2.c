@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/15 09:56:18 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/21 17:42:52 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/22 14:37:26 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	set_status(int *status, int *i, char *s, int quote)
 	{
 		*i += 1;
 		*status = 2;
-	}	
+	}
 	else if (quote == 0 && s[*i] == '|' && s[*i + 1] == '|')
 	{
 		*i += 1;
@@ -108,7 +108,7 @@ int	check_front_pth(char *s, int i, int pth_nb, int in)
 		if (v.qt == 0 && s[i] == ')')
 			in--;
 		if (!s[i])
-			break ;
+			return (0);
 	}
 	return (check_front_pth(s, i, ++pth_nb, in));
 }
@@ -117,7 +117,7 @@ int	check_fist_last_pth(char *s)
 {
 	int	ret;
 
-	if (check_front_pth(s, -1, 0, 0))
+	if (check_front_pth(s, 0, 0, 0))
 		return (print_and_ret("minishell: syntax error near unexpected\
  token `('\n", 1));
 	ret = check_back_pth(s, ft_strlen(s), 0, 0);

@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:08 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/19 15:39:39 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/22 16:46:23 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+int	check_exit_error(t_cmd_lst *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst->args[0] && lst->args[0][i] && ft_isdigit(lst->args[0][i]))
+		i++;
+	if (lst->args[0][i] == '-')
+		i++;
+	while (lst->args[0] && lst->args[0][i] && ft_isdigit(lst->args[0][i]))
+		i++;
+	if (lst->args[0] && lst->args[0][i])
+		return (255);
+	return (0);
+}
 
 int	builtin_exit(t_cmd_lst *lst)
 {
@@ -23,12 +39,12 @@ int	builtin_exit(t_cmd_lst *lst)
 		g_exit_code = 1;
 		return (g_exit_code);
 	}
-	while (lst->args[0] && lst->args[0][i] && ft_isdigit(lst->args[0][i]))
-		i++;
-	if (lst->args[0] && lst->args[0][i])
+	if (check_exit_error(lst))
 	{
+		printf("exit\n");
 		printf("minishell: exit: %s: numeric argument required\n", lst->args[0]);
-		g_exit_code = 1;
+		g_exit_code = 255;
+		exit(g_exit_code);
 		return (g_exit_code);
 	}
 	if (lst->args[0])

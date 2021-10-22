@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/22 15:15:06 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/22 19:37:53 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int	find_phlvl(char *s, int pos)
 	int	phlvl;
 
 	phlvl = 0;
-	i = skip_space(s);
+	i = 0;
 	while (s[i] && i != pos)
 	{
 		if (s[i] == '\'' || s[i] == '"')
@@ -48,6 +48,8 @@ int	find_phlvl(char *s, int pos)
 			phlvl++;
 		else if (s[i] == ')')
 			phlvl--;
+		if (!s[i])
+			break ;
 		i++;
 	}
 	return (phlvl);

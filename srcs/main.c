@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/22 17:05:06 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/22 19:49:47 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	sig_handler(int sig)
 	}
 	if (sig == 2)
 		write(STDOUT_FILENO, "\n", 1);
-	if (isatty(0))
+	if (isatty(0) && sig != 11)
 	{
 		rl_on_new_line();
 		rl_replace_line("", 0);

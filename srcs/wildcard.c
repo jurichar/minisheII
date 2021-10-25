@@ -51,7 +51,7 @@ char	**get_match(char *wd, char **files)
 	while (files[++i])
 	{
 		file = files[i];
-		if (check_match(file, wd))
+		if (check_match(file, wd) && file[0] != '.')
 		{
 			ret_files[k++] = ft_strdup(files[i]);
 			ret_files = ft_realloc_double(ret_files);
@@ -133,7 +133,7 @@ char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 				if (new[i] == '"' || new[i] == '\'')
 					i = get_to_next_quote(new, i);
 				if (new[i] == '*')
-					new = wildcard_found(new, ptr_begin_wd, i);
+                        new = wildcard_found(new, ptr_begin_wd, i);
 				i++;
 			}
 		}

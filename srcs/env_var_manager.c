@@ -66,7 +66,7 @@ char	*insert_env_var2(char *str, char *var, int i)
 	return (str);
 }
 
-char	*insert_env_var(char *str, int i, t_env_lst *env)
+char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 {
 	char	*copy;
 	char	*var;
@@ -74,6 +74,15 @@ char	*insert_env_var(char *str, int i, t_env_lst *env)
 	var = get_arg(&str[i], env);
 	if (var != NULL)
 		str = insert_env_var2(str, var, i);
+    else if (var == NULL && squote)
+    {
+        copy = str;
+        str = ft_substr(str, 0, i);
+        free(copy);
+        copy = str;
+        str = ft_strjoin(str, "'\"");
+        free(copy);
+    }
 	else
 	{
 		copy = str;
@@ -97,15 +106,17 @@ char	*find_env_var(char *str, t_env_lst *env)
 	while (str[++i])
 	{
 		quote = double_quote_status(quote, i, s);
-		if (str[i] == '\'')
+		if (quote == 0 && str[i] == '\'')
 		{
 			i = get_to_next_quote(str, i);
 			continue ;
 		}	
 		if (quote == 0 && is_sep(str[i]))
 			break ;
-		if (str[i] == '$')
-			s = insert_env_var(s, i, env);
+        if (str[i] == '\'' && str[i + 1] == '$')
+                s = insert_env_var(s, ++i, env, 1);
+        else if (str[i] == '$')
+			s = insert_env_var(s, i, env, 0);
 	}
 	free(str);
 	return (s);

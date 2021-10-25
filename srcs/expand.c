@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/25 18:48:28 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:35:09 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst)
 		while ((*lst)->args[j])
 		{
 			printf ("1\n");
-			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst);
+			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst); // = NULL ?
 			printf ("1a\n");
 			buf = ft_strdup((*lst)->args[j]);
 			printf ("1b\n");

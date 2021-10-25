@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wildcard.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:27:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/18 16:18:03 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:49:26 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,25 +121,30 @@ char	*wildcard(char *to_find)
 char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 {
 	char	*new;
-
+	printf ("1find\n");
 	new = ft_strdup(s);
 	while (new[i])
 	{
+		printf ("2find\n");
 		if (!is_space(new[i]))
 		{
+			printf ("3find\n");
 			ptr_begin_wd = &new[i];
 			while (new[i] && !is_space(new[i]))
 			{
+				printf ("4find\n");
 				if (new[i] == '"' || new[i] == '\'')
 					i = get_to_next_quote(new, i);
 				if (new[i] == '*')
-                        new = wildcard_found(new, ptr_begin_wd, i);
+					new = wildcard_found(new, ptr_begin_wd, i);
 				i++;
 			}
+			printf ("5find\n");
 		}
 		else
 			i++;
 	}
+	printf ("6find\n");
 	free(s);
 	return (new);
 }

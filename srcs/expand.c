@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/22 15:17:56 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:48:28 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	**expanded_tab(char **dest, char **srcs, int j)
 	int		i2;
 
 	new = malloc(sizeof(char *) * (ft_strdoublelen(dest)
-		+ ft_strdoublelen(srcs) + 1));
+				+ ft_strdoublelen(srcs) + 1));
 	i = 0;
 	while (i < j)
 	{
@@ -50,18 +50,24 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst)
 	{
 		while ((*lst)->args[j])
 		{
+			printf ("1\n");
 			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst);
+			printf ("1a\n");
 			buf = ft_strdup((*lst)->args[j]);
-            (*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+			printf ("1b\n");
+			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+			printf ("2\n");
 			if ((ft_strcmp((*lst)->args[j], buf)) == 0)
 				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
 			else
 			{
+				printf ("3\n");
 				tab_buf = ft_split((*lst)->args[j], ' ');
 				size = ft_strdoublelen(tab_buf);
 				(*lst)->args = expanded_tab((*lst)->args, tab_buf, j);
 				j += size - 1;
 			}
+			printf ("4\n");
 			free(buf);
 			j++;
 		}

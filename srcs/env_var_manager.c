@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/21 16:53:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:40:49 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,15 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 	var = get_arg(&str[i], env);
 	if (var != NULL)
 		str = insert_env_var2(str, var, i);
-    else if (var == NULL && squote)
-    {
-        copy = str;
-        str = ft_substr(str, 0, i);
-        free(copy);
-        copy = str;
-        str = ft_strjoin(str, "'\"");
-        free(copy);
-    }
+	else if (var == NULL && squote)
+	{
+		copy = str;
+		str = ft_substr(str, 0, i);
+		free(copy);
+		copy = str;
+		str = ft_strjoin(str, "'\"");
+		free(copy);
+	}
 	else
 	{
 		copy = str;
@@ -113,9 +113,9 @@ char	*find_env_var(char *str, t_env_lst *env)
 		}	
 		if (quote == 0 && is_sep(str[i]))
 			break ;
-        if (str[i] == '\'' && str[i + 1] == '$')
-                s = insert_env_var(s, ++i, env, 1);
-        else if (str[i] == '$')
+		if (str[i] == '\'' && str[i + 1] == '$')
+			s = insert_env_var(s, ++i, env, 1);
+		else if (str[i] == '$')
 			s = insert_env_var(s, i, env, 0);
 	}
 	free(str);

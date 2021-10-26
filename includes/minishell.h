@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/22 16:59:53 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/25 18:40:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 void		check_oldpwd(t_env_lst **begin);
 
 // env_var_manager
-char		*insert_env_var(char *str, int i, t_env_lst *env);
+char		*insert_env_var(char *str, int i, t_env_lst *env, int squote);
 char		*find_env_var(char *str, t_env_lst *env);
 
 // env_var_tools

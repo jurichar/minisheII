@@ -18,6 +18,8 @@ char	*ft_strstr(char *str, char *to_find)
 	int	j;
 
 	i = 0;
+	if (str[0] == '.')
+		return (NULL);
 	while (str[i])
 	{
 		j = 0;
@@ -110,7 +112,7 @@ char	*wildcard_found(char *new, char *ptr_begin_wd, int i)
 	}
 	ptr_post_wd = ft_strdup(&new[i]);
 	if (wd)
-		insert_match(new, ptr_begin_wd, ptr_post_wd, wd);
+		new = insert_match(new, ptr_begin_wd, ptr_post_wd, wd);
 	free(ptr_post_wd);
 	return (new);
 }

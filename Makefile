@@ -9,9 +9,10 @@ CC = gcc
 
 INCLUDES = -I libft/
 
-CFLAGS = -Wall -Wextra -Werror -g3 $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -Wuninitialized -g3 $(INCLUDES)
 
-DEBUG = --analyze
+ANALYZE = --analyze
+DEBUG = -fsanitize=address -fno-omit-frame-pointer
 
 LDFLAGS = libft/libft.a
 
@@ -30,6 +31,11 @@ $(NAME): lib
 	$(CC) $(CFLAGS) $(SRC) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib $(LDFLAGS) -I ~/.brew/opt/readline/include
 	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
+
+analyze:
+	$(CC) $(CFLAGS) $(ANALYZE) $(SRC) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib $(LDFLAGS) -I ~/.brew/opt/readline/include
+readline:
+	@sudo apt-get install libreadline-dev
 
 debug: lib
 	@printf $(YLW)"[Minishell compilation...]%-30s\r"

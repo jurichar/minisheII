@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 17:57:18 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:10:03 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,12 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 		if (quote == 0 && str[i] == '\'')
 		{
 			quote = get_to_next_quote(str, i);
-			if (str[quote])
+			if (quote)
 				i = quote;
-			quote = 0;
 			continue ;
 		}	
 		if (quote == 0 && is_sep(str[i]))
 			break ;
-		if (str[i] == '\'' && str[i + 1] == '$')
-		{
-			s = insert_env_var(s, ++i, env, 1);
-			break ;
-		}
 		else if (str[i] == '$')
 		{
 			s = insert_env_var(s, i, env, 0);

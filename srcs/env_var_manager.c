@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 15:16:30 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:12:01 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,25 +70,24 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 {
 	char	*copy;
 	char	*var;
+	int		j;
 
 	var = get_arg(&str[i], env);
 	if (var != NULL)
-		str = insert_env_var2(str, var, i);
-	else if (var == NULL && squote)
+		return (str = insert_env_var2(str, var, i));
+	copy = str;
+	str = ft_substr(str, 0, i);
+	if (squote)
+		str = join_squote(str);
+	j = i;
+	while (copy[i] && copy[i] != ' ' && copy[i] != '"' && copy[i] != '\'')
+		i++;
+	while (copy[i])
 	{
-		copy = str;
-		str = ft_substr(str, 0, i);
-		free(copy);
-		copy = str;
-		str = ft_strjoin(str, "'\"");
-		free(copy);
-	}
-	else
-	{
-		copy = str;
-		str = ft_substr(str, 0, i);
-		free(copy);
-	}
+		str = ft_realloc(str, ft_strlen(str) + 1);
+		str[j++] = copy[i++];
+	}	
+	free(copy);
 	return (str);
 }
 

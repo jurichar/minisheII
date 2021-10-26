@@ -3,14 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_tools.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:20:37 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/04 19:30:01 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:10:49 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+char	*join_squote(char *str)
+{
+	char	*copy;
+
+	copy = str;
+	str = ft_strjoin(str, "\'");
+	free(copy);
+	return (str);
+}
 
 char	*set_start(char *s, int *quote)
 {

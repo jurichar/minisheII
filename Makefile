@@ -11,7 +11,7 @@ INCLUDES = -I libft/
 
 CFLAGS = -Wall -Wextra -Werror -g3 $(INCLUDES)
 
-DEBUG = -fsanitize=address -fno-omit-frame-pointer
+DEBUG = --analyze
 
 LDFLAGS = libft/libft.a
 

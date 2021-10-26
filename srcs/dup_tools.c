@@ -118,7 +118,10 @@ char	*ft_strdup_space_sep(char *s, int quote)
 	str = ft_strdup(s);
 	copy = malloc_line(str, &len);
 	if (quote)
+	{
 		get_line_without_quote(str, copy, len, 0);
+		free(s);
+	}
 	else
 		copy_until_space(copy, str);
 	free(str);

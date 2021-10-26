@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:18 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/22 17:01:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:54:59 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	export_cat(t_env_lst **list, char *str, char *tmp, char *content)
 			ft_strlen(ft_strchr(str, '=') + 1));
 	if (content == NULL)
 	{
-		printf("error: fatal\n");
+		ft_putstr_fd("error: fatal\n", 2);
 		return (1);
 	}
 	if ((*list)->content == NULL)
@@ -30,7 +30,7 @@ int	export_cat(t_env_lst **list, char *str, char *tmp, char *content)
 	(*list)->content = ft_strjoin((*list)->content, content);
 	if ((*list)->content == NULL)
 	{
-		printf("error: fatal\n");
+		ft_putstr_fd("error: fatal\n", 2);
 		free(tmp);
 		return (1);
 	}
@@ -48,7 +48,7 @@ int	export_add(t_env_lst **list, char *str)
 			ft_strlen(ft_strchr(str, '=') + 1));
 	if (content == NULL)
 	{
-		printf("error: fatal\n");
+		ft_putstr_fd("error: fatal\n", 2);
 		return (1);
 	}
 	if ((*list)->content)

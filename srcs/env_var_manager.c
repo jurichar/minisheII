@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 00:37:01 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:00:20 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,8 @@ char	*find_env_var(char *str, t_env_lst *env)
 	int		quote;
 	char	*s;
 
-	if (!str || !*str) // ?? ca fait tout sauter 
-		return NULL;
+	if (!str || !*str)
+		return (NULL);
 	s = ft_strdup(str);
 	i = -1;
 	quote = 0;

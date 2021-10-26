@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/22 19:37:53 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:01:17 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,13 +93,13 @@ int	check_cmd(t_cmd_lst *lst)
 	{
 		if (!(lst->next))
 		{
-			printf ("syntax error\n");
+			ft_putstr_fd("syntax error\n", 2);
 			ret = 1;
 		}
 		else if (ft_strcmp(lst->next->cmd, "") == 0
 			|| ft_strcmp(lst->next->cmd, "NIL") == 0)
 		{
-			printf ("syntax error\n");
+			ft_putstr_fd("syntax error\n", 2);
 			ret = 1;
 		}
 	}
@@ -120,7 +120,7 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 	}
 	if (check_redir(str) == -1)
 	{
-		printf("syntax error\n");
+		ft_putstr_fd("syntax error\n", 2);
 		g_exit_code = 1;
 		lst_begin->cmd = "NIL";
 		return ;

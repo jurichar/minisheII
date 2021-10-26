@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_exit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:08 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/22 19:51:52 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:54:08 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,17 @@ int	builtin_exit(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	if (lst->args[0] && lst->args[1])
 	{
-		printf("exit\n");
-		printf("minishell: exit: too many arguments\n");
+		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("minishell: exit: too many arguments\n", 2);
 		g_exit_code = 1;
 		return (g_exit_code);
 	}
 	if (lst->args[0] && check_exit_error(lst))
 	{
-		printf("exit\n");
-		printf("minishell: exit: %s: numeric argument required\n", lst->args[0]);
+		ft_putstr_fd("exit\n", 1);
+		ft_putstr_fd("minishell: exit: ", 2);
+		ft_putstr_fd(lst->args[0], 2);
+		ft_putstr_fd(": numeric argument required\n", 2);
 		g_exit_code = 255;
 	}
 	else if (lst->args[0])

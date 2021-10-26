@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/21 16:46:58 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:57:56 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	fork_error(t_pipor pip, int i)
 {
 	if (pip.pid[i] < 0)
 	{
-		printf("fork error\n");
+		ft_putstr_fd("fork error\n", 2);
 		exit(-1);
 	}
 }

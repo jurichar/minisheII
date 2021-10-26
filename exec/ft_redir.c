@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/21 16:47:38 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:59:33 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 	while (1)
 	{
 		line = readline("> ");
-		printf ("line = %s , redir = %s\n", line, lst->redir->arg);
 		if (!line)
 			break ;
 		if (ft_strcmp(line, lst->redir->arg) == 0)
@@ -82,7 +81,9 @@ int	ft_redir_in(t_cmd_lst *lst)
 	fd = open(lst->redir->arg, O_RDONLY, 0666);
 	if (fd == -1)
 	{
-		printf ("minishell: %s: No such file or directory\n", lst->redir->arg);
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(lst->redir->arg, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
 		return (0);
 	}
 	else

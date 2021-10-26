@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/26 00:35:09 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 14:46:25 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	**expanded_tab(char **dest, char **srcs, int j)
 	i2 = i - (i2 - 1);
 	while (dest[i2])
 		new[i++] = ft_strdup(dest[i2++]);
-	new[i + 1] = NULL;
+	new[i] = NULL;
 	ft_free_double_char(dest);
 	ft_free_double_char(srcs);
 	return (new);
@@ -50,24 +50,18 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst)
 	{
 		while ((*lst)->args[j])
 		{
-			printf ("1\n");
-			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst); // = NULL ?
-			printf ("1a\n");
+			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst);
 			buf = ft_strdup((*lst)->args[j]);
-			printf ("1b\n");
 			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
-			printf ("2\n");
 			if ((ft_strcmp((*lst)->args[j], buf)) == 0)
 				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
 			else
 			{
-				printf ("3\n");
 				tab_buf = ft_split((*lst)->args[j], ' ');
 				size = ft_strdoublelen(tab_buf);
 				(*lst)->args = expanded_tab((*lst)->args, tab_buf, j);
 				j += size - 1;
 			}
-			printf ("4\n");
 			free(buf);
 			j++;
 		}

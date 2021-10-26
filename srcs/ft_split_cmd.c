@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 16:01:02 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:49:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 
 int	check_cmd(t_cmd_lst **begin)
 {
-	int	ret;
-	t_cmd_lst *lst;
+	int			ret;
+	t_cmd_lst	*lst;
 
 	lst = *begin;
 	ret = 0;

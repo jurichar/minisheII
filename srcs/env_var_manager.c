@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 17:12:01 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:57:18 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,13 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 	return (str);
 }
 
-char	*find_env_var(char *str, t_env_lst *env, int i)
+char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 {
-	int		quote;
 	char	*s;
 
 	if (!str || !*str)
 		return (NULL);
 	s = ft_strdup(str);
-	i = -1;
-	quote = 0;
 	while (s[++i])
 	{
 		quote = double_quote_status(quote, i, s);

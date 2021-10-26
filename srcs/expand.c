@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/26 15:18:09 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:52:01 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 	{
 		while ((*lst)->args[j])
 		{
-			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1);
+			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1, 0);
 			buf = ft_strdup((*lst)->args[j]);
 			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
 			if ((ft_strcmp((*lst)->args[j], buf)) == 0)

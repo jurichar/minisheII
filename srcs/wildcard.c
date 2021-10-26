@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:27:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 18:13:07 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:21:52 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ char	*find_wildcard(char *s, char *ptr_begin_wd, int i, char *new)
 				if (new[i] == '"' || new[i] == '\'')
 				{
 					quote = get_to_next_quote(new, i);
-					if (quote)
+					if (s[quote])
 						i = quote;
 				}
 				if (new[i] == '*')

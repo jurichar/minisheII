@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 18:10:03 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:21:37 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 		if (quote == 0 && str[i] == '\'')
 		{
 			quote = get_to_next_quote(str, i);
-			if (quote)
+			if (s[quote])
 				i = quote;
 			continue ;
 		}	

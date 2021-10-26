@@ -101,7 +101,7 @@ char	*find_env_var(char *str, t_env_lst *env, int i)
 	s = ft_strdup(str);
 	i = -1;
 	quote = 0;
-	while (str[++i])
+	while (s[++i])
 	{
 		quote = double_quote_status(quote, i, s);
 		if (quote == 0 && str[i] == '\'')

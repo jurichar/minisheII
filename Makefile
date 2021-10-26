@@ -11,7 +11,6 @@ INCLUDES = -I libft/
 
 CFLAGS = -Wall -Wextra -Werror -Wuninitialized -g3 $(INCLUDES)
 
-ANALYZE = --analyze
 DEBUG = -fsanitize=address -fno-omit-frame-pointer
 
 LDFLAGS = libft/libft.a
@@ -32,8 +31,6 @@ $(NAME): lib
 	@printf $(GRN)"[Minishell ready !!]%-30s\r"
 	@printf $(END)
 
-analyze:
-	$(CC) $(CFLAGS) $(ANALYZE) $(SRC) -o $(NAME) -lreadline -L ~/.brew/opt/readline/lib $(LDFLAGS) -I ~/.brew/opt/readline/include
 readline:
 	@sudo apt-get install libreadline-dev
 
@@ -72,15 +69,4 @@ re: fclean all
 
 .SILENT:
 
-# tester: $(OBJ)
-# 				$(CC) -o $@ $^ $(LDFLAGS)
-
-# main.o: includes/minishell.h
-
-# %.o:	%.c
-# 		$(CC) -o $@ -c $< $(CFLAGS)
-# clean:
-# 			rm -f */*.o core
-
-# mrproper:	clean
-# 			rm -f $(NAME)
+.PHONY: all clear clean fclean lib readline

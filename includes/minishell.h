@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 15:18:37 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:45:24 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ typedef struct s_pth_var
 BUILT IN
 */
 // built_cd_home
-int			built_cd_home(t_env_lst **envlst, int ret);
+int			built_cd_home(t_env_lst *envlst, int ret);
 
 // built_cd
 int			builtin_cd_tild(t_env_lst *envlst);

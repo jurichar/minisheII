@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execve.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/26 14:57:32 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:46:44 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 	int		i;
 
 	i = -1;
-	path = ft_split(get_env_by_name(envlst, "PATH"), ':');
-	if (!path)
+	buf = get_env_by_name(envlst, "PATH");
+	if (!buf)
 		return (1);
+	path = ft_split(buf, ':');
 	while (path[++i])
 	{
 		cmd = ft_strjoin(path[i], "/");

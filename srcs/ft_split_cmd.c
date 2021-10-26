@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 15:01:17 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:01:02 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,12 @@ void	set_line(char *str, t_cmd_lst **lst, char **envp)
 	*lst = lst_begin;
 }
 
-int	check_cmd(t_cmd_lst *lst)
+int	check_cmd(t_cmd_lst **begin)
 {
 	int	ret;
+	t_cmd_lst *lst;
 
+	lst = *begin;
 	ret = 0;
 	if (lst->sep == '|' || lst->sep == AND || lst->sep == OR)
 	{
@@ -102,6 +104,11 @@ int	check_cmd(t_cmd_lst *lst)
 			ft_putstr_fd("syntax error\n", 2);
 			ret = 1;
 		}
+	}
+	if (ret)
+	{
+		free((*begin)->cmd);
+		(*begin)->cmd = "NIL";
 	}
 	return (ret);
 }
@@ -132,4 +139,5 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 	}
 	set_line(s, lst, envp);
 	free(s);
+	check_cmd(lst);
 }

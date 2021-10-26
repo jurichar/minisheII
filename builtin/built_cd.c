@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_cd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:34:38 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/26 14:50:42 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:45:01 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	builtin_cd_tild(t_env_lst *envlst)
 int	builtin_cd(t_cmd_lst *lst, t_env_lst **envlst, int ret)
 {
 	if (lst->args[0] == NULL)
-		ret = built_cd_home(envlst, ret);
+		ret = built_cd_home(*envlst, ret);
 	else if (ft_strcmp(lst->args[0], "~") == 0)
 		ret = chdir(getenv("HOME"));
 	else

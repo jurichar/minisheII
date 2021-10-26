@@ -16,6 +16,7 @@ int	args_counter(char *str)
 {
 	int		i;
 	int		count;
+	int		quote;
 
 	i = 0;
 	count = 1;
@@ -24,7 +25,9 @@ int	args_counter(char *str)
 	{
 		if (str[i - 1] == ' ' && (str[i] == '\'' || str[i] == '"'))
 		{
-			i = get_to_next_quote(str, i);
+			quote = get_to_next_quote(str, i);
+			if (str[quote])
+				i = quote;
 			count++;
 		}
 		else if (!is_space(str[i])
@@ -82,6 +85,7 @@ void	set_words(char *str, t_cmd_lst **lst, int j)
 {
 	int	i;
 	int	args_count;
+	int	quote;
 
 	args_count = args_counter(str);
 	i = 0;
@@ -93,7 +97,11 @@ void	set_words(char *str, t_cmd_lst **lst, int j)
 		while (!is_space(str[j]) && str[j])
 		{
 			if (str[j] == '\'' || str[j] == '"')
-				j = get_to_next_quote(str, j);
+			{
+				quote = get_to_next_quote(str, j);
+				if (str[quote])
+					j = quote;
+			}
 			j++;
 		}
 	}

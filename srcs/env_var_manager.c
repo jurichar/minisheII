@@ -106,7 +106,10 @@ char	*find_env_var(char *str, t_env_lst *env, int i)
 		quote = double_quote_status(quote, i, s);
 		if (quote == 0 && str[i] == '\'')
 		{
-			i = get_to_next_quote(str, i);
+			quote = get_to_next_quote(str, i);
+			if (str[quote])
+				i = quote;
+			quote = 0;
 			continue ;
 		}	
 		if (quote == 0 && is_sep(str[i]))

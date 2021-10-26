@@ -121,6 +121,7 @@ char	*wildcard(char *to_find)
 char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 {
 	char	*new;
+	int		quote;
 
 	new = ft_strdup(s);
 	while (new[i])
@@ -131,7 +132,11 @@ char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 			while (new[i] && !is_space(new[i]))
 			{
 				if (new[i] == '"' || new[i] == '\'')
-					i = get_to_next_quote(new, i);
+				{
+					quote = get_to_next_quote(new, i);
+					if (new[quote])
+						i = quote;
+				}
 				if (new[i] == '*')
 					new = wildcard_found(new, ptr_begin_wd, i);
 				i++;

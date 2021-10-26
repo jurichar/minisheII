@@ -117,7 +117,11 @@ char	*find_env_var(char *str, t_env_lst *env, int i)
 		if (str[i] == '\'' && str[i + 1] == '$')
 			s = insert_env_var(s, ++i, env, 1);
 		else if (str[i] == '$')
+		{
 			s = insert_env_var(s, i, env, 0);
+			if (*s == 0)
+				break ;
+		}
 	}
 	free(str);
 	return (s);

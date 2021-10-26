@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/25 18:40:42 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:18:37 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -242,14 +242,14 @@ void		check_oldpwd(t_env_lst **begin);
 
 // env_var_manager
 char		*insert_env_var(char *str, int i, t_env_lst *env, int squote);
-char		*find_env_var(char *str, t_env_lst *env);
+char		*find_env_var(char *str, t_env_lst *env, int i);
 
 // env_var_tools
 char		*set_start(char *s, int *quote);
 char		*get_ret_value(char *ret, char *s, int quote, int len);
 
 // expand
-void		expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst);
+void		expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j);
 
 // ft_free
 void		ft_free_env(t_env_lst *lst);

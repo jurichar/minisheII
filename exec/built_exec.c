@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/25 18:40:36 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 15:19:04 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
-	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst);
-	expand_before_exec(lst, *envlst);
+	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst, -1);
+	expand_before_exec(lst, *envlst, 0);
 	if ((*lst)->redir != NULL)
 	{
 		i = ft_redir(*lst, *envlst);

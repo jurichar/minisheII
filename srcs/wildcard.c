@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 17:27:12 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 15:02:04 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:13:07 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,12 +118,10 @@ char	*wildcard(char *to_find)
 	return (res);
 }
 
-char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
+char	*find_wildcard(char *s, char *ptr_begin_wd, int i, char *new)
 {
-	char	*new;
 	int		quote;
 
-	new = ft_strdup(s);
 	while (new[i])
 	{
 		if (!is_space(new[i]))
@@ -134,7 +132,7 @@ char	*find_wildcard(char *s, char *ptr_begin_wd, int i)
 				if (new[i] == '"' || new[i] == '\'')
 				{
 					quote = get_to_next_quote(new, i);
-					if (new[quote])
+					if (quote)
 						i = quote;
 				}
 				if (new[i] == '*')

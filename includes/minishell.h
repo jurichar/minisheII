@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 17:52:10 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:13:34 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -346,6 +346,6 @@ char		*wildcard_found(char *new, char *ptr_begin_wd, int i);
 
 // wildcard
 char		*wildcard(char *to_find);
-char		*find_wildcard(char *s, char *ptr_begin_wd, int i);
+char		*find_wildcard(char *s, char *ptr_begin_wd, int i, char *new);
 
 #endif

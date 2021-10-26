@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:37:19 by user42            #+#    #+#             */
-/*   Updated: 2021/10/26 17:52:01 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/26 18:15:55 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 	char	**tab_buf;
 	int		size;
 
-	j = 0;
 	if ((*lst)->args && (*lst)->args[0])
 	{
 		while ((*lst)->args[j])
 		{
 			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1, 0);
 			buf = ft_strdup((*lst)->args[j]);
-			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0);
+			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0,
+					ft_strdup((*lst)->args[j]));
 			if ((ft_strcmp((*lst)->args[j], buf)) == 0)
 				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
 			else

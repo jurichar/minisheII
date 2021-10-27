@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/27 18:17:04 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/27 23:03:49 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,7 +211,7 @@ void		clean_pid(t_pipor *pip);
 int			pipor(t_cmd_lst *lst, t_env_lst *envlst);
 
 // ft_redir
-void		ft_redir_in_double(t_cmd_lst *lst);
+int			ft_redir_in_double(t_cmd_lst *lst);
 void		ft_redir_out_double(t_cmd_lst *lst);
 void		ft_redir_out(t_cmd_lst *lst);
 int			ft_redir_in(t_cmd_lst *lst);

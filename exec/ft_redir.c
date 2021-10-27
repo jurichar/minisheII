@@ -6,11 +6,15 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/27 19:39:21 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/27 23:27:30 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// idée : cat > a << lol, faire une structure avec la valeur (erreure en cas open)
+// et un autre int avec le fd pour recuperer les fd : mettre 0 dans ft_redir pour le fd retourné
+// si il y a un next !
 
 void 	sigito(int sig)
 {
@@ -18,7 +22,7 @@ void 	sigito(int sig)
 	exit(130);
 }
 
-void	ft_redir_in_double(t_cmd_lst *lst)
+int	ft_redir_in_double(t_cmd_lst *lst)
 {
 	int		fd0;
 	int		fd;
@@ -51,7 +55,7 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	line = ft_strjoin("libft/.", lst->redir->arg);
-	printf("exit code = %d\n", g_exit_code);
+	ft_putstr_fd(ft_itoa(g_exit_code), 1);
 	if (g_exit_code != 130)
 	{
 	fd = open(line, O_RDWR, 0666);
@@ -59,6 +63,9 @@ void	ft_redir_in_double(t_cmd_lst *lst)
 	dup2(fd, 0);
 	close(fd);
 	}
+	if (g_exit_code != 0)
+		return 0;
+	return 1;
 }
 
 void	ft_redir_out_double(t_cmd_lst *lst)
@@ -113,9 +120,7 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	else if (lst->redir->redir == IN)
 		i = ft_redir_in(lst);
 	else if (lst->redir->redir == IN_DOUBLE)
-		ft_redir_in_double(lst);
-	if (lst->sep == '|')
-		pipor(lst, envlst);
+		i = ft_redir_in_double(lst);
 	if (lst->redir->next)
 	{
 		lst->redir = lst->redir->next;

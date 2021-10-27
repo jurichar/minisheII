@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:30:10 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/27 19:48:56 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/27 23:27:16 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,11 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 	expand_before_exec(lst, *envlst, 0);
 	if ((*lst)->sep == '|')
 		pipor(*lst, *envlst);
-	if ((*lst)->redir != NULL)
+	else if ((*lst)->redir != NULL)
 	{
-		ft_redir(*lst, *envlst);
+		int i = ft_redir(*lst, *envlst);
+		if (i == 1)
+			exec_ve(*lst, envlst);
 	}
 	else
 		exec_ve(*lst, envlst);

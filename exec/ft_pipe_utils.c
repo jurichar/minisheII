@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/13 05:49:00 by jurichar          #+#    #+#             */
-/*   Updated: 2021/09/13 05:50:47 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:47:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ void	pipor_mid(t_pipor pip, t_cmd_lst *lst, t_env_lst *envlst)
 {
 	dup2(pip.pipes[pip.tpipes - 2], 0);
 	close_pipor(&pip);
-	if (lst->redir != NULL)
-		ft_redir(lst, envlst);
+	// if (lst->redir != NULL)
+	// 	ft_redir(lst, envlst);
 	exec_ve(lst, &envlst);
 	exit(1);
 }

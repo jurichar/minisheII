@@ -1,0 +1,15 @@
+a
+b
+builtin
+c
+correc
+d
+e
+exec
+f
+includes
+libft
+Makefile
+minishell
+README.md
+srcs

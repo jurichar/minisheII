@@ -3,37 +3,62 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/26 14:59:33 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:39:21 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void 	sigito(int sig)
+{
+	write(1, "\n", 1);
+	exit(130);
+}
 
 void	ft_redir_in_double(t_cmd_lst *lst)
 {
 	int		fd0;
 	int		fd;
 	char	*line;
+	pid_t pid;
 
-	fd0 = open(".lol", O_CREAT | O_RDWR | O_TRUNC, 0777);
-	while (1)
+
+	line = ft_strjoin("libft/.", lst->redir->arg);
+	fd0 = open(line, O_CREAT | O_RDWR | O_TRUNC, 0666);
+	free(line);
+	signal(SIGINT, SIG_IGN);
+	pid = fork();
+	if (pid == -1)
+		perror("fork() failed (exec_ve)");
+	else if (pid == 0)
 	{
+		while (1)
+		{
+		signal(SIGINT, sigito);
 		line = readline("> ");
-		if (!line)
-			break ;
-		if (ft_strcmp(line, lst->redir->arg) == 0)
-			break ;
-		ft_putstr_fd("\n", fd0);
+		if (ft_strcmp(line, lst->redir->arg) == 0 || !line) 
+			exit (0) ;
 		ft_putstr_fd(line, fd0);
-		free(line);
+		ft_putstr_fd("\n", fd0);
+		}
 	}
+	else
+		exec_error(pid);
 	close(fd0);
-	fd = open(".lol", O_RDWR, 0666);
+	signal(SIGINT, sig_handler);
+	signal(SIGQUIT, sig_handler);
+	line = ft_strjoin("libft/.", lst->redir->arg);
+	printf("exit code = %d\n", g_exit_code);
+	if (g_exit_code != 130)
+	{
+	fd = open(line, O_RDWR, 0666);
+	free(line);
 	dup2(fd, 0);
 	close(fd);
+	}
 }
 
 void	ft_redir_out_double(t_cmd_lst *lst)
@@ -42,12 +67,6 @@ void	ft_redir_out_double(t_cmd_lst *lst)
 
 	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0666);
 	dup2(fd, 1);
-	if (lst->redir->next && lst->redir->next->redir == IN)
-	{
-		while (lst->redir->next && lst->redir->next->redir == IN)
-			lst->redir = lst->redir->next;
-		ft_redir_in(lst);
-	}
 	close(fd);
 }
 
@@ -59,12 +78,6 @@ void	ft_redir_out(t_cmd_lst *lst)
 	file = lst->redir->arg;
 	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0666);
 	dup2(fd, 1);
-	if (lst->redir->next && lst->redir->next->redir == IN)
-	{
-		while (lst->redir->next && lst->redir->next->redir == IN)
-			lst->redir = lst->redir->next;
-		ft_redir_in(lst);
-	}
 	close(fd);
 }
 
@@ -72,12 +85,6 @@ int	ft_redir_in(t_cmd_lst *lst)
 {
 	int	fd;
 
-	while (lst->redir->next && lst->redir->redir == IN
-		&& (lst->redir->next->redir == IN))
-	{
-		open(lst->redir->arg, O_RDONLY, 0666);
-		lst->redir = lst->redir->next;
-	}
 	fd = open(lst->redir->arg, O_RDONLY, 0666);
 	if (fd == -1)
 	{
@@ -99,14 +106,6 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	int	i;
 
 	i = TRUE;
-	while (lst->redir->next && (lst->redir->redir == OUT
-			|| lst->redir->redir == OUT_DOUBLE)
-		&& (lst->redir->next->redir == OUT
-			|| lst->redir->next->redir == OUT_DOUBLE))
-	{
-		open(lst->redir->arg, O_CREAT | O_RDWR | O_TRUNC, 0666);
-		lst->redir = lst->redir->next;
-	}
 	if (lst->redir->redir == OUT)
 		ft_redir_out(lst);
 	else if (lst->redir->redir == OUT_DOUBLE)
@@ -117,6 +116,10 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 		ft_redir_in_double(lst);
 	if (lst->sep == '|')
 		pipor(lst, envlst);
-	unlink(".lol");
+	if (lst->redir->next)
+	{
+		lst->redir = lst->redir->next;
+		ft_redir(lst, envlst);
+	}
 	return (i);
 }

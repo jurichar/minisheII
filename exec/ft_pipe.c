@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 16:29:55 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/26 14:57:56 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:47:35 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ int	pipor(t_cmd_lst *lst, t_env_lst *envlst)
 	int		i;
 
 	pip = init_pipor(lst);
+	if (lst->redir != NULL)
+		ft_redir(lst,envlst);
 	i = -1;
 	while (++i < pip.nbc)
 	{

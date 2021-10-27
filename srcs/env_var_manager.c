@@ -6,7 +6,7 @@
 /*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 18:21:37 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:37:12 by lebourre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	*get_arg(char *s, t_env_lst *env)
 
 	s = set_start(s, &quote);
 	len = 0;
-	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
+	while (s[len] && !is_sep(s[len]) && !is_space(s[len]) && valid_identifier(s[len], 2)
 		&& s[len] != '"' && s[len] != '\'' && s[len] != '/')
 		len++;
 	if (quote && s[len] == '"')
@@ -86,7 +86,7 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 	{
 		str = ft_realloc(str, ft_strlen(str) + 1);
 		str[j++] = copy[i++];
-	}	
+	}
 	free(copy);
 	return (str);
 }
@@ -101,19 +101,19 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 	while (s[++i])
 	{
 		quote = double_quote_status(quote, i, s);
-		if (quote == 0 && str[i] == '\'')
+		if (quote == 0 && s[i] == '\'')
 		{
-			quote = get_to_next_quote(str, i);
+			quote = get_to_next_quote(s, i);
 			if (s[quote])
 				i = quote;
 			continue ;
-		}	
-		if (quote == 0 && is_sep(str[i]))
+		}
+		if (quote == 0 && is_sep(s[i]))
 			break ;
-		else if (str[i] == '$')
+		else if (s[i] == '$')
 		{
 			s = insert_env_var(s, i, env, 0);
-			break ;
+			i = -1;
 		}
 	}
 	free(str);

@@ -81,13 +81,6 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 	fd[0] = dup(0);
 	fd[1] = dup(1);
 	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst, -1, 0);
-	t_cmd_lst *ptr;
-	ptr = *lst;
-	while(ptr)
-	{
-		printf("args = %s\n", ptr->args);
-		ptr = ptr->next;
-	}
 	expand_before_exec(lst, *envlst, 0);
 	if ((*lst)->redir != NULL)
 	{

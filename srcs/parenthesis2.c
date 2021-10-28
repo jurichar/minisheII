@@ -28,14 +28,10 @@ int	check_empty_pth(char *s)
 	ret = 0;
 	while (s[i])
 	{
-		if (quote == 0 && (s[i] == '\'' || s[i] == '"'))
-			quote = get_to_next_quote(s, i);
-		if (!s[quote])
-			quote = 0;
-		if (quote && i == quote)
-			quote = 0;
+		quote = quote_status(quote, i, s);
 		if (quote == 0 && s[i] == '(')
 			return (ret + check_empty_pth(&s[i]));
+		i++;
 	}
 	return (ret);
 }

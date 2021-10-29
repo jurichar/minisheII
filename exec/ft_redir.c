@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/29 17:57:54 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/29 20:39:28 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_redir_in(t_cmd_lst *lst)
 	int	fd;
 
 	lst->fd[0] = open(lst->redir->arg, O_RDONLY, 0666);
-	if (fd == -1)
+	if (lst->fd[0] == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(lst->redir->arg, 2);
@@ -99,27 +99,29 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	int	i;
 
 	i = TRUE;
-	find_redir_double(lst);
+	// find_redir_double(lst);
 	if (lst->redir->redir == OUT)
 	{
 		ft_redir_out(lst);
-		close(lst->fd[1]);
+		// close(lst->fd[1]);
 	}
 	else if (lst->redir->redir == OUT_DOUBLE)
 	{
 		ft_redir_out_double(lst);
-		close(lst->fd[1]);
+		// close(lst->fd[1]);
 	}	
 	else if (lst->redir->redir == IN)
 	{
 		i = ft_redir_in(lst);
-		close(lst->fd[0]);
+		// close(lst->fd[0]);
 	}
 	else if (lst->redir->redir == IN_DOUBLE)
 	{
 		ft_redir_in_double(lst);
-		close(lst->fd[0]);
+		// close(lst->fd[0]);
 	}
+	close(lst->fd[1]);
+	close(lst->fd[0]);
 	if (lst->redir->next)
 	{
 		lst->redir = lst->redir->next;

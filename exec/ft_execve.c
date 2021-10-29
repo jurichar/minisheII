@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:36:34 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/26 15:46:44 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/29 17:57:45 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	exec_ve_abs(t_cmd_lst *lst, t_env_lst *envlst)
 	lst->envp = update_envp(envlst, get_env_size(envlst));
 	if (execve(lst->cmd, args, lst->envp) == -1)
 		g_exit_code = 1;
+	unlink("libft/.tmp");
 	ft_free_double_char(args);
 	return (g_exit_code);
 }
@@ -55,6 +56,7 @@ int	exec_ve_rel(t_cmd_lst *lst, t_env_lst *envlst)
 		cmd = ft_strjoin(cmd, lst->cmd);
 		args = join_args(cmd, lst->args);
 		execve(cmd, args, lst->envp);
+		unlink("libft/.tmp");
 		ft_free_double_char(args);
 		free(cmd);
 		free(buf);

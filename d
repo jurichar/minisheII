@@ -1,0 +1,12 @@
+1
+2
+Makefile
+README.md
+a
+builtin
+correc
+exec
+includes
+libft
+minishell
+srcs

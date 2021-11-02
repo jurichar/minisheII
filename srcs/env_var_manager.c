@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_var_manager.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/04 18:19:26 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/27 19:37:12 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:32:17 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ char	*get_arg(char *s, t_env_lst *env)
 
 	s = set_start(s, &quote);
 	len = 0;
-	while (s[len] && !is_sep(s[len]) && !is_space(s[len]) && valid_identifier(s[len], 2)
+	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
+		&& valid_identifier(s[len], 2)
 		&& s[len] != '"' && s[len] != '\'' && s[len] != '/')
 		len++;
 	if (quote && s[len] == '"')

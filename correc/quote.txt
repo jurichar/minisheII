@@ -1,0 +1,13 @@
+echo "coucou"
+echo "coucou\""
+echo "coucou" "salut"
+echo "$"
+ec"ho" "salut"
+
+echo 'coucou'
+echo 'coucou\'
+echo 'coucou' 'salut'
+echo '$'
+
+echo ''lfa"s"''"':"
+echo ""lfa's'""'":'

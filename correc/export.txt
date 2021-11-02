@@ -1,0 +1,24 @@
+export coucou=salut
+export cou=ec
+export bon=ho
+$cou$bon salut
+"$cou$bon" salut
+'$cou$bon' salut
+
+export what="echo coucou"
+$what
+
+export test="      a      "
+echo $test
+echo $test$test$test$test$test$test$test$test$test
+echo "$test$test$test$test$test$test$test$test$test"
+unset test
+
+export TEST=coucou
+export TEST+=bonjour
+export | grep TEST
+unset TEST
+
+export TEST=lol | export TEST+=lol | echo $TEST > 0test.log | env | sort >> 0test.log | export | grep -v SHLVL >> 1test.log | env | grep -v 4 > 2test.log | export | grep TEST >> 3test.log | unset TEST
+export TEST="ls      -l     - a" | echo $TEST | $LS | env |  sort | grep -v SHLVL | grep -v _" | grep TEST | unset TEST
+export TEST=hello | export TEST | env | grep TEST | grep -v alien | unset TEST

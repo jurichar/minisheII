@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 10:50:02 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/22 19:49:47 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/10/27 19:10:10 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,11 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
+	if (!env[0])
+	{
+		printf ("need environment\n");
+		return -1;
+	}
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, sig_handler);
 	g_exit_code = 0;

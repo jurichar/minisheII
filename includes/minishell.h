@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lebourre <lebourre@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 18:13:34 by lebourre         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:51:33 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,12 +210,17 @@ void		fork_error(t_pipor pip, int i);
 void		clean_pid(t_pipor *pip);
 int			pipor(t_cmd_lst *lst, t_env_lst *envlst);
 
+// heredoc
+void		fill_the_file(char *arg);
+void		sigito(int sig);
+void		find_redir_double(t_cmd_lst *lst);
+
 // ft_redir
-void		ft_redir_in_double(t_cmd_lst *lst);
+int			ft_redir_in_double(t_cmd_lst *lst);
 void		ft_redir_out_double(t_cmd_lst *lst);
 void		ft_redir_out(t_cmd_lst *lst);
 int			ft_redir_in(t_cmd_lst *lst);
-int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst, int i);
 
 /*
 SRCS
@@ -347,5 +352,8 @@ char		*wildcard_found(char *new, char *ptr_begin_wd, int i);
 // wildcard
 char		*wildcard(char *to_find);
 char		*find_wildcard(char *s, char *ptr_begin_wd, int i, char *new);
+
+
+void	exec_error(pid_t pid);
 
 #endif

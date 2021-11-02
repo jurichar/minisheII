@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/11/02 15:58:39 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:12:39 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,6 +209,11 @@ t_pipor		init_pipor(t_cmd_lst *lst);
 void		fork_error(t_pipor pip, int i);
 void		clean_pid(t_pipor *pip);
 int			pipor(t_cmd_lst *lst, t_env_lst *envlst);
+
+// heredoc
+void		fill_the_file(char *arg);
+void		sigito(int sig);
+void		find_redir_double(t_cmd_lst *lst);
 
 // ft_redir
 int			ft_redir_in_double(t_cmd_lst *lst);

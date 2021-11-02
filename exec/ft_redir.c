@@ -6,24 +6,23 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/11/02 14:57:07 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:09:42 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void fill_the_file(t_cmd_lst *lst)
+void	fill_the_file(char *arg)
 {
-	char *line;
-	int fd = open("libft/.tmp", O_CREAT | O_RDWR | O_TRUNC, 0666);
+	char	*line;
+	int		fd;
 
+	fd = open("libft/.tmp", O_CREAT | O_RDWR | O_TRUNC, 0666);
 	while (1)
 	{
 		line = readline("> ");
-		if (strcmp(line, lst->redir->arg) == 0)
-		{
+		if (ft_strcmp(line, arg) == 0)
 			break ;
-		}
 		ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 	}
@@ -34,23 +33,23 @@ int	ft_redir_in_double(t_cmd_lst *lst)
 {
 	lst->fd[0] = open("libft/.tmp", O_RDONLY, 0666);
 	dup2(lst->fd[0], 0);
-	close(lst->fd[0]);
 	return (1);
 }
 
 void	find_redir_double(t_cmd_lst *lst)
 {
-	while (lst->redir)
+	t_redir	*ptr;
+
+	ptr = lst->redir;
+	while (ptr)
 	{
-		if (lst->redir->redir == IN_DOUBLE)
-			fill_the_file(lst);
-		if (!lst->redir->next)
-			break ;
-		lst->redir = lst->redir->next;
+		if (ptr->redir == IN_DOUBLE)
+			fill_the_file(ptr->arg);
+		ptr = ptr->next;
 	}
 }
 
-void 	sigito(int sig)
+void	sigito(int sig)
 {
 	write(1, "\n", 1);
 	exit(130);
@@ -58,16 +57,12 @@ void 	sigito(int sig)
 
 void	ft_redir_out_double(t_cmd_lst *lst)
 {
-	int	fd;
-
 	lst->fd[1] = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0666);
 	dup2(lst->fd[1], 1);
-	close(lst->fd[1]);
 }
 
 void	ft_redir_out(t_cmd_lst *lst)
 {
-	int		fd;
 	char	*file;
 
 	file = lst->redir->arg;
@@ -96,12 +91,13 @@ int	ft_redir_in(t_cmd_lst *lst)
 	}
 }
 
-int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
+int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst, int x)
 {
 	int	i;
 
 	i = TRUE;
-	find_redir_double(lst);
+	if (x == 0)
+		find_redir_double(lst);
 	if (lst->redir->redir == OUT)
 		ft_redir_out(lst);
 	else if (lst->redir->redir == OUT_DOUBLE)
@@ -113,7 +109,7 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	if (lst->redir->next)
 	{
 		lst->redir = lst->redir->next;
-		ft_redir(lst, envlst);
+		ft_redir(lst, envlst, 1);
 	}
 	return (i);
 }

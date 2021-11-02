@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:05:17 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/27 23:03:49 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 15:58:39 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ int			ft_redir_in_double(t_cmd_lst *lst);
 void		ft_redir_out_double(t_cmd_lst *lst);
 void		ft_redir_out(t_cmd_lst *lst);
 int			ft_redir_in(t_cmd_lst *lst);
-int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst);
+int			ft_redir(t_cmd_lst *lst, t_env_lst *envlst, int i);
 
 /*
 SRCS

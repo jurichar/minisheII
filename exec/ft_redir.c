@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/30 10:33:09 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 14:57:07 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,9 @@ void fill_the_file(t_cmd_lst *lst)
 
 int	ft_redir_in_double(t_cmd_lst *lst)
 {
-	int		fd;
-
 	lst->fd[0] = open("libft/.tmp", O_RDONLY, 0666);
 	dup2(lst->fd[0], 0);
+	close(lst->fd[0]);
 	return (1);
 }
 
@@ -61,8 +60,9 @@ void	ft_redir_out_double(t_cmd_lst *lst)
 {
 	int	fd;
 
-	fd = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0666);
-	dup2(fd, 1);
+	lst->fd[1] = open(lst->redir->arg, O_CREAT | O_RDWR | O_APPEND, 0666);
+	dup2(lst->fd[1], 1);
+	close(lst->fd[1]);
 }
 
 void	ft_redir_out(t_cmd_lst *lst)
@@ -71,8 +71,9 @@ void	ft_redir_out(t_cmd_lst *lst)
 	char	*file;
 
 	file = lst->redir->arg;
-	fd = open(file, O_CREAT | O_RDWR | O_TRUNC, 0666);
-	dup2(fd, 1);
+	lst->fd[1] = open(file, O_CREAT | O_RDWR | O_TRUNC, 0666);
+	dup2(lst->fd[1], 1);
+	close(lst->fd[1]);
 }
 
 int	ft_redir_in(t_cmd_lst *lst)
@@ -90,6 +91,7 @@ int	ft_redir_in(t_cmd_lst *lst)
 	else
 	{
 		dup2(lst->fd[0], 0);
+		close(lst->fd[0]);
 		return (1);
 	}
 }
@@ -99,37 +101,19 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	int	i;
 
 	i = TRUE;
-	// find_redir_double(lst);
+	find_redir_double(lst);
 	if (lst->redir->redir == OUT)
-	{
 		ft_redir_out(lst);
-		// close(lst->fd[1]);
-	}
 	else if (lst->redir->redir == OUT_DOUBLE)
-	{
 		ft_redir_out_double(lst);
-		// close(lst->fd[1]);
-	}
 	else if (lst->redir->redir == IN)
-	{
 		i = ft_redir_in(lst);
-		// close(lst->fd[0]);
-	}
 	else if (lst->redir->redir == IN_DOUBLE)
-	{
 		i = ft_redir_in_double(lst);
-	}
 	if (lst->redir->next)
 	{
-		close(lst->fd[0]);
-		close(lst->fd[1]);
 		lst->redir = lst->redir->next;
 		ft_redir(lst, envlst);
 	}
-	// else
-	// {
-		// close(lst->fd[1]);
-		// close(lst->fd[0]);
-	// }
 	return (i);
 }

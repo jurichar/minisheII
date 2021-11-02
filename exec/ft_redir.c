@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/10/29 20:39:28 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 14:30:32 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void fill_the_file(t_cmd_lst *lst)
 
 int	ft_redir_in_double(t_cmd_lst *lst)
 {
-	int		fd;
-
 	lst->fd[0] = open("libft/.tmp", O_RDONLY, 0666);
 	dup2(lst->fd[0], 0);
 	return (1);
@@ -55,7 +53,6 @@ void	ft_redir_out_double(t_cmd_lst *lst)
 
 void	ft_redir_out(t_cmd_lst *lst)
 {
-	int		fd;
 	char	*file;
 
 	file = lst->redir->arg;
@@ -65,21 +62,20 @@ void	ft_redir_out(t_cmd_lst *lst)
 
 int	ft_redir_in(t_cmd_lst *lst)
 {
-	int	fd;
 
 	lst->fd[0] = open(lst->redir->arg, O_RDONLY, 0666);
-	if (lst->fd[0] == -1)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(lst->redir->arg, 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		return (0);
-	}
-	else
-	{
-		dup2(lst->fd[0], 0);
-		return (1);
-	}
+	// if (lst->fd[0] == -1)
+	// {
+	// 	ft_putstr_fd("minishell: ", 2);
+	// 	ft_putstr_fd(lst->redir->arg, 2);
+	// 	ft_putstr_fd(": No such file or directory\n", 2);
+	// 	return (0);
+	// }
+	// else
+	// {
+	dup2(lst->fd[0], 0);
+	return (1);
+	// }
 }
 
 void	find_redir_double(t_cmd_lst *lst)
@@ -97,13 +93,14 @@ void	find_redir_double(t_cmd_lst *lst)
 int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	int	i;
+	// int fd[2];
 
 	i = TRUE;
-	// find_redir_double(lst);
+	find_redir_double(lst);
 	if (lst->redir->redir == OUT)
 	{
-		ft_redir_out(lst);
-		// close(lst->fd[1]);
+		ft_redir_out(lst); // 3
+		close(lst->fd[1]);
 	}
 	else if (lst->redir->redir == OUT_DOUBLE)
 	{
@@ -112,7 +109,7 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 	}	
 	else if (lst->redir->redir == IN)
 	{
-		i = ft_redir_in(lst);
+		i = ft_redir_in(lst); // 1
 		// close(lst->fd[0]);
 	}
 	else if (lst->redir->redir == IN_DOUBLE)
@@ -120,12 +117,12 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst)
 		ft_redir_in_double(lst);
 		// close(lst->fd[0]);
 	}
-	close(lst->fd[1]);
-	close(lst->fd[0]);
 	if (lst->redir->next)
 	{
+		close(lst->fd[0]);
+		close(lst->fd[1]);
 		lst->redir = lst->redir->next;
-		ft_redir(lst, envlst);	
+		ft_redir(lst, envlst);	// 2
 	}
 	return (i);
 }

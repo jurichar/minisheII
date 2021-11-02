@@ -1,13 +1,11 @@
-1
-2
+Makefile
+README.md
 a
+b
 builtin
 correc
-d
 exec
 includes
 libft
-Makefile
 minishell
-README.md
 srcs

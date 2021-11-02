@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/08 17:41:02 by jurichar          #+#    #+#             */
-/*   Updated: 2021/11/02 16:12:12 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/02 16:51:47 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 int	ft_redir_in_double(t_cmd_lst *lst)
 {
 	lst->fd[0] = open("libft/.tmp", O_RDONLY, 0666);
+	if (lst->fd[0] == -1)
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(lst->redir->arg, 2);
+		ft_putstr_fd(": No such file or directory\n", 2);
+		return (0);
+	}
 	dup2(lst->fd[0], 0);
 	return (1);
 }
@@ -37,10 +44,8 @@ void	ft_redir_out(t_cmd_lst *lst)
 
 int	ft_redir_in(t_cmd_lst *lst)
 {
-	int	fd;
-
 	lst->fd[0] = open(lst->redir->arg, O_RDONLY, 0666);
-	if (fd == -1)
+	if (lst->fd[0] == -1)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(lst->redir->arg, 2);

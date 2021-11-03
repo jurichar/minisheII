@@ -89,7 +89,7 @@ int	skip_redir(char *s, int i)
 	if (s[i] == '\0')
 		return (-1);
 	while (s[i] && ft_isascii(s[i])
-			&& !is_space(s[i]) && s[i] != '\'' && s[i] != '"')
+		&& !is_space(s[i]) && s[i] != '\'' && s[i] != '"')
 		i++;
 	if (s[i] == '\'' || s[i] == '"')
 		i = get_to_next_quote(s, i) + 1;

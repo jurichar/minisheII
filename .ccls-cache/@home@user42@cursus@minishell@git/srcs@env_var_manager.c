@@ -41,9 +41,9 @@ char	*get_arg(char *s, t_env_lst *env)
 		len++;
 	if (quote && s[len] == '"')
 		len--;
+	if (len == 0 && s[0] == '?')
+		return (get_ret_value(ft_strdup("?"), s, quote, 1));
 	ret = ft_substr(s, 0, len);
-	if ((ft_strcmp(ret, "?") == 0))
-		return (get_ret_value(ret, s, quote, len));
 	while (env && (ft_strcmp(ret, env->name) != 0))
 		env = env->next;
 	free(ret);

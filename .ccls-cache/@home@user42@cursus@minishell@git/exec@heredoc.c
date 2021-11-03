@@ -37,9 +37,7 @@ void	fill_the_file(char *arg, t_env_lst *envlst)
 void	find_redir_double(t_cmd_lst *lst, t_env_lst *envlst)
 {
 	t_redir	*ptr;
-	int		i;
 
-	i = 1;
 	ptr = lst->redir;
 	while (ptr)
 	{

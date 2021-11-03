@@ -62,8 +62,10 @@ int	ft_redir_in(t_cmd_lst *lst)
 
 int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst, int x)
 {
-	int	i;
+	int		i;
+	t_redir	*begin;
 
+	begin = lst->redir;
 	i = TRUE;
 	if (x == 0)
 		find_redir_double(lst, envlst);
@@ -80,5 +82,6 @@ int	ft_redir(t_cmd_lst *lst, t_env_lst *envlst, int x)
 		lst->redir = lst->redir->next;
 		ft_redir(lst, envlst, 1);
 	}
+	lst->redir = begin;
 	return (i);
 }

@@ -140,5 +140,4 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 	set_line(s, lst, envp);
 	free(s);
 	check_cmd(lst);
-	
 }

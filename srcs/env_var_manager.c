@@ -82,7 +82,7 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 		str = join_squote(str);
 	j = i;
 	while (copy[++i] && copy[i] != ' ' && copy[i] != '"' && copy[i] != '\''
-			&& copy[i] != '$')
+		&& copy[i] != '$')
 		i++;
 	while (copy[i])
 	{

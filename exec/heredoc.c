@@ -26,7 +26,8 @@ void	fill_the_file(char *arg, t_env_lst *envlst)
 			break ;
 		line = ft_strdup(line);
 		line = find_env_var(line, envlst, -1, 0);
-		ft_putstr_fd(line, fd);
+		if (line)
+			ft_putstr_fd(line, fd);
 		ft_putstr_fd("\n", fd);
 		free(line);
 	}

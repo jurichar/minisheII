@@ -54,13 +54,28 @@ void	reposition_args(t_cmd_lst **lst)
 	(*lst)->args[i] = NULL;
 }
 
-void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
+void	expand_check(t_cmd_lst **lst, int j, char *buf)
 {
-	char	*buf;
 	char	**tab_buf;
 	int		size;
 
+	if ((ft_strcmp((*lst)->args[j], buf)) == 0)
+				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
+	else
+	{
+		tab_buf = ft_split((*lst)->args[j], ' ');
+		size = ft_strdoublelen(tab_buf);
+		(*lst)->args = expanded_tab((*lst)->args, tab_buf, j);
+		j += size - 1;
+	}
+}
+
+void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
+{
+	char	*buf;
+
 	if ((*lst)->args && (*lst)->args[0])
+	{
 		while ((*lst)->args[j])
 		{
 
@@ -73,16 +88,9 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 			buf = ft_strdup((*lst)->args[j]);
 			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0,
 					ft_strdup((*lst)->args[j]));
-			if ((ft_strcmp((*lst)->args[j], buf)) == 0)
-				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
-			else
-			{
-				tab_buf = ft_split((*lst)->args[j], ' ');
-				size = ft_strdoublelen(tab_buf);
-				(*lst)->args = expanded_tab((*lst)->args, tab_buf, j);
-				j += size - 1;
-			}
+			expand_check(lst, j, buf);
 			free(buf);
 			j++;
 		}
+	}
 }

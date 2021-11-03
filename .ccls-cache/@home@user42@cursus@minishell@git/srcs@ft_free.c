@@ -18,7 +18,6 @@ void	ft_free_redir(t_redir *lst)
 
 	while (lst)
 	{
-		printf("redir->arg = %s\n", lst->arg);
 		free(lst->arg);
 		ptr = lst->next;
 		free(lst);

@@ -9,8 +9,8 @@ CC = gcc
 
 INCLUDES = -I libft/
 
-# CFLAGS = -Wall -Wextra -Werror -Wuninitialized -g3 $(INCLUDES)
-CFLAGS = $(INCLUDES)
+CFLAGS = -Wall -Wextra -Werror -Wuninitialized -g3 $(INCLUDES)
+# CFLAGS = $(INCLUDES)
 
 DEBUG = -fsanitize=address -fno-omit-frame-pointer
 

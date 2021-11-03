@@ -6,7 +6,7 @@
 /*   By: jurichar <jurichar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/03 11:39:11 by lebourre          #+#    #+#             */
-/*   Updated: 2021/10/26 16:49:32 by jurichar         ###   ########.fr       */
+/*   Updated: 2021/11/03 10:34:13 by jurichar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,4 +140,5 @@ void	ft_split_cmd(t_cmd_lst **lst, char *str, char **envp)
 	set_line(s, lst, envp);
 	free(s);
 	check_cmd(lst);
+	
 }

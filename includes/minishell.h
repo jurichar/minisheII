@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 /***
- *      __  __ _       _     _          _ _  
- *     |  \/  (_)     (_)   | |        | | | 
- *     | \  / |_ _ __  _ ___| |__   ___| | | 
- *     | |\/| | | '_ \| / __| '_ \ / _ \ | | 
- *     | |  | | | | | | \__ \ | | |  __/ | | 
- *     |_|  |_|_|_| |_|_|___/_| |_|\___|_|_| 
- *                                           
- *                                           
+ *      __  __ _       _     _          _ _
+ *     |  \/  (_)     (_)   | |        | | |
+ *     | \  / |_ _ __  _ ___| |__   ___| | |
+ *     | |\/| | | '_ \| / __| '_ \ / _ \ | |
+ *     | |  | | | | | | \__ \ | | |  __/ | |
+ *     |_|  |_|_|_| |_|_|___/_| |_|\___|_|_|
+ *
+ *
  */
 
 #ifndef MINISHELL_H
@@ -211,9 +211,9 @@ void		clean_pid(t_pipor *pip);
 int			pipor(t_cmd_lst *lst, t_env_lst *envlst);
 
 // heredoc
-void		fill_the_file(char *arg);
+void		fill_the_file(char *arg, t_env_lst *envlst);
 void		sigito(int sig);
-void		find_redir_double(t_cmd_lst *lst);
+void		find_redir_double(t_cmd_lst *lst, t_env_lst *envlst);
 
 // ft_redir
 int			ft_redir_in_double(t_cmd_lst *lst);

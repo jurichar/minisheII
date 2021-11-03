@@ -80,7 +80,10 @@ void	get_built_in(t_cmd_lst **lst, t_env_lst **envlst, int i)
 
 	fd[0] = dup(0);
 	fd[1] = dup(1);
-	(*lst)->cmd = find_env_var((*lst)->cmd, *envlst, -1, 0);
+	if ((*lst)->cmd && (*lst)->cmd[0])
+		(*lst)->cmd = find_env_var((*lst)->cmd, *envlst, -1, 0);
+	else
+		(*lst)->cmd = NULL;
 	expand_before_exec(lst, *envlst, 0);
 	if ((*lst)->sep == '|')
 		pipor(*lst, *envlst);

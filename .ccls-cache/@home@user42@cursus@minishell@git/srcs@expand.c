@@ -61,13 +61,12 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 	int		size;
 
 	if ((*lst)->args && (*lst)->args[0])
-	{
 		while ((*lst)->args[j])
 		{
+
 			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1, 0);
 			if ((*lst)->args[j] == NULL)
 			{
-				printf("COUCOU\n");
 				reposition_args(lst);
 				continue ;
 			}
@@ -86,8 +85,4 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 			free(buf);
 			j++;
 		}
-	}
-	j = -1;
-	while ((*lst)->args[++j])
-		printf("args = %s\n", (*lst)->args[j]);
 }

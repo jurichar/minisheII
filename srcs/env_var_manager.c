@@ -67,19 +67,10 @@ char	*insert_env_var2(char *str, char *var, int i)
 	return (str);
 }
 
-char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
+char	*get_rest(char *str, char *copy, int i)
 {
-	char	*copy;
-	char	*var;
-	int		j;
+	int	j;
 
-	var = get_arg(&str[i], env);
-	if (var != NULL)
-		return (str = insert_env_var2(str, var, i));
-	copy = str;
-	str = ft_substr(str, 0, i);
-	if (squote)
-		str = join_squote(str);
 	j = i;
 	while (copy[++i] && copy[i] != ' ' && copy[i] != '"' && copy[i] != '\''
 		&& copy[i] != '$' && copy[i] != '=')
@@ -92,8 +83,24 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 	if (str[0] == '\0')
 	{
 		free(str);
-		return (NULL);
+		str = NULL;
 	}
+	return (str);
+}
+
+char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
+{
+	char	*copy;
+	char	*var;
+
+	var = get_arg(&str[i], env);
+	if (var != NULL)
+		return (str = insert_env_var2(str, var, i));
+	copy = str;
+	str = ft_substr(str, 0, i);
+	if (squote)
+		str = join_squote(str);
+	str = get_rest(str, copy, i);
 	free(copy);
 	return (str);
 }
@@ -102,8 +109,6 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 {
 	char	*s;
 
-	if (!str || !*str)
-		return (NULL);
 	s = ft_strdup(str);
 	while (s[++i])
 	{

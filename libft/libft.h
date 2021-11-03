@@ -55,6 +55,7 @@ char			*ft_strchr(char const *s, int c);
 char			*ft_strrchr(char const *s, int c);
 char			*ft_strtrim(char const *s1, char const *set);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strjoin_sep(char const *s1, char const *s2, char sep);
 char			*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char			*ft_strnstr(char const *s1, char const *s2, size_t len);
 int				ft_strcmp(const char *s1, const char *s2);

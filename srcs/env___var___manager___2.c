@@ -31,7 +31,7 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 			break ;
 		else if (s[i] == '$')
 		{
-			s = insert_env_var(s, i, env, 0);
+			s = insert_env_var(s, i, env, quote);
 			if (!s)
 				return (NULL);
 			i = -1;

@@ -14,33 +14,41 @@
 
 char	*dup_var_from_list(t_env_lst *env, char *s, int len, int quote)
 {
-	char	*tmp;
+	char	**tmp;
 	char	*ret;
+	char	*to_free;
 
 	ret = ft_strjoin(env->content, &s[len]);
-	if (quote)
+	if(!quote)
 	{
-		tmp = ret;
-		ret = ft_strjoin("\"", tmp);
-		free (tmp);
+		tmp = ft_split(ret, ' ');
+		free(ret);
+		ret = *tmp;
+		while (*tmp && *(tmp + 1))
+		{
+			to_free = ret;
+			ret = ft_strjoin_sep(ret, *(tmp + 1), ' ');
+			free(to_free);
+			tmp++;
+		}
 	}
 	return (ret);
 }
 
-char	*get_arg(char *s, t_env_lst *env)
+char	*get_arg(char *s, t_env_lst *env, int quote)
 {
 	char	*ret;
 	int		len;
-	int		quote;
+	int		rquote;
 
+	rquote = quote;
 	s = set_start(s, &quote);
+	quote = rquote;
 	len = 0;
 	while (s[len] && !is_sep(s[len]) && !is_space(s[len])
 		&& valid_identifier(s[len], 2)
 		&& s[len] != '"' && s[len] != '\'' && s[len] != '/')
 		len++;
-	if (quote && s[len] == '"')
-		len--;
 	if (len == 0 && s[0] == '?')
 		return (get_ret_value(ft_strdup("?"), s, quote, 1));
 	ret = ft_substr(s, 0, len);
@@ -88,18 +96,18 @@ char	*get_rest(char *str, char *copy, int i)
 	return (str);
 }
 
-char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
+char	*insert_env_var(char *str, int i, t_env_lst *env, int quote)
 {
 	char	*copy;
 	char	*var;
 
-	var = get_arg(&str[i], env);
+	var = get_arg(&str[i], env, quote);
 	if (var != NULL)
 		return (str = insert_env_var2(str, var, i));
 	copy = str;
 	str = ft_substr(str, 0, i);
-	if (squote)
-		str = join_squote(str);
+/* 	if (squote)   KEEEP IT
+		str = join_squote(str);*/
 	str = get_rest(str, copy, i);
 	free(copy);
 	return (str);

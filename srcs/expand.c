@@ -60,7 +60,7 @@ void	expand_check(t_cmd_lst **lst, int j, char *buf)
 	int		size;
 
 	if ((ft_strcmp((*lst)->args[j], buf)) == 0)
-				(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
+		(*lst)->args[j] = ft_strdup_space_sep((*lst)->args[j], 1);
 	else
 	{
 		tab_buf = ft_split((*lst)->args[j], ' ');
@@ -78,7 +78,6 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 	{
 		while ((*lst)->args[j])
 		{
-
 			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1, 0);
 			if ((*lst)->args[j] == NULL)
 			{

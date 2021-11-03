@@ -82,12 +82,17 @@ char	*insert_env_var(char *str, int i, t_env_lst *env, int squote)
 		str = join_squote(str);
 	j = i;
 	while (copy[++i] && copy[i] != ' ' && copy[i] != '"' && copy[i] != '\''
-		&& copy[i] != '$')
-		i++;
+		&& copy[i] != '$' && copy[i] != '=')
+		;
 	while (copy[i])
 	{
 		str = ft_realloc(str, ft_strlen(str) + 1);
 		str[j++] = copy[i++];
+	}
+	if (str[0] == '\0')
+	{
+		free(str);
+		return (NULL);
 	}
 	free(copy);
 	return (str);
@@ -115,6 +120,8 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 		else if (s[i] == '$')
 		{
 			s = insert_env_var(s, i, env, 0);
+			if (!s)
+				return (NULL);
 			i = -1;
 		}
 	}

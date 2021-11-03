@@ -38,6 +38,22 @@ char	**expanded_tab(char **dest, char **srcs, int j)
 	return (new);
 }
 
+void	reposition_args(t_cmd_lst **lst)
+{
+	int	i;
+
+	i = 0;
+	while ((*lst)->args[i])
+		i++;
+	while ((*lst)->args[i + 1])
+	{
+		free((*lst)->args[i]);
+		(*lst)->args[i] = ft_strdup((*lst)->args[i + 1]);
+		i++;
+	}
+	(*lst)->args[i] = NULL;
+}
+
 void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 {
 	char	*buf;
@@ -49,6 +65,12 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 		while ((*lst)->args[j])
 		{
 			(*lst)->args[j] = find_env_var((*lst)->args[j], envlst, -1, 0);
+			if ((*lst)->args[j] == NULL)
+			{
+				printf("COUCOU\n");
+				reposition_args(lst);
+				continue ;
+			}
 			buf = ft_strdup((*lst)->args[j]);
 			(*lst)->args[j] = find_wildcard((*lst)->args[j], NULL, 0,
 					ft_strdup((*lst)->args[j]));
@@ -65,4 +87,7 @@ void	expand_before_exec(t_cmd_lst **lst, t_env_lst *envlst, int j)
 			j++;
 		}
 	}
+	j = -1;
+	while ((*lst)->args[++j])
+		printf("args = %s\n", (*lst)->args[j]);
 }

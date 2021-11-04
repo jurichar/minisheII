@@ -19,7 +19,7 @@ char	*dup_var_from_list(t_env_lst *env, char *s, int len, int quote)
 	char	*to_free;
 
 	ret = ft_strjoin(env->content, &s[len]);
-	if(!quote)
+	if (!quote)
 	{
 		tmp = ft_split(ret, ' ');
 		free(ret);

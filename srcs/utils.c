@@ -76,7 +76,7 @@ char	*malloc_line(char *str, int *ptr_len)
 	while (str[len])
 	{
 		quote = quote_status(quote, len, str);
-		if (quote == 0 && (/*is_space(str[len]) || */is_sep(str[len])))
+		if (quote == 0 && is_sep(str[len]))
 			break ;
 		else if (quote && len == quote && str[len + 1] == ' ')
 			break ;

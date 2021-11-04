@@ -25,6 +25,8 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 			quote = get_to_next_quote(s, i);
 			if (s[quote])
 				i = quote;
+			else
+				quote = 0;
 			continue ;
 		}
 		if (quote == 0 && is_sep(s[i]))
@@ -34,6 +36,7 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 			s = insert_env_var(s, i, env, quote);
 			if (!s)
 				return (NULL);
+			quote = 0;
 			i = -1;
 		}
 	}

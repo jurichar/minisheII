@@ -5,7 +5,7 @@ ls | grep .sh
 ls | grep .sh | sort
 ls | grep .sh | sort | cat -e
 ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls | ls
-
+cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | cat | ls 
 echo "coucou salut bonjour" | sort
 
 ls | grep j | cat -e | echo coucou | pwd | env | grep coucou

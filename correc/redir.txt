@@ -1,0 +1,12 @@
+ls > a
+cat < a > b
+ls > a > b > c > d > e
+
+cat < a < b < c < d < e > a > b > c
+
+cat << a << b << c
+sig + heredoc
+expand + heredoc
+
+cat << a << b << c > d > e
+cat > b > c < a > d < e > f

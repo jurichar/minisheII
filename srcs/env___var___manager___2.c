@@ -29,14 +29,11 @@ char	*find_env_var(char *str, t_env_lst *env, int i, int quote)
 				quote = 0;
 			continue ;
 		}
-		if (quote == 0 && is_sep(s[i]))
-			break ;
-		else if (s[i] == '$')
+		if (s[i] == '$')
 		{
-			s = insert_env_var(s, i, env, quote);
+			s = insert_env_var(s, i, env, &quote);
 			if (!s)
 				return (NULL);
-			quote = 0;
 			i = -1;
 		}
 	}

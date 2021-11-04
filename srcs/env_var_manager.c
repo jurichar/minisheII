@@ -96,19 +96,21 @@ char	*get_rest(char *str, char *copy, int i)
 	return (str);
 }
 
-char	*insert_env_var(char *str, int i, t_env_lst *env, int quote)
+char	*insert_env_var(char *str, int i, t_env_lst *env, int *quote)
 {
 	char	*copy;
 	char	*var;
 
-	var = get_arg(&str[i], env, quote);
+	var = get_arg(&str[i], env, *quote);
 	if (var != NULL)
+	{
+		*quote = 0;
 		return (str = insert_env_var2(str, var, i));
+	}
 	copy = str;
 	str = ft_substr(str, 0, i);
-/* 	if (squote)   KEEEP IT
-		str = join_squote(str);*/
 	str = get_rest(str, copy, i);
 	free(copy);
+	*quote = 0;
 	return (str);
 }

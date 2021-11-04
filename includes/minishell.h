@@ -246,7 +246,7 @@ t_env_lst	*ft_lstnew_env(char *v_name, int equal, char *v_content);
 void		check_oldpwd(t_env_lst **begin);
 
 // env_var_manager
-char		*insert_env_var(char *str, int i, t_env_lst *env, int squote);
+char		*insert_env_var(char *str, int i, t_env_lst *env, int *quote);
 char		*find_env_var(char *str, t_env_lst *env, int i, int quote);
 
 // env_var_tools

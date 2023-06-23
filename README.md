@@ -1,83 +1,32 @@
 # Minishell
 
-## Eval
+## Description
 
-- [x] parser
+Minishell is a simple implementation of a terminal written in C. This project was created as part of a school assignment, using the 'libft' library.
 
-- [x] gestions d'erreurs
+## Installation
 
-- [ ] pas d'interpretation de quote ouverte, de \ ou de ;
+To install Minishell, follow these steps:
 
-- [x] UNE globale (et expliquer pourquoi).
+```bash
+git clone [repo link]
+cd [repo name]
+make
+```
 
-- [x] prompt qui attend une commande.
+## Usage
 
-- [x] historique fonctionnel.
+To run Minishell, simply use the following command:
 
-- [x] chercher et executer le bon binaire (relative / absolute PATH).
+```
+./minishell
+```
 
-- [ ] (',") inhibe tt interpretations.
+## Features
 
-- [x] pipes
+Minishell can execute basic commands like `ls`, `cd`, `echo`, etc. More information on the specific supported commands will be provided later.
 
-- [x] multi-pipe
+## Contributing
 
-## redirection
+Contributions are welcome! Feel free to open an issue or create a pull request.
 
-- [x] ">"
-
-- [x] "<"
-
-- [x] ">>"
-
-- [x] "<<"
-
-- [ ] multiple redir.
-
-- [ ] variable d'environnement.
-
-- [ ] $? affiche le status de la derniere pipe EXIT.
-
-## signaux
-
-- [x] ctrl-C
-
-- [x] ctrl-D
-
-- [x] ctrl-\
-
-## builtins
-
-- [x] echo avec -n
-
-- [x] cd avec seulement un chemin relative / absolue
-
-- [x] pwd sans option
-
-- [x] export sans option
-
-- [x] unset sans option
-
-- [x] env sans option ni argument
-
-- [x] exit sans option
-
-## ToFix
-
-- mute TAB
-
-- fleche du haut apres une commande
-
-- reparer historique
-
-- format du nom de variable.
-
-- echo $HOME $HOME $HOME
-/home/user42 /home/user42`
-
-- echo $HOME"$HOME"
-/home/user42$ME
-
-- "cat < test.sh" : .sh no such file or directory
-
-- "ls >a" a fix
